@@ -84,7 +84,7 @@ function App() {
           <pre>{`{\n  x: ${spritePosition.x}\n  y: ${spritePosition.y}\n}`}</pre>
         </div>
         <div>
-          <button className="button" onClick={addSprite}>Add New Sprite</button>
+          <button className="button" onClick={addSprite}>Add New Star Sprite</button>
         </div>
       </div>
     </div>
