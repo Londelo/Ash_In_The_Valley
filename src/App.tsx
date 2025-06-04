@@ -1,6 +1,7 @@
 import {useRef, useState} from 'react';
 import {IRefPhaserGame, PhaserGame} from './PhaserGame';
 import { MainMenu } from './game/scenes/MainMenu';
+import { Player } from './game/scenes/Player';
 
 function App() {
   // The sprite can only be moved in the MainMenu Scene
@@ -14,10 +15,16 @@ function App() {
   const changeScene = () => {
 
     if( phaserRef.current ) {
-      const scene = phaserRef.current.scene as MainMenu;
+      const scene = phaserRef.current.scene;
 
       if ( scene ) {
-        scene.changeScene();
+        if ( scene.scene.key === 'MainMenu' ) {
+          ( scene as MainMenu ).changeScene();
+        } else if ( scene.scene.key === 'Player' ) {
+          ( scene as Player ).changeScene();
+        } else if ( 'changeScene' in scene ) {
+          ( scene as any ).changeScene();
+        }
       }
     }
   };
@@ -84,7 +91,7 @@ function App() {
           <pre>{`{\n  x: ${spritePosition.x}\n  y: ${spritePosition.y}\n}`}</pre>
         </div>
         <div>
-          <button className="button" onClick={addSprite}>Add New Sprite</button>
+          <button className="button" onClick={addSprite}>Add New Star Sprite</button>
         </div>
       </div>
     </div>

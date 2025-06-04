@@ -143,9 +143,9 @@ const customRules = {
 };
 
 export default [
-  basicSettings,
-  basicJsRules,
-  basicTsRules,
-  formattingRules,
-  customRules
+  // basicSettings,
+  // basicJsRules,
+  // basicTsRules,
+  // // formattingRules,
+  // customRules
 ];
