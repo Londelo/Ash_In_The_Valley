@@ -2,6 +2,7 @@ import { Boot } from './scenes/Boot';
 import { GameOver } from './scenes/GameOver';
 import { Game as MainGame } from './scenes/Game';
 import { MainMenu } from './scenes/MainMenu';
+import { Player } from './scenes/Player';
 import {AUTO, Game} from 'phaser';
 import { Preloader } from './scenes/Preloader';
 
@@ -13,10 +14,16 @@ const config: Phaser.Types.Core.GameConfig = {
   height: 768,
   parent: 'game-container',
   backgroundColor: '#028af8',
+  render: {
+    pixelArt: true,
+    antialias: false,
+    roundPixels: true
+  },
   scene: [
     Boot,
     Preloader,
     MainMenu,
+    Player,
     MainGame,
     GameOver
   ]
