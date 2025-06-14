@@ -144,8 +144,8 @@ export class Player extends Scene {
       // Check if we've reached the peak and started falling
       if ( this.velocityY > 0 && this.isJumping ) {
         this.isJumping = false;
-        if(currentAnim !== 'slam_attack') {
-          this.player.play( 'fall' );
+        if(currentAnim !== 'player_slam_attack') {
+          this.player.play( 'player_fall' );
         }
       }
 
@@ -159,8 +159,8 @@ export class Player extends Scene {
         // Reset running state when landing
         this.wasRunningBeforeJump = false;
 
-        if(currentAnim !== 'slam_attack') {
-          this.player.play( 'land' );
+        if(currentAnim !== 'player_slam_attack') {
+          this.player.play( 'player_land' );
         }
       }
     }
@@ -189,11 +189,11 @@ export class Player extends Scene {
     }
 
     if (inputState.shouldPlayWalkAnimation) {
-      this.player.play('walk');
+      this.player.play('player_walk');
     } else if (inputState.shouldPlayRunAnimation) {
-      this.player.play('run');
+      this.player.play('player_run');
     } else if (inputState.shouldPlayIdleAnimation) {
-      this.player.play('idle');
+      this.player.play('player_idle');
     }
   }
 
@@ -204,12 +204,12 @@ export class Player extends Scene {
 
       if (this.comboState === 0) {
         // First attack in combo
-        this.player.play('slash_1');
+        this.player.play('player_slash_1');
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 1) {
         // Second attack in combo
-        this.player.play('slash_2');
+        this.player.play('player_slash_2');
 
         const baseSpeed = 2000 * deltaTime;
         if (this.player.flipX) {
@@ -224,7 +224,7 @@ export class Player extends Scene {
         this.comboTimer = 0;
       } else if (this.comboState === 2) {
         // Third attack in combo
-        this.player.play('spin_attack');
+        this.player.play('player_spin_attack');
         this.resetCombo()
       }
     }
@@ -236,17 +236,17 @@ export class Player extends Scene {
       this.shouldResetCombo()
 
       if(inputState.isInAir && this.comboState === 0) {
-        this.player.play('slam_attack');
+        this.player.play('player_slam_attack');
         this.velocityY += this.GRAVITY / 3
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 0) {
-        this.player.play('slam_attack');
+        this.player.play('player_slam_attack');
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 1) {
         this.setCharacterDirection(!this.player.flipX); // Facing right
-        this.player.play('slam_attack');
+        this.player.play('player_slam_attack');
         this.resetCombo()
       }
     }
@@ -255,7 +255,7 @@ export class Player extends Scene {
   private handleDash(inputState: ReturnType<typeof getInputState>) {
     if (inputState.shouldDash) {
       this.performDash();
-      this.player.play('dash');
+      this.player.play('player_dash');
       this.comboState = 2;
       this.comboTimer = 0;
     }
@@ -263,7 +263,7 @@ export class Player extends Scene {
 
   private handleBlock(inputState: ReturnType<typeof getInputState>) {
     if (inputState.shouldBlock) {
-      this.player.play('block');
+      this.player.play('player_block');
       this.comboState = 2;
       this.comboTimer = 0;
     }
@@ -276,7 +276,7 @@ export class Player extends Scene {
       this.velocityY = this.JUMP_VELOCITY;
       this.isOnGround = false;
       this.isJumping = true;
-      this.player.play('jump');
+      this.player.play('player_jump');
     }
   }
 
@@ -313,7 +313,7 @@ export class Player extends Scene {
 
     addPlayerAnimationListeners(this);
 
-    this.player.play('idle');
+    this.player.play('player_idle');
 
     EventBus.emit('current-scene-ready', this);
   }
@@ -336,6 +336,6 @@ export class Player extends Scene {
   }
 
   changeScene() {
-    this.scene.start( 'Game' );
+    this.scene.start( 'DaggerBandit' );
   }
 }

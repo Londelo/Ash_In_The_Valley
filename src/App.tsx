@@ -2,6 +2,7 @@ import {useRef, useState} from 'react';
 import {IRefPhaserGame, PhaserGame} from './PhaserGame';
 import { MainMenu } from './game/scenes/MainMenu';
 import { Player } from './game/scenes/Player';
+import { DaggerBandit } from './game/scenes/DaggerBandit';
 
 function App() {
   // The sprite can only be moved in the MainMenu Scene
@@ -22,6 +23,8 @@ function App() {
           ( scene as MainMenu ).changeScene();
         } else if ( scene.scene.key === 'Player' ) {
           ( scene as Player ).changeScene();
+        } else if ( scene.scene.key === 'DaggerBandit' ) {
+          ( scene as DaggerBandit ).changeScene();
         } else if ( 'changeScene' in scene ) {
           ( scene as any ).changeScene();
         }
