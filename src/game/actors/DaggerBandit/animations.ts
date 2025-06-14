@@ -180,9 +180,9 @@ export function createDaggerBanditAnimations(scene: Scene) {
 }
 
 export function addDaggerBanditAnimationListeners(_this: DaggerBandit) {
-  _this.bandit.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
+  _this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
     if (isActionAnimations(animation.key)) {
-      _this.bandit.play('bandit_idle');
+      _this.sprite.play('bandit_idle');
     } else if (animation.key === 'bandit_vanish') {
       _this.onVanishComplete();
     } else if (animation.key === 'bandit_appear') {

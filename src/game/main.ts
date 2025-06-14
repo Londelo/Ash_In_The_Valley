@@ -1,9 +1,5 @@
 import { Boot } from './scenes/Boot';
-import { GameOver } from './scenes/GameOver';
-import { Game as MainGame } from './scenes/Game';
-import { MainMenu } from './scenes/MainMenu';
-import { Player } from './scenes/Player';
-import { DaggerBandit } from './scenes/DaggerBandit';
+import { Testing } from './scenes/Testing';
 import {AUTO, Game} from 'phaser';
 import { Preloader } from './scenes/Preloader';
 
@@ -23,11 +19,7 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: [
     Boot,
     Preloader,
-    MainMenu,
-    Player,
-    DaggerBandit,
-    MainGame,
-    GameOver
+    Testing
   ]
 };
 
