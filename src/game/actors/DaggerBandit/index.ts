@@ -7,7 +7,7 @@ export class DaggerBandit {
   scene: Scene;
   sprite: Phaser.GameObjects.Sprite;
   banditSpeed: number = 180;
-  
+
   // AI system
   private banditAI: BanditAI;
   private playerRef: Player;
@@ -39,12 +39,6 @@ export class DaggerBandit {
   // Vanish/Appear system
   private isVanished: boolean = false;
   private vanishTargetX: number = 0;
-
-  // Combat system
-  private comboState: number = 0;
-  private comboTimer: number = 0;
-  private readonly COMBO_WINDOW_MAX = 800;
-  private readonly COMBO_WINDOW_MIN = 200;
 
   constructor(scene: Scene, x: number, y: number, playerRef: Player) {
     this.scene = scene;
@@ -90,23 +84,6 @@ export class DaggerBandit {
 
   public setCharacterDirection(facingLeft: boolean) {
     this.sprite.setFlipX(facingLeft);
-  }
-
-  public resetCombo() {
-    this.comboState = 0;
-    this.comboTimer = 0;
-  }
-
-  private shouldResetCombo() {
-    if (this.comboTimer < this.COMBO_WINDOW_MIN || this.comboTimer > this.COMBO_WINDOW_MAX) {
-      this.resetCombo();
-    }
-  }
-
-  private updateComboTimer(deltaTime: number) {
-    if (this.comboState > 0) {
-      this.comboTimer += deltaTime * 1000; // Convert to milliseconds
-    }
   }
 
   private updateJumpPhysics(deltaTime: number) {
@@ -180,30 +157,13 @@ export class DaggerBandit {
 
   public handleAttack() {
     if (!this.isVanished) {
-      this.shouldResetCombo();
-
-      if (this.comboState === 0) {
-        // First attack in combo
-        this.sprite.play('bandit_attack');
-        this.comboState = 1;
-        this.comboTimer = 0;
-      } else if (this.comboState === 1) {
-        // Second attack in combo - more powerful
-        this.sprite.play('bandit_attack');
-        this.comboState = 2;
-        this.comboTimer = 0;
-      } else if (this.comboState === 2) {
-        // Third attack - reset combo
-        this.sprite.play('bandit_attack');
-        this.resetCombo();
-      }
+      this.sprite.play('bandit_attack');
     }
   }
 
   public handleBatFangAttack() {
     if (!this.isVanished) {
       this.sprite.play('bandit_bat_fang_attack');
-      this.resetCombo();
     }
   }
 
@@ -223,15 +183,6 @@ export class DaggerBandit {
     }
   }
 
-  public handleBlock() {
-    if (!this.isVanished) {
-      // For now, just play idle animation as a block stance
-      // You could create a specific block animation later
-      this.sprite.play('bandit_idle');
-      this.resetCombo();
-    }
-  }
-
   public handleJump() {
     if (!this.isVanished && this.isOnGround) {
       this.velocityY = this.JUMP_VELOCITY;
@@ -242,7 +193,6 @@ export class DaggerBandit {
   }
 
   create() {
-    console.log('DaggerBandit actor create() called');
 
     createDaggerBanditAnimations(this.scene);
     addDaggerBanditAnimationListeners(this);
@@ -256,7 +206,6 @@ export class DaggerBandit {
   update(time: number, delta: number) {
     const deltaTime = delta / 1000; // Convert to seconds
 
-    this.updateComboTimer(deltaTime);
     this.updateJumpPhysics(deltaTime);
 
     // Let AI control the bandit
