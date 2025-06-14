@@ -271,19 +271,12 @@ export class DaggerBandit extends Scene {
     createDaggerBanditAnimations(this);
     addDaggerBanditAnimationListeners(this);
 
-    // Only play idle if we have a proper sprite
-    if (this.bandit && this.bandit.play) {
-      this.bandit.play('bandit_idle');
-    }
+    this.bandit.play('bandit_idle');
 
     EventBus.emit('current-scene-ready', this);
   }
 
   update(time: number, delta: number) {
-    // Only update if we have a proper sprite
-    if (!this.bandit || !this.bandit.play) {
-      return;
-    }
 
     const deltaTime = delta / 1000; // Convert to seconds
     const currentAnim = this.bandit.anims.currentAnim?.key;
