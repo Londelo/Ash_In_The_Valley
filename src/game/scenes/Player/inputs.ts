@@ -50,11 +50,11 @@ export function getInputState(
   const wasRunningBeforeJump = player.wasRunningBeforeJump;
 
   // Current state checks
-  const isSlashing = currentAnim === 'slash_1' || currentAnim === 'slash_2' || currentAnim === 'spin_attack';;;
-  const isDashing = currentAnim === 'dash';
-  const isLanding = currentAnim === 'land';
-  const isSlamming = currentAnim === 'slam_attack'
-  const isBlocking = currentAnim === 'block'
+  const isSlashing = currentAnim === 'player_slash_1' || currentAnim === 'player_slash_2' || currentAnim === 'player_spin_attack';;;
+  const isDashing = currentAnim === 'player_dash';
+  const isLanding = currentAnim === 'player_land';
+  const isSlamming = currentAnim === 'player_slam_attack'
+  const isBlocking = currentAnim === 'player_block'
   const isInAir = !isOnGround;
 
   // Input checks - using arrow keys for movement
@@ -95,7 +95,7 @@ export function getInputState(
                                  !isLanding &&
                                  !isInAir &&
                                  !isMoving &&
-                                 currentAnim !== 'idle';
+                                 currentAnim !== 'player_idle';
 
   const shouldPlayMovementAnimation = isOnGround &&
                                      !isSlashing &&
@@ -106,11 +106,11 @@ export function getInputState(
 
   const shouldPlayWalkAnimation = shouldPlayMovementAnimation &&
                                  !isRunning &&
-                                 currentAnim !== 'walk';
+                                 currentAnim !== 'player_walk';
 
   const shouldPlayRunAnimation = shouldPlayMovementAnimation &&
                                 isRunning &&
-                                currentAnim !== 'run';
+                                currentAnim !== 'player_run';
 
   return {
     // Input actions

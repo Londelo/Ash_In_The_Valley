@@ -3,7 +3,7 @@ import { Player } from '.';
 
 export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
-    key: 'idle',
+    key: 'player_idle',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Idle 0' },
       { key: 'mainCharacterAtlas', frame: 'Idle 1' },
@@ -20,7 +20,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'walk',
+    key: 'player_walk',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Run 1' },
       { key: 'mainCharacterAtlas', frame: 'Run 2' },
@@ -35,7 +35,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'run',
+    key: 'player_run',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Run Fast 0' },
       { key: 'mainCharacterAtlas', frame: 'Run Fast 1' },
@@ -51,7 +51,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'jump',
+    key: 'player_jump',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Jump 0' },
       { key: 'mainCharacterAtlas', frame: 'Jump 1' },
@@ -62,7 +62,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'fall',
+    key: 'player_fall',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Fall 0' },
       { key: 'mainCharacterAtlas', frame: 'Fall 1' },
@@ -73,7 +73,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'land',
+    key: 'player_land',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'crouch land 0' },
       { key: 'mainCharacterAtlas', frame: 'crouch land 1' },
@@ -85,7 +85,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'dash',
+    key: 'player_dash',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Dash 0' },
       { key: 'mainCharacterAtlas', frame: 'Dash 1' },
@@ -99,7 +99,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'slash_1',
+    key: 'player_slash_1',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Slash 1 0' },
       { key: 'mainCharacterAtlas', frame: 'Slash 1 1' },
@@ -116,7 +116,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'slash_2',
+    key: 'player_slash_2',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Slash 2 0' },
       { key: 'mainCharacterAtlas', frame: 'Slash 2 1' },
@@ -131,7 +131,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'slash_heavy',
+    key: 'player_slash_heavy',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Dash 1' },
       { key: 'mainCharacterAtlas', frame: 'Dash 2' },
@@ -150,7 +150,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'spin_attack',
+    key: 'player_spin_attack',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Block 0' },
       { key: 'mainCharacterAtlas', frame: 'Block 1' },
@@ -168,7 +168,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'slam_attack',
+    key: 'player_slam_attack',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Slam 0' },
       { key: 'mainCharacterAtlas', frame: 'Slam 1' },
@@ -183,7 +183,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'roll_attack',
+    key: 'player_roll_attack',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Roll Attack 0' },
       { key: 'mainCharacterAtlas', frame: 'Roll Attack 1' },
@@ -201,7 +201,7 @@ export function createPlayerAnimations(scene: Scene) {
   });
 
   scene.anims.create({
-    key: 'block',
+    key: 'player_block',
     frames: [
       { key: 'mainCharacterAtlas', frame: 'Block 0' },
       { key: 'mainCharacterAtlas', frame: 'Block 1' },
@@ -221,30 +221,30 @@ export function addPlayerAnimationListeners(_this: Player) {
   _this.player.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
 
     if (isActionAnimations(animation.key)) {
-      _this.player.play('idle');
+      _this.player.play('player_idle');
     }
   });
 }
 
 export function isActionAnimations(animKey?: string): boolean {
-  return animKey === 'slash_1' ||
-    animKey === 'slash_2' ||
-    animKey === 'slam_attack' ||
-    animKey === 'dash' ||
-    animKey === 'spin_attack' ||
-    animKey === 'roll_attack' ||
-    animKey === 'slash_heavy' ||
-    animKey === 'block'
+  return animKey === 'player_slash_1' ||
+    animKey === 'player_slash_2' ||
+    animKey === 'player_slam_attack' ||
+    animKey === 'player_dash' ||
+    animKey === 'player_spin_attack' ||
+    animKey === 'player_roll_attack' ||
+    animKey === 'player_slash_heavy' ||
+    animKey === 'player_block'
 }
 
 export function isHighPriorityAnimation(animKey?: string): boolean {
-  return animKey === 'land' ||
-    animKey === 'slash_1' ||
-    animKey === 'slash_2' ||
-    animKey === 'slam_attack' ||
-    animKey === 'dash' ||
-    animKey === 'spin_attack' ||
-    animKey === 'roll_attack' ||
-    animKey === 'slash_heavy' ||
-    animKey === 'block'
+  return animKey === 'player_land' ||
+    animKey === 'player_slash_1' ||
+    animKey === 'player_slash_2' ||
+    animKey === 'player_slam_attack' ||
+    animKey === 'player_dash' ||
+    animKey === 'player_spin_attack' ||
+    animKey === 'player_roll_attack' ||
+    animKey === 'player_slash_heavy' ||
+    animKey === 'player_block'
 }
