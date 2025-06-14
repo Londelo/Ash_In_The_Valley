@@ -27,7 +27,7 @@ export class Testing extends Scene {
 
     // Create actor instances
     this.player = new Player(this, 300, 600);
-    this.daggerBandit = new DaggerBandit(this, 700, 600);
+    this.daggerBandit = new DaggerBandit(this, 700, 600, this.player);
 
     // Initialize actors
     this.player.create();

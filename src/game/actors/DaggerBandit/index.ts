@@ -1,13 +1,16 @@
 import { Scene } from 'phaser';
 import { createDaggerBanditAnimations, addDaggerBanditAnimationListeners, isHighPriorityAnimation } from './animations';
-import { setupDaggerBanditInput, getDaggerBanditInputState } from './inputs';
+import { BanditAI } from './ai';
+import type { Player } from '../Player/index';
 
 export class DaggerBandit {
   scene: Scene;
   sprite: Phaser.GameObjects.Sprite;
-  cursors: Phaser.Types.Input.Keyboard.CursorKeys;
-  inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   banditSpeed: number = 180;
+  
+  // AI system
+  private banditAI: BanditAI;
+  private playerRef: Player;
 
   // Bandit scaling
   private banditScale: number = 3;
@@ -43,9 +46,10 @@ export class DaggerBandit {
   private readonly COMBO_WINDOW_MAX = 800;
   private readonly COMBO_WINDOW_MIN = 200;
 
-  constructor(scene: Scene, x: number, y: number) {
+  constructor(scene: Scene, x: number, y: number, playerRef: Player) {
     this.scene = scene;
     this.characterCenterX = x;
+    this.playerRef = playerRef;
 
     // Verify the atlas is loaded
     if (!scene.textures.exists('daggerBanditAtlas')) {
@@ -84,7 +88,7 @@ export class DaggerBandit {
     this.sprite.x = this.characterCenterX;
   }
 
-  private setCharacterDirection(facingLeft: boolean) {
+  public setCharacterDirection(facingLeft: boolean) {
     this.sprite.setFlipX(facingLeft);
   }
 
@@ -145,37 +149,37 @@ export class DaggerBandit {
     }
   }
 
-  private handleMovement(inputState: ReturnType<typeof getDaggerBanditInputState>, deltaTime: number) {
-    if (inputState.canMove && inputState.isMoving && !this.isVanished) {
+  public handleMovement(moveLeft: boolean, moveRight: boolean, isRunning: boolean, deltaTime: number) {
+    if (!this.isVanished) {
       const baseSpeed = this.banditSpeed * deltaTime;
-      const moveSpeed = inputState.isRunning ? baseSpeed * 1.8 : baseSpeed;
+      const moveSpeed = isRunning ? baseSpeed * 1.8 : baseSpeed;
 
-      if (inputState.isMovingLeft) {
+      if (moveLeft) {
         this.moveCharacter(-moveSpeed);
         this.setCharacterDirection(true); // Facing left
-      } else if (inputState.isMovingRight) {
+      } else if (moveRight) {
         this.moveCharacter(moveSpeed);
         this.setCharacterDirection(false); // Facing right
       }
     }
   }
 
-  private handleMovementAnimations(inputState: ReturnType<typeof getDaggerBanditInputState>) {
+  public handleMovementAnimations(isMoving: boolean, isRunning: boolean) {
     // Don't override priority animations
     const currentAnim = this.sprite.anims.currentAnim?.key;
     if (isHighPriorityAnimation(currentAnim) || this.isVanished) {
       return;
     }
 
-    if (inputState.shouldPlayRunAnimation) {
+    if (isMoving && isRunning) {
       this.sprite.play('bandit_run');
-    } else if (inputState.shouldPlayIdleAnimation) {
+    } else if (!isMoving) {
       this.sprite.play('bandit_idle');
     }
   }
 
-  private handleAttack(inputState: ReturnType<typeof getDaggerBanditInputState>) {
-    if (inputState.shouldAttack && !this.isVanished) {
+  public handleAttack() {
+    if (!this.isVanished) {
       this.shouldResetCombo();
 
       if (this.comboState === 0) {
@@ -196,15 +200,15 @@ export class DaggerBandit {
     }
   }
 
-  private handleBatFangAttack(inputState: ReturnType<typeof getDaggerBanditInputState>) {
-    if (inputState.shouldBatFangAttack && !this.isVanished) {
+  public handleBatFangAttack() {
+    if (!this.isVanished) {
       this.sprite.play('bandit_bat_fang_attack');
       this.resetCombo();
     }
   }
 
-  private handleVanishAppear(inputState: ReturnType<typeof getDaggerBanditInputState>) {
-    if (inputState.shouldVanish && !this.isVanished) {
+  public handleVanishAppear() {
+    if (!this.isVanished) {
       // Start vanish sequence
       this.isVanished = true;
       this.sprite.play('bandit_vanish');
@@ -219,8 +223,8 @@ export class DaggerBandit {
     }
   }
 
-  private handleBlock(inputState: ReturnType<typeof getDaggerBanditInputState>) {
-    if (inputState.shouldBlock && !this.isVanished) {
+  public handleBlock() {
+    if (!this.isVanished) {
       // For now, just play idle animation as a block stance
       // You could create a specific block animation later
       this.sprite.play('bandit_idle');
@@ -228,10 +232,8 @@ export class DaggerBandit {
     }
   }
 
-  private handleJump(inputState: ReturnType<typeof getDaggerBanditInputState>) {
-    if (inputState.shouldJump && !this.isVanished) {
-      // Remember if we were running before jumping
-      this.wasRunningBeforeJump = inputState.isRunning;
+  public handleJump() {
+    if (!this.isVanished && this.isOnGround) {
       this.velocityY = this.JUMP_VELOCITY;
       this.isOnGround = false;
       this.isJumping = true;
@@ -242,33 +244,23 @@ export class DaggerBandit {
   create() {
     console.log('DaggerBandit actor create() called');
 
-    // Set up inputs
-    const { cursors, inputKeys } = setupDaggerBanditInput(this.scene);
-    this.cursors = cursors;
-    this.inputKeys = inputKeys;
-
     createDaggerBanditAnimations(this.scene);
     addDaggerBanditAnimationListeners(this);
+
+    // Initialize AI
+    this.banditAI = new BanditAI(this, this.playerRef);
 
     this.sprite.play('bandit_idle');
   }
 
   update(time: number, delta: number) {
     const deltaTime = delta / 1000; // Convert to seconds
-    const currentAnim = this.sprite.anims.currentAnim?.key;
 
     this.updateComboTimer(deltaTime);
     this.updateJumpPhysics(deltaTime);
 
-    const inputState = getDaggerBanditInputState(this, currentAnim);
-
-    this.handleAttack(inputState);
-    this.handleBatFangAttack(inputState);
-    this.handleVanishAppear(inputState);
-    this.handleBlock(inputState);
-    this.handleJump(inputState);
-    this.handleMovement(inputState, deltaTime);
-    this.handleMovementAnimations(inputState);
+    // Let AI control the bandit
+    this.banditAI.update(time, delta);
   }
 
   // Method called when vanish animation completes
