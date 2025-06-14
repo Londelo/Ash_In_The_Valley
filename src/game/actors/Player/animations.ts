@@ -234,6 +234,7 @@ export function isActionAnimations(animKey?: string): boolean {
     animKey === 'player_spin_attack' ||
     animKey === 'player_roll_attack' ||
     animKey === 'player_slash_heavy' ||
+    animKey === 'player_land' ||
     animKey === 'player_block'
 }
 
