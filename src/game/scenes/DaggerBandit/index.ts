@@ -15,16 +15,12 @@ export class DaggerBandit extends Scene {
   private banditScale: number = 3;
 
   // Character positioning constants (base values for scale 1) - Updated for 128x78 frame
-  private readonly BASE_FRAME_WIDTH = 128;
-  private readonly BASE_FRAME_HEIGHT = 78;
   private readonly BASE_CHARACTER_CENTER_RIGHT = 64;  // Character center when facing right
   private readonly BASE_CHARACTER_CENTER_LEFT = 64;   // Character center when facing left
 
   // Computed values based on current scale
-  private get FRAME_WIDTH() { return this.BASE_FRAME_WIDTH * this.banditScale; }
   private get CHARACTER_CENTER_RIGHT() { return this.BASE_CHARACTER_CENTER_RIGHT * this.banditScale; }
   private get CHARACTER_CENTER_LEFT() { return this.BASE_CHARACTER_CENTER_LEFT * this.banditScale; }
-  private get FRAME_CENTER() { return this.FRAME_WIDTH / 2; }
 
   // Track the character's logical center position
   private characterCenterX: number = 512;
