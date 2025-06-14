@@ -1,12 +1,10 @@
-import { EventBus } from '../../EventBus';
 import { Scene } from 'phaser';
 import { createPlayerAnimations, addPlayerAnimationListeners, isHighPriorityAnimation } from './animations';
 import { setupPlayerInput, getInputState } from './inputs';
 
-export class Player extends Scene {
-  camera: Phaser.Cameras.Scene2D.Camera;
-  background: Phaser.GameObjects.Image;
-  player: Phaser.GameObjects.Sprite;
+export class Player {
+  scene: Scene;
+  sprite: Phaser.GameObjects.Sprite;
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   playerSpeed: number = 200;
@@ -26,7 +24,7 @@ export class Player extends Scene {
   private get FRAME_CENTER() { return this.FRAME_WIDTH / 2; }
 
   // Track the character's logical center position
-  private characterCenterX: number = 512;
+  private characterCenterX: number;
 
   // Jump physics
   private readonly GROUND_Y = 600;
@@ -46,26 +44,34 @@ export class Player extends Scene {
   private readonly COMBO_WINDOW_MAX = 600;
   private readonly COMBO_WINDOW_MIN = 300;
 
-
-  constructor() {
-    super( 'Player' );
+  constructor(scene: Scene, x: number, y: number) {
+    this.scene = scene;
+    this.characterCenterX = x;
+    
+    // Create sprite using the atlas with the first idle frame
+    this.sprite = scene.add.sprite(x, y, 'mainCharacterAtlas', 'Idle 0');
+    this.setPlayerScale(this.playerScale);
+    
+    // Set texture filtering to nearest neighbor for crisp pixel art
+    this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    
+    this.adjustForCenterOffset();
   }
 
   public setPlayerScale(scale: number) {
     this.playerScale = scale;
-    this.player.setScale(scale);
-
+    this.sprite.setScale(scale);
     this.adjustForCenterOffset();
   }
 
   private adjustForCenterOffset() {
     //The sprite for this character is not positioned directly in the center of its frame
-    if ( this.player.flipX ) {
+    if ( this.sprite.flipX ) {
       // Facing left: character center is at CHARACTER_CENTER_LEFT from left edge of frame
-      this.player.x = this.characterCenterX + ( this.FRAME_CENTER - this.CHARACTER_CENTER_LEFT );
+      this.sprite.x = this.characterCenterX + ( this.FRAME_CENTER - this.CHARACTER_CENTER_LEFT );
     } else {
       // Facing right: character center is at CHARACTER_CENTER_RIGHT from left edge of frame
-      this.player.x = this.characterCenterX + ( this.FRAME_CENTER - this.CHARACTER_CENTER_RIGHT );
+      this.sprite.x = this.characterCenterX + ( this.FRAME_CENTER - this.CHARACTER_CENTER_RIGHT );
     }
   }
 
@@ -77,27 +83,26 @@ export class Player extends Scene {
     this.characterCenterX = Phaser.Math.Clamp(
       this.characterCenterX,
       characterHalfWidth + this.CHARACTER_CENTER_RIGHT,
-      this.scale.width - characterHalfWidth - this.CHARACTER_CENTER_RIGHT
+      this.scene.scale.width - characterHalfWidth - this.CHARACTER_CENTER_RIGHT
     );
 
     this.adjustForCenterOffset();
   }
 
   private setCharacterDirection( facingLeft: boolean ) {
-    this.player.setFlipX( facingLeft );
+    this.sprite.setFlipX( facingLeft );
     this.adjustForCenterOffset();
   }
 
-
   private performDash() {
-    const dashDirection = this.player.flipX ? -1 : 1; // -1 for left, 1 for right
+    const dashDirection = this.sprite.flipX ? -1 : 1; // -1 for left, 1 for right
     const dashDistance = this.DASH_DISTANCE * dashDirection;
 
     // Calculate the dash movement from the left side of the frame
-    const frameLeftSide = this.player.x - (this.FRAME_WIDTH / 2);
+    const frameLeftSide = this.sprite.x - (this.FRAME_WIDTH / 2);
     const newFrameLeftSide = frameLeftSide + dashDistance;
     const newCharacterCenterX = newFrameLeftSide + (this.FRAME_WIDTH / 2) +
-                               (this.player.flipX ? this.CHARACTER_CENTER_LEFT - this.FRAME_CENTER :
+                               (this.sprite.flipX ? this.CHARACTER_CENTER_LEFT - this.FRAME_CENTER :
                                                    this.CHARACTER_CENTER_RIGHT - this.FRAME_CENTER);
 
     // Apply the dash movement
@@ -108,7 +113,7 @@ export class Player extends Scene {
     this.characterCenterX = Phaser.Math.Clamp(
       this.characterCenterX,
       characterHalfWidth + this.CHARACTER_CENTER_RIGHT,
-      this.scale.width - characterHalfWidth - this.CHARACTER_CENTER_RIGHT
+      this.scene.scale.width - characterHalfWidth - this.CHARACTER_CENTER_RIGHT
     );
 
     this.adjustForCenterOffset();
@@ -132,26 +137,26 @@ export class Player extends Scene {
   }
 
   private updateJumpPhysics( deltaTime: number ) {
-    const currentAnim = this.player.anims.currentAnim?.key;
+    const currentAnim = this.sprite.anims.currentAnim?.key;
 
     if ( !this.isOnGround ) {
       // Apply gravity
       this.velocityY += this.GRAVITY * deltaTime;
 
       // Update Y position
-      this.player.y += this.velocityY * deltaTime;
+      this.sprite.y += this.velocityY * deltaTime;
 
       // Check if we've reached the peak and started falling
       if ( this.velocityY > 0 && this.isJumping ) {
         this.isJumping = false;
         if(currentAnim !== 'player_slam_attack') {
-          this.player.play( 'player_fall' );
+          this.sprite.play( 'player_fall' );
         }
       }
 
       // Check if we've landed
-      if ( this.player.y >= this.GROUND_Y ) {
-        this.player.y = this.GROUND_Y;
+      if ( this.sprite.y >= this.GROUND_Y ) {
+        this.sprite.y = this.GROUND_Y;
         this.velocityY = 0;
         this.isOnGround = true;
         this.isJumping = false;
@@ -160,7 +165,7 @@ export class Player extends Scene {
         this.wasRunningBeforeJump = false;
 
         if(currentAnim !== 'player_slam_attack') {
-          this.player.play( 'player_land' );
+          this.sprite.play( 'player_land' );
         }
       }
     }
@@ -183,17 +188,17 @@ export class Player extends Scene {
 
   private handleMovementAnimations(inputState: ReturnType<typeof getInputState>) {
     // Don't override priority animations like landing
-    const currentAnim = this.player.anims.currentAnim?.key;
+    const currentAnim = this.sprite.anims.currentAnim?.key;
     if (isHighPriorityAnimation(currentAnim)) {
       return;
     }
 
     if (inputState.shouldPlayWalkAnimation) {
-      this.player.play('player_walk');
+      this.sprite.play('player_walk');
     } else if (inputState.shouldPlayRunAnimation) {
-      this.player.play('player_run');
+      this.sprite.play('player_run');
     } else if (inputState.shouldPlayIdleAnimation) {
-      this.player.play('player_idle');
+      this.sprite.play('player_idle');
     }
   }
 
@@ -204,15 +209,15 @@ export class Player extends Scene {
 
       if (this.comboState === 0) {
         // First attack in combo
-        this.player.play('player_slash_1');
+        this.sprite.play('player_slash_1');
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 1) {
         // Second attack in combo
-        this.player.play('player_slash_2');
+        this.sprite.play('player_slash_2');
 
         const baseSpeed = 2000 * deltaTime;
-        if (this.player.flipX) {
+        if (this.sprite.flipX) {
           this.moveCharacter(-baseSpeed);
           this.setCharacterDirection(true); // Facing left
         } else {
@@ -224,7 +229,7 @@ export class Player extends Scene {
         this.comboTimer = 0;
       } else if (this.comboState === 2) {
         // Third attack in combo
-        this.player.play('player_spin_attack');
+        this.sprite.play('player_spin_attack');
         this.resetCombo()
       }
     }
@@ -236,17 +241,17 @@ export class Player extends Scene {
       this.shouldResetCombo()
 
       if(inputState.isInAir && this.comboState === 0) {
-        this.player.play('player_slam_attack');
+        this.sprite.play('player_slam_attack');
         this.velocityY += this.GRAVITY / 3
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 0) {
-        this.player.play('player_slam_attack');
+        this.sprite.play('player_slam_attack');
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 1) {
-        this.setCharacterDirection(!this.player.flipX); // Facing right
-        this.player.play('player_slam_attack');
+        this.setCharacterDirection(!this.sprite.flipX); // Facing right
+        this.sprite.play('player_slam_attack');
         this.resetCombo()
       }
     }
@@ -255,7 +260,7 @@ export class Player extends Scene {
   private handleDash(inputState: ReturnType<typeof getInputState>) {
     if (inputState.shouldDash) {
       this.performDash();
-      this.player.play('player_dash');
+      this.sprite.play('player_dash');
       this.comboState = 2;
       this.comboTimer = 0;
     }
@@ -263,7 +268,7 @@ export class Player extends Scene {
 
   private handleBlock(inputState: ReturnType<typeof getInputState>) {
     if (inputState.shouldBlock) {
-      this.player.play('player_block');
+      this.sprite.play('player_block');
       this.comboState = 2;
       this.comboTimer = 0;
     }
@@ -276,51 +281,25 @@ export class Player extends Scene {
       this.velocityY = this.JUMP_VELOCITY;
       this.isOnGround = false;
       this.isJumping = true;
-      this.player.play('player_jump');
+      this.sprite.play('player_jump');
     }
   }
 
-  private initPlayer() {
-    // Create player sprite using the atlas with the first idle frame
-    this.player = this.add.sprite(512, this.GROUND_Y, 'mainCharacterAtlas', 'Idle 0');
-    this.setPlayerScale(this.playerScale);
-    // Set texture filtering to nearest neighbor for crisp pixel art
-    this.player.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    // Initialize character center position
-    this.characterCenterX = 512;
-    this.adjustForCenterOffset();
-  }
-
-  private initBackground() {
-    this.camera = this.cameras.main;
-    this.camera.setBackgroundColor(0x87CEEB);
-
-    this.background = this.add.image(512, 384, 'background');
-    this.background.setAlpha(0.3);
-  }
-
   create() {
-    this.initBackground();
-
-    this.initPlayer();
-
     // Set up inputs
-    const { cursors, inputKeys } = setupPlayerInput(this);
+    const { cursors, inputKeys } = setupPlayerInput(this.scene);
     this.cursors = cursors;
     this.inputKeys = inputKeys;
 
-    createPlayerAnimations(this);
-
+    createPlayerAnimations(this.scene);
     addPlayerAnimationListeners(this);
 
-    this.player.play('player_idle');
-
-    EventBus.emit('current-scene-ready', this);
+    this.sprite.play('player_idle');
   }
 
   update( time: number, delta: number ) {
     const deltaTime = delta / 1000; // Convert to seconds
-    const currentAnim = this.player.anims.currentAnim?.key;
+    const currentAnim = this.sprite.anims.currentAnim?.key;
 
     this.updateComboTimer(deltaTime);
     this.updateJumpPhysics( deltaTime );
@@ -333,9 +312,5 @@ export class Player extends Scene {
     this.handleJump(inputState);
     this.handleMovement(inputState, deltaTime);
     this.handleMovementAnimations(inputState);
-  }
-
-  changeScene() {
-    this.scene.start( 'DaggerBandit' );
   }
 }

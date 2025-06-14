@@ -218,10 +218,10 @@ export function createPlayerAnimations(scene: Scene) {
 }
 
 export function addPlayerAnimationListeners(_this: Player) {
-  _this.player.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
+  _this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
 
     if (isActionAnimations(animation.key)) {
-      _this.player.play('player_idle');
+      _this.sprite.play('player_idle');
     }
   });
 }

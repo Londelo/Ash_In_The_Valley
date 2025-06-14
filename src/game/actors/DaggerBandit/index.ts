@@ -1,12 +1,10 @@
-import { EventBus } from '../../EventBus';
 import { Scene } from 'phaser';
 import { createDaggerBanditAnimations, addDaggerBanditAnimationListeners, isHighPriorityAnimation } from './animations';
 import { setupDaggerBanditInput, getDaggerBanditInputState } from './inputs';
 
-export class DaggerBandit extends Scene {
-  camera: Phaser.Cameras.Scene2D.Camera;
-  background: Phaser.GameObjects.Image;
-  bandit: Phaser.GameObjects.Sprite;
+export class DaggerBandit {
+  scene: Scene;
+  sprite: Phaser.GameObjects.Sprite;
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   banditSpeed: number = 180;
@@ -23,7 +21,7 @@ export class DaggerBandit extends Scene {
   private get CHARACTER_CENTER_LEFT() { return this.BASE_CHARACTER_CENTER_LEFT * this.banditScale; }
 
   // Track the character's logical center position
-  private characterCenterX: number = 512;
+  private characterCenterX: number;
 
   // Jump physics - Adjusted for smaller character
   private readonly GROUND_Y = 650;
@@ -45,13 +43,31 @@ export class DaggerBandit extends Scene {
   private readonly COMBO_WINDOW_MAX = 800;
   private readonly COMBO_WINDOW_MIN = 200;
 
-  constructor() {
-    super('DaggerBandit');
+  constructor(scene: Scene, x: number, y: number) {
+    this.scene = scene;
+    this.characterCenterX = x;
+
+    // Verify the atlas is loaded
+    if (!scene.textures.exists('daggerBanditAtlas')) {
+      console.error('daggerBanditAtlas not found! Available textures:', scene.textures.list);
+      // Fallback to a basic rectangle if atlas is missing
+      this.sprite = scene.add.rectangle(x, y, 100, 100, 0xff0000) as any;
+      return;
+    }
+
+    // Create bandit sprite using the atlas with the first idle frame
+    this.sprite = scene.add.sprite(x, y, 'daggerBanditAtlas', 'Idle 0');
+    this.setBanditScale(this.banditScale);
+
+    // Set texture filtering to nearest neighbor for crisp pixel art
+    this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+
+    this.sprite.x = this.characterCenterX;
   }
 
   public setBanditScale(scale: number) {
     this.banditScale = scale;
-    this.bandit.setScale(scale);
+    this.sprite.setScale(scale);
   }
 
   private moveCharacter(deltaX: number) {
@@ -62,14 +78,14 @@ export class DaggerBandit extends Scene {
     this.characterCenterX = Phaser.Math.Clamp(
       this.characterCenterX,
       characterHalfWidth + this.CHARACTER_CENTER_RIGHT,
-      this.scale.width - characterHalfWidth - this.CHARACTER_CENTER_RIGHT
+      this.scene.scale.width - characterHalfWidth - this.CHARACTER_CENTER_RIGHT
     );
 
-    this.bandit.x = this.characterCenterX;
+    this.sprite.x = this.characterCenterX;
   }
 
   private setCharacterDirection(facingLeft: boolean) {
-    this.bandit.setFlipX(facingLeft);
+    this.sprite.setFlipX(facingLeft);
   }
 
   public resetCombo() {
@@ -90,26 +106,26 @@ export class DaggerBandit extends Scene {
   }
 
   private updateJumpPhysics(deltaTime: number) {
-    const currentAnim = this.bandit.anims.currentAnim?.key;
+    const currentAnim = this.sprite.anims.currentAnim?.key;
 
     if (!this.isOnGround) {
       // Apply gravity
       this.velocityY += this.GRAVITY * deltaTime;
 
       // Update Y position
-      this.bandit.y += this.velocityY * deltaTime;
+      this.sprite.y += this.velocityY * deltaTime;
 
       // Check if we've reached the peak and started falling
       if (this.velocityY > 0 && this.isJumping) {
         this.isJumping = false;
         if (currentAnim !== 'bandit_bat_fang_attack' && !this.isVanished) {
-          this.bandit.play('bandit_fall');
+          this.sprite.play('bandit_fall');
         }
       }
 
       // Check if we've landed
-      if (this.bandit.y >= this.GROUND_Y) {
-        this.bandit.y = this.GROUND_Y;
+      if (this.sprite.y >= this.GROUND_Y) {
+        this.sprite.y = this.GROUND_Y;
         this.velocityY = 0;
         this.isOnGround = true;
         this.isJumping = false;
@@ -119,9 +135,9 @@ export class DaggerBandit extends Scene {
 
         if (currentAnim !== 'bandit_bat_fang_attack' && !this.isVanished) {
           // Brief landing pause before returning to idle
-          this.time.delayedCall(100, () => {
-            if (this.bandit.anims.currentAnim?.key === 'bandit_fall') {
-              this.bandit.play('bandit_idle');
+          this.scene.time.delayedCall(100, () => {
+            if (this.sprite.anims.currentAnim?.key === 'bandit_fall') {
+              this.sprite.play('bandit_idle');
             }
           });
         }
@@ -146,15 +162,15 @@ export class DaggerBandit extends Scene {
 
   private handleMovementAnimations(inputState: ReturnType<typeof getDaggerBanditInputState>) {
     // Don't override priority animations
-    const currentAnim = this.bandit.anims.currentAnim?.key;
+    const currentAnim = this.sprite.anims.currentAnim?.key;
     if (isHighPriorityAnimation(currentAnim) || this.isVanished) {
       return;
     }
 
     if (inputState.shouldPlayRunAnimation) {
-      this.bandit.play('bandit_run');
+      this.sprite.play('bandit_run');
     } else if (inputState.shouldPlayIdleAnimation) {
-      this.bandit.play('bandit_idle');
+      this.sprite.play('bandit_idle');
     }
   }
 
@@ -164,17 +180,17 @@ export class DaggerBandit extends Scene {
 
       if (this.comboState === 0) {
         // First attack in combo
-        this.bandit.play('bandit_attack');
+        this.sprite.play('bandit_attack');
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 1) {
         // Second attack in combo - more powerful
-        this.bandit.play('bandit_attack');
+        this.sprite.play('bandit_attack');
         this.comboState = 2;
         this.comboTimer = 0;
       } else if (this.comboState === 2) {
         // Third attack - reset combo
-        this.bandit.play('bandit_attack');
+        this.sprite.play('bandit_attack');
         this.resetCombo();
       }
     }
@@ -182,7 +198,7 @@ export class DaggerBandit extends Scene {
 
   private handleBatFangAttack(inputState: ReturnType<typeof getDaggerBanditInputState>) {
     if (inputState.shouldBatFangAttack && !this.isVanished) {
-      this.bandit.play('bandit_bat_fang_attack');
+      this.sprite.play('bandit_bat_fang_attack');
       this.resetCombo();
     }
   }
@@ -191,12 +207,12 @@ export class DaggerBandit extends Scene {
     if (inputState.shouldVanish && !this.isVanished) {
       // Start vanish sequence
       this.isVanished = true;
-      this.bandit.play('bandit_vanish');
+      this.sprite.play('bandit_vanish');
 
       // Calculate teleport destination (opposite side of screen)
-      const currentSide = this.characterCenterX < this.scale.width / 2 ? 'left' : 'right';
+      const currentSide = this.characterCenterX < this.scene.scale.width / 2 ? 'left' : 'right';
       if (currentSide === 'left') {
-        this.vanishTargetX = this.scale.width - 200; // Near right edge
+        this.vanishTargetX = this.scene.scale.width - 200; // Near right edge
       } else {
         this.vanishTargetX = 200; // Near left edge
       }
@@ -207,7 +223,7 @@ export class DaggerBandit extends Scene {
     if (inputState.shouldBlock && !this.isVanished) {
       // For now, just play idle animation as a block stance
       // You could create a specific block animation later
-      this.bandit.play('bandit_idle');
+      this.sprite.play('bandit_idle');
       this.resetCombo();
     }
   }
@@ -219,63 +235,27 @@ export class DaggerBandit extends Scene {
       this.velocityY = this.JUMP_VELOCITY;
       this.isOnGround = false;
       this.isJumping = true;
-      this.bandit.play('bandit_jump');
+      this.sprite.play('bandit_jump');
     }
-  }
-
-  private initBandit() {
-    // Verify the atlas is loaded
-    if (!this.textures.exists('daggerBanditAtlas')) {
-      console.error('daggerBanditAtlas not found! Available textures:', this.textures.list);
-      // Fallback to a basic rectangle if atlas is missing
-      this.bandit = this.add.rectangle(512, this.GROUND_Y, 100, 100, 0xff0000) as any;
-      return;
-    }
-
-    // Create bandit sprite using the atlas with the first idle frame
-    this.bandit = this.add.sprite(512, this.GROUND_Y, 'daggerBanditAtlas', 'Idle 0');
-    this.setBanditScale(this.banditScale);
-
-    // Set texture filtering to nearest neighbor for crisp pixel art
-    this.bandit.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-
-    // Initialize character center position
-    this.characterCenterX = 512;
-    this.bandit.x = this.characterCenterX;
-  }
-
-  private initBackground() {
-    this.camera = this.cameras.main;
-    this.camera.setBackgroundColor(0x2C1810); // Dark brown background
-
-    this.background = this.add.image(512, 384, 'background');
-    this.background.setAlpha(0.2);
   }
 
   create() {
-    console.log('DaggerBandit scene create() called');
-    console.log('Available textures:', Object.keys(this.textures.list));
-
-    this.initBackground();
-    this.initBandit();
+    console.log('DaggerBandit actor create() called');
 
     // Set up inputs
-    const { cursors, inputKeys } = setupDaggerBanditInput(this);
+    const { cursors, inputKeys } = setupDaggerBanditInput(this.scene);
     this.cursors = cursors;
     this.inputKeys = inputKeys;
 
-    createDaggerBanditAnimations(this);
+    createDaggerBanditAnimations(this.scene);
     addDaggerBanditAnimationListeners(this);
 
-    this.bandit.play('bandit_idle');
-
-    EventBus.emit('current-scene-ready', this);
+    this.sprite.play('bandit_idle');
   }
 
   update(time: number, delta: number) {
-
     const deltaTime = delta / 1000; // Convert to seconds
-    const currentAnim = this.bandit.anims.currentAnim?.key;
+    const currentAnim = this.sprite.anims.currentAnim?.key;
 
     this.updateComboTimer(deltaTime);
     this.updateJumpPhysics(deltaTime);
@@ -295,19 +275,15 @@ export class DaggerBandit extends Scene {
   public onVanishComplete() {
     // Teleport to new position
     this.characterCenterX = this.vanishTargetX;
-    this.bandit.x = this.characterCenterX;
+    this.sprite.x = this.characterCenterX;
 
     // Start appear animation
-    this.bandit.play('bandit_appear');
+    this.sprite.play('bandit_appear');
   }
 
   // Method called when appear animation completes
   public onAppearComplete() {
     this.isVanished = false;
-    this.bandit.play('bandit_idle');
-  }
-
-  changeScene() {
-    this.scene.start('Game');
+    this.sprite.play('bandit_idle');
   }
 }
