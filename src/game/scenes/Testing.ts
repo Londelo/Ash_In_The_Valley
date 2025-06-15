@@ -6,7 +6,7 @@ import { DaggerBandit } from '../actors/DaggerBandit';
 export class Testing extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
   background: Phaser.GameObjects.Image;
-  
+
   // Actor instances
   player: Player;
   daggerBandit: DaggerBandit;
@@ -38,8 +38,8 @@ export class Testing extends Scene {
 
   update(time: number, delta: number) {
     // Update all actors
-    this.player.update(time, delta);
     this.daggerBandit.update(time, delta);
+    this.player.update(time, delta);
   }
 
   changeScene() {

@@ -1,14 +1,24 @@
 import type { DaggerBandit } from './index';
 import type { Player } from '../Player/index';
 
+export type AI_State = {
+    // isMoving: boolean;
+    // isAttacking: boolean;
+    // isBigAttacking: boolean;
+    shouldAttack: boolean;
+    shouldPlayIdleAnim: boolean;
+    shouldPlayMoveAnim: boolean;
+    shouldMove: boolean;
+    playerDirection: "left" | "right";
+}
 export class BanditAI {
   private bandit: DaggerBandit;
   private player: Player;
-  
+
   // Simple AI parameters
   private readonly DETECTION_RANGE = 300;
   private readonly ATTACK_RANGE = 100;
-  
+
   // Attack cooldown
   private lastAttackTime: number = 0;
   private readonly ATTACK_COOLDOWN = 1500; // ms
@@ -23,7 +33,7 @@ export class BanditAI {
     const banditY = this.bandit.sprite.y;
     const playerX = this.player.sprite.x;
     const playerY = this.player.sprite.y;
-    
+
     return Math.sqrt(Math.pow(playerX - banditX, 2) + Math.pow(playerY - banditY, 2));
   }
 
@@ -31,36 +41,38 @@ export class BanditAI {
     return this.player.sprite.x < this.bandit.sprite.x ? 'left' : 'right';
   }
 
-  private canAttack(currentTime: number): boolean {
+  private checkAttackCooldown(currentTime: number): boolean {
     return currentTime - this.lastAttackTime > this.ATTACK_COOLDOWN;
   }
 
-  public update(time: number, delta: number) {
-    const deltaTime = delta / 1000;
+  public getState(time: number, delta: number):AI_State {
     const distance = this.getDistanceToPlayer();
     const direction = this.getDirectionToPlayer();
+    const currentAnim = this.bandit.sprite.anims.currentAnim?.key;
 
-    // If player is not detected, do nothing
-    if (distance > this.DETECTION_RANGE) {
-      return;
-    }
+    const isMoving = currentAnim === 'bandit_run'
+    const isIdle = currentAnim === 'bandit_idle'
+    const isAttacking = currentAnim === 'bandit_attack'
+    const isBigAttacking = currentAnim === 'bandit_bat_fang_attack'
 
-    // If close enough and can attack, attack
-    if (distance <= this.ATTACK_RANGE && this.canAttack(time)) {
-      this.bandit.setCharacterDirection(direction === 'left');
-      this.bandit.handleAttack();
-      this.lastAttackTime = time;
-      return;
-    }
+    const playerDirection = direction
+    const playerIsDetected = distance < this.DETECTION_RANGE
+    const playerIsInAttackRange = distance <= this.ATTACK_RANGE
+    const canAttack = this.checkAttackCooldown(time)
 
-    // If player is detected but not in attack range, move towards player
-    if (distance > this.ATTACK_RANGE) {
-      const moveLeft = direction === 'left';
-      const moveRight = direction === 'right';
-      const isRunning = true; // Always run when chasing
-      
-      this.bandit.handleMovement(moveLeft, moveRight, isRunning, deltaTime);
-      this.bandit.handleMovementAnimations(true, isRunning);
+    const shouldAttack = canAttack && playerIsInAttackRange && !isAttacking && !isBigAttacking
+    const shouldMove = distance > this.ATTACK_RANGE && playerIsDetected
+    const shouldPlayMoveAnim = shouldMove && !isMoving && !playerIsInAttackRange
+    const shouldPlayIdleAnim = (playerIsInAttackRange || !playerIsDetected) && !isIdle
+
+    this.lastAttackTime = shouldAttack ? time : this.lastAttackTime
+
+    return {
+      shouldAttack,
+      shouldPlayMoveAnim,
+      shouldPlayIdleAnim,
+      shouldMove,
+      playerDirection
     }
   }
 }

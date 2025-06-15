@@ -1,12 +1,12 @@
 import { Scene } from 'phaser';
 import { createDaggerBanditAnimations, addDaggerBanditAnimationListeners, isHighPriorityAnimation } from './animations';
-import { BanditAI } from './ai';
+import { BanditAI, AI_State } from './ai';
 import type { Player } from '../Player/index';
 
 export class DaggerBandit {
   scene: Scene;
   sprite: Phaser.GameObjects.Sprite;
-  banditSpeed: number = 180;
+  banditSpeed: number = 50;
 
   // AI system
   private banditAI: BanditAI;
@@ -39,6 +39,9 @@ export class DaggerBandit {
   // Vanish/Appear system
   private isVanished: boolean = false;
   private vanishTargetX: number = 0;
+
+  // Global deltaTime for this class
+  private deltaTime: number = 0;
 
   constructor(scene: Scene, x: number, y: number, playerRef: Player) {
     this.scene = scene;
@@ -86,15 +89,15 @@ export class DaggerBandit {
     this.sprite.setFlipX(facingLeft);
   }
 
-  private updateJumpPhysics(deltaTime: number) {
+  private updateJumpPhysics() {
     const currentAnim = this.sprite.anims.currentAnim?.key;
 
     if (!this.isOnGround) {
       // Apply gravity
-      this.velocityY += this.GRAVITY * deltaTime;
+      this.velocityY += this.GRAVITY * this.deltaTime;
 
       // Update Y position
-      this.sprite.y += this.velocityY * deltaTime;
+      this.sprite.y += this.velocityY * this.deltaTime;
 
       // Check if we've reached the peak and started falling
       if (this.velocityY > 0 && this.isJumping) {
@@ -126,37 +129,41 @@ export class DaggerBandit {
     }
   }
 
-  public handleMovement(moveLeft: boolean, moveRight: boolean, isRunning: boolean, deltaTime: number) {
-    if (!this.isVanished) {
-      const baseSpeed = this.banditSpeed * deltaTime;
-      const moveSpeed = isRunning ? baseSpeed * 1.8 : baseSpeed;
+  public handleMovement(aiState: AI_State) {
+    const {
+      shouldMove,
+      playerDirection
+    } = aiState
 
-      if (moveLeft) {
-        this.moveCharacter(-moveSpeed);
+    if(shouldMove) {
+      const baseSpeed = this.banditSpeed * this.deltaTime;
+
+      if (playerDirection === 'left') {
+        this.moveCharacter(-baseSpeed);
         this.setCharacterDirection(true); // Facing left
-      } else if (moveRight) {
-        this.moveCharacter(moveSpeed);
+      } else {
+        this.moveCharacter(baseSpeed);
         this.setCharacterDirection(false); // Facing right
       }
     }
   }
 
-  public handleMovementAnimations(isMoving: boolean, isRunning: boolean) {
+  public handleMovementAnimations(aiState: AI_State) {
     // Don't override priority animations
     const currentAnim = this.sprite.anims.currentAnim?.key;
-    if (isHighPriorityAnimation(currentAnim) || this.isVanished) {
+    if (isHighPriorityAnimation(currentAnim)) {
       return;
     }
 
-    if (isMoving && isRunning) {
+    if (aiState.shouldPlayMoveAnim) {
       this.sprite.play('bandit_run');
-    } else if (!isMoving) {
+    } else if (aiState.shouldPlayIdleAnim) {
       this.sprite.play('bandit_idle');
     }
   }
 
-  public handleAttack() {
-    if (!this.isVanished) {
+  public handleAttack(aiState: AI_State) {
+    if (aiState.shouldAttack) {
       this.sprite.play('bandit_attack');
     }
   }
@@ -204,12 +211,16 @@ export class DaggerBandit {
   }
 
   update(time: number, delta: number) {
-    const deltaTime = delta / 1000; // Convert to seconds
+    this.deltaTime = delta / 1000; // Convert to seconds
 
-    this.updateJumpPhysics(deltaTime);
+    this.updateJumpPhysics();
 
     // Let AI control the bandit
-    this.banditAI.update(time, delta);
+    const aiState = this.banditAI.getState(time, delta);
+
+    this.handleAttack(aiState)
+    this.handleMovement(aiState)
+    this.handleMovementAnimations(aiState);
   }
 
   // Method called when vanish animation completes
