@@ -46,8 +46,7 @@ export function getInputState(
   // Extract needed properties from player
   const inputKeys = player.inputKeys;
   const cursors = player.cursors;
-  const isOnGround = player.isOnGround;
-  const wasRunningBeforeJump = player.wasRunningBeforeJump;
+  const isOnGround = player.sprite.body.onFloor();
 
   // Current state checks
   const isSlashing = currentAnim === 'player_slash_1' || currentAnim === 'player_slash_2' || currentAnim === 'player_spin_attack';;;
@@ -64,7 +63,7 @@ export function getInputState(
 
   // Running logic: spacebar for running, can only start running on ground, but maintain running state if jumped while running
   const spacePressed = inputKeys.SPACE.isDown;
-  const isRunning = spacePressed && (isOnGround || (isInAir && wasRunningBeforeJump));
+  const isRunning = spacePressed && isOnGround;
 
   // Double-click detection for dash using the reusable utility
   const shouldDash = Phaser.Input.Keyboard.JustDown(inputKeys.Q) &&

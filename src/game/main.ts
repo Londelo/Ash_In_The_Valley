@@ -1,9 +1,5 @@
 import { Boot } from './scenes/Boot';
-import { GameOver } from './scenes/GameOver';
-import { Game as MainGame } from './scenes/Game';
-import { MainMenu } from './scenes/MainMenu';
-import { Player } from './scenes/Player';
-import { DaggerBandit } from './scenes/DaggerBandit';
+import { Testing } from './scenes/Testing';
 import {AUTO, Game} from 'phaser';
 import { Preloader } from './scenes/Preloader';
 
@@ -15,6 +11,13 @@ const config: Phaser.Types.Core.GameConfig = {
   height: 768,
   parent: 'game-container',
   backgroundColor: '#028af8',
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 800, x: 0 },
+      debug: false
+    }
+  },
   render: {
     pixelArt: true,
     antialias: false,
@@ -23,11 +26,7 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: [
     Boot,
     Preloader,
-    MainMenu,
-    Player,
-    DaggerBandit,
-    MainGame,
-    GameOver
+    Testing
   ]
 };
 

@@ -218,10 +218,10 @@ export function createPlayerAnimations(scene: Scene) {
 }
 
 export function addPlayerAnimationListeners(_this: Player) {
-  _this.player.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
+  _this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
 
     if (isActionAnimations(animation.key)) {
-      _this.player.play('player_idle');
+      _this.sprite.play('player_idle');
     }
   });
 }
@@ -234,6 +234,7 @@ export function isActionAnimations(animKey?: string): boolean {
     animKey === 'player_spin_attack' ||
     animKey === 'player_roll_attack' ||
     animKey === 'player_slash_heavy' ||
+    animKey === 'player_land' ||
     animKey === 'player_block'
 }
 
