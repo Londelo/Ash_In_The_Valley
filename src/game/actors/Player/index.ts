@@ -4,37 +4,13 @@ import { setupPlayerInput, getInputState } from './inputs';
 
 export class Player {
   scene: Scene;
-  sprite: Phaser.GameObjects.Sprite;
+  sprite: Phaser.Physics.Arcade.Sprite;
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   playerSpeed: number = 200;
 
   // Player scaling
   private playerScale: number = 3;
-
-  // Character positioning constants (base values for scale 1)
-  private readonly BASE_FRAME_WIDTH = 90;
-  private readonly BASE_CHARACTER_CENTER_RIGHT = 20;  // Character center when facing right
-  private readonly BASE_CHARACTER_CENTER_LEFT = 85;   // Character center when facing left
-
-  // Computed values based on current scale
-  private get FRAME_WIDTH() { return this.BASE_FRAME_WIDTH * this.playerScale/2; }
-  private get CHARACTER_CENTER_RIGHT() { return this.BASE_CHARACTER_CENTER_RIGHT * this.playerScale/2; }
-  private get CHARACTER_CENTER_LEFT() { return this.BASE_CHARACTER_CENTER_LEFT * this.playerScale/2; }
-  private get FRAME_CENTER() { return this.FRAME_WIDTH / 2; }
-
-  // Track the character's logical center position
-  private characterCenterX: number;
-
-  // Jump physics
-  private readonly GROUND_Y = 600;
-  private readonly JUMP_VELOCITY = -400;
-  private readonly GRAVITY = 800;
-  private velocityY: number = 0;
-
-  public isOnGround: boolean = true;
-  public wasRunningBeforeJump: boolean = false;
-  public isJumping: boolean = false;
 
   private readonly DASH_DISTANCE = 180;
 
@@ -46,77 +22,35 @@ export class Player {
 
   constructor(scene: Scene, x: number, y: number) {
     this.scene = scene;
-    this.characterCenterX = x;
     
     // Create sprite using the atlas with the first idle frame
-    this.sprite = scene.add.sprite(x, y, 'mainCharacterAtlas', 'Idle 0');
+    this.sprite = scene.physics.add.sprite(x, y, 'mainCharacterAtlas', 'Idle 0');
     this.setPlayerScale(this.playerScale);
     
     // Set texture filtering to nearest neighbor for crisp pixel art
     this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     
-    this.adjustForCenterOffset();
+    // Set origin to bottom center for proper ground positioning
+    this.sprite.setOrigin(0.5, 1);
+    
+    // Enable physics
+    this.sprite.setCollideWorldBounds(true);
+    this.sprite.body.setGravityY(300);
   }
 
   public setPlayerScale(scale: number) {
     this.playerScale = scale;
     this.sprite.setScale(scale);
-    this.adjustForCenterOffset();
   }
 
-  private adjustForCenterOffset() {
-    //The sprite for this character is not positioned directly in the center of its frame
-    if ( this.sprite.flipX ) {
-      // Facing left: character center is at CHARACTER_CENTER_LEFT from left edge of frame
-      this.sprite.x = this.characterCenterX + ( this.FRAME_CENTER - this.CHARACTER_CENTER_LEFT );
-    } else {
-      // Facing right: character center is at CHARACTER_CENTER_RIGHT from left edge of frame
-      this.sprite.x = this.characterCenterX + ( this.FRAME_CENTER - this.CHARACTER_CENTER_RIGHT );
-    }
-  }
-
-  private moveCharacter( deltaX: number ) {
-    this.characterCenterX += deltaX;
-
-    // Keep character within screen bounds (accounting for character bounds, not sprite bounds)
-    const characterHalfWidth = ( this.CHARACTER_CENTER_LEFT - this.CHARACTER_CENTER_RIGHT ) / 2;
-    this.characterCenterX = Phaser.Math.Clamp(
-      this.characterCenterX,
-      characterHalfWidth + this.CHARACTER_CENTER_RIGHT,
-      this.scene.scale.width - characterHalfWidth - this.CHARACTER_CENTER_RIGHT
-    );
-
-    this.adjustForCenterOffset();
-  }
-
-  private setCharacterDirection( facingLeft: boolean ) {
+  private setCharacterDirection(facingLeft: boolean) {
     this.sprite.setFlipX( facingLeft );
-    this.adjustForCenterOffset();
   }
 
   private performDash() {
     const dashDirection = this.sprite.flipX ? -1 : 1; // -1 for left, 1 for right
     const dashDistance = this.DASH_DISTANCE * dashDirection;
-
-    // Calculate the dash movement from the left side of the frame
-    const frameLeftSide = this.sprite.x - (this.FRAME_WIDTH / 2);
-    const newFrameLeftSide = frameLeftSide + dashDistance;
-    const newCharacterCenterX = newFrameLeftSide + (this.FRAME_WIDTH / 2) +
-                               (this.sprite.flipX ? this.CHARACTER_CENTER_LEFT - this.FRAME_CENTER :
-                                                   this.CHARACTER_CENTER_RIGHT - this.FRAME_CENTER);
-
-    // Apply the dash movement
-    this.characterCenterX = newCharacterCenterX;
-
-    // Keep character within screen bounds
-    const characterHalfWidth = (this.CHARACTER_CENTER_LEFT - this.CHARACTER_CENTER_RIGHT) / 2;
-    this.characterCenterX = Phaser.Math.Clamp(
-      this.characterCenterX,
-      characterHalfWidth + this.CHARACTER_CENTER_RIGHT,
-      this.scene.scale.width - characterHalfWidth - this.CHARACTER_CENTER_RIGHT
-    );
-
-    this.adjustForCenterOffset();
+    this.sprite.x += dashDistance;
   }
 
   public resetCombo() {
@@ -136,53 +70,20 @@ export class Player {
     }
   }
 
-  private updateJumpPhysics( deltaTime: number ) {
-    const currentAnim = this.sprite.anims.currentAnim?.key;
-
-    if ( !this.isOnGround ) {
-      // Apply gravity
-      this.velocityY += this.GRAVITY * deltaTime;
-
-      // Update Y position
-      this.sprite.y += this.velocityY * deltaTime;
-
-      // Check if we've reached the peak and started falling
-      if ( this.velocityY > 0 && this.isJumping ) {
-        this.isJumping = false;
-        if(currentAnim !== 'player_slam_attack') {
-          this.sprite.play( 'player_fall' );
-        }
-      }
-
-      // Check if we've landed
-      if ( this.sprite.y >= this.GROUND_Y ) {
-        this.sprite.y = this.GROUND_Y;
-        this.velocityY = 0;
-        this.isOnGround = true;
-        this.isJumping = false;
-
-        // Reset running state when landing
-        this.wasRunningBeforeJump = false;
-
-        if(currentAnim !== 'player_slam_attack') {
-          this.sprite.play( 'player_land' );
-        }
-      }
-    }
-  }
-
   private handleMovement(inputState: ReturnType<typeof getInputState>, deltaTime: number) {
     if (inputState.canMove && inputState.isMoving) {
       const baseSpeed = this.playerSpeed * deltaTime;
       const moveSpeed = inputState.isRunning ? baseSpeed * 2 : baseSpeed;
 
       if (inputState.isMovingLeft) {
-        this.moveCharacter(-moveSpeed);
+        this.sprite.setVelocityX(-moveSpeed);
         this.setCharacterDirection(true); // Facing left
       } else if (inputState.isMovingRight) {
-        this.moveCharacter(moveSpeed);
+        this.sprite.setVelocityX(moveSpeed);
         this.setCharacterDirection(false); // Facing right
       }
+    } else {
+      this.sprite.setVelocityX(0);
     }
   }
 
@@ -218,10 +119,10 @@ export class Player {
 
         const baseSpeed = 2000 * deltaTime;
         if (this.sprite.flipX) {
-          this.moveCharacter(-baseSpeed);
+          this.sprite.x -= baseSpeed;
           this.setCharacterDirection(true); // Facing left
         } else {
-          this.moveCharacter(baseSpeed);
+          this.sprite.x += baseSpeed;
           this.setCharacterDirection(false); // Facing right
         }
 
@@ -242,7 +143,7 @@ export class Player {
 
       if(inputState.isInAir && this.comboState === 0) {
         this.sprite.play('player_slam_attack');
-        this.velocityY += this.GRAVITY / 3
+        this.sprite.setVelocityY(400);
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 0) {
@@ -276,11 +177,7 @@ export class Player {
 
   private handleJump(inputState: ReturnType<typeof getInputState>) {
     if (inputState.shouldJump) {
-      // Remember if we were running before jumping
-      this.wasRunningBeforeJump = inputState.isRunning;
-      this.velocityY = this.JUMP_VELOCITY;
-      this.isOnGround = false;
-      this.isJumping = true;
+      this.sprite.setVelocityY(-400);
       this.sprite.play('player_jump');
     }
   }
@@ -302,7 +199,6 @@ export class Player {
     const currentAnim = this.sprite.anims.currentAnim?.key;
 
     this.updateComboTimer(deltaTime);
-    this.updateJumpPhysics( deltaTime );
 
     const inputState = getInputState(this, currentAnim);
     this.handleSlash(inputState, deltaTime);

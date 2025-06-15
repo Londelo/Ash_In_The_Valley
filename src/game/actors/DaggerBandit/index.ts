@@ -5,7 +5,7 @@ import type { Player } from '../Player/index';
 
 export class DaggerBandit {
   scene: Scene;
-  sprite: Phaser.GameObjects.Sprite;
+  sprite: Phaser.Physics.Arcade.Sprite;
   banditSpeed: number = 50;
 
   // AI system
@@ -14,27 +14,6 @@ export class DaggerBandit {
 
   // Bandit scaling
   private banditScale: number = 3;
-
-  // Character positioning constants (base values for scale 1) - Updated for 128x78 frame
-  private readonly BASE_CHARACTER_CENTER_RIGHT = 64;  // Character center when facing right
-  private readonly BASE_CHARACTER_CENTER_LEFT = 64;   // Character center when facing left
-
-  // Computed values based on current scale
-  private get CHARACTER_CENTER_RIGHT() { return this.BASE_CHARACTER_CENTER_RIGHT * this.banditScale; }
-  private get CHARACTER_CENTER_LEFT() { return this.BASE_CHARACTER_CENTER_LEFT * this.banditScale; }
-
-  // Track the character's logical center position
-  private characterCenterX: number;
-
-  // Jump physics - Adjusted for smaller character
-  private readonly GROUND_Y = 650;
-  private readonly JUMP_VELOCITY = -350;
-  private readonly GRAVITY = 700;
-  private velocityY: number = 0;
-
-  public isOnGround: boolean = true;
-  public wasRunningBeforeJump: boolean = false;
-  public isJumping: boolean = false;
 
   // Vanish/Appear system
   private isVanished: boolean = false;
@@ -45,25 +24,29 @@ export class DaggerBandit {
 
   constructor(scene: Scene, x: number, y: number, playerRef: Player) {
     this.scene = scene;
-    this.characterCenterX = x;
     this.playerRef = playerRef;
 
     // Verify the atlas is loaded
     if (!scene.textures.exists('daggerBanditAtlas')) {
       console.error('daggerBanditAtlas not found! Available textures:', scene.textures.list);
       // Fallback to a basic rectangle if atlas is missing
-      this.sprite = scene.add.rectangle(x, y, 100, 100, 0xff0000) as any;
+      this.sprite = scene.physics.add.sprite(x, y, null) as any;
       return;
     }
 
     // Create bandit sprite using the atlas with the first idle frame
-    this.sprite = scene.add.sprite(x, y, 'daggerBanditAtlas', 'Idle 0');
+    this.sprite = scene.physics.add.sprite(x, y, 'daggerBanditAtlas', 'Idle 0');
     this.setBanditScale(this.banditScale);
 
     // Set texture filtering to nearest neighbor for crisp pixel art
     this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
 
-    this.sprite.x = this.characterCenterX;
+    // Set origin to bottom center for proper ground positioning
+    this.sprite.setOrigin(0.5, 1);
+    
+    // Enable physics
+    this.sprite.setCollideWorldBounds(true);
+    this.sprite.body.setGravityY(300);
   }
 
   public setBanditScale(scale: number) {
@@ -71,62 +54,8 @@ export class DaggerBandit {
     this.sprite.setScale(scale);
   }
 
-  private moveCharacter(deltaX: number) {
-    this.characterCenterX += deltaX;
-
-    // Keep character within screen bounds
-    const characterHalfWidth = (this.CHARACTER_CENTER_LEFT - this.CHARACTER_CENTER_RIGHT) / 2;
-    this.characterCenterX = Phaser.Math.Clamp(
-      this.characterCenterX,
-      characterHalfWidth + this.CHARACTER_CENTER_RIGHT,
-      this.scene.scale.width - characterHalfWidth - this.CHARACTER_CENTER_RIGHT
-    );
-
-    this.sprite.x = this.characterCenterX;
-  }
-
   public setCharacterDirection(facingLeft: boolean) {
     this.sprite.setFlipX(facingLeft);
-  }
-
-  private updateJumpPhysics() {
-    const currentAnim = this.sprite.anims.currentAnim?.key;
-
-    if (!this.isOnGround) {
-      // Apply gravity
-      this.velocityY += this.GRAVITY * this.deltaTime;
-
-      // Update Y position
-      this.sprite.y += this.velocityY * this.deltaTime;
-
-      // Check if we've reached the peak and started falling
-      if (this.velocityY > 0 && this.isJumping) {
-        this.isJumping = false;
-        if (currentAnim !== 'bandit_bat_fang_attack' && !this.isVanished) {
-          this.sprite.play('bandit_fall');
-        }
-      }
-
-      // Check if we've landed
-      if (this.sprite.y >= this.GROUND_Y) {
-        this.sprite.y = this.GROUND_Y;
-        this.velocityY = 0;
-        this.isOnGround = true;
-        this.isJumping = false;
-
-        // Reset running state when landing
-        this.wasRunningBeforeJump = false;
-
-        if (currentAnim !== 'bandit_bat_fang_attack' && !this.isVanished) {
-          // Brief landing pause before returning to idle
-          this.scene.time.delayedCall(100, () => {
-            if (this.sprite.anims.currentAnim?.key === 'bandit_fall') {
-              this.sprite.play('bandit_idle');
-            }
-          });
-        }
-      }
-    }
   }
 
   public handleMovement(aiState: AI_State) {
@@ -136,15 +65,17 @@ export class DaggerBandit {
     } = aiState
 
     if(shouldMove) {
-      const baseSpeed = this.banditSpeed * this.deltaTime;
+      const baseSpeed = this.banditSpeed;
 
       if (playerDirection === 'left') {
-        this.moveCharacter(-baseSpeed);
+        this.sprite.setVelocityX(-baseSpeed);
         this.setCharacterDirection(true); // Facing left
       } else {
-        this.moveCharacter(baseSpeed);
+        this.sprite.setVelocityX(baseSpeed);
         this.setCharacterDirection(false); // Facing right
       }
+    } else {
+      this.sprite.setVelocityX(0);
     }
   }
 
@@ -181,7 +112,7 @@ export class DaggerBandit {
       this.sprite.play('bandit_vanish');
 
       // Calculate teleport destination (opposite side of screen)
-      const currentSide = this.characterCenterX < this.scene.scale.width / 2 ? 'left' : 'right';
+      const currentSide = this.sprite.x < this.scene.scale.width / 2 ? 'left' : 'right';
       if (currentSide === 'left') {
         this.vanishTargetX = this.scene.scale.width - 200; // Near right edge
       } else {
@@ -191,10 +122,8 @@ export class DaggerBandit {
   }
 
   public handleJump() {
-    if (!this.isVanished && this.isOnGround) {
-      this.velocityY = this.JUMP_VELOCITY;
-      this.isOnGround = false;
-      this.isJumping = true;
+    if (!this.isVanished && this.sprite.body.onFloor()) {
+      this.sprite.setVelocityY(-350);
       this.sprite.play('bandit_jump');
     }
   }
@@ -213,7 +142,6 @@ export class DaggerBandit {
   update(time: number, delta: number) {
     this.deltaTime = delta / 1000; // Convert to seconds
 
-    this.updateJumpPhysics();
 
     // Let AI control the bandit
     const aiState = this.banditAI.getState(time, delta);
@@ -226,8 +154,7 @@ export class DaggerBandit {
   // Method called when vanish animation completes
   public onVanishComplete() {
     // Teleport to new position
-    this.characterCenterX = this.vanishTargetX;
-    this.sprite.x = this.characterCenterX;
+    this.sprite.x = this.vanishTargetX;
 
     // Start appear animation
     this.sprite.play('bandit_appear');

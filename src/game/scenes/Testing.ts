@@ -6,6 +6,7 @@ import { DaggerBandit } from '../actors/DaggerBandit';
 export class Testing extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
   background: Phaser.GameObjects.Image;
+  ground: Phaser.Physics.Arcade.StaticGroup;
 
   // Actor instances
   player: Player;
@@ -25,14 +26,21 @@ export class Testing extends Scene {
     this.background = this.add.image(512, 384, 'background');
     this.background.setAlpha(0.3);
 
+    // Create ground
+    this.ground = this.physics.add.staticGroup();
+    const groundRect = this.add.rectangle(512, 600, 1024, 40, 0x8B4513);
+    this.ground.add(groundRect);
     // Create actor instances
-    this.player = new Player(this, 300, 600);
-    this.daggerBandit = new DaggerBandit(this, 700, 600, this.player);
+    this.player = new Player(this, 300, 560);
+    this.daggerBandit = new DaggerBandit(this, 700, 560, this.player);
 
     // Initialize actors
     this.player.create();
     this.daggerBandit.create();
 
+    // Add colliders
+    this.physics.add.collider(this.player.sprite, this.ground);
+    this.physics.add.collider(this.daggerBandit.sprite, this.ground);
     EventBus.emit('current-scene-ready', this);
   }
 
