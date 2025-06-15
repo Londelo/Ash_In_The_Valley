@@ -18,7 +18,7 @@ export class BanditAI {
   // Simple AI parameters
   private DETECTION_MADE = false; // Speed of the bandit in pixels per second
   private readonly DETECTION_RANGE = 300;
-  private readonly ATTACK_RANGE = 100;
+  private readonly ATTACK_RANGE = 50;
 
   // Attack cooldown
   private lastAttackTime: number = 0;
