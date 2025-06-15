@@ -16,6 +16,7 @@ export class BanditAI {
   private player: Player;
 
   // Simple AI parameters
+  private DETECTION_MADE = false; // Speed of the bandit in pixels per second
   private readonly DETECTION_RANGE = 300;
   private readonly ATTACK_RANGE = 100;
 
@@ -56,7 +57,7 @@ export class BanditAI {
     const isBigAttacking = currentAnim === 'bandit_bat_fang_attack'
 
     const playerDirection = direction
-    const playerIsDetected = distance < this.DETECTION_RANGE
+    const playerIsDetected = distance < this.DETECTION_RANGE || this.DETECTION_MADE
     const playerIsInAttackRange = distance <= this.ATTACK_RANGE
     const canAttack = this.checkAttackCooldown(time)
 
@@ -66,6 +67,7 @@ export class BanditAI {
     const shouldPlayIdleAnim = (playerIsInAttackRange || !playerIsDetected) && !isIdle
 
     this.lastAttackTime = shouldAttack ? time : this.lastAttackTime
+    this.DETECTION_MADE = !this.DETECTION_MADE && playerIsDetected ? true : this.DETECTION_MADE
 
     return {
       shouldAttack,
