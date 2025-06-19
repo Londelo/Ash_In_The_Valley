@@ -1,5 +1,5 @@
 { "frames": {
-   "Dagger Bandit #Idle 0.aseprite": {
+   "Idle 0": {
     "frame": { "x": 0, "y": 0, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -7,7 +7,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Idle 1.aseprite": {
+   "Idle 1": {
     "frame": { "x": 136, "y": 0, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -15,7 +15,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Idle 2.aseprite": {
+   "Idle 2": {
     "frame": { "x": 272, "y": 0, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -23,7 +23,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Idle 3.aseprite": {
+   "Idle 3": {
     "frame": { "x": 408, "y": 0, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -31,7 +31,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Idle 4.aseprite": {
+   "Idle 4": {
     "frame": { "x": 544, "y": 0, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -39,7 +39,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Idle 5.aseprite": {
+   "Idle 5": {
     "frame": { "x": 680, "y": 0, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -47,7 +47,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Idle 6.aseprite": {
+   "Idle 6": {
     "frame": { "x": 816, "y": 0, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -55,7 +55,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Idle 7.aseprite": {
+   "Idle 7": {
     "frame": { "x": 952, "y": 0, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -63,7 +63,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Run 0.aseprite": {
+   "Run 0": {
     "frame": { "x": 0, "y": 72, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -71,7 +71,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Run 1.aseprite": {
+   "Run 1": {
     "frame": { "x": 136, "y": 72, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -79,7 +79,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Run 2.aseprite": {
+   "Run 2": {
     "frame": { "x": 272, "y": 72, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -87,7 +87,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Run 3.aseprite": {
+   "Run 3": {
     "frame": { "x": 408, "y": 72, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -95,7 +95,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Run 4.aseprite": {
+   "Run 4": {
     "frame": { "x": 544, "y": 72, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -103,7 +103,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Run 5.aseprite": {
+   "Run 5": {
     "frame": { "x": 680, "y": 72, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -111,7 +111,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Run 6.aseprite": {
+   "Run 6": {
     "frame": { "x": 816, "y": 72, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -119,7 +119,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Run 7.aseprite": {
+   "Run 7": {
     "frame": { "x": 952, "y": 72, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -127,7 +127,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Jump.aseprite": {
+   "Jump": {
     "frame": { "x": 0, "y": 144, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -135,7 +135,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Fall.aseprite": {
+   "Fall": {
     "frame": { "x": 0, "y": 216, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -143,7 +143,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Attack 0.aseprite": {
+   "Attack 0": {
     "frame": { "x": 0, "y": 288, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -151,7 +151,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Attack 1.aseprite": {
+   "Attack 1": {
     "frame": { "x": 136, "y": 288, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -159,7 +159,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Attack 2.aseprite": {
+   "Attack 2": {
     "frame": { "x": 272, "y": 288, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -167,7 +167,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Attack 3.aseprite": {
+   "Attack 3": {
     "frame": { "x": 408, "y": 288, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -175,7 +175,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Attack 4.aseprite": {
+   "Attack 4": {
     "frame": { "x": 544, "y": 288, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -183,7 +183,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Attack 5.aseprite": {
+   "Attack 5": {
     "frame": { "x": 680, "y": 288, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -191,7 +191,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Attack 6.aseprite": {
+   "Attack 6": {
     "frame": { "x": 816, "y": 288, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -199,7 +199,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 0.aseprite": {
+   "Bat Fang Attack 0": {
     "frame": { "x": 0, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -207,7 +207,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 1.aseprite": {
+   "Bat Fang Attack 1": {
     "frame": { "x": 136, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -215,7 +215,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 2.aseprite": {
+   "Bat Fang Attack 2": {
     "frame": { "x": 272, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -223,7 +223,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 3.aseprite": {
+   "Bat Fang Attack 3": {
     "frame": { "x": 408, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -231,7 +231,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 4.aseprite": {
+   "Bat Fang Attack 4": {
     "frame": { "x": 544, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -239,7 +239,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 5.aseprite": {
+   "Bat Fang Attack 5": {
     "frame": { "x": 680, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -247,7 +247,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 6.aseprite": {
+   "Bat Fang Attack 6": {
     "frame": { "x": 816, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -255,7 +255,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 7.aseprite": {
+   "Bat Fang Attack 7": {
     "frame": { "x": 952, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -263,7 +263,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 8.aseprite": {
+   "Bat Fang Attack 8": {
     "frame": { "x": 1088, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -271,7 +271,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 9.aseprite": {
+   "Bat Fang Attack 9": {
     "frame": { "x": 1224, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -279,7 +279,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 10.aseprite": {
+   "Bat Fang Attack 10": {
     "frame": { "x": 1360, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -287,7 +287,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 11.aseprite": {
+   "Bat Fang Attack 11": {
     "frame": { "x": 1496, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -295,7 +295,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 12.aseprite": {
+   "Bat Fang Attack 12": {
     "frame": { "x": 1632, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -303,7 +303,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 13.aseprite": {
+   "Bat Fang Attack 13": {
     "frame": { "x": 1768, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -311,7 +311,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 14.aseprite": {
+   "Bat Fang Attack 14": {
     "frame": { "x": 1904, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -319,7 +319,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 15.aseprite": {
+   "Bat Fang Attack 15": {
     "frame": { "x": 2040, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -327,7 +327,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 16.aseprite": {
+   "Bat Fang Attack 16": {
     "frame": { "x": 2176, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -335,7 +335,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 17.aseprite": {
+   "Bat Fang Attack 17": {
     "frame": { "x": 2312, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -343,7 +343,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 18.aseprite": {
+   "Bat Fang Attack 18": {
     "frame": { "x": 2448, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -351,7 +351,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Bat Fang Attack 19.aseprite": {
+   "Bat Fang Attack 19": {
     "frame": { "x": 2584, "y": 360, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -359,7 +359,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 0.aseprite": {
+   "Vanish 0": {
     "frame": { "x": 0, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -367,7 +367,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 1.aseprite": {
+   "Vanish 1": {
     "frame": { "x": 136, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -375,7 +375,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 2.aseprite": {
+   "Vanish 2": {
     "frame": { "x": 272, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -383,7 +383,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 3.aseprite": {
+   "Vanish 3": {
     "frame": { "x": 408, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -391,7 +391,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 4.aseprite": {
+   "Vanish 4": {
     "frame": { "x": 544, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -399,7 +399,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 5.aseprite": {
+   "Vanish 5": {
     "frame": { "x": 680, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -407,7 +407,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 6.aseprite": {
+   "Vanish 6": {
     "frame": { "x": 816, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -415,7 +415,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 7.aseprite": {
+   "Vanish 7": {
     "frame": { "x": 952, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -423,7 +423,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 8.aseprite": {
+   "Vanish 8": {
     "frame": { "x": 1088, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -431,7 +431,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 9.aseprite": {
+   "Vanish 9": {
     "frame": { "x": 1224, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -439,7 +439,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 10.aseprite": {
+   "Vanish 10": {
     "frame": { "x": 1360, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -447,7 +447,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 11.aseprite": {
+   "Vanish 11": {
     "frame": { "x": 1496, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -455,7 +455,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 12.aseprite": {
+   "Vanish 12": {
     "frame": { "x": 1632, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -463,7 +463,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 13.aseprite": {
+   "Vanish 13": {
     "frame": { "x": 1768, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -471,7 +471,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 14.aseprite": {
+   "Vanish 14": {
     "frame": { "x": 1904, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -479,7 +479,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 15.aseprite": {
+   "Vanish 15": {
     "frame": { "x": 2040, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -487,7 +487,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 16.aseprite": {
+   "Vanish 16": {
     "frame": { "x": 2176, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -495,7 +495,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Vanish 17.aseprite": {
+   "Vanish 17": {
     "frame": { "x": 2312, "y": 432, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -503,7 +503,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 0.aseprite": {
+   "Appear 0": {
     "frame": { "x": 0, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -511,7 +511,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 1.aseprite": {
+   "Appear 1": {
     "frame": { "x": 136, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -519,7 +519,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 2.aseprite": {
+   "Appear 2": {
     "frame": { "x": 272, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -527,7 +527,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 3.aseprite": {
+   "Appear 3": {
     "frame": { "x": 408, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -535,7 +535,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 4.aseprite": {
+   "Appear 4": {
     "frame": { "x": 544, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -543,7 +543,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 5.aseprite": {
+   "Appear 5": {
     "frame": { "x": 680, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -551,7 +551,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 6.aseprite": {
+   "Appear 6": {
     "frame": { "x": 816, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -559,7 +559,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 7.aseprite": {
+   "Appear 7": {
     "frame": { "x": 952, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -567,7 +567,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 8.aseprite": {
+   "Appear 8": {
     "frame": { "x": 1088, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -575,7 +575,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 9.aseprite": {
+   "Appear 9": {
     "frame": { "x": 1224, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -583,7 +583,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 10.aseprite": {
+   "Appear 10": {
     "frame": { "x": 1360, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -591,7 +591,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 11.aseprite": {
+   "Appear 11": {
     "frame": { "x": 1496, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -599,7 +599,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 12.aseprite": {
+   "Appear 12": {
     "frame": { "x": 1632, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -607,7 +607,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 13.aseprite": {
+   "Appear 13": {
     "frame": { "x": 1768, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -615,7 +615,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 14.aseprite": {
+   "Appear 14": {
     "frame": { "x": 1904, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -623,7 +623,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Appear 15.aseprite": {
+   "Appear 15": {
     "frame": { "x": 2040, "y": 504, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -631,7 +631,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 0.aseprite": {
+   "Death 0": {
     "frame": { "x": 0, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -639,7 +639,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 1.aseprite": {
+   "Death 1": {
     "frame": { "x": 136, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -647,7 +647,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 2.aseprite": {
+   "Death 2": {
     "frame": { "x": 272, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -655,7 +655,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 3.aseprite": {
+   "Death 3": {
     "frame": { "x": 408, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -663,7 +663,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 4.aseprite": {
+   "Death 4": {
     "frame": { "x": 544, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -671,7 +671,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 5.aseprite": {
+   "Death 5": {
     "frame": { "x": 680, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -679,7 +679,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 6.aseprite": {
+   "Death 6": {
     "frame": { "x": 816, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -687,7 +687,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 7.aseprite": {
+   "Death 7": {
     "frame": { "x": 952, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -695,7 +695,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 8.aseprite": {
+   "Death 8": {
     "frame": { "x": 1088, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -703,7 +703,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 9.aseprite": {
+   "Death 9": {
     "frame": { "x": 1224, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -711,7 +711,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 10.aseprite": {
+   "Death 10": {
     "frame": { "x": 1360, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -719,7 +719,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 11.aseprite": {
+   "Death 11": {
     "frame": { "x": 1496, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -727,7 +727,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 12.aseprite": {
+   "Death 12": {
     "frame": { "x": 1632, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -735,7 +735,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 13.aseprite": {
+   "Death 13": {
     "frame": { "x": 1768, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -743,7 +743,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 14.aseprite": {
+   "Death 14": {
     "frame": { "x": 1904, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -751,7 +751,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #Death 15.aseprite": {
+   "Death 15": {
     "frame": { "x": 2040, "y": 576, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -759,7 +759,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #HIT 0.aseprite": {
+   "HIT 0": {
     "frame": { "x": 0, "y": 648, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -767,7 +767,7 @@
     "sourceSize": { "w": 136, "h": 72 },
     "duration": 75
    },
-   "Dagger Bandit #HIT 1.aseprite": {
+   "HIT 1": {
     "frame": { "x": 136, "y": 648, "w": 136, "h": 72 },
     "rotated": false,
     "trimmed": false,
@@ -777,7 +777,7 @@
    }
  },
  "meta": {
-  "app": "https://www.aseprite.org/",
+  "app": "https://www.org/",
   "version": "1.3.14.2-arm64",
   "image": "Dagger_Bandit.png",
   "format": "RGBA8888",

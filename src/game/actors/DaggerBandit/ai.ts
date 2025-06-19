@@ -52,10 +52,10 @@ export class BanditAI {
     const direction = this.getDirectionToPlayer();
     const currentAnim = this.bandit.sprite.anims.currentAnim?.key;
 
-    const isMoving = currentAnim === 'bandit_run'
-    const isIdle = currentAnim === 'bandit_idle'
-    const isAttacking = currentAnim === 'bandit_attack'
-    const isBigAttacking = currentAnim === 'bandit_bat_fang_attack'
+    const isMoving = currentAnim === `${this.bandit.uniqueId}_dagger_bandit_run`
+    const isIdle = currentAnim === `${this.bandit.uniqueId}_dagger_bandit_idle`
+    const isAttacking = currentAnim === `${this.bandit.uniqueId}_dagger_bandit_attack`
+    const isBigAttacking = currentAnim === `${this.bandit.uniqueId}_dagger_bandit_bat_fang_attack`
     const isOnGround = this.bandit.sprite.body.onFloor();
 
     const playerDirection = direction
