@@ -1,8 +1,6 @@
 import {useRef, useState} from 'react';
 import {IRefPhaserGame, PhaserGame} from './PhaserGame';
-import { MainMenu } from './game/scenes/MainMenu';
-import { Player } from './game/scenes/Player';
-import { DaggerBandit } from './game/scenes/DaggerBandit';
+import { Testing } from './game/scenes/Testing';
 
 function App() {
   // The sprite can only be moved in the MainMenu Scene
@@ -19,12 +17,8 @@ function App() {
       const scene = phaserRef.current.scene;
 
       if ( scene ) {
-        if ( scene.scene.key === 'MainMenu' ) {
-          ( scene as MainMenu ).changeScene();
-        } else if ( scene.scene.key === 'Player' ) {
-          ( scene as Player ).changeScene();
-        } else if ( scene.scene.key === 'DaggerBandit' ) {
-          ( scene as DaggerBandit ).changeScene();
+        if ( scene.scene.key === 'Testing' ) {
+          ( scene as Testing ).changeScene();
         } else if ( 'changeScene' in scene ) {
           ( scene as any ).changeScene();
         }
@@ -36,13 +30,13 @@ function App() {
 
     if( phaserRef.current ) {
 
-      const scene = phaserRef.current.scene as MainMenu;
+      const scene = phaserRef.current.scene as Testing;
 
-      if ( scene && scene.scene.key === 'MainMenu' ) {
+      if ( scene && scene.scene.key === 'Testing' ) {
         // Get the update logo position
-        scene.moveLogo( ( {x, y} ) => {
-          setSpritePosition( {x, y} );
-        } );
+        // scene.moveLogo( ( {x, y} ) => {
+        //   setSpritePosition( {x, y} );
+        // } );
       }
     }
 
@@ -77,7 +71,7 @@ function App() {
 
   // Event emitted from the PhaserGame component
   const currentScene = ( scene: Phaser.Scene ) => {
-    setCanMoveSprite( scene.scene.key !== 'MainMenu' );
+    setCanMoveSprite( scene.scene.key !== 'Testing' );
   };
 
   return (

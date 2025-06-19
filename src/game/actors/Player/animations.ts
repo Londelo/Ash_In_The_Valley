@@ -215,13 +215,40 @@ export function createPlayerAnimations(scene: Scene) {
     frameRate: 20,
     repeat: 0
   });
+
+  scene.anims.create({
+    key: 'player_hit',
+    frames: [
+      { key: 'mainCharacterAtlas', frame: 'Hit 0' },
+      { key: 'mainCharacterAtlas', frame: 'Hit 1' }
+    ],
+    frameRate: 12,
+    repeat: 0
+  });
+
+  scene.anims.create({
+    key: 'player_death',
+    frames: [
+      { key: 'mainCharacterAtlas', frame: 'death 0' },
+      { key: 'mainCharacterAtlas', frame: 'death 1' },
+      { key: 'mainCharacterAtlas', frame: 'death 2' },
+      { key: 'mainCharacterAtlas', frame: 'death 3' },
+      { key: 'mainCharacterAtlas', frame: 'death 4' },
+      { key: 'mainCharacterAtlas', frame: 'death 5' }
+    ],
+    frameRate: 8,
+    repeat: 0
+  });
 }
 
 export function addPlayerAnimationListeners(_this: Player) {
-  _this.player.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
+  _this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
 
-    if (isActionAnimations(animation.key)) {
-      _this.player.play('player_idle');
+    if (isActionAnimations(animation.key) && animation.key !== 'player_death') {
+      _this.sprite.play('player_idle');
+    } else if (animation.key === 'player_death') {
+      // Stop the animation on the last frame
+      _this.sprite.anims.stop();
     }
   });
 }
@@ -234,7 +261,10 @@ export function isActionAnimations(animKey?: string): boolean {
     animKey === 'player_spin_attack' ||
     animKey === 'player_roll_attack' ||
     animKey === 'player_slash_heavy' ||
-    animKey === 'player_block'
+    animKey === 'player_land' ||
+    animKey === 'player_block' ||
+    animKey === 'player_hit' ||
+    animKey === 'player_death'
 }
 
 export function isHighPriorityAnimation(animKey?: string): boolean {
@@ -246,5 +276,7 @@ export function isHighPriorityAnimation(animKey?: string): boolean {
     animKey === 'player_spin_attack' ||
     animKey === 'player_roll_attack' ||
     animKey === 'player_slash_heavy' ||
-    animKey === 'player_block'
+    animKey === 'player_block' ||
+    animKey === 'player_hit' ||
+    animKey === 'player_death'
 }
