@@ -2,6 +2,7 @@ import { EventBus } from '../EventBus';
 import { Scene } from 'phaser';
 import { Player } from '../actors/Player';
 import { DaggerBandit } from '../actors/DaggerBandit';
+import { Prophet } from '../actors/Prophet';
 
 export class Testing extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
@@ -11,6 +12,7 @@ export class Testing extends Scene {
   // Actor instances
   player: Player;
   bandits: DaggerBandit[] = [];
+  prophet: Prophet;
   private readonly MAX_BANDITS = 5;
   private readonly MIN_BANDITS = 0;
   private readonly MIN_SPAWN_DISTANCE = 300;
@@ -57,9 +59,11 @@ export class Testing extends Scene {
 
     // Create actor instances
     this.player = new Player(this, 500, 560);
+    this.prophet = new Prophet(this, 1500, 560, this.player);
 
     // Initialize actors
     this.player.create();
+    this.prophet.create();
 
     // Spawn initial bandits
     this.spawnInitialBandits();
@@ -75,6 +79,7 @@ export class Testing extends Scene {
     // Add colliders
     this.physics.add.collider(this.player.sprite, this.ground);
     this.physics.add.collider(this.enemyGroup, this.ground);
+    this.physics.add.collider(this.prophet.sprite, this.ground);
 
     // Add overlap detection for attack hitboxes hitting enemy bodies
     this.physics.add.overlap(
@@ -207,6 +212,9 @@ export class Testing extends Scene {
 
     // Update player
     this.player.update(time, delta);
+
+    // Update prophet
+    this.prophet.update(time, delta);
   }
 
   changeScene() {
