@@ -32,7 +32,7 @@ export class DaggerBandit {
 
   // Attack configurations
   private attackConfigs: { [key: string]: AttackHitboxConfig } = {
-    'bandit_attack': {
+    [`${this.uniqueId}_dagger_bandit_attack`]: {
       width: 100,
       height: 40,
       offsetX_right: 65,
@@ -42,7 +42,7 @@ export class DaggerBandit {
       damage: this.attackPower,
       attackerId: this.uniqueId
     },
-    'bandit_bat_fang_attack': {
+    [`${this.uniqueId}_dagger_bandit_attack`]: {
       width: 50,
       height: 40,
       offsetX_right: 35,
@@ -78,12 +78,6 @@ export class DaggerBandit {
     Object.keys(this.attackConfigs).forEach(key => {
       this.attackConfigs[key].attackerId = this.uniqueId;
     });
-
-    // Update attack config keys to use uniqueId
-    this.attackConfigs[`${this.uniqueId}_dagger_bandit_attack`] = this.attackConfigs['bandit_attack'];
-    this.attackConfigs[`${this.uniqueId}_dagger_bandit_bat_fang_attack`] = this.attackConfigs['bandit_bat_fang_attack'];
-    delete this.attackConfigs['bandit_attack'];
-    delete this.attackConfigs['bandit_bat_fang_attack'];
   }
 
   public takeDamage(amount: number) {
