@@ -217,7 +217,7 @@ export class DaggerBandit {
   }
 
   create() {
-    createDaggerBanditAnimations(this.scene);
+    createDaggerBanditAnimations(this.scene, this.uniqueId);
     addDaggerBanditAnimationListeners(this);
     this.banditAI = new BanditAI(this, this.playerRef);
 

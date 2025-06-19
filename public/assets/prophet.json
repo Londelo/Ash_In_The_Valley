@@ -1,5 +1,5 @@
 { "frames": {
-   "NPCs #prophet_idle.aseprite": {
+   "prophet_idle": {
     "frame": { "x": 0, "y": 0, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -7,7 +7,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_breathe 0.aseprite": {
+   "prophet_idle_breathe 0": {
     "frame": { "x": 0, "y": 32, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -15,7 +15,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_breathe 1.aseprite": {
+   "prophet_idle_breathe 1": {
     "frame": { "x": 48, "y": 32, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -23,7 +23,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_breathe 2.aseprite": {
+   "prophet_idle_breathe 2": {
     "frame": { "x": 96, "y": 32, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -31,7 +31,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_breathe 3.aseprite": {
+   "prophet_idle_breathe 3": {
     "frame": { "x": 144, "y": 32, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -39,7 +39,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_breathe 4.aseprite": {
+   "prophet_idle_breathe 4": {
     "frame": { "x": 192, "y": 32, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -47,7 +47,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_breathe 5.aseprite": {
+   "prophet_idle_breathe 5": {
     "frame": { "x": 240, "y": 32, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -55,7 +55,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_breathe 6.aseprite": {
+   "prophet_idle_breathe 6": {
     "frame": { "x": 288, "y": 32, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -63,7 +63,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_look_up 0.aseprite": {
+   "prophet_look_up 0": {
     "frame": { "x": 0, "y": 64, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -71,7 +71,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_look_up 1.aseprite": {
+   "prophet_look_up 1": {
     "frame": { "x": 48, "y": 64, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -79,7 +79,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_look_up 2.aseprite": {
+   "prophet_look_up 2": {
     "frame": { "x": 96, "y": 64, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -87,7 +87,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 0.aseprite": {
+   "prophet_idle_blink 0": {
     "frame": { "x": 0, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -95,7 +95,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 1.aseprite": {
+   "prophet_idle_blink 1": {
     "frame": { "x": 48, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -103,7 +103,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 2.aseprite": {
+   "prophet_idle_blink 2": {
     "frame": { "x": 96, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -111,7 +111,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 3.aseprite": {
+   "prophet_idle_blink 3": {
     "frame": { "x": 144, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -119,7 +119,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 4.aseprite": {
+   "prophet_idle_blink 4": {
     "frame": { "x": 192, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -127,7 +127,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 5.aseprite": {
+   "prophet_idle_blink 5": {
     "frame": { "x": 240, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -135,7 +135,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 6.aseprite": {
+   "prophet_idle_blink 6": {
     "frame": { "x": 288, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -143,7 +143,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 7.aseprite": {
+   "prophet_idle_blink 7": {
     "frame": { "x": 336, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -151,7 +151,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 8.aseprite": {
+   "prophet_idle_blink 8": {
     "frame": { "x": 384, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -159,7 +159,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 9.aseprite": {
+   "prophet_idle_blink 9": {
     "frame": { "x": 432, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -167,7 +167,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 10.aseprite": {
+   "prophet_idle_blink 10": {
     "frame": { "x": 480, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -175,7 +175,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 11.aseprite": {
+   "prophet_idle_blink 11": {
     "frame": { "x": 528, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -183,7 +183,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 12.aseprite": {
+   "prophet_idle_blink 12": {
     "frame": { "x": 576, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -191,7 +191,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 13.aseprite": {
+   "prophet_idle_blink 13": {
     "frame": { "x": 624, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -199,7 +199,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_idle_blink 14.aseprite": {
+   "prophet_idle_blink 14": {
     "frame": { "x": 672, "y": 96, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -207,7 +207,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_look_down 0.aseprite": {
+   "prophet_look_down 0": {
     "frame": { "x": 0, "y": 128, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -215,7 +215,7 @@
     "sourceSize": { "w": 48, "h": 32 },
     "duration": 100
    },
-   "NPCs #prophet_look_down 1.aseprite": {
+   "prophet_look_down 1": {
     "frame": { "x": 48, "y": 128, "w": 48, "h": 32 },
     "rotated": false,
     "trimmed": false,
@@ -225,7 +225,7 @@
    }
  },
  "meta": {
-  "app": "https://www.aseprite.org/",
+  "app": "https://www.org/",
   "version": "1.3.14.2-arm64",
   "image": "prophet.png",
   "format": "RGBA8888",
