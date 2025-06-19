@@ -5,7 +5,7 @@ import type { Player } from '../Player/index';
 export class Prophet {
   scene: Scene;
   sprite: Phaser.Types.Physics.Arcade.SpriteWithStaticBody;
-  private prophetScale: number = 3;
+  private prophetScale: number = 4;
   private playerRef: Player;
   private readonly DETECTION_RANGE = 150;
   private isPlayerNear: boolean = false;
@@ -15,17 +15,10 @@ export class Prophet {
     this.scene = scene;
     this.playerRef = playerRef;
 
-    this.sprite = scene.physics.add.staticSprite(x, y, 'prophetAtlas', 'NPCs #prophet_idle_breathe 0.aseprite');
+    this.sprite = scene.physics.add.staticSprite(x, y, 'prophetAtlas', 'prophet_idle_breathe 0');
     this.sprite.setScale(this.prophetScale);
     this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    // this.sprite.setCollideWorldBounds(true);
-    // this.sprite.setGravityY(0);
     this.sprite.setDepth(0);
-    // this.sprite.setImmovable(true);
-
-    // Set proper body size and origin for ground positioning
-    // this.sprite.setBodySize(32, 24, false);
-    // this.sprite.setOrigin(0.5, 1); // Bottom center origin
   }
 
   private getDistanceToPlayer(): number {

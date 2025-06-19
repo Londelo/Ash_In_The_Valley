@@ -58,7 +58,7 @@ export class DaggerBandit {
     this.scene = scene;
     this.playerRef = playerRef;
 
-    this.sprite = scene.physics.add.sprite(x, y, 'daggerBanditAtlas', 'Dagger Bandit #Idle 0.aseprite');
+    this.sprite = scene.physics.add.sprite(x, y, 'daggerBanditAtlas', 'Idle 0');
 
     // Add reference to this DaggerBandit instance on the sprite
     this.sprite.banditInstance = this;
@@ -137,7 +137,7 @@ export class DaggerBandit {
 
   public onVanishComplete() {
     this.sprite.x = this.vanishTargetX;
-    this.sprite.play('bandit_appear');
+    this.sprite.play(`${this.uniqueId}_dagger_bandit_appear`);
   }
 
   public onAppearComplete() {
