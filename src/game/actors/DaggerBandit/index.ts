@@ -58,7 +58,7 @@ export class DaggerBandit {
     this.scene = scene;
     this.playerRef = playerRef;
 
-    this.sprite = scene.physics.add.sprite(x, y, 'daggerBanditAtlas', 'Idle 0');
+    this.sprite = scene.physics.add.sprite(x, y, 'daggerBanditAtlas', 'Dagger Bandit #Idle 0.aseprite');
 
     // Add reference to this DaggerBandit instance on the sprite
     this.sprite.banditInstance = this;
@@ -78,6 +78,12 @@ export class DaggerBandit {
     Object.keys(this.attackConfigs).forEach(key => {
       this.attackConfigs[key].attackerId = this.uniqueId;
     });
+
+    // Update attack config keys to use uniqueId
+    this.attackConfigs[`${this.uniqueId}_dagger_bandit_attack`] = this.attackConfigs['bandit_attack'];
+    this.attackConfigs[`${this.uniqueId}_dagger_bandit_bat_fang_attack`] = this.attackConfigs['bandit_bat_fang_attack'];
+    delete this.attackConfigs['bandit_attack'];
+    delete this.attackConfigs['bandit_bat_fang_attack'];
   }
 
   public takeDamage(amount: number) {
@@ -89,10 +95,10 @@ export class DaggerBandit {
     if (this.health <= 0) {
       console.log(`Bandit ${this.uniqueId} defeated!`);
       this.isDead = true;
-      this.sprite.play('bandit_death');
+      this.sprite.play(`${this.uniqueId}_dagger_bandit_death`);
       this.sprite.setVelocityX(0); // Stop movement immediately
     } else {
-      this.sprite.play('bandit_hit');
+      this.sprite.play(`${this.uniqueId}_dagger_bandit_hit`);
 
       // Add knockback effect
       const knockbackForce = 100;
@@ -142,7 +148,7 @@ export class DaggerBandit {
 
   public onAppearComplete() {
     this.isVanished = false;
-    this.sprite.play('bandit_idle');
+    this.sprite.play(`${this.uniqueId}_dagger_bandit_idle`);
   }
 
   public handleMovement(aiState: AI_State) {
@@ -168,28 +174,28 @@ export class DaggerBandit {
   public handleMovementAnimations(aiState: AI_State) {
     // Don't override priority animations
     const currentAnim = this.sprite.anims.currentAnim?.key;
-    if (isHighPriorityAnimation(currentAnim)) {
+    if (isHighPriorityAnimation(currentAnim, this.uniqueId)) {
       return;
     }
 
     if (aiState.shouldPlayMoveAnim) {
-      this.sprite.play('bandit_run');
+      this.sprite.play(`${this.uniqueId}_dagger_bandit_run`);
     } else if (aiState.shouldPlayIdleAnim) {
-      this.sprite.play('bandit_idle');
+      this.sprite.play(`${this.uniqueId}_dagger_bandit_idle`);
     }
   }
 
   public handleAttack(aiState: AI_State) {
     if (aiState.shouldAttack) {
-      this.sprite.play('bandit_attack');
-      this.createAttackHitbox('bandit_attack');
+      this.sprite.play(`${this.uniqueId}_dagger_bandit_attack`);
+      this.createAttackHitbox(`${this.uniqueId}_dagger_bandit_attack`);
     }
   }
 
   public handleBatFangAttack() {
     if (!this.isVanished) {
-      this.sprite.play('bandit_bat_fang_attack');
-      this.createAttackHitbox('bandit_bat_fang_attack');
+      this.sprite.play(`${this.uniqueId}_dagger_bandit_bat_fang_attack`);
+      this.createAttackHitbox(`${this.uniqueId}_dagger_bandit_bat_fang_attack`);
     }
   }
 
@@ -197,7 +203,7 @@ export class DaggerBandit {
     if (!this.isVanished) {
       // Start vanish sequence
       this.isVanished = true;
-      this.sprite.play('bandit_vanish');
+      this.sprite.play(`${this.uniqueId}_dagger_bandit_vanish`);
 
       // Calculate teleport destination (opposite side of screen)
       const currentSide = this.sprite.x < this.scene.scale.width / 2 ? 'left' : 'right';
@@ -212,7 +218,7 @@ export class DaggerBandit {
   public handleJump(aiState: AI_State) {
     if (!this.isVanished && aiState.isOnGround) {
       this.sprite.setVelocityY(-350);
-      this.sprite.play('bandit_jump');
+      this.sprite.play(`${this.uniqueId}_dagger_bandit_jump`);
     }
   }
 
@@ -226,7 +232,7 @@ export class DaggerBandit {
       this.takeDamage(damage);
     });
 
-    this.sprite.play('bandit_idle');
+    this.sprite.play(`${this.uniqueId}_dagger_bandit_idle`);
   }
 
   update(time: number, delta: number) {
