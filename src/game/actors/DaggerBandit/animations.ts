@@ -4,7 +4,7 @@ import { DaggerBandit } from '.';
 export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
   // Idle animation
   scene.anims.create({
-    key: 'bandit_idle',
+    key: `${uniqueId}_dagger_bandit_idle`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'Idle 0' },
       { key: 'daggerBanditAtlas', frame: 'Idle 1' },
@@ -21,7 +21,7 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 
   // Run animation
   scene.anims.create({
-    key: 'bandit_run',
+    key: `${uniqueId}_dagger_bandit_run`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'Run 0' },
       { key: 'daggerBanditAtlas', frame: 'Run 1' },
@@ -38,7 +38,7 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 
   // Jump animation
   scene.anims.create({
-    key: 'bandit_jump',
+    key: `${uniqueId}_dagger_bandit_jump`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'Jump' }
     ],
@@ -48,7 +48,7 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 
   // Fall animation
   scene.anims.create({
-    key: 'bandit_fall',
+    key: `${uniqueId}_dagger_bandit_fall`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'Fall' }
     ],
@@ -58,7 +58,7 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 
   // Basic attack animation
   scene.anims.create({
-    key: 'bandit_attack',
+    key: `${uniqueId}_dagger_bandit_attack`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'Attack 0' },
       { key: 'daggerBanditAtlas', frame: 'Attack 1' },
@@ -74,7 +74,7 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 
   // Bat Fang Attack animation (special attack)
   scene.anims.create({
-    key: 'bandit_bat_fang_attack',
+    key: `${uniqueId}_dagger_bandit_bat_fang_attack`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 0' },
       { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 1' },
@@ -103,7 +103,7 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 
   // Vanish animation
   scene.anims.create({
-    key: 'bandit_vanish',
+    key: `${uniqueId}_dagger_bandit_vanish`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'Vanish 0' },
       { key: 'daggerBanditAtlas', frame: 'Vanish 1' },
@@ -130,7 +130,7 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 
   // Appear animation
   scene.anims.create({
-    key: 'bandit_appear',
+    key: `${uniqueId}_dagger_bandit_appear`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'Appear 0' },
       { key: 'daggerBanditAtlas', frame: 'Appear 1' },
@@ -155,7 +155,7 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 
   // Death animation
   scene.anims.create({
-    key: 'bandit_death',
+    key: `${uniqueId}_dagger_bandit_death`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'Death 0' },
       { key: 'daggerBanditAtlas', frame: 'Death 1' },
@@ -180,7 +180,7 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 
   // Hit animation
   scene.anims.create({
-    key: 'bandit_hit',
+    key: `${uniqueId}_dagger_bandit_hit`,
     frames: [
       { key: 'daggerBanditAtlas', frame: 'HIT 0' },
       { key: 'daggerBanditAtlas', frame: 'HIT 1' }
@@ -193,29 +193,30 @@ export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
 export function addDaggerBanditAnimationListeners(_this: DaggerBandit) {
   _this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
     if (isActionAnimations(animation.key) && animation.key !== 'bandit_death') {
-      _this.sprite.play('bandit_idle');
-    } else if (animation.key === 'bandit_death') {
+      _this.sprite.play(`${_this.uniqueId}_dagger_bandit_idle`);
+    } else if (animation.key === `${_this.uniqueId}_dagger_bandit_death`) {
       // Stop the animation on the last frame
       _this.sprite.anims.stop();
-    } else if (animation.key === 'bandit_vanish') {
       _this.onVanishComplete();
-    } else if (animation.key === 'bandit_appear') {
+    } else if (animation.key === `${_this.uniqueId}_dagger_bandit_appear`) {
       _this.onAppearComplete();
     }
   });
 }
 
-export function isActionAnimations(animKey?: string): boolean {
-  return animKey === 'bandit_attack' ||
-    animKey === 'bandit_bat_fang_attack' ||
-    animKey === 'bandit_hit';
+export function isActionAnimations(animKey?: string, uniqueId?: string): boolean {
+  if (!animKey || !uniqueId) return false;
+  return animKey === `${uniqueId}_dagger_bandit_attack` ||
+    animKey === `${uniqueId}_dagger_bandit_bat_fang_attack` ||
+    animKey === `${uniqueId}_dagger_bandit_hit`;
 }
 
-export function isHighPriorityAnimation(animKey?: string): boolean {
-  return animKey === 'bandit_attack' ||
-    animKey === 'bandit_bat_fang_attack' ||
-    animKey === 'bandit_vanish' ||
-    animKey === 'bandit_appear' ||
-    animKey === 'bandit_death' ||
-    animKey === 'bandit_hit';
+export function isHighPriorityAnimation(animKey?: string, uniqueId?: string): boolean {
+  if (!animKey || !uniqueId) return false;
+  return animKey === `${uniqueId}_dagger_bandit_attack` ||
+    animKey === `${uniqueId}_dagger_bandit_bat_fang_attack` ||
+    animKey === `${uniqueId}_dagger_bandit_vanish` ||
+    animKey === `${uniqueId}_dagger_bandit_appear` ||
+    animKey === `${uniqueId}_dagger_bandit_death` ||
+    animKey === `${uniqueId}_dagger_bandit_hit`;
 }
