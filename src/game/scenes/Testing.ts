@@ -2,7 +2,6 @@ import { EventBus } from '../EventBus';
 import { Scene } from 'phaser';
 import { Player } from '../actors/Player';
 import { DaggerBandit } from '../actors/DaggerBandit';
-import { isActionAnimations } from '../actors/Player/animations';
 
 export class Testing extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
@@ -12,8 +11,8 @@ export class Testing extends Scene {
   // Actor instances
   player: Player;
   bandits: DaggerBandit[] = [];
-  private readonly MAX_BANDITS = 20;
-  private readonly MIN_BANDITS = 15;
+  private readonly MAX_BANDITS = 5;
+  private readonly MIN_BANDITS = 0;
   private readonly MIN_SPAWN_DISTANCE = 300;
 
   // Physics groups for hit detection
@@ -122,7 +121,7 @@ export class Testing extends Scene {
     // Create and initialize bandit
     const bandit = new DaggerBandit(this, spawnX, spawnY, this.player);
     bandit.create();
-    
+
     // Add to arrays and groups
     this.bandits.push(bandit);
     this.enemyGroup.add(bandit.sprite);
