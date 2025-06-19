@@ -59,7 +59,7 @@ export class Testing extends Scene {
 
     // Create actor instances
     this.player = new Player(this, 500, 560);
-    this.prophet = new Prophet(this, 1500, 560, this.player);
+    this.prophet = new Prophet(this, 1500, 580, this.player); // Adjusted Y position
 
     // Initialize actors
     this.player.create();

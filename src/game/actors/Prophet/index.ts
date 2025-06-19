@@ -18,10 +18,14 @@ export class Prophet {
     this.sprite = scene.physics.add.sprite(x, y, 'prophetAtlas', 'NPCs #prophet_idle_breathe 0.aseprite');
     this.sprite.setScale(this.prophetScale);
     this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.sprite.setCollideWorldBounds(true);
-    this.sprite.setGravityY(300);
+    this.sprite.setCollideWorldBounds(false);
+    this.sprite.setGravityY(0);
     this.sprite.setDepth(0);
     this.sprite.setImmovable(true);
+    
+    // Set proper body size and origin for ground positioning
+    this.sprite.setBodySize(32, 24, false);
+    this.sprite.setOrigin(0.5, 1); // Bottom center origin
   }
 
   private getDistanceToPlayer(): number {
