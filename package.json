@@ -15,7 +15,7 @@
         "build-nolog": "vite build --config vite/config.prod.mjs"
     },
     "dependencies": {
-        "@elevenlabs/react": "^0.1.7",
+        "@elevenlabs/client": "^0.1.7",
         "phaser": "^3.90.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
