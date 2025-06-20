@@ -25,7 +25,7 @@ export class Prophet {
     // Initialize ChatAI with placeholder agent ID
     // TODO: Replace with your actual ElevenLabs agent ID
     const chatAIOptions: ChatAIOptions = {
-      agentId: 'your-agent-id-here',
+      agentId: 'agent_01jy5e6qfyear8247z07scjnrj',
       onMessageReceived: this.onAIMessageReceived.bind(this),
       onConversationStarted: this.onConversationStarted.bind(this),
       onConversationEnded: this.onConversationEnded.bind(this)
@@ -61,7 +61,7 @@ export class Prophet {
       this.isPlayerNear = true;
       this.currentState = 'looking_up';
       this.sprite.play('prophet_look_up');
-      
+
       // Start AI conversation
       this.chatAI.startConversation();
     }
@@ -70,7 +70,7 @@ export class Prophet {
       this.isPlayerNear = false;
       this.currentState = 'looking_down';
       this.sprite.play('prophet_look_down');
-      
+
       // End AI conversation
       this.chatAI.endConversation();
     }
@@ -98,6 +98,7 @@ export class Prophet {
   create() {
     createProphetAnimations(this.scene);
     addProphetAnimationListeners(this);
+    this.chatAI.getMicPermissions()
     this.sprite.play('prophet_idle_breathe');
   }
 

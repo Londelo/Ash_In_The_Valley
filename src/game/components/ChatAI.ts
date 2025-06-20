@@ -20,37 +20,19 @@ export class ChatAI {
     this.onMessageCallback = options.onMessageReceived;
     this.onConversationStartedCallback = options.onConversationStarted;
     this.onConversationEndedCallback = options.onConversationEnded;
+
   }
 
-  public async startConversation(): Promise<void> {
-    if (this.isConversationActive) {
-      console.log('Conversation is already active');
-      return;
-    }
-
-    try {
+  public async getMicPermissions(): Promise<void> {
+      try {
       // Request microphone access
       console.log('Requesting microphone access...');
       await navigator.mediaDevices.getUserMedia({ audio: true });
       console.log('Microphone access granted');
 
-      // Start the conversation session
-      console.log('Starting ElevenLabs conversation...');
-      this.conversation = await Conversation.startSession({
-        agentId: this.agentId,
-        onMessage: this.onMessageReceived.bind(this),
-        onError: this.onConversationError.bind(this),
-        onConnect: this.onConnect.bind(this),
-        onDisconnect: this.onDisconnect.bind(this)
-      });
-
-      this.isConversationActive = true;
-      console.log('ElevenLabs conversation started successfully');
-      this.onConversationStartedCallback?.();
-
     } catch (error) {
       console.error('Failed to start conversation:', error);
-      
+
       if (error instanceof DOMException && error.name === 'NotAllowedError') {
         console.error('Microphone access denied by user');
       } else if (error instanceof DOMException && error.name === 'NotFoundError') {
@@ -59,6 +41,25 @@ export class ChatAI {
         console.error('Unknown error starting conversation:', error);
       }
     }
+  }
+
+  public async startConversation(): Promise<void> {
+    if (this.isConversationActive) {
+      console.log('Conversation is already active');
+      return;
+    }
+
+    this.conversation = await Conversation.startSession({
+      agentId: this.agentId,
+      onMessage: this.onMessageReceived.bind(this),
+      onError: this.onConversationError.bind(this),
+      onConnect: this.onConnect.bind(this),
+      onDisconnect: this.onDisconnect.bind(this)
+    });
+
+    this.isConversationActive = true;
+
+    this.onConversationStartedCallback?.();
   }
 
   public async endConversation(): Promise<void> {
