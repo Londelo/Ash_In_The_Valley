@@ -1,19 +1,19 @@
 import { Scene } from 'phaser';
 import { DaggerBandit } from '.';
 
-export function createDaggerBanditAnimations(scene: Scene) {
+export function createDaggerBanditAnimations(scene: Scene, uniqueId: string) {
   // Idle animation
   scene.anims.create({
-    key: 'bandit_idle',
+    key: `${uniqueId}_dagger_bandit_idle`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Idle 0.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Idle 1.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Idle 2.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Idle 3.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Idle 4.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Idle 5.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Idle 6.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Idle 7.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'Idle 0' },
+      { key: 'daggerBanditAtlas', frame: 'Idle 1' },
+      { key: 'daggerBanditAtlas', frame: 'Idle 2' },
+      { key: 'daggerBanditAtlas', frame: 'Idle 3' },
+      { key: 'daggerBanditAtlas', frame: 'Idle 4' },
+      { key: 'daggerBanditAtlas', frame: 'Idle 5' },
+      { key: 'daggerBanditAtlas', frame: 'Idle 6' },
+      { key: 'daggerBanditAtlas', frame: 'Idle 7' }
     ],
     frameRate: 8,
     repeat: -1
@@ -21,16 +21,16 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
   // Run animation
   scene.anims.create({
-    key: 'bandit_run',
+    key: `${uniqueId}_dagger_bandit_run`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Run 0.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Run 1.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Run 2.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Run 3.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Run 4.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Run 5.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Run 6.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Run 7.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'Run 0' },
+      { key: 'daggerBanditAtlas', frame: 'Run 1' },
+      { key: 'daggerBanditAtlas', frame: 'Run 2' },
+      { key: 'daggerBanditAtlas', frame: 'Run 3' },
+      { key: 'daggerBanditAtlas', frame: 'Run 4' },
+      { key: 'daggerBanditAtlas', frame: 'Run 5' },
+      { key: 'daggerBanditAtlas', frame: 'Run 6' },
+      { key: 'daggerBanditAtlas', frame: 'Run 7' }
     ],
     frameRate: 12,
     repeat: -1
@@ -38,9 +38,9 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
   // Jump animation
   scene.anims.create({
-    key: 'bandit_jump',
+    key: `${uniqueId}_dagger_bandit_jump`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Jump.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'Jump' }
     ],
     frameRate: 10,
     repeat: 0
@@ -48,9 +48,9 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
   // Fall animation
   scene.anims.create({
-    key: 'bandit_fall',
+    key: `${uniqueId}_dagger_bandit_fall`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Fall.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'Fall' }
     ],
     frameRate: 8,
     repeat: -1
@@ -58,15 +58,15 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
   // Basic attack animation
   scene.anims.create({
-    key: 'bandit_attack',
+    key: `${uniqueId}_dagger_bandit_attack`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Attack 0.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Attack 1.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Attack 2.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Attack 3.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Attack 4.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Attack 5.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Attack 6.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'Attack 0' },
+      { key: 'daggerBanditAtlas', frame: 'Attack 1' },
+      { key: 'daggerBanditAtlas', frame: 'Attack 2' },
+      { key: 'daggerBanditAtlas', frame: 'Attack 3' },
+      { key: 'daggerBanditAtlas', frame: 'Attack 4' },
+      { key: 'daggerBanditAtlas', frame: 'Attack 5' },
+      { key: 'daggerBanditAtlas', frame: 'Attack 6' }
     ],
     frameRate: 15,
     repeat: 0
@@ -74,28 +74,28 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
   // Bat Fang Attack animation (special attack)
   scene.anims.create({
-    key: 'bandit_bat_fang_attack',
+    key: `${uniqueId}_dagger_bandit_bat_fang_attack`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 0.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 1.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 2.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 3.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 4.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 5.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 6.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 7.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 8.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 9.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 10.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 11.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 12.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 13.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 14.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 15.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 16.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 17.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 18.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Bat Fang Attack 19.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 0' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 1' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 2' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 3' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 4' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 5' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 6' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 7' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 8' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 9' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 10' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 11' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 12' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 13' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 14' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 15' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 16' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 17' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 18' },
+      { key: 'daggerBanditAtlas', frame: 'Bat Fang Attack 19' }
     ],
     frameRate: 20,
     repeat: 0
@@ -103,26 +103,26 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
   // Vanish animation
   scene.anims.create({
-    key: 'bandit_vanish',
+    key: `${uniqueId}_dagger_bandit_vanish`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 0.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 1.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 2.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 3.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 4.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 5.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 6.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 7.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 8.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 9.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 10.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 11.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 12.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 13.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 14.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 15.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 16.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Vanish 17.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'Vanish 0' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 1' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 2' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 3' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 4' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 5' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 6' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 7' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 8' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 9' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 10' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 11' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 12' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 13' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 14' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 15' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 16' },
+      { key: 'daggerBanditAtlas', frame: 'Vanish 17' }
     ],
     frameRate: 18,
     repeat: 0
@@ -130,24 +130,24 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
   // Appear animation
   scene.anims.create({
-    key: 'bandit_appear',
+    key: `${uniqueId}_dagger_bandit_appear`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 0.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 1.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 2.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 3.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 4.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 5.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 6.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 7.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 8.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 9.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 10.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 11.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 12.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 13.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 14.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Appear 15.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'Appear 0' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 1' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 2' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 3' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 4' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 5' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 6' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 7' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 8' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 9' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 10' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 11' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 12' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 13' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 14' },
+      { key: 'daggerBanditAtlas', frame: 'Appear 15' }
     ],
     frameRate: 18,
     repeat: 0
@@ -155,24 +155,24 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
   // Death animation
   scene.anims.create({
-    key: 'bandit_death',
+    key: `${uniqueId}_dagger_bandit_death`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 0.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 1.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 2.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 3.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 4.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 5.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 6.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 7.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 8.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 9.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 10.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 11.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 12.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 13.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 14.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #Death 15.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'Death 0' },
+      { key: 'daggerBanditAtlas', frame: 'Death 1' },
+      { key: 'daggerBanditAtlas', frame: 'Death 2' },
+      { key: 'daggerBanditAtlas', frame: 'Death 3' },
+      { key: 'daggerBanditAtlas', frame: 'Death 4' },
+      { key: 'daggerBanditAtlas', frame: 'Death 5' },
+      { key: 'daggerBanditAtlas', frame: 'Death 6' },
+      { key: 'daggerBanditAtlas', frame: 'Death 7' },
+      { key: 'daggerBanditAtlas', frame: 'Death 8' },
+      { key: 'daggerBanditAtlas', frame: 'Death 9' },
+      { key: 'daggerBanditAtlas', frame: 'Death 10' },
+      { key: 'daggerBanditAtlas', frame: 'Death 11' },
+      { key: 'daggerBanditAtlas', frame: 'Death 12' },
+      { key: 'daggerBanditAtlas', frame: 'Death 13' },
+      { key: 'daggerBanditAtlas', frame: 'Death 14' },
+      { key: 'daggerBanditAtlas', frame: 'Death 15' }
     ],
     frameRate: 12,
     repeat: 0
@@ -180,10 +180,10 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
   // Hit animation
   scene.anims.create({
-    key: 'bandit_hit',
+    key: `${uniqueId}_dagger_bandit_hit`,
     frames: [
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #HIT 0.aseprite' },
-      { key: 'daggerBanditAtlas', frame: 'Dagger Bandit #HIT 1.aseprite' }
+      { key: 'daggerBanditAtlas', frame: 'HIT 0' },
+      { key: 'daggerBanditAtlas', frame: 'HIT 1' }
     ],
     frameRate: 12,
     repeat: 0
@@ -192,30 +192,31 @@ export function createDaggerBanditAnimations(scene: Scene) {
 
 export function addDaggerBanditAnimationListeners(_this: DaggerBandit) {
   _this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
-    if (isActionAnimations(animation.key) && animation.key !== 'bandit_death') {
-      _this.sprite.play('bandit_idle');
-    } else if (animation.key === 'bandit_death') {
+    if (isActionAnimations(animation.key, _this.uniqueId) && animation.key !== `${_this.uniqueId}_dagger_bandit_death`) {
+      _this.sprite.play(`${_this.uniqueId}_dagger_bandit_idle`);
+    } else if (animation.key === `${_this.uniqueId}_dagger_bandit_death`) {
       // Stop the animation on the last frame
       _this.sprite.anims.stop();
-    } else if (animation.key === 'bandit_vanish') {
       _this.onVanishComplete();
-    } else if (animation.key === 'bandit_appear') {
+    } else if (animation.key === `${_this.uniqueId}_dagger_bandit_appear`) {
       _this.onAppearComplete();
     }
   });
 }
 
-export function isActionAnimations(animKey?: string): boolean {
-  return animKey === 'bandit_attack' ||
-    animKey === 'bandit_bat_fang_attack' ||
-    animKey === 'bandit_hit';
+export function isActionAnimations(animKey?: string, uniqueId?: string): boolean {
+  if (!animKey || !uniqueId) return false;
+  return animKey === `${uniqueId}_dagger_bandit_attack` ||
+    animKey === `${uniqueId}_dagger_bandit_bat_fang_attack` ||
+    animKey === `${uniqueId}_dagger_bandit_hit`;
 }
 
-export function isHighPriorityAnimation(animKey?: string): boolean {
-  return animKey === 'bandit_attack' ||
-    animKey === 'bandit_bat_fang_attack' ||
-    animKey === 'bandit_vanish' ||
-    animKey === 'bandit_appear' ||
-    animKey === 'bandit_death' ||
-    animKey === 'bandit_hit';
+export function isHighPriorityAnimation(animKey?: string, uniqueId?: string): boolean {
+  if (!animKey || !uniqueId) return false;
+  return animKey === `${uniqueId}_dagger_bandit_attack` ||
+    animKey === `${uniqueId}_dagger_bandit_bat_fang_attack` ||
+    animKey === `${uniqueId}_dagger_bandit_vanish` ||
+    animKey === `${uniqueId}_dagger_bandit_appear` ||
+    animKey === `${uniqueId}_dagger_bandit_death` ||
+    animKey === `${uniqueId}_dagger_bandit_hit`;
 }
