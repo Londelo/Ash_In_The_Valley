@@ -38,9 +38,17 @@ export class Preloader extends Scene {
     console.log('Loading Dagger Bandit atlas...');
     this.load.atlas( 'daggerBanditAtlas', 'Dagger_Bandit.png', 'Dagger_Bandit.json' );
 
+    // Load the Prophet as a texture atlas
+    console.log('Loading Prophet atlas...');
+    this.load.atlas( 'prophetAtlas', 'prophet.png', 'prophet.json' );
+
     // Add load event listeners for debugging
     this.load.on('filecomplete-atlas-daggerBanditAtlas', () => {
       console.log('Dagger Bandit atlas loaded successfully!');
+    });
+
+    this.load.on('filecomplete-atlas-prophetAtlas', () => {
+      console.log('Prophet atlas loaded successfully!');
     });
 
     this.load.on('loaderror', (file: any) => {
@@ -59,6 +67,12 @@ export class Preloader extends Scene {
       console.log('✓ Dagger Bandit atlas is available');
     } else {
       console.error('✗ Dagger Bandit atlas is NOT available');
+    }
+
+    if (this.textures.exists('prophetAtlas')) {
+      console.log('✓ Prophet atlas is available');
+    } else {
+      console.error('✗ Prophet atlas is NOT available');
     }
 
     //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
