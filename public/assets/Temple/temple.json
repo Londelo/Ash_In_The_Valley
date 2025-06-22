@@ -1,0 +1,328 @@
+{ "frames": {
+   "door light up 0": {
+    "frame": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 1": {
+    "frame": { "x": 133, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 2": {
+    "frame": { "x": 266, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 3": {
+    "frame": { "x": 399, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 4": {
+    "frame": { "x": 532, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 5": {
+    "frame": { "x": 665, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 6": {
+    "frame": { "x": 798, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 7": {
+    "frame": { "x": 931, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 8": {
+    "frame": { "x": 1064, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 9": {
+    "frame": { "x": 1197, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 10": {
+    "frame": { "x": 1330, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 11": {
+    "frame": { "x": 1463, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 12": {
+    "frame": { "x": 1596, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 13": {
+    "frame": { "x": 1729, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 14": {
+    "frame": { "x": 1862, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 15": {
+    "frame": { "x": 1995, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 16": {
+    "frame": { "x": 2128, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 17": {
+    "frame": { "x": 2261, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door light up 18": {
+    "frame": { "x": 2394, "y": 0, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 0": {
+    "frame": { "x": 0, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 1": {
+    "frame": { "x": 133, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 2": {
+    "frame": { "x": 266, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 3": {
+    "frame": { "x": 399, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 4": {
+    "frame": { "x": 532, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 5": {
+    "frame": { "x": 665, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 6": {
+    "frame": { "x": 798, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 7": {
+    "frame": { "x": 931, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 8": {
+    "frame": { "x": 1064, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 9": {
+    "frame": { "x": 1197, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 10": {
+    "frame": { "x": 1330, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 11": {
+    "frame": { "x": 1463, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 12": {
+    "frame": { "x": 1596, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 13": {
+    "frame": { "x": 1729, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 14": {
+    "frame": { "x": 1862, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 15": {
+    "frame": { "x": 1995, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 16": {
+    "frame": { "x": 2128, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 17": {
+    "frame": { "x": 2261, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   },
+   "door fade 18": {
+    "frame": { "x": 2394, "y": 109, "w": 133, "h": 109 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 133, "h": 109 },
+    "sourceSize": { "w": 133, "h": 109 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.org/",
+  "version": "1.3.14.2-arm64",
+  "image": "temple.png",
+  "format": "RGBA8888",
+  "size": { "w": 2527, "h": 218 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "door light up", "from": 1, "to": 19, "direction": "forward", "color": "#000000ff" },
+   { "name": "door fade", "from": 20, "to": 38, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Temple", "opacity": 255, "blendMode": "normal" },
+   { "name": "Sign Lights", "opacity": 255, "blendMode": "normal" },
+   { "name": "Door Lights", "opacity": 255, "blendMode": "normal" },
+   { "name": "fire", "opacity": 255, "blendMode": "normal" },
+   { "name": "fire 2", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

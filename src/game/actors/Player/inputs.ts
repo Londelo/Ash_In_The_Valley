@@ -15,6 +15,7 @@ export interface InputState {
   shouldAttack: boolean;
   shouldSlamAttack: boolean;
   shouldJump: boolean;
+  shouldFall: boolean;
   shouldDash: boolean;
   shouldBlock: boolean
   isMovingLeft: boolean;
@@ -87,6 +88,12 @@ export function getInputState(
                      !isSlashing &&
                      !isDashing
 
+  const shouldFall = player.sprite.body.velocity.y > 0 &&
+                     isInAir &&
+                     !isSlamming &&
+                     !isSlashing &&
+                     !isDashing
+
   // Movement permissions
   const canMove = !isSlashing && !isDashing && !isLanding && !isSlamming
 
@@ -119,6 +126,7 @@ export function getInputState(
     shouldAttack,
     shouldSlamAttack,
     shouldJump,
+    shouldFall,
     shouldDash,
     shouldBlock,
     isMovingLeft,

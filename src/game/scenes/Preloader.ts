@@ -28,28 +28,24 @@ export class Preloader extends Scene {
     //  Load the assets for the game - Replace with your own assets
     this.load.setPath( 'assets' );
 
-    this.load.image( 'logo', 'logo.png' );
-    this.load.image( 'star', 'star.png' );
+    this.load.atlas( 'swordMasterAtlas', 'SwordMaster/swordmaster.png', 'SwordMaster/swordmaster.json' );
 
-    // Load the main character as a texture atlas
-    this.load.atlas( 'mainCharacterAtlas', 'mainCharacterOne.png', 'mainCharacterOne.json' );
+    this.load.atlas( 'daggerBanditAtlas', 'DaggerBandit/Dagger_Bandit.png', 'DaggerBandit/Dagger_Bandit.json' );
 
-    // Load the Dagger Bandit as a texture atlas
-    console.log('Loading Dagger Bandit atlas...');
-    this.load.atlas( 'daggerBanditAtlas', 'Dagger_Bandit.png', 'Dagger_Bandit.json' );
+    this.load.atlas( 'prophetAtlas', 'Prophet/prophet.png', 'Prophet/prophet.json' );
 
-    // Load the Prophet as a texture atlas
-    console.log('Loading Prophet atlas...');
-    this.load.atlas( 'prophetAtlas', 'prophet.png', 'prophet.json' );
+    this.load.atlas( 'templeAtlas', 'Temple/temple.png', 'Temple/temple.json' );
 
-    // Add load event listeners for debugging
-    this.load.on('filecomplete-atlas-daggerBanditAtlas', () => {
-      console.log('Dagger Bandit atlas loaded successfully!');
-    });
+    // Load tilemap assets with unique keys matching tileset names
+    this.load.image("mainTileSheet", "maps/AvenWood/mainTileSheet.png");
+    this.load.image("bg", "maps/AvenWood/bg.png");
+    this.load.image("bg1", "maps/AvenWood/bg1.png");
+    this.load.image("bg2", "maps/AvenWood/bg2.png");
+    this.load.image("bg3", "maps/AvenWood/bg3.png");
+    this.load.image("bg4", "maps/AvenWood/bg4.png");
+    this.load.image("sun", "maps/AvenWood/sun.png");
 
-    this.load.on('filecomplete-atlas-prophetAtlas', () => {
-      console.log('Prophet atlas loaded successfully!');
-    });
+    this.load.tilemapTiledJSON("avenWood", "maps/AvenWood/AvenWood.tmj");
 
     this.load.on('loaderror', (file: any) => {
       console.error('Failed to load file:', file.key, file.src);
@@ -57,25 +53,6 @@ export class Preloader extends Scene {
   }
 
   create() {
-    //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
-    //  For example, you can define global animations here, so we can use them in other scenes.
-
-    // Verify assets are loaded
-    console.log('Preloader create() - Available textures:', Object.keys(this.textures.list));
-
-    if (this.textures.exists('daggerBanditAtlas')) {
-      console.log('✓ Dagger Bandit atlas is available');
-    } else {
-      console.error('✗ Dagger Bandit atlas is NOT available');
-    }
-
-    if (this.textures.exists('prophetAtlas')) {
-      console.log('✓ Prophet atlas is available');
-    } else {
-      console.error('✗ Prophet atlas is NOT available');
-    }
-
-    //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
-    this.scene.start( 'Testing' );
+    this.scene.start( 'AvenWood' );
   }
 }

@@ -5,15 +5,15 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_idle',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Idle 0' },
-      { key: 'mainCharacterAtlas', frame: 'Idle 1' },
-      { key: 'mainCharacterAtlas', frame: 'Idle 2' },
-      { key: 'mainCharacterAtlas', frame: 'Idle 3' },
-      { key: 'mainCharacterAtlas', frame: 'Idle 4' },
-      { key: 'mainCharacterAtlas', frame: 'Idle 5' },
-      { key: 'mainCharacterAtlas', frame: 'Idle 6' },
-      { key: 'mainCharacterAtlas', frame: 'Idle 7' },
-      { key: 'mainCharacterAtlas', frame: 'Idle 8' }
+      { key: 'swordMasterAtlas', frame: 'Idle 0' },
+      { key: 'swordMasterAtlas', frame: 'Idle 1' },
+      { key: 'swordMasterAtlas', frame: 'Idle 2' },
+      { key: 'swordMasterAtlas', frame: 'Idle 3' },
+      { key: 'swordMasterAtlas', frame: 'Idle 4' },
+      { key: 'swordMasterAtlas', frame: 'Idle 5' },
+      { key: 'swordMasterAtlas', frame: 'Idle 6' },
+      { key: 'swordMasterAtlas', frame: 'Idle 7' },
+      { key: 'swordMasterAtlas', frame: 'Idle 8' }
     ],
     frameRate: 8,
     repeat: -1
@@ -22,13 +22,13 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_walk',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Run 1' },
-      { key: 'mainCharacterAtlas', frame: 'Run 2' },
-      { key: 'mainCharacterAtlas', frame: 'Run 3' },
-      { key: 'mainCharacterAtlas', frame: 'Run 4' },
-      { key: 'mainCharacterAtlas', frame: 'Run 5' },
-      { key: 'mainCharacterAtlas', frame: 'Run 6' },
-      { key: 'mainCharacterAtlas', frame: 'Run 7' }
+      { key: 'swordMasterAtlas', frame: 'Run 1' },
+      { key: 'swordMasterAtlas', frame: 'Run 2' },
+      { key: 'swordMasterAtlas', frame: 'Run 3' },
+      { key: 'swordMasterAtlas', frame: 'Run 4' },
+      { key: 'swordMasterAtlas', frame: 'Run 5' },
+      { key: 'swordMasterAtlas', frame: 'Run 6' },
+      { key: 'swordMasterAtlas', frame: 'Run 7' }
     ],
     frameRate: 12,
     repeat: -1
@@ -37,14 +37,14 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_run',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Run Fast 0' },
-      { key: 'mainCharacterAtlas', frame: 'Run Fast 1' },
-      { key: 'mainCharacterAtlas', frame: 'Run Fast 2' },
-      { key: 'mainCharacterAtlas', frame: 'Run Fast 3' },
-      { key: 'mainCharacterAtlas', frame: 'Run Fast 4' },
-      { key: 'mainCharacterAtlas', frame: 'Run Fast 5' },
-      { key: 'mainCharacterAtlas', frame: 'Run Fast 6' },
-      { key: 'mainCharacterAtlas', frame: 'Run Fast 7' }
+      { key: 'swordMasterAtlas', frame: 'Run Fast 0' },
+      { key: 'swordMasterAtlas', frame: 'Run Fast 1' },
+      { key: 'swordMasterAtlas', frame: 'Run Fast 2' },
+      { key: 'swordMasterAtlas', frame: 'Run Fast 3' },
+      { key: 'swordMasterAtlas', frame: 'Run Fast 4' },
+      { key: 'swordMasterAtlas', frame: 'Run Fast 5' },
+      { key: 'swordMasterAtlas', frame: 'Run Fast 6' },
+      { key: 'swordMasterAtlas', frame: 'Run Fast 7' }
     ],
     frameRate: 15,
     repeat: -1
@@ -53,9 +53,9 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_jump',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Jump 0' },
-      { key: 'mainCharacterAtlas', frame: 'Jump 1' },
-      { key: 'mainCharacterAtlas', frame: 'Jump 2' }
+      { key: 'swordMasterAtlas', frame: 'Jump 0' },
+      { key: 'swordMasterAtlas', frame: 'Jump 1' },
+      { key: 'swordMasterAtlas', frame: 'Jump 2' }
     ],
     frameRate: 10,
     repeat: 0
@@ -64,9 +64,9 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_fall',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Fall 0' },
-      { key: 'mainCharacterAtlas', frame: 'Fall 1' },
-      { key: 'mainCharacterAtlas', frame: 'Fall 2' }
+      { key: 'swordMasterAtlas', frame: 'Fall 0' },
+      { key: 'swordMasterAtlas', frame: 'Fall 1' },
+      { key: 'swordMasterAtlas', frame: 'Fall 2' }
     ],
     frameRate: 8,
     repeat: -1
@@ -75,10 +75,10 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_land',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'crouch land 0' },
-      { key: 'mainCharacterAtlas', frame: 'crouch land 1' },
-      { key: 'mainCharacterAtlas', frame: 'crouch land 2' },
-      { key: 'mainCharacterAtlas', frame: 'crouch land 3' }
+      { key: 'swordMasterAtlas', frame: 'crouch land 0' },
+      { key: 'swordMasterAtlas', frame: 'crouch land 1' },
+      { key: 'swordMasterAtlas', frame: 'crouch land 2' },
+      { key: 'swordMasterAtlas', frame: 'crouch land 3' }
     ],
     frameRate: 12,
     repeat: 0
@@ -87,12 +87,12 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_dash',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Dash 0' },
-      { key: 'mainCharacterAtlas', frame: 'Dash 1' },
-      { key: 'mainCharacterAtlas', frame: 'Dash 2' },
-      { key: 'mainCharacterAtlas', frame: 'Dash 3' },
-      { key: 'mainCharacterAtlas', frame: 'Dash 4' },
-      { key: 'mainCharacterAtlas', frame: 'Dash 5' }
+      { key: 'swordMasterAtlas', frame: 'Dash 0' },
+      { key: 'swordMasterAtlas', frame: 'Dash 1' },
+      { key: 'swordMasterAtlas', frame: 'Dash 2' },
+      { key: 'swordMasterAtlas', frame: 'Dash 3' },
+      { key: 'swordMasterAtlas', frame: 'Dash 4' },
+      { key: 'swordMasterAtlas', frame: 'Dash 5' }
     ],
     frameRate: 20,
     repeat: 0
@@ -101,13 +101,13 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_slash_1',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Slash 1 0' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 1 1' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 1 2' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 1 3' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 1 4' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 1 5' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 1 6' }
+      { key: 'swordMasterAtlas', frame: 'Slash 1 0' },
+      { key: 'swordMasterAtlas', frame: 'Slash 1 1' },
+      { key: 'swordMasterAtlas', frame: 'Slash 1 2' },
+      { key: 'swordMasterAtlas', frame: 'Slash 1 3' },
+      { key: 'swordMasterAtlas', frame: 'Slash 1 4' },
+      { key: 'swordMasterAtlas', frame: 'Slash 1 5' },
+      { key: 'swordMasterAtlas', frame: 'Slash 1 6' }
     ],
     delay: 50,
     showBeforeDelay: true,
@@ -118,11 +118,11 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_slash_2',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Slash 2 0' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 2 1' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 2 2' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 2 3' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 2 4' }
+      { key: 'swordMasterAtlas', frame: 'Slash 2 0' },
+      { key: 'swordMasterAtlas', frame: 'Slash 2 1' },
+      { key: 'swordMasterAtlas', frame: 'Slash 2 2' },
+      { key: 'swordMasterAtlas', frame: 'Slash 2 3' },
+      { key: 'swordMasterAtlas', frame: 'Slash 2 4' }
     ],
     delay: 50,
     showBeforeDelay: true,
@@ -133,15 +133,15 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_slash_heavy',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Dash 1' },
-      { key: 'mainCharacterAtlas', frame: 'Dash 2' },
-      { key: 'mainCharacterAtlas', frame: 'Dash 3' },
+      { key: 'swordMasterAtlas', frame: 'Dash 1' },
+      { key: 'swordMasterAtlas', frame: 'Dash 2' },
+      { key: 'swordMasterAtlas', frame: 'Dash 3' },
 
-      // { key: 'mainCharacterAtlas', frame: 'Slash 2 0' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 2 1' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 2 2' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 2 3' },
-      { key: 'mainCharacterAtlas', frame: 'Slash 2 4' }
+      // { key: 'swordMasterAtlas', frame: 'Slash 2 0' },
+      { key: 'swordMasterAtlas', frame: 'Slash 2 1' },
+      { key: 'swordMasterAtlas', frame: 'Slash 2 2' },
+      { key: 'swordMasterAtlas', frame: 'Slash 2 3' },
+      { key: 'swordMasterAtlas', frame: 'Slash 2 4' }
     ],
     delay: 50,
     showBeforeDelay: true,
@@ -152,14 +152,14 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_spin_attack',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Block 0' },
-      { key: 'mainCharacterAtlas', frame: 'Block 1' },
-      { key: 'mainCharacterAtlas', frame: 'Spin Attack 0' },
-      { key: 'mainCharacterAtlas', frame: 'Spin Attack 1' },
-      { key: 'mainCharacterAtlas', frame: 'Spin Attack 2' },
-      { key: 'mainCharacterAtlas', frame: 'Spin Attack 3' },
-      { key: 'mainCharacterAtlas', frame: 'Spin Attack 4' },
-      { key: 'mainCharacterAtlas', frame: 'Spin Attack 5' }
+      { key: 'swordMasterAtlas', frame: 'Block 0' },
+      { key: 'swordMasterAtlas', frame: 'Block 1' },
+      { key: 'swordMasterAtlas', frame: 'Spin Attack 0' },
+      { key: 'swordMasterAtlas', frame: 'Spin Attack 1' },
+      { key: 'swordMasterAtlas', frame: 'Spin Attack 2' },
+      { key: 'swordMasterAtlas', frame: 'Spin Attack 3' },
+      { key: 'swordMasterAtlas', frame: 'Spin Attack 4' },
+      { key: 'swordMasterAtlas', frame: 'Spin Attack 5' }
     ],
     delay: 50,
     showBeforeDelay: true,
@@ -170,11 +170,11 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_slam_attack',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Slam 0' },
-      { key: 'mainCharacterAtlas', frame: 'Slam 1' },
-      { key: 'mainCharacterAtlas', frame: 'Slam 2' },
-      { key: 'mainCharacterAtlas', frame: 'Slam 3' },
-      { key: 'mainCharacterAtlas', frame: 'Slam 4' }
+      { key: 'swordMasterAtlas', frame: 'Slam 0' },
+      { key: 'swordMasterAtlas', frame: 'Slam 1' },
+      { key: 'swordMasterAtlas', frame: 'Slam 2' },
+      { key: 'swordMasterAtlas', frame: 'Slam 3' },
+      { key: 'swordMasterAtlas', frame: 'Slam 4' }
     ],
     delay: 100,
     showBeforeDelay: true,
@@ -185,16 +185,16 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_roll_attack',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 0' },
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 1' },
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 2' },
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 3' },
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 4' },
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 5' },
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 6' },
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 7' },
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 8' },
-      { key: 'mainCharacterAtlas', frame: 'Roll Attack 9' }
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 0' },
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 1' },
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 2' },
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 3' },
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 4' },
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 5' },
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 6' },
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 7' },
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 8' },
+      { key: 'swordMasterAtlas', frame: 'Roll Attack 9' }
     ],
     frameRate: 7,
     repeat: 0
@@ -203,12 +203,12 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_block',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Block 0' },
-      { key: 'mainCharacterAtlas', frame: 'Block 1' },
-      { key: 'mainCharacterAtlas', frame: 'Block 2' },
-      { key: 'mainCharacterAtlas', frame: 'Block 3' },
-      { key: 'mainCharacterAtlas', frame: 'Block 4' },
-      { key: 'mainCharacterAtlas', frame: 'Block 5' }
+      { key: 'swordMasterAtlas', frame: 'Block 0' },
+      { key: 'swordMasterAtlas', frame: 'Block 1' },
+      { key: 'swordMasterAtlas', frame: 'Block 2' },
+      { key: 'swordMasterAtlas', frame: 'Block 3' },
+      { key: 'swordMasterAtlas', frame: 'Block 4' },
+      { key: 'swordMasterAtlas', frame: 'Block 5' }
     ],
     delay: 100,
     showBeforeDelay: true,
@@ -219,8 +219,8 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_hit',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'Hit 0' },
-      { key: 'mainCharacterAtlas', frame: 'Hit 1' }
+      { key: 'swordMasterAtlas', frame: 'Hit 0' },
+      { key: 'swordMasterAtlas', frame: 'Hit 1' }
     ],
     frameRate: 12,
     repeat: 0
@@ -229,12 +229,12 @@ export function createPlayerAnimations(scene: Scene) {
   scene.anims.create({
     key: 'player_death',
     frames: [
-      { key: 'mainCharacterAtlas', frame: 'death 0' },
-      { key: 'mainCharacterAtlas', frame: 'death 1' },
-      { key: 'mainCharacterAtlas', frame: 'death 2' },
-      { key: 'mainCharacterAtlas', frame: 'death 3' },
-      { key: 'mainCharacterAtlas', frame: 'death 4' },
-      { key: 'mainCharacterAtlas', frame: 'death 5' }
+      { key: 'swordMasterAtlas', frame: 'death 0' },
+      { key: 'swordMasterAtlas', frame: 'death 1' },
+      { key: 'swordMasterAtlas', frame: 'death 2' },
+      { key: 'swordMasterAtlas', frame: 'death 3' },
+      { key: 'swordMasterAtlas', frame: 'death 4' },
+      { key: 'swordMasterAtlas', frame: 'death 5' }
     ],
     frameRate: 8,
     repeat: 0

@@ -13,7 +13,7 @@ import Phaser from 'phaser';
  */
 export function debugGraphics(
   graphics: Phaser.GameObjects.Graphics,
-  sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody,
+  sprite: any,
   scale: number = 1,
   attackHitboxes?: any[],
   spriteBorderColor: number = 0xff0000,
@@ -21,7 +21,7 @@ export function debugGraphics(
 ) {
   if (!graphics || !sprite) return;
   graphics.clear();
-  
+
   // Draw sprite bounds (red border)
   graphics.lineStyle(lineWidth, spriteBorderColor, 1);
   // Get the sprite's bounds in world space
@@ -32,7 +32,7 @@ export function debugGraphics(
   graphics.lineStyle(lineWidth, 0x000000, 1);
   const body = sprite.body;
   graphics.strokeRect(body.x, body.y, body.width, body.height);
-  
+
   graphics.setDepth(1000); // Ensure border is above the sprite
 
   // Draw crosshairs for the sprite's origin (green)
@@ -41,7 +41,7 @@ export function debugGraphics(
   graphics.lineStyle(1, 0x00ff00, 1);
   graphics.lineBetween(originX, bounds.y, originX, bounds.y + bounds.height);
   graphics.lineBetween(bounds.x, originY, bounds.x + bounds.width, originY);
-  
+
   // Draw attack hitboxes (blue border)
   if (attackHitboxes) {
     graphics.lineStyle(lineWidth, 0x0000ff, 1);
