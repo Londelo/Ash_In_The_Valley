@@ -74,7 +74,7 @@ export class Prophet {
       this.sprite.play('prophet_look_up');
 
       // Start AI conversation
-      this.chatAI.startConversation();
+      // this.chatAI.startConversation();
     }
     // Player just left range
     else if (!playerIsNear && this.isPlayerNear && this.currentState === 'blinking' && this.chatAI.getIsConversationActive()) {

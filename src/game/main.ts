@@ -1,5 +1,5 @@
 import { Boot } from './scenes/Boot';
-import { Testing } from './scenes/Testing';
+import AvenWood from './scenes/avenwood';
 import {AUTO, Game} from 'phaser';
 import { Preloader } from './scenes/Preloader';
 
@@ -7,8 +7,8 @@ import { Preloader } from './scenes/Preloader';
 //  https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
 const config: Phaser.Types.Core.GameConfig = {
   type: AUTO,
-  width: 1024,
-  height: 768,
+  width: 1500,
+  height: 650,
   parent: 'game-container',
   backgroundColor: '#028af8',
   physics: {
@@ -26,7 +26,7 @@ const config: Phaser.Types.Core.GameConfig = {
   scene: [
     Boot,
     Preloader,
-    Testing
+    AvenWood
   ]
 };
 

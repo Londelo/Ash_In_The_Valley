@@ -80,7 +80,7 @@ export class Player {
 
   constructor(scene: Scene, x: number, y: number) {
     this.scene = scene;
-    this.sprite = scene.physics.add.sprite(x, y, 'mainCharacterAtlas', 'Idle 0');
+    this.sprite = scene.physics.add.sprite(x, y, 'swordMasterAtlas', 'Idle 0');
     this.setPlayerScale(this.playerScale);
     // Set texture filtering to nearest neighbor for crisp pixel art
     this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -296,6 +296,12 @@ export class Player {
     }
   }
 
+  private handleFall(inputState: ReturnType<typeof getInputState>) {
+    if (inputState.shouldFall) {
+      this.sprite.play('player_fall');
+    }
+  }
+
   create() {
     // Set up inputs
     const { cursors, inputKeys } = setupPlayerInput(this.scene);
@@ -326,6 +332,7 @@ export class Player {
     this.handleDash(inputState, deltaTime);
     this.handleBlock(inputState)
     this.handleJump(inputState);
+    this.handleFall(inputState);
     this.handleMovement(inputState);
     this.handleMovementAnimations(inputState);
 
