@@ -53,14 +53,16 @@ export default class AvenWood extends Scene {
       // Add more as needed, or use a naming convention
     ];
     this.map.layers.forEach(layer => {
-      const layerObj = this.map.createLayer(layer.name, [tilesetSun, tilesetBg, tilesetBg1, tilesetBg2, tilesetBg3, tilesetBg4, tilesetMain], 0, 300);
+      const layerObj = this.map.createLayer(
+        layer.name,
+        [tilesetSun, tilesetBg, tilesetBg1, tilesetBg2, tilesetBg3, tilesetBg4, tilesetMain]
+      );
 
       if (layerObj) {
         layerObj.setScale(scale);
         if (layer.name.includes('background')) {
           const parallax = parallaxConfig.find(config => layer.name.includes(config.name));
           if (parallax) {
-            console.log(`Setting parallax factor for layer ${layer.name}: ${parallax.factor}`);
             layerObj.setScrollFactor(parallax.factor, 1);
           }
           layerObj.setDepth(-1);
@@ -77,11 +79,11 @@ export default class AvenWood extends Scene {
     const groundCollisionLayer: any = this.map.getObjectLayer('ground/ground_collision')?.objects[0]
     const collisionRect = this.add.rectangle(
           groundCollisionLayer.x * scale,
-          groundCollisionLayer.y * scale + 300,
+          groundCollisionLayer.y * scale,
           groundCollisionLayer.width * scale,
           groundCollisionLayer.height * scale,
           0x000000,
-          0.3
+          0
         );
     collisionRect.setOrigin(0, 0);
     this.world.add(collisionRect);
@@ -90,10 +92,11 @@ export default class AvenWood extends Scene {
     const mapWidth = this.map.widthInPixels * scale;
     const mapHeight = this.map.heightInPixels * scale;
 
-    // Create actors with positions appropriate for the new map (scaled)
-    this.player = new Player(this, config.player_start_x, config.player_start_y * scale);
+    const templeLocation = this.map.getObjectLayer('temple')?.objects[0] as any
+    console.log('templeLocation', templeLocation);
+    this.player = new Player(this, config.temple_x * scale, config.player_start_y * scale);
     this.prophet = new Prophet(this, config.prophet_start_x * scale, config.prophet_start_y * scale, this.player);
-    this.temple = new Temple(this, config.temple_x * scale, config.temple_y * scale, this.player);
+    this.temple = new Temple(this, templeLocation.x * scale, templeLocation.y * scale, this.player);
 
     this.player.create();
     this.prophet.create();

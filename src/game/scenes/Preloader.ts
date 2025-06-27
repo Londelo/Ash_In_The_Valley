@@ -29,14 +29,12 @@ export class Preloader extends Scene {
     this.load.setPath( 'assets' );
 
     this.load.atlas( 'swordMasterAtlas', 'SwordMaster/swordmaster.png', 'SwordMaster/swordmaster.json' );
-
     this.load.atlas( 'daggerBanditAtlas', 'DaggerBandit/Dagger_Bandit.png', 'DaggerBandit/Dagger_Bandit.json' );
-
     this.load.atlas( 'prophetAtlas', 'Prophet/prophet.png', 'Prophet/prophet.json' );
 
     this.load.atlas( 'templeAtlas', 'Temple/temple.png', 'Temple/temple.json' );
 
-    // Load tilemap assets with unique keys matching tileset names
+    this.load.tilemapTiledJSON("avenWood", "maps/AvenWood/AvenWood.tmj");
     this.load.image("mainTileSheet", "maps/AvenWood/mainTileSheet.png");
     this.load.image("bg", "maps/AvenWood/bg.png");
     this.load.image("bg1", "maps/AvenWood/bg1.png");
@@ -45,7 +43,14 @@ export class Preloader extends Scene {
     this.load.image("bg4", "maps/AvenWood/bg4.png");
     this.load.image("sun", "maps/AvenWood/sun.png");
 
-    this.load.tilemapTiledJSON("avenWood", "maps/AvenWood/AvenWood.tmj");
+    this.load.tilemapTiledJSON("gehennaDeep", "maps/GehennaDeep/GehennaDeep.tmj");
+    this.load.image("mainCave", "maps/GehennaDeep/mainCave.png");
+    this.load.image("crossSectionBG", "maps/GehennaDeep/crossSectionBG.png");
+    this.load.image("hangersBG", "maps/GehennaDeep/hangersBG.png");
+    this.load.image("horizontalColumnsBG", "maps/GehennaDeep/horizontalColumnsBG.png");
+    this.load.image("Small1BG", "maps/GehennaDeep/Small1BG.png");
+    this.load.image("Small3BG", "maps/GehennaDeep/Small3BG.png");
+    this.load.image("Small2BG", "maps/GehennaDeep/Small2BG.png");
 
     this.load.on('loaderror', (file: any) => {
       console.error('Failed to load file:', file.key, file.src);
