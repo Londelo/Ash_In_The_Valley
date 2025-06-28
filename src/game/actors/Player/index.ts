@@ -1,11 +1,13 @@
 import { Scene } from 'phaser';
 import { State, PlayerState } from './state';
 import { setSpriteDirection } from '../../utils/spriteDirection';
-import { AttackHitboxManager, AttackHitboxConfig } from '../../components/AttackHitbox';
+import { AttackHitboxManager } from '../../components/AttackHitbox';
 import { AnimationHelper } from '../../components/AnimationHelper';
-import { playerAnimationConfigs } from './animations';
+import { getAnimationConfig } from './animations';
 import { Actor, ActorConfig } from '../../components/Actor';
+import { getAttackConfig } from './attackConfigs';
 
+export type PlayerSkins = 'swordMaster' | 'bloodSwordsMan' | 'lordOfFames' | 'holySamurai'
 export class Player extends Actor {
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
@@ -16,51 +18,8 @@ export class Player extends Actor {
   private readonly COMBO_WINDOW_MAX = 600;
   private readonly COMBO_WINDOW_MIN = 300;
   private state: State;
-
+  private playerSkin: PlayerSkins = 'swordMaster'
   public attackHitboxManager: AttackHitboxManager;
-
-  private attackConfigs: { [key: string]: AttackHitboxConfig } = {
-    'player_slash_1': {
-      width: 200,
-      height: 40,
-      offsetX_right: 65,
-      offsetX_left: -65,
-      offsetY: -18,
-      duration: 200,
-      damage: this.attackPower,
-      attackerId: 'player'
-    },
-    'player_slash_2': {
-      width: 200,
-      height: 40,
-      offsetX_right: 65,
-      offsetX_left: -65,
-      offsetY: -18,
-      duration: 200,
-      damage: this.attackPower,
-      attackerId: 'player'
-    },
-    'player_spin_attack': {
-      width: 270,
-      height: 70,
-      offsetX_right: 45,
-      offsetX_left: -45,
-      offsetY: -35,
-      duration: 400,
-      damage: this.attackPower * 1.5,
-      attackerId: 'player'
-    },
-    'player_slam_attack': {
-      width: 220,
-      height: 100,
-      offsetX_right: 80,
-      offsetX_left: -80,
-      offsetY: -55,
-      duration: 300,
-      damage: this.attackPower * 1.2,
-      attackerId: 'player'
-    }
-  };
 
   constructor(scene: Scene, x: number, y: number) {
     const actorConfig: ActorConfig = {
@@ -86,12 +45,21 @@ export class Player extends Actor {
 
   private createPlayerAnimations(scene: Scene) {
     const animationManager = new AnimationHelper(scene);
-    animationManager.createAnimations(playerAnimationConfigs);
+    const animationConfigs = getAnimationConfig(this.playerSkin);
+    if (!animationConfigs) {
+      console.error('MISSING ANIMATION CONFIG')
+      return
+    };
+    animationManager.createAnimations(animationConfigs);
   }
 
   private createAttackHitbox(attackType: string) {
-    const config = this.attackConfigs[attackType];
-    if (!config) return;
+    const attackConfigFn = getAttackConfig(this.playerSkin);
+    const config = attackConfigFn ? attackConfigFn(this) [attackType] : undefined;
+    if (!config) {
+      console.error('MISSING ATTACK CONFIG')
+      return
+    };
 
     const direction = this.sprite.flipX ? 'left' : 'right';
     this.attackHitboxManager.createAttackHitbox(

@@ -8,9 +8,8 @@ export class Prophet {
   sprite: Phaser.Types.Physics.Arcade.SpriteWithStaticBody;
   private prophetScale: number = 4;
   private playerRef: Player;
-  private readonly DETECTION_RANGE = 150;
+  private readonly DETECTION_RANGE = 400;
   private isPlayerNear: boolean = false;
-  private currentState: 'breathing' | 'looking_up' | 'blinking' | 'looking_down' = 'breathing';
   private chatAI: ChatAI;
   private inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
 
@@ -44,36 +43,32 @@ export class Prophet {
 
   private getDistanceToPlayer(): number {
     const prophetX = this.sprite.x;
-    const prophetY = this.sprite.y;
     const playerX = this.playerRef.sprite.x;
-    const playerY = this.playerRef.sprite.y;
 
-    return Math.sqrt(Math.pow(playerX - prophetX, 2) + Math.pow(playerY - prophetY, 2));
+    return prophetX - playerX
   }
 
   public onLookUpComplete() {
-    this.currentState = 'blinking';
     this.sprite.play('prophet_idle_blink');
   }
 
   public onLookDownComplete() {
-    this.currentState = 'breathing';
     this.sprite.play('prophet_idle_breathe');
   }
 
   private handlePlayerProximity() {
     const distance = this.getDistanceToPlayer();
-    const playerIsNear = distance <= this.DETECTION_RANGE;
+    const playerIsNear = Math.abs(distance) <= this.DETECTION_RANGE;
 
-    if (playerIsNear && !this.isPlayerNear && this.currentState === 'breathing' && !this.chatAI.getIsConversationActive()) {
+    if (playerIsNear && !this.isPlayerNear && !this.chatAI.getIsConversationActive()) {
       this.isPlayerNear = true;
-      this.currentState = 'looking_up';
       this.sprite.play('prophet_look_up');
+      this.chatAI.startConversation()
     }
-    else if (!playerIsNear && this.isPlayerNear && this.currentState === 'blinking' && this.chatAI.getIsConversationActive()) {
+    else if (!playerIsNear && this.isPlayerNear) {
       this.isPlayerNear = false;
-      this.currentState = 'looking_down';
       this.sprite.play('prophet_look_down');
+      this.chatAI.endConversation()
     }
 
     this.isPlayerNear = playerIsNear;
@@ -86,6 +81,12 @@ export class Prophet {
   }
 
   private onConversationEnded(): void {
+  }
+
+  private handleFacePlayer() {
+    const distance = this.getDistanceToPlayer()
+    const direction = distance > 0 ? false : true
+    this.sprite.setFlipX(direction)
   }
 
   create() {
@@ -102,5 +103,6 @@ export class Prophet {
       this.chatAI.sendUserMessage('Use evil voice to insult the player');
     }
     this.handlePlayerProximity();
+    this.handleFacePlayer()
   }
 }

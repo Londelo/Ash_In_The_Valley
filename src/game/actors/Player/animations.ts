@@ -1,6 +1,7 @@
 import { Animation } from '../../components/AnimationHelper';
+import { PlayerSkins } from '.';
 
-export const playerAnimationConfigs: Animation[] = [
+export const swordsMasterAnimationConfigs: Animation[] = [
   {
     key: 'player_idle',
     frames: [
@@ -222,3 +223,12 @@ export const playerAnimationConfigs: Animation[] = [
     repeat: 0
   }
 ];
+
+export const bloodSwordsmanAnimationConfigs: Animation[] = []
+
+const animationConfigs: { [K in PlayerSkins]?: Animation[] } = {
+  'swordMaster': swordsMasterAnimationConfigs,
+  'bloodSwordsMan': bloodSwordsmanAnimationConfigs
+};
+
+export const getAnimationConfig = (playerSkin: PlayerSkins) => animationConfigs[playerSkin]
