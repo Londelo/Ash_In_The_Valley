@@ -1,5 +1,7 @@
+import { TileMapConfig } from '../../components/TileMap';
+
 const config = {
-  backgroundColor: 0x87CEEB, // Sky blue color
+  backgroundColor: 0x87CEEB,
 
   world_width: 3000,
   world_height: 800,
@@ -26,6 +28,21 @@ const config = {
 
   temple_x: 2629,
   temple_y: 655,
+
+  tileMapConfig: {
+    mapKey: "gehennaDeep",
+    tilesets: [
+      { name: "mainCave", key: "mainCave" },
+      { name: "crossSectionBG", key: "crossSectionBG" },
+      { name: "hangersBG", key: "hangersBG" },
+      { name: "horizontalColumnsBG", key: "horizontalColumnsBG" },
+      { name: "Small1BG", key: "Small1BG" },
+      { name: "Small2BG", key: "Small2BG" },
+      { name: "Small3BG", key: "Small3BG" }
+    ],
+    scale: 3,
+    collisionLayers: ['floor']
+  } as TileMapConfig
 }
 
 export default config;

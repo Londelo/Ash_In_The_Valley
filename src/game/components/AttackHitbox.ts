@@ -4,9 +4,9 @@ export interface AttackHitboxConfig {
   offsetX_right: number;
   offsetX_left: number;
   offsetY: number;
-  duration: number; // How long the hitbox stays active (ms)
+  duration: number;
   damage: number;
-  attackerId: string; // Who created this attack
+  attackerId: string;
 }
 
 export class AttackHitboxManager {
@@ -75,15 +75,12 @@ export class AttackHitbox {
     this.scene = scene;
     this.config = config;
 
-    // Create invisible sprite for the hitbox
     this.sprite = scene.physics.add.sprite(x, y, '');
-    this.sprite.setVisible(false); // Make it invisible
+    this.sprite.setVisible(false);
     this.sprite.setBodySize(config.width, config.height);
 
-    // Store reference to this hitbox on the sprite
     this.sprite.attackHitbox = this;
 
-    // Auto-destroy after duration
     this.timer = scene.time.delayedCall(config.duration, () => {
       this.destroy();
     });

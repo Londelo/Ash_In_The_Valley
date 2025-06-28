@@ -1,4 +1,3 @@
-
 export function setSpriteDirection(
   sprite: Phaser.GameObjects.Sprite,
   direction: 'left' | 'right',

@@ -2,9 +2,6 @@ import type { DaggerBandit } from './index';
 import type { Player } from '../Player/index';
 
 export type AI_State = {
-    // isMoving: boolean;
-    // isAttacking: boolean;
-    // isBigAttacking: boolean;
     shouldAttack: boolean;
     shouldPlayIdleAnim: boolean;
     shouldPlayMoveAnim: boolean;
@@ -12,18 +9,16 @@ export type AI_State = {
     isOnGround: boolean
     playerDirection: "left" | "right";
 }
-export class BanditAI {
+export class State {
   private bandit: DaggerBandit;
   private player: Player;
 
-  // Simple AI parameters
-  private DETECTION_MADE = false; // Speed of the bandit in pixels per second
+  private DETECTION_MADE = false;
   private readonly DETECTION_RANGE = 300;
   private readonly ATTACK_RANGE = 150;
 
-  // Attack cooldown
   private lastAttackTime: number = 0;
-  private readonly ATTACK_COOLDOWN = 1500; // ms
+  private readonly ATTACK_COOLDOWN = 1500;
 
   constructor(bandit: DaggerBandit, player: Player) {
     this.bandit = bandit;
@@ -45,6 +40,23 @@ export class BanditAI {
 
   private checkAttackCooldown(currentTime: number): boolean {
     return currentTime - this.lastAttackTime > this.ATTACK_COOLDOWN;
+  }
+
+  public isActionAnimations(animKey?: string, uniqueId?: string): boolean {
+    if (!animKey || !uniqueId) return false;
+    return animKey === `${uniqueId}_dagger_bandit_attack` ||
+      animKey === `${uniqueId}_dagger_bandit_bat_fang_attack` ||
+      animKey === `${uniqueId}_dagger_bandit_hit`;
+  }
+
+  public isHighPriorityAnimation(animKey?: string, uniqueId?: string): boolean {
+    if (!animKey || !uniqueId) return false;
+    return animKey === `${uniqueId}_dagger_bandit_attack` ||
+      animKey === `${uniqueId}_dagger_bandit_bat_fang_attack` ||
+      animKey === `${uniqueId}_dagger_bandit_vanish` ||
+      animKey === `${uniqueId}_dagger_bandit_appear` ||
+      animKey === `${uniqueId}_dagger_bandit_death` ||
+      animKey === `${uniqueId}_dagger_bandit_hit`;
   }
 
   public getState(time: number, _delta: number):AI_State {

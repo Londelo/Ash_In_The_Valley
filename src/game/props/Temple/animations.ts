@@ -1,8 +1,7 @@
-import { Scene } from 'phaser';
+import { Animation } from '../../components/AnimationHelper'
 
-export function createTempleAnimations(scene: Scene) {
-  // Door light up animation
-  scene.anims.create({
+export const templeAnimationConfigs: Animation[] = [
+  {
     key: 'temple_door_light_up',
     frames: [
       { key: 'templeAtlas', frame: 'door light up 0' },
@@ -27,10 +26,8 @@ export function createTempleAnimations(scene: Scene) {
     ],
     frameRate: 12,
     repeat: 0
-  });
-
-  // Door fade animation
-  scene.anims.create({
+  },
+  {
     key: 'temple_door_fade',
     frames: [
       { key: 'templeAtlas', frame: 'door fade 0' },
@@ -55,15 +52,5 @@ export function createTempleAnimations(scene: Scene) {
     ],
     frameRate: 12,
     repeat: 0
-  });
-}
-
-export function addTempleAnimationListeners(temple: any) {
-  temple.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
-    if (animation.key === 'temple_door_light_up') {
-      temple.onLightUpComplete();
-    } else if (animation.key === 'temple_door_fade') {
-      temple.onFadeComplete();
-    }
-  });
-}
+  }
+];

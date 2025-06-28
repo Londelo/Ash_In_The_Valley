@@ -1,5 +1,7 @@
+import { TileMapConfig } from '../../components/TileMap';
+
 const config = {
-  backgroundColor: 0x87CEEB, // Sky blue color
+  backgroundColor: 0x87CEEB,
 
   world_width: 3000,
   world_height: 800,
@@ -26,6 +28,28 @@ const config = {
 
   temple_x: 2629,
   temple_y: 655,
+
+  tileMapConfig: {
+    mapKey: "avenWood",
+    tilesets: [
+      { name: "mainTileSheet", key: "mainTileSheet" },
+      { name: "bg", key: "bg" },
+      { name: "bg1", key: "bg1" },
+      { name: "bg2", key: "bg2" },
+      { name: "bg3", key: "bg3" },
+      { name: "bg4", key: "bg4" },
+      { name: "sun", key: "sun" }
+    ],
+    parallaxLayers: [
+      { name: 'BG_0', factor: 0.1 },
+      { name: 'BG_1', factor: 0.2 },
+      { name: 'BG_2', factor: 0.4 },
+      { name: 'BG_3', factor: 0.6 },
+      { name: 'BG_4', factor: 0.8 },
+    ],
+    scale: 2,
+    collisionLayers: ['ground/ground_collision']
+  } as TileMapConfig
 }
 
 export default config;

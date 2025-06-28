@@ -1,7 +1,6 @@
 import { Scene } from 'phaser';
 
 export function createProphetAnimations(scene: Scene) {
-  // Base breathing animation
   scene.anims.create({
     key: 'prophet_idle_breathe',
     frames: [
@@ -17,7 +16,6 @@ export function createProphetAnimations(scene: Scene) {
     repeat: -1
   });
 
-  // Look up animation
   scene.anims.create({
     key: 'prophet_look_up',
     frames: [
@@ -29,7 +27,6 @@ export function createProphetAnimations(scene: Scene) {
     repeat: 0
   });
 
-  // Blinking animation
   scene.anims.create({
     key: 'prophet_idle_blink',
     frames: [
@@ -53,7 +50,6 @@ export function createProphetAnimations(scene: Scene) {
     repeat: -1
   });
 
-  // Look down animation
   scene.anims.create({
     key: 'prophet_look_down',
     frames: [

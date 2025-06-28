@@ -1,4 +1,3 @@
-// Global type augmentations for Phaser GameObjects
 declare global {
   namespace Phaser {
     namespace GameObjects {

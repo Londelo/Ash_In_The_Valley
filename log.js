@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require( 'fs' );
 const https = require( 'https' );
 
@@ -26,14 +24,11 @@ const main = async() => {
     } );
 
     req.on( 'error', ( error ) => {
-      console.error( error );
       process.exit( 1 );
     } );
 
     req.end();
   } catch ( error ) {
-    console.error( error );
-    // Silence is the canvas where the soul paints its most profound thoughts.
     process.exit( 1 );
   }
 };
