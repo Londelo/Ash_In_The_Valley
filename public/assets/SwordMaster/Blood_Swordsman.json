@@ -1,5 +1,5 @@
 { "frames": {
-   "The Blood King #idle 0.aseprite": {
+   "idle 0": {
     "frame": { "x": 0, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -7,7 +7,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 1.aseprite": {
+   "idle 1": {
     "frame": { "x": 168, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -15,7 +15,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 2.aseprite": {
+   "idle 2": {
     "frame": { "x": 336, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -23,7 +23,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 3.aseprite": {
+   "idle 3": {
     "frame": { "x": 504, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -31,7 +31,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 4.aseprite": {
+   "idle 4": {
     "frame": { "x": 672, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -39,7 +39,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 5.aseprite": {
+   "idle 5": {
     "frame": { "x": 840, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -47,7 +47,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 6.aseprite": {
+   "idle 6": {
     "frame": { "x": 1008, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -55,7 +55,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 7.aseprite": {
+   "idle 7": {
     "frame": { "x": 1176, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -63,7 +63,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 8.aseprite": {
+   "idle 8": {
     "frame": { "x": 1344, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -71,7 +71,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 9.aseprite": {
+   "idle 9": {
     "frame": { "x": 1512, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -79,7 +79,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 10.aseprite": {
+   "idle 10": {
     "frame": { "x": 1680, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -87,7 +87,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #idle 11.aseprite": {
+   "idle 11": {
     "frame": { "x": 1848, "y": 0, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -95,7 +95,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #transition to charge 0.aseprite": {
+   "transition to charge 0": {
     "frame": { "x": 0, "y": 79, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -103,7 +103,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #transition to charge 1.aseprite": {
+   "transition to charge 1": {
     "frame": { "x": 168, "y": 79, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -111,7 +111,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #charge 0.aseprite": {
+   "charge 0": {
     "frame": { "x": 0, "y": 158, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -119,7 +119,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #charge 1.aseprite": {
+   "charge 1": {
     "frame": { "x": 168, "y": 158, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -127,7 +127,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #charge 2.aseprite": {
+   "charge 2": {
     "frame": { "x": 336, "y": 158, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -135,7 +135,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #charge 3.aseprite": {
+   "charge 3": {
     "frame": { "x": 504, "y": 158, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -143,7 +143,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #charge 4.aseprite": {
+   "charge 4": {
     "frame": { "x": 672, "y": 158, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -151,7 +151,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #charge 5.aseprite": {
+   "charge 5": {
     "frame": { "x": 840, "y": 158, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -159,7 +159,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #transition down 0.aseprite": {
+   "transition down 0": {
     "frame": { "x": 0, "y": 237, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -167,7 +167,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #transition down 1.aseprite": {
+   "transition down 1": {
     "frame": { "x": 168, "y": 237, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -175,7 +175,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #run 0.aseprite": {
+   "run 0": {
     "frame": { "x": 0, "y": 316, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -183,7 +183,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #run 1.aseprite": {
+   "run 1": {
     "frame": { "x": 168, "y": 316, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -191,7 +191,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #run 2.aseprite": {
+   "run 2": {
     "frame": { "x": 336, "y": 316, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -199,7 +199,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #run 3.aseprite": {
+   "run 3": {
     "frame": { "x": 504, "y": 316, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -207,7 +207,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #run 4.aseprite": {
+   "run 4": {
     "frame": { "x": 672, "y": 316, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -215,7 +215,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #run 5.aseprite": {
+   "run 5": {
     "frame": { "x": 840, "y": 316, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -223,7 +223,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #run 6.aseprite": {
+   "run 6": {
     "frame": { "x": 1008, "y": 316, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -231,7 +231,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #run 7.aseprite": {
+   "run 7": {
     "frame": { "x": 1176, "y": 316, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -239,7 +239,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump 0.aseprite": {
+   "jump 0": {
     "frame": { "x": 0, "y": 395, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -247,7 +247,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump 1.aseprite": {
+   "jump 1": {
     "frame": { "x": 168, "y": 395, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -255,7 +255,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump 2.aseprite": {
+   "jump 2": {
     "frame": { "x": 336, "y": 395, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -263,7 +263,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump 3.aseprite": {
+   "jump 3": {
     "frame": { "x": 504, "y": 395, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -271,7 +271,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump to fall trans 0.aseprite": {
+   "jump to fall trans 0": {
     "frame": { "x": 0, "y": 474, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -279,7 +279,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump to fall trans 1.aseprite": {
+   "jump to fall trans 1": {
     "frame": { "x": 168, "y": 474, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -287,7 +287,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #fall 0.aseprite": {
+   "fall 0": {
     "frame": { "x": 0, "y": 553, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -295,7 +295,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #fall 1.aseprite": {
+   "fall 1": {
     "frame": { "x": 168, "y": 553, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -303,7 +303,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #fall 2.aseprite": {
+   "fall 2": {
     "frame": { "x": 336, "y": 553, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -311,7 +311,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #fall 3.aseprite": {
+   "fall 3": {
     "frame": { "x": 504, "y": 553, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -319,7 +319,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 0.aseprite": {
+   "double slash 0": {
     "frame": { "x": 0, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -327,7 +327,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 1.aseprite": {
+   "double slash 1": {
     "frame": { "x": 168, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -335,7 +335,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 2.aseprite": {
+   "double slash 2": {
     "frame": { "x": 336, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -343,7 +343,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 3.aseprite": {
+   "double slash 3": {
     "frame": { "x": 504, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -351,7 +351,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 4.aseprite": {
+   "double slash 4": {
     "frame": { "x": 672, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -359,7 +359,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 5.aseprite": {
+   "double slash 5": {
     "frame": { "x": 840, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -367,7 +367,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 6.aseprite": {
+   "double slash 6": {
     "frame": { "x": 1008, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -375,7 +375,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 7.aseprite": {
+   "double slash 7": {
     "frame": { "x": 1176, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -383,7 +383,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 8.aseprite": {
+   "double slash 8": {
     "frame": { "x": 1344, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -391,7 +391,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 9.aseprite": {
+   "double slash 9": {
     "frame": { "x": 1512, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -399,7 +399,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 10.aseprite": {
+   "double slash 10": {
     "frame": { "x": 1680, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -407,7 +407,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 11.aseprite": {
+   "double slash 11": {
     "frame": { "x": 1848, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -415,7 +415,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 12.aseprite": {
+   "double slash 12": {
     "frame": { "x": 2016, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -423,7 +423,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #double slash 13.aseprite": {
+   "double slash 13": {
     "frame": { "x": 2184, "y": 632, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -431,7 +431,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 0.aseprite": {
+   "attack 3 0": {
     "frame": { "x": 0, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -439,7 +439,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 1.aseprite": {
+   "attack 3 1": {
     "frame": { "x": 168, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -447,7 +447,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 2.aseprite": {
+   "attack 3 2": {
     "frame": { "x": 336, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -455,7 +455,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 3.aseprite": {
+   "attack 3 3": {
     "frame": { "x": 504, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -463,7 +463,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 4.aseprite": {
+   "attack 3 4": {
     "frame": { "x": 672, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -471,7 +471,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 5.aseprite": {
+   "attack 3 5": {
     "frame": { "x": 840, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -479,7 +479,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 6.aseprite": {
+   "attack 3 6": {
     "frame": { "x": 1008, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -487,7 +487,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 7.aseprite": {
+   "attack 3 7": {
     "frame": { "x": 1176, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -495,7 +495,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 8.aseprite": {
+   "attack 3 8": {
     "frame": { "x": 1344, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -503,7 +503,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 9.aseprite": {
+   "attack 3 9": {
     "frame": { "x": 1512, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -511,7 +511,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 10.aseprite": {
+   "attack 3 10": {
     "frame": { "x": 1680, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -519,7 +519,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 11.aseprite": {
+   "attack 3 11": {
     "frame": { "x": 1848, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -527,7 +527,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3 12.aseprite": {
+   "attack 3 12": {
     "frame": { "x": 2016, "y": 711, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -535,7 +535,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 0.aseprite": {
+   "attack 1 0": {
     "frame": { "x": 0, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -543,7 +543,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 1.aseprite": {
+   "attack 1 1": {
     "frame": { "x": 168, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -551,7 +551,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 2.aseprite": {
+   "attack 1 2": {
     "frame": { "x": 336, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -559,7 +559,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 3.aseprite": {
+   "attack 1 3": {
     "frame": { "x": 504, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -567,7 +567,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 4.aseprite": {
+   "attack 1 4": {
     "frame": { "x": 672, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -575,7 +575,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 5.aseprite": {
+   "attack 1 5": {
     "frame": { "x": 840, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -583,7 +583,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 6.aseprite": {
+   "attack 1 6": {
     "frame": { "x": 1008, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -591,7 +591,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 7.aseprite": {
+   "attack 1 7": {
     "frame": { "x": 1176, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -599,7 +599,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 8.aseprite": {
+   "attack 1 8": {
     "frame": { "x": 1344, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -607,7 +607,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 9.aseprite": {
+   "attack 1 9": {
     "frame": { "x": 1512, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -615,7 +615,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 10.aseprite": {
+   "attack 1 10": {
     "frame": { "x": 1680, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -623,7 +623,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 11.aseprite": {
+   "attack 1 11": {
     "frame": { "x": 1848, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -631,7 +631,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 12.aseprite": {
+   "attack 1 12": {
     "frame": { "x": 2016, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -639,7 +639,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 13.aseprite": {
+   "attack 1 13": {
     "frame": { "x": 2184, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -647,7 +647,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 14.aseprite": {
+   "attack 1 14": {
     "frame": { "x": 2352, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -655,7 +655,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 15.aseprite": {
+   "attack 1 15": {
     "frame": { "x": 2520, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -663,7 +663,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 16.aseprite": {
+   "attack 1 16": {
     "frame": { "x": 2688, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -671,7 +671,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 17.aseprite": {
+   "attack 1 17": {
     "frame": { "x": 2856, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -679,7 +679,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1 18.aseprite": {
+   "attack 1 18": {
     "frame": { "x": 3024, "y": 790, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -687,7 +687,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 0.aseprite": {
+   "attack 0": {
     "frame": { "x": 0, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -695,7 +695,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 1.aseprite": {
+   "attack 1": {
     "frame": { "x": 168, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -703,7 +703,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 2.aseprite": {
+   "attack 2": {
     "frame": { "x": 336, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -711,7 +711,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 3.aseprite": {
+   "attack 3": {
     "frame": { "x": 504, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -719,7 +719,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 4.aseprite": {
+   "attack 4": {
     "frame": { "x": 672, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -727,7 +727,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 5.aseprite": {
+   "attack 5": {
     "frame": { "x": 840, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -735,7 +735,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 6.aseprite": {
+   "attack 6": {
     "frame": { "x": 1008, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -743,7 +743,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 7.aseprite": {
+   "attack 7": {
     "frame": { "x": 1176, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -751,7 +751,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 8.aseprite": {
+   "attack 8": {
     "frame": { "x": 1344, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -759,7 +759,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 9.aseprite": {
+   "attack 9": {
     "frame": { "x": 1512, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -767,7 +767,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 10.aseprite": {
+   "attack 10": {
     "frame": { "x": 1680, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -775,7 +775,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 11.aseprite": {
+   "attack 11": {
     "frame": { "x": 1848, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -783,7 +783,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #attack 12.aseprite": {
+   "attack 12": {
     "frame": { "x": 2016, "y": 869, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -791,7 +791,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 0.aseprite": {
+   "jump slam 0": {
     "frame": { "x": 0, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -799,7 +799,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 1.aseprite": {
+   "jump slam 1": {
     "frame": { "x": 168, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -807,7 +807,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 2.aseprite": {
+   "jump slam 2": {
     "frame": { "x": 336, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -815,7 +815,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 3.aseprite": {
+   "jump slam 3": {
     "frame": { "x": 504, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -823,7 +823,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 4.aseprite": {
+   "jump slam 4": {
     "frame": { "x": 672, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -831,7 +831,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 5.aseprite": {
+   "jump slam 5": {
     "frame": { "x": 840, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -839,7 +839,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 6.aseprite": {
+   "jump slam 6": {
     "frame": { "x": 1008, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -847,7 +847,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 7.aseprite": {
+   "jump slam 7": {
     "frame": { "x": 1176, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -855,7 +855,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 8.aseprite": {
+   "jump slam 8": {
     "frame": { "x": 1344, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -863,7 +863,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 9.aseprite": {
+   "jump slam 9": {
     "frame": { "x": 1512, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -871,7 +871,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 10.aseprite": {
+   "jump slam 10": {
     "frame": { "x": 1680, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -879,7 +879,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 11.aseprite": {
+   "jump slam 11": {
     "frame": { "x": 1848, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -887,7 +887,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #jump slam 12.aseprite": {
+   "jump slam 12": {
     "frame": { "x": 2016, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -895,7 +895,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #hit 0.aseprite": {
+   "hit 0": {
     "frame": { "x": 0, "y": 1027, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -903,7 +903,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #hit 1.aseprite": {
+   "hit 1": {
     "frame": { "x": 168, "y": 1027, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -911,7 +911,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 0.aseprite": {
+   "death/blood teleport 0": {
     "frame": { "x": 0, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -919,7 +919,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 1.aseprite": {
+   "death/blood teleport 1": {
     "frame": { "x": 168, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -927,7 +927,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 2.aseprite": {
+   "death/blood teleport 2": {
     "frame": { "x": 336, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -935,7 +935,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 3.aseprite": {
+   "death/blood teleport 3": {
     "frame": { "x": 504, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -943,7 +943,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 4.aseprite": {
+   "death/blood teleport 4": {
     "frame": { "x": 672, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -951,7 +951,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 5.aseprite": {
+   "death/blood teleport 5": {
     "frame": { "x": 840, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -959,7 +959,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 6.aseprite": {
+   "death/blood teleport 6": {
     "frame": { "x": 1008, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -967,7 +967,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 7.aseprite": {
+   "death/blood teleport 7": {
     "frame": { "x": 1176, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -975,7 +975,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 8.aseprite": {
+   "death/blood teleport 8": {
     "frame": { "x": 1344, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -983,7 +983,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 9.aseprite": {
+   "death/blood teleport 9": {
     "frame": { "x": 1512, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -991,7 +991,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #death/blood teleport 10.aseprite": {
+   "death/blood teleport 10": {
     "frame": { "x": 1680, "y": 1106, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -999,7 +999,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 0.aseprite": {
+   "heart slam 0": {
     "frame": { "x": 0, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1007,7 +1007,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 1.aseprite": {
+   "heart slam 1": {
     "frame": { "x": 168, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1015,7 +1015,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 2.aseprite": {
+   "heart slam 2": {
     "frame": { "x": 336, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1023,7 +1023,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 3.aseprite": {
+   "heart slam 3": {
     "frame": { "x": 504, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1031,7 +1031,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 4.aseprite": {
+   "heart slam 4": {
     "frame": { "x": 672, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1039,7 +1039,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 5.aseprite": {
+   "heart slam 5": {
     "frame": { "x": 840, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1047,7 +1047,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 6.aseprite": {
+   "heart slam 6": {
     "frame": { "x": 1008, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1055,7 +1055,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 7.aseprite": {
+   "heart slam 7": {
     "frame": { "x": 1176, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1063,7 +1063,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 8.aseprite": {
+   "heart slam 8": {
     "frame": { "x": 1344, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1071,7 +1071,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 9.aseprite": {
+   "heart slam 9": {
     "frame": { "x": 1512, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1079,7 +1079,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 10.aseprite": {
+   "heart slam 10": {
     "frame": { "x": 1680, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1087,7 +1087,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 11.aseprite": {
+   "heart slam 11": {
     "frame": { "x": 1848, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1095,7 +1095,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 12.aseprite": {
+   "heart slam 12": {
     "frame": { "x": 2016, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1103,7 +1103,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 13.aseprite": {
+   "heart slam 13": {
     "frame": { "x": 2184, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1111,7 +1111,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 14.aseprite": {
+   "heart slam 14": {
     "frame": { "x": 2352, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1119,7 +1119,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 15.aseprite": {
+   "heart slam 15": {
     "frame": { "x": 2520, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1127,7 +1127,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 16.aseprite": {
+   "heart slam 16": {
     "frame": { "x": 2688, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1135,7 +1135,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #heart slam 17.aseprite": {
+   "heart slam 17": {
     "frame": { "x": 2856, "y": 1185, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1143,7 +1143,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 0.aseprite": {
+   "blood teleport 2 0": {
     "frame": { "x": 0, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1151,7 +1151,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 1.aseprite": {
+   "blood teleport 2 1": {
     "frame": { "x": 168, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1159,7 +1159,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 2.aseprite": {
+   "blood teleport 2 2": {
     "frame": { "x": 336, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1167,7 +1167,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 3.aseprite": {
+   "blood teleport 2 3": {
     "frame": { "x": 504, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1175,7 +1175,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 4.aseprite": {
+   "blood teleport 2 4": {
     "frame": { "x": 672, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1183,7 +1183,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 5.aseprite": {
+   "blood teleport 2 5": {
     "frame": { "x": 840, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1191,7 +1191,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 6.aseprite": {
+   "blood teleport 2 6": {
     "frame": { "x": 1008, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1199,7 +1199,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 7.aseprite": {
+   "blood teleport 2 7": {
     "frame": { "x": 1176, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1207,7 +1207,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 8.aseprite": {
+   "blood teleport 2 8": {
     "frame": { "x": 1344, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1215,7 +1215,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 9.aseprite": {
+   "blood teleport 2 9": {
     "frame": { "x": 1512, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1223,7 +1223,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 10.aseprite": {
+   "blood teleport 2 10": {
     "frame": { "x": 1680, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1231,7 +1231,7 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "The Blood King #blood teleport 2 11.aseprite": {
+   "blood teleport 2 11": {
     "frame": { "x": 1848, "y": 1264, "w": 168, "h": 79 },
     "rotated": false,
     "trimmed": false,
@@ -1241,7 +1241,7 @@
    }
  },
  "meta": {
-  "app": "https://www.aseprite.org/",
+  "app": "https://www.org/",
   "version": "1.3.14.2-arm64",
   "image": "Blood_Swordsman.png",
   "format": "RGBA8888",
