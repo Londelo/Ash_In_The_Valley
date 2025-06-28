@@ -23,6 +23,7 @@ export class Preloader extends Scene {
     this.load.setPath( 'assets' );
 
     this.load.atlas( 'swordMasterAtlas', 'SwordMaster/swordmaster.png', 'SwordMaster/swordmaster.json' );
+    this.load.atlas( 'bloodSwordsmanAtlas', 'SwordMaster/Blood_Swordsman.png', 'SwordMaster/Blood_Swordsman.json' );
     this.load.atlas( 'daggerBanditAtlas', 'DaggerBandit/Dagger_Bandit.png', 'DaggerBandit/Dagger_Bandit.json' );
     this.load.atlas( 'prophetAtlas', 'Prophet/prophet.png', 'Prophet/prophet.json' );
 

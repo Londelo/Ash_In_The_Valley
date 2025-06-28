@@ -49,7 +49,48 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
   });
 
 const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
-  (_this: Player) => ({});
+  (_this: Player) => ({
+    'player_slash_1': {
+      width: 250,
+      height: 50,
+      offsetX_right: 75,
+      offsetX_left: -75,
+      offsetY: -25,
+      duration: 250,
+      damage: _this.attackPower * 1.1,
+      attackerId: 'player'
+    },
+    'player_slash_2': {
+      width: 280,
+      height: 60,
+      offsetX_right: 85,
+      offsetX_left: -85,
+      offsetY: -30,
+      duration: 300,
+      damage: _this.attackPower * 1.3,
+      attackerId: 'player'
+    },
+    'player_spin_attack': {
+      width: 320,
+      height: 80,
+      offsetX_right: 55,
+      offsetX_left: -55,
+      offsetY: -40,
+      duration: 450,
+      damage: _this.attackPower * 1.8,
+      attackerId: 'player'
+    },
+    'player_slam_attack': {
+      width: 300,
+      height: 120,
+      offsetX_right: 100,
+      offsetX_left: -100,
+      offsetY: -60,
+      duration: 350,
+      damage: _this.attackPower * 1.5,
+      attackerId: 'player'
+    }
+  });
 
 const attackConfigs: { [K in PlayerSkins]?: PlayerAttackConfigFn } = {
   'swordMaster': swordsMasterAttackConfigs,

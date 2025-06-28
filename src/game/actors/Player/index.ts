@@ -8,6 +8,21 @@ import { Actor, ActorConfig } from '../../components/Actor';
 import { getAttackConfig } from './attackConfigs';
 
 export type PlayerSkins = 'swordMaster' | 'bloodSwordsMan' | 'lordOfFames' | 'holySamurai'
+
+const skinAtlasMap: { [K in PlayerSkins]: string } = {
+  'swordMaster': 'swordMasterAtlas',
+  'bloodSwordsMan': 'bloodSwordsmanAtlas',
+  'lordOfFames': 'lordOfFamesAtlas',
+  'holySamurai': 'holySamuraiAtlas'
+};
+
+const skinFrameMap: { [K in PlayerSkins]: string } = {
+  'swordMaster': 'Idle 0',
+  'bloodSwordsMan': 'idle 0',
+  'lordOfFames': 'idle 0',
+  'holySamurai': 'idle 0'
+};
+
 export class Player extends Actor {
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
@@ -38,7 +53,7 @@ export class Player extends Actor {
       hitAnimationKey: 'player_hit'
     };
 
-    super(scene, x, y, 'swordMasterAtlas', 'Idle 0', actorConfig);
+    super(scene, x, y, skinAtlasMap[actorConfig.playerSkin || 'swordMaster'], skinFrameMap[actorConfig.playerSkin || 'swordMaster'], actorConfig);
     this.sprite.setDepth(1);
     this.attackHitboxManager = new AttackHitboxManager(scene);
   }
@@ -83,7 +98,7 @@ export class Player extends Actor {
   private setupPlayerInput(scene: Phaser.Scene) {
     if (scene.input && scene.input.keyboard) {
       const cursors = scene.input.keyboard.createCursorKeys();
-      const inputKeys = scene.input.keyboard.addKeys('R,Q,E,W,SPACE') as { [key: string]: Phaser.Input.Keyboard.Key };
+      const inputKeys = scene.input.keyboard.addKeys('R,Q,E,W,SPACE,C') as { [key: string]: Phaser.Input.Keyboard.Key };
       return { cursors, inputKeys };
     } else {
       throw new Error('Keyboard input plugin is not available.');
@@ -110,6 +125,28 @@ export class Player extends Actor {
   private updateComboTimer(deltaTime: number) {
     if (this.comboState > 0) {
       this.comboTimer += deltaTime * 1000;
+    }
+  }
+
+  private changeSkin(newSkin: PlayerSkins) {
+    if (this.playerSkin === newSkin) return;
+    
+    this.playerSkin = newSkin;
+    
+    // Update sprite texture
+    this.sprite.setTexture(skinAtlasMap[newSkin], skinFrameMap[newSkin]);
+    
+    // Recreate animations for new skin
+    this.createPlayerAnimations(this.scene);
+    
+    // Play idle animation
+    this.sprite.play('player_idle');
+  }
+
+  private handleSkinChange() {
+    if (Phaser.Input.Keyboard.JustDown(this.inputKeys.C)) {
+      const newSkin = this.playerSkin === 'swordMaster' ? 'bloodSwordsMan' : 'swordMaster';
+      this.changeSkin(newSkin);
     }
   }
 
@@ -242,6 +279,7 @@ export class Player extends Actor {
 
     if (this.isDead) return;
 
+    this.handleSkinChange();
     this.updateComboTimer(deltaTime);
     this.updateInvulnerabilityTimer(delta);
 
