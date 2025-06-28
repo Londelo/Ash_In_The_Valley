@@ -34,7 +34,7 @@ export default class AvenWood extends Scene {
     const { width: mapWidth, height: mapHeight } = this.tileMapComponent.getMapDimensions();
     const templeLocation = this.tileMapComponent.getObjectLayer('temple')?.objects[0] as any;
 
-    this.player = new Player(this, config.temple_x * tileMapConfig.scale, config.player_start_y * tileMapConfig.scale);
+    this.player = new Player(this, config.player_start_x * tileMapConfig.scale, config.player_start_y * tileMapConfig.scale);
     this.prophet = new Prophet(this, config.prophet_start_x * tileMapConfig.scale, config.prophet_start_y * tileMapConfig.scale, this.player);
     this.temple = new Temple(this, templeLocation.x, templeLocation.y, tileMapConfig.scale, this.player);
 
@@ -46,6 +46,7 @@ export default class AvenWood extends Scene {
     this.camera.startFollow(this.player.sprite);
     this.physics.world.setBounds(0, 0, mapWidth, mapHeight);
     this.camera.setBounds(0, 0, mapWidth, mapHeight);
+    this.camera.setFollowOffset(0, 250);
 
     this.physics.add.collider(this.player.sprite, this.world);
     this.physics.add.collider(this.prophet.sprite, this.world);
