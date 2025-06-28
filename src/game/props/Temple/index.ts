@@ -1,14 +1,14 @@
 import { Scene } from 'phaser';
 import { createTempleAnimations, addTempleAnimationListeners } from './animations';
 import type { Player } from '../../actors/Player/index';
-import { debugGraphics } from '../../utils/debugGraphics';
+// import { debugGraphics } from '../../utils/debugGraphics';
 
 export class Temple {
   scene: Scene;
   sprite: Phaser.Types.Physics.Arcade.SpriteWithStaticBody;
   private templeScale: number = 2;
   private playerRef: Player;
-  private readonly INTERACTION_RANGE = 100;
+  private readonly INTERACTION_RANGE = 50;
   private isPlayerNear: boolean = false;
   private inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   private templeBoundingBox: Phaser.GameObjects.Graphics;
@@ -21,6 +21,7 @@ export class Temple {
     this.sprite.setScale(this.templeScale);
     this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.sprite.setDepth(-1);
+    this.sprite.setOrigin(0, 0);
 
     this.templeBoundingBox = scene.add.graphics();
   }
@@ -35,7 +36,7 @@ export class Temple {
   }
 
   private getDistanceToPlayer(): number {
-    const templeX = this.sprite.x;
+    const templeX = this.sprite.x + 130;
     const playerX = this.playerRef.sprite.x;
     return Math.abs(templeX - playerX);
   }
@@ -52,7 +53,7 @@ export class Temple {
     const distance = this.getDistanceToPlayer();
     this.isPlayerNear = distance <= this.INTERACTION_RANGE;
     if (this.isPlayerNear && Phaser.Input.Keyboard.JustDown(this.inputKeys.T)) {
-      console.log('Player interacted with the temple door!');
+      this.scene.scene.start('GehennaDeep');
     }
   }
 
