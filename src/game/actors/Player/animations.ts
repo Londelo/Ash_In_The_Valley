@@ -1,8 +1,7 @@
-import { Scene } from 'phaser';
-import { Player } from '.';
+import { Animation } from '../../components/AnimationHelper';
 
-export function createPlayerAnimations(scene: Scene) {
-  scene.anims.create({
+export const playerAnimationConfigs: Animation[] = [
+  {
     key: 'player_idle',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Idle 0' },
@@ -17,9 +16,8 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 8,
     repeat: -1
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_walk',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Run 1' },
@@ -32,9 +30,8 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 12,
     repeat: -1
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_run',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Run Fast 0' },
@@ -48,9 +45,8 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 15,
     repeat: -1
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_jump',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Jump 0' },
@@ -59,9 +55,8 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 10,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_fall',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Fall 0' },
@@ -70,9 +65,8 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 8,
     repeat: -1
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_land',
     frames: [
       { key: 'swordMasterAtlas', frame: 'crouch land 0' },
@@ -82,9 +76,8 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 12,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_dash',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Dash 0' },
@@ -96,9 +89,8 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 20,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_slash_1',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slash 1 0' },
@@ -113,9 +105,8 @@ export function createPlayerAnimations(scene: Scene) {
     showBeforeDelay: true,
     frameRate: 10,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_slash_2',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slash 2 0' },
@@ -128,16 +119,13 @@ export function createPlayerAnimations(scene: Scene) {
     showBeforeDelay: true,
     frameRate: 15,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_slash_heavy',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Dash 1' },
       { key: 'swordMasterAtlas', frame: 'Dash 2' },
       { key: 'swordMasterAtlas', frame: 'Dash 3' },
-
-      // { key: 'swordMasterAtlas', frame: 'Slash 2 0' },
       { key: 'swordMasterAtlas', frame: 'Slash 2 1' },
       { key: 'swordMasterAtlas', frame: 'Slash 2 2' },
       { key: 'swordMasterAtlas', frame: 'Slash 2 3' },
@@ -147,9 +135,8 @@ export function createPlayerAnimations(scene: Scene) {
     showBeforeDelay: true,
     frameRate: 15,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_spin_attack',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Block 0' },
@@ -165,9 +152,8 @@ export function createPlayerAnimations(scene: Scene) {
     showBeforeDelay: true,
     frameRate: 10,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_slam_attack',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slam 0' },
@@ -180,9 +166,8 @@ export function createPlayerAnimations(scene: Scene) {
     showBeforeDelay: true,
     frameRate: 12,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_roll_attack',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Roll Attack 0' },
@@ -198,9 +183,8 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 7,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_block',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Block 0' },
@@ -214,9 +198,8 @@ export function createPlayerAnimations(scene: Scene) {
     showBeforeDelay: true,
     frameRate: 20,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_hit',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Hit 0' },
@@ -224,9 +207,8 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 12,
     repeat: 0
-  });
-
-  scene.anims.create({
+  },
+  {
     key: 'player_death',
     frames: [
       { key: 'swordMasterAtlas', frame: 'death 0' },
@@ -238,45 +220,5 @@ export function createPlayerAnimations(scene: Scene) {
     ],
     frameRate: 8,
     repeat: 0
-  });
-}
-
-export function addPlayerAnimationListeners(_this: Player) {
-  _this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
-
-    if (isActionAnimations(animation.key) && animation.key !== 'player_death') {
-      _this.sprite.play('player_idle');
-    } else if (animation.key === 'player_death') {
-      // Stop the animation on the last frame
-      _this.sprite.anims.stop();
-    }
-  });
-}
-
-export function isActionAnimations(animKey?: string): boolean {
-  return animKey === 'player_slash_1' ||
-    animKey === 'player_slash_2' ||
-    animKey === 'player_slam_attack' ||
-    animKey === 'player_dash' ||
-    animKey === 'player_spin_attack' ||
-    animKey === 'player_roll_attack' ||
-    animKey === 'player_slash_heavy' ||
-    animKey === 'player_land' ||
-    animKey === 'player_block' ||
-    animKey === 'player_hit' ||
-    animKey === 'player_death'
-}
-
-export function isHighPriorityAnimation(animKey?: string): boolean {
-  return animKey === 'player_land' ||
-    animKey === 'player_slash_1' ||
-    animKey === 'player_slash_2' ||
-    animKey === 'player_slam_attack' ||
-    animKey === 'player_dash' ||
-    animKey === 'player_spin_attack' ||
-    animKey === 'player_roll_attack' ||
-    animKey === 'player_slash_heavy' ||
-    animKey === 'player_block' ||
-    animKey === 'player_hit' ||
-    animKey === 'player_death'
-}
+  }
+];

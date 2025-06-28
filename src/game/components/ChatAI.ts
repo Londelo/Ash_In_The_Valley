@@ -25,27 +25,19 @@ export class ChatAI {
 
   public async getMicPermissions(): Promise<void> {
       try {
-      // Request microphone access
-      console.log('Requesting microphone access...');
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      console.log('Microphone access granted');
 
     } catch (error) {
-      console.error('Failed to start conversation:', error);
 
       if (error instanceof DOMException && error.name === 'NotAllowedError') {
-        console.error('Microphone access denied by user');
       } else if (error instanceof DOMException && error.name === 'NotFoundError') {
-        console.error('No microphone found on device');
       } else {
-        console.error('Unknown error starting conversation:', error);
       }
     }
   }
 
   public async startConversation(): Promise<void> {
     if (this.isConversationActive) {
-      console.log('Conversation is already active');
       return;
     }
 
@@ -64,20 +56,15 @@ export class ChatAI {
 
   public async endConversation(): Promise<void> {
     if (!this.conversation || !this.isConversationActive) {
-      console.log('No active conversation to end');
       return;
     }
 
     try {
-      console.log('Ending ElevenLabs conversation...');
       await this.conversation.endSession();
       this.isConversationActive = false;
       this.conversation = null;
-      console.log('ElevenLabs conversation ended successfully');
       this.onConversationEndedCallback?.();
     } catch (error) {
-      console.error('Error ending conversation:', error);
-      // Force cleanup even if endSession fails
       this.isConversationActive = false;
       this.conversation = null;
     }
@@ -85,29 +72,23 @@ export class ChatAI {
 
   public sendUserMessage(message: string): void {
     if (!this.conversation || !this.isConversationActive) {
-      console.warn('Cannot send message: no active conversation');
       return;
     }
 
     try {
       this.conversation.sendUserMessage(message);
-      console.log('User message sent:', message);
     } catch (error) {
-      console.error('Error sending user message:', error);
     }
   }
 
   public sendContextualUpdate(update: string): void {
     if (!this.conversation || !this.isConversationActive) {
-      console.warn('Cannot send contextual update: no active conversation');
       return;
     }
 
     try {
       this.conversation.sendContextualUpdate(update);
-      console.log('Contextual update sent:', update);
     } catch (error) {
-      console.error('Error sending contextual update:', error);
     }
   }
 
@@ -116,23 +97,18 @@ export class ChatAI {
   }
 
   private onMessageReceived(message: any): void {
-    console.log('Message received from AI:', message);
     this.onMessageCallback?.(message);
   }
 
   private onConversationError(error: any): void {
-    console.error('Conversation error:', error);
-    // Auto-cleanup on error
     this.isConversationActive = false;
     this.conversation = null;
   }
 
   private onConnect(): void {
-    console.log('ElevenLabs conversation connected');
   }
 
   private onDisconnect(): void {
-    console.log('ElevenLabs conversation disconnected');
     this.isConversationActive = false;
     this.conversation = null;
   }

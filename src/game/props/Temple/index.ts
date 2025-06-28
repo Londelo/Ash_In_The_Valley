@@ -1,29 +1,23 @@
 import { Scene } from 'phaser';
-import { createTempleAnimations, addTempleAnimationListeners } from './animations';
+import { Prop, PropConfig } from '../../components/Prop';
+import { templeAnimationConfigs } from './animations';
 import type { Player } from '../../actors/Player/index';
-// import { debugGraphics } from '../../utils/debugGraphics';
 
-export class Temple {
-  scene: Scene;
-  sprite: Phaser.Types.Physics.Arcade.SpriteWithStaticBody;
-  private templeScale: number = 2;
+export class Temple extends Prop {
   private playerRef: Player;
   private readonly INTERACTION_RANGE = 50;
   private isPlayerNear: boolean = false;
   private inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
-  private templeBoundingBox: Phaser.GameObjects.Graphics;
+  public debugEnabled: boolean = true;
 
-  constructor(scene: Scene, x: number, y: number, playerRef: Player) {
-    this.scene = scene;
+  constructor(scene: Scene, x: number, y: number, mapScale: number, playerRef: Player) {
+    const propConfig: PropConfig = {
+      scale: mapScale,
+      depth: -1,
+    };
+
+    super(scene, x * mapScale, y * mapScale, 'templeAtlas', 'door light up 0', propConfig);
     this.playerRef = playerRef;
-
-    this.sprite = scene.physics.add.staticSprite(x, y, 'templeAtlas', 'door light up 0');
-    this.sprite.setScale(this.templeScale);
-    this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.sprite.setDepth(-1);
-    this.sprite.setOrigin(0, 0);
-
-    this.templeBoundingBox = scene.add.graphics();
   }
 
   private setupInputKeys() {
@@ -58,18 +52,21 @@ export class Temple {
   }
 
   create() {
-    createTempleAnimations(this.scene);
-    addTempleAnimationListeners(this);
+    this.createAnimations(templeAnimationConfigs);
+
+    this.addAnimationListeners({
+      'temple_door_light_up': () => this.onLightUpComplete(),
+      'temple_door_fade': () => this.onFadeComplete()
+    });
 
     const { inputKeys } = this.setupInputKeys();
     this.inputKeys = inputKeys;
 
-    // Start the animation cycle
     this.sprite.play('temple_door_light_up');
   }
 
   update(_time: number, _delta: number) {
     this.handlePlayerInteraction();
-    // debugGraphics(this.templeBoundingBox, this.sprite, this.templeScale);
+    this.renderDebugGraphics();
   }
 }

@@ -4,8 +4,6 @@ import stylistic from '@stylistic/eslint-plugin';
 import globals from 'globals';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
-/** @type {import('eslint').Linter.Config[]} */
-
 const basicSettings = {files: [ '**/*.{js,mjs,cjs,ts,tsx}' ],
   languageOptions: {
     globals: {
@@ -15,18 +13,15 @@ const basicSettings = {files: [ '**/*.{js,mjs,cjs,ts,tsx}' ],
       ...globals.browser
     },
     parser: tsParser,
-    sourceType: 'module' // needed for imports / exports
+    sourceType: 'module'
   }};
 
 const basicJsRules = {name: 'basicJsRules',
   rules: {
-    // 🔹 General JavaScript & TypeScript rules
     'no-var': 'error',
     'prefer-const': 'error',
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',
-
-    // 🔹 General JavaScript rules
     'array-callback-return': 'error',
     'complexity': [ 'error', 10 ],
     'consistent-return': 'off',
@@ -97,14 +92,12 @@ const formattingRules = {
     '@stylistic/arrow-parens': [ 'error', 'always' ],
     '@stylistic/comma-style': [ 'error', 'last' ],
     '@stylistic/computed-property-spacing': [ 'error', 'never', { 'enforceForClassMembers': true } ],
-    // '@stylistic/curly-newline': [ 'error', 'always' ],
     '@stylistic/brace-style': [ 'error', '1tbs', { 'allowSingleLine': true } ],
     '@stylistic/block-spacing': [ 'error', 'always' ],
     '@stylistic/function-call-spacing': [ 'error', 'never' ],
     '@stylistic/implicit-arrow-linebreak': [ 'error', 'beside' ],
     '@stylistic/lines-around-comment': [ 'error', { 'beforeBlockComment': true } ],
     '@stylistic/object-curly-newline': [ 'error', { 'minProperties': 3 } ],
-    // '@stylistic/object-property-newline': 'error',
     '@stylistic/space-before-blocks': 'error',
     '@stylistic/space-before-function-paren': [ 'error', 'never' ],
     '@stylistic/space-in-parens': [ 'error', 'always' ],
@@ -142,10 +135,4 @@ const customRules = {
   }
 };
 
-export default [
-  // basicSettings,
-  // basicJsRules,
-  // basicTsRules,
-  // // formattingRules,
-  // customRules
-];
+export default [];

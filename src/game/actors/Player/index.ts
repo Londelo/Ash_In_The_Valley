@@ -1,40 +1,24 @@
 import { Scene } from 'phaser';
-import { createPlayerAnimations, addPlayerAnimationListeners, isHighPriorityAnimation } from './animations';
-import { setupPlayerInput, getInputState } from './inputs';
+import { State, PlayerState } from './state';
 import { setSpriteDirection } from '../../utils/spriteDirection';
-import { debugGraphics } from '../../utils/debugGraphics';
-import { AttackHitboxManager, AttackHitboxConfig } from '../../utils/attackHitbox';
+import { AttackHitboxManager, AttackHitboxConfig } from '../../components/AttackHitbox';
+import { AnimationHelper } from '../../components/AnimationHelper';
+import { playerAnimationConfigs } from './animations';
+import { Actor, ActorConfig } from '../../components/Actor';
 
-export class Player {
-  scene: Scene;
-  sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+export class Player extends Actor {
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   playerSpeed: number = 200;
-  public playerScale: number = 3;
-  private playerBoundingBox: Phaser.GameObjects.Graphics
-  private readonly center_x_left: number = .7
-  private readonly center_x_right: number = .305
-  private readonly center_y: number = 1
   private readonly DASH_DISTANCE = 15000;
   private comboState: number = 0;
   private comboTimer: number = 0;
   private readonly COMBO_WINDOW_MAX = 600;
   private readonly COMBO_WINDOW_MIN = 300;
-  private readonly bodyWidth = 15
-  private readonly bodyHeight = 34
+  private state: State;
 
-  // Combat system
-  public attackPower: number = 30;
   public attackHitboxManager: AttackHitboxManager;
-  public health: number = 100;
-  public maxHealth: number = 100;
-  private isInvulnerable: boolean = false;
-  private invulnerabilityTimer: number = 0;
-  private readonly INVULNERABILITY_DURATION = 1000; // ms
-  private isDead: boolean = false;
 
-  // Attack configurations
   private attackConfigs: { [key: string]: AttackHitboxConfig } = {
     'player_slash_1': {
       width: 200,
@@ -79,18 +63,30 @@ export class Player {
   };
 
   constructor(scene: Scene, x: number, y: number) {
-    this.scene = scene;
-    this.sprite = scene.physics.add.sprite(x, y, 'swordMasterAtlas', 'Idle 0');
-    this.setPlayerScale(this.playerScale);
-    // Set texture filtering to nearest neighbor for crisp pixel art
-    this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    this.sprite.setCollideWorldBounds(true);
-    this.sprite.setGravityY(300);
-    this.sprite.setBodySize(this.bodyWidth, this.bodyHeight, false)
-    this.adjustForCenterOffset('right')
-    this.sprite.setDepth(1)
-    this.playerBoundingBox = scene.add.graphics();
+    const actorConfig: ActorConfig = {
+      scale: 3,
+      bodyWidth: 15,
+      bodyHeight: 34,
+      centerXLeft: 0.7,
+      centerXRight: 0.305,
+      centerY: 1,
+      health: 100,
+      attackPower: 30,
+      invulnerabilityDuration: 1000,
+      bodyOffsetY: 0,
+      knockbackForce: 200,
+      deathAnimationKey: 'player_death',
+      hitAnimationKey: 'player_hit'
+    };
+
+    super(scene, x, y, 'swordMasterAtlas', 'Idle 0', actorConfig);
+    this.sprite.setDepth(1);
     this.attackHitboxManager = new AttackHitboxManager(scene);
+  }
+
+  private createPlayerAnimations(scene: Scene) {
+    const animationManager = new AnimationHelper(scene);
+    animationManager.createAnimations(playerAnimationConfigs);
   }
 
   private createAttackHitbox(attackType: string) {
@@ -106,63 +102,28 @@ export class Player {
     );
   }
 
-  public adjustForCenterOffset = (direction: 'left' | 'right') => {
-    if(direction === 'left') {
-      this.sprite.setOrigin(this.center_x_left, this.center_y)
-    } else {
-      this.sprite.setOrigin(this.center_x_right, this.center_y)
-    }
-    this.sprite.body.setOffset(this.sprite.displayOriginX - this.bodyWidth/2, 0)
-  }
-
-  public takeDamage(amount: number) {
-    if (this.isInvulnerable || this.isDead) return;
-
-    this.health = Math.max(0, this.health - amount);
-    console.log(`Player took ${amount} damage! Health: ${this.health}/${this.maxHealth}`);
-
-    if (this.health <= 0) {
-      console.log('Player defeated!');
-      this.isDead = true;
-      this.sprite.play('player_death');
-      this.sprite.setVelocityX(0);
-    } else {
-      this.sprite.play('player_hit');
-
-      // Add knockback effect
-      const knockbackForce = 200;
-      const knockbackDirection = this.sprite.flipX ? 1 : -1; // Opposite to facing direction
-      this.sprite.setVelocityX(knockbackDirection * knockbackForce);
-
-      // Start invulnerability period
-      this.isInvulnerable = true;
-      this.invulnerabilityTimer = 0;
-
-      this.sprite.setTint(0xf0f8ff);
-      this.scene.time.delayedCall(200, () => {
-        this.sprite.clearTint();
-        this.sprite.setVelocityX(0);
-      });
-    }
-  }
-
-  private updateInvulnerabilityTimer(delta: number) {
-    if (this.isInvulnerable) {
-      this.invulnerabilityTimer += delta;
-      if (this.invulnerabilityTimer >= this.INVULNERABILITY_DURATION) {
-        this.isInvulnerable = false;
-        this.invulnerabilityTimer = 0;
+  private addPlayerAnimationListeners() {
+    this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
+      if (this.state.isActionAnimations(animation.key) && animation.key !== 'player_death') {
+        this.sprite.play('player_idle');
+      } else if (animation.key === 'player_death') {
+        this.sprite.anims.stop();
       }
-    }
+    });
   }
 
-  public setPlayerScale(scale: number) {
-    this.playerScale = scale;
-    this.sprite.setScale(scale);
+  private setupPlayerInput(scene: Phaser.Scene) {
+    if (scene.input && scene.input.keyboard) {
+      const cursors = scene.input.keyboard.createCursorKeys();
+      const inputKeys = scene.input.keyboard.addKeys('R,Q,E,W,SPACE') as { [key: string]: Phaser.Input.Keyboard.Key };
+      return { cursors, inputKeys };
+    } else {
+      throw new Error('Keyboard input plugin is not available.');
+    }
   }
 
   private performDash(deltaTime: number) {
-    const dashDirection = this.sprite.flipX ? -1 : 1; // -1 for left, 1 for right
+    const dashDirection = this.sprite.flipX ? -1 : 1;
     const dashDistance = this.DASH_DISTANCE * dashDirection;
     this.sprite.x += dashDistance * deltaTime;
   }
@@ -174,85 +135,79 @@ export class Player {
 
   private shouldResetCombo() {
     if (this.comboTimer < this.COMBO_WINDOW_MIN || this.comboTimer > this.COMBO_WINDOW_MAX) {
-      this.resetCombo()
+      this.resetCombo();
     }
   }
 
   private updateComboTimer(deltaTime: number) {
     if (this.comboState > 0) {
-      this.comboTimer += deltaTime * 1000; // Convert to milliseconds
+      this.comboTimer += deltaTime * 1000;
     }
   }
 
-  private handleMovement(inputState: ReturnType<typeof getInputState>) {
-    if (inputState.canMove && inputState.isMoving) {
-      const moveSpeed = inputState.isRunning ? this.playerSpeed * 2 : this.playerSpeed;
+  private handleMovement(state: PlayerState) {
+    if (state.canMove && state.isMoving) {
+      const moveSpeed = state.isRunning ? this.playerSpeed * 2 : this.playerSpeed;
 
-      if (inputState.isMovingLeft) {
+      if (state.isMovingLeft) {
         this.sprite.setVelocityX(-moveSpeed);
         setSpriteDirection(this.sprite, 'left', this.adjustForCenterOffset);
-      } else if (inputState.isMovingRight) {
+      } else if (state.isMovingRight) {
         this.sprite.setVelocityX(moveSpeed);
         setSpriteDirection(this.sprite, 'right', this.adjustForCenterOffset);
       }
-    } else if(inputState.justStoppedMoving) {
-      this.sprite.setVelocityX(0)
+    } else if (state.justStoppedMoving) {
+      this.sprite.setVelocityX(0);
     }
   }
 
-  private handleMovementAnimations(inputState: ReturnType<typeof getInputState>) {
-    // Don't override priority animations like landing
+  private handleMovementAnimations(state: PlayerState) {
     const currentAnim = this.sprite.anims.currentAnim?.key;
-    if (isHighPriorityAnimation(currentAnim)) {
+    if (this.state.isHighPriorityAnimation(currentAnim)) {
       return;
     }
 
-    if (inputState.shouldPlayWalkAnimation) {
+    if (state.shouldPlayWalkAnimation) {
       this.sprite.play('player_walk');
-    } else if (inputState.shouldPlayRunAnimation) {
+    } else if (state.shouldPlayRunAnimation) {
       this.sprite.play('player_run');
-    } else if (inputState.shouldPlayIdleAnimation) {
+    } else if (state.shouldPlayIdleAnimation) {
       this.sprite.play('player_idle');
     }
   }
 
-  private handleSlash(inputState: ReturnType<typeof getInputState>, deltaTime: number) {
-    if (inputState.shouldAttack) {
-
-      this.shouldResetCombo()
+  private handleSlash(state: PlayerState, deltaTime: number) {
+    if (state.shouldAttack) {
+      this.shouldResetCombo();
 
       if (this.comboState === 0) {
-        // First attack in combo
         this.sprite.play('player_slash_1');
         this.createAttackHitbox('player_slash_1');
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 1) {
-        // Second attack in combo
         this.sprite.play('player_slash_2');
         this.createAttackHitbox('player_slash_2');
 
-        const dashDirection = this.sprite.flipX ? -1 : 1; // -1 for left, 1 for right
+        const dashDirection = this.sprite.flipX ? -1 : 1;
         const dashDistance = 1500 * dashDirection;
         this.sprite.x += dashDistance * deltaTime;
 
         this.comboState = 2;
         this.comboTimer = 0;
       } else if (this.comboState === 2) {
-        // Third attack in combo
         this.sprite.play('player_spin_attack');
         this.createAttackHitbox('player_spin_attack');
-        this.resetCombo()
+        this.resetCombo();
       }
     }
   }
 
-  private handleSlamAttack(inputState: ReturnType<typeof getInputState>) {
-    if (inputState.shouldSlamAttack) {
+  private handleSlamAttack(state: PlayerState) {
+    if (state.shouldSlamAttack) {
+      this.shouldResetCombo();
 
-      this.shouldResetCombo()
-
-      if(inputState.isInAir && this.comboState === 0) {
+      if (state.isInAir && this.comboState === 0) {
         this.sprite.play('player_slam_attack');
         this.createAttackHitbox('player_slam_attack');
         this.sprite.setVelocityY(400);
@@ -267,13 +222,13 @@ export class Player {
         setSpriteDirection(this.sprite, this.sprite.flipX ? 'right' : 'left', this.adjustForCenterOffset);
         this.sprite.play('player_slam_attack');
         this.createAttackHitbox('player_slam_attack');
-        this.resetCombo()
+        this.resetCombo();
       }
     }
   }
 
-  private handleDash(inputState: ReturnType<typeof getInputState>, deltaTime: number) {
-    if (inputState.shouldDash) {
+  private handleDash(state: PlayerState, deltaTime: number) {
+    if (state.shouldDash) {
       this.performDash(deltaTime);
       this.sprite.play('player_dash');
       this.comboState = 2;
@@ -281,66 +236,61 @@ export class Player {
     }
   }
 
-  private handleBlock(inputState: ReturnType<typeof getInputState>) {
-    if (inputState.shouldBlock) {
+  private handleBlock(state: PlayerState) {
+    if (state.shouldBlock) {
       this.sprite.play('player_block');
       this.comboState = 2;
       this.comboTimer = 0;
     }
   }
 
-  private handleJump(inputState: ReturnType<typeof getInputState>) {
-    if (inputState.shouldJump) {
+  private handleJump(state: PlayerState) {
+    if (state.shouldJump) {
       this.sprite.setVelocityY(-400);
       this.sprite.play('player_jump');
     }
   }
 
-  private handleFall(inputState: ReturnType<typeof getInputState>) {
-    if (inputState.shouldFall) {
+  private handleFall(state: PlayerState) {
+    if (state.shouldFall) {
       this.sprite.play('player_fall');
     }
   }
 
   create() {
-    // Set up inputs
-    const { cursors, inputKeys } = setupPlayerInput(this.scene);
+    const { cursors, inputKeys } = this.setupPlayerInput(this.scene);
     this.cursors = cursors;
     this.inputKeys = inputKeys;
 
-    createPlayerAnimations(this.scene);
-    addPlayerAnimationListeners(this);
-
+    this.state = new State(this);
+    this.createPlayerAnimations(this.scene);
+    this.addPlayerAnimationListeners();
     this.sprite.play('player_idle');
   }
 
-  update( time: number, delta: number ) {
-    const deltaTime = delta / 1000; // Convert to seconds
+  update(time: number, delta: number) {
+    const deltaTime = delta / 1000;
     const currentAnim = this.sprite.anims.currentAnim?.key;
 
-    // Don't do anything if dead
     if (this.isDead) return;
 
     this.updateComboTimer(deltaTime);
-
-    // Update invulnerability timer
     this.updateInvulnerabilityTimer(delta);
 
-    const inputState = getInputState(this, currentAnim);
-    this.handleSlash(inputState, deltaTime);
-    this.handleSlamAttack(inputState);
-    this.handleDash(inputState, deltaTime);
-    this.handleBlock(inputState)
-    this.handleJump(inputState);
-    this.handleFall(inputState);
-    this.handleMovement(inputState);
-    this.handleMovementAnimations(inputState);
+    const state = this.state.getState(currentAnim);
+    this.handleSlash(state, deltaTime);
+    this.handleSlamAttack(state);
+    this.handleDash(state, deltaTime);
+    this.handleBlock(state);
+    this.handleJump(state);
+    this.handleFall(state);
+    this.handleMovement(state);
+    this.handleMovementAnimations(state);
 
-    // Update attack hitboxes
     const direction = this.sprite.flipX ? 'left' : 'right';
     this.attackHitboxManager.updateHitboxes(this.sprite.x, this.sprite.y, direction);
     this.attackHitboxManager.cleanupInactiveHitboxes();
 
-    // debugGraphics(this.playerBoundingBox, this.sprite, this.playerScale, this.attackHitboxManager.getActiveHitboxes());
+    this.renderDebugGraphics(this.attackHitboxManager.getActiveHitboxes());
   }
 }
