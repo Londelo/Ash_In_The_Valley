@@ -6,6 +6,7 @@ import { DaggerBandit } from '../../actors/DaggerBandit';
 import { Prophet } from '../../actors/Prophet';
 import { Temple } from '../../props/Temple';
 import { TileMapComponent } from '../../components/TileMap';
+import { EnemySpawner, EnemySpawnerConfig } from '../../components/EnemySpawner';
 
 export default class GehennaDeep extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
@@ -17,6 +18,7 @@ export default class GehennaDeep extends Scene {
   prophet: Prophet;
   temple: Temple;
   tileMapComponent: TileMapComponent;
+  enemySpawner: EnemySpawner;
 
   constructor() {
     super('GehennaDeep');
@@ -38,6 +40,9 @@ export default class GehennaDeep extends Scene {
 
     this.player.create();
 
+    // Setup enemy spawner for cave environment
+    this.setupEnemySpawner();
+
     this.camera.startFollow(this.player.sprite);
     this.camera.setFollowOffset(0, 200);
     this.physics.world.setBounds(0, 0, mapWidth, mapHeight);
@@ -48,7 +53,28 @@ export default class GehennaDeep extends Scene {
     EventBus.emit('current-scene-ready', this);
   }
 
+  private setupEnemySpawner(): void {
+    const spawnerConfig: EnemySpawnerConfig = {
+      enemyClass: DaggerBandit,
+      maxEnemies: 5,
+      spawnInterval: 4000, // 4 seconds - more intense in cave
+      spawnPoints: [
+        { x: 300, y: 400 },
+        { x: 800, y: 400 },
+        { x: 1300, y: 400 },
+        { x: 1800, y: 400 },
+        { x: 2300, y: 400 }
+      ],
+      spawnRadius: 80,
+      autoStart: true,
+      respawnDelay: 2500
+    };
+
+    this.enemySpawner = new EnemySpawner(this, this.player, spawnerConfig);
+  }
+
   update(time: number, delta: number) {
     this.player.update(time, delta);
+    this.enemySpawner.update(time, delta);
   }
 }

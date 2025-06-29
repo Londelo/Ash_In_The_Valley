@@ -6,6 +6,7 @@ import { DaggerBandit } from '../../actors/DaggerBandit';
 import { Prophet } from '../../actors/Prophet';
 import { Temple } from '../../props/Temple';
 import { TileMapComponent, TileMapConfig } from '../../components/TileMap';
+import { EnemySpawner, EnemySpawnerConfig } from '../../components/EnemySpawner';
 
 export default class AvenWood extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
@@ -17,6 +18,7 @@ export default class AvenWood extends Scene {
   prophet: Prophet;
   temple: Temple;
   tileMapComponent: TileMapComponent;
+  enemySpawner: EnemySpawner;
 
   constructor() {
     super('AvenWood');
@@ -38,10 +40,12 @@ export default class AvenWood extends Scene {
     this.prophet = new Prophet(this, config.prophet_start_x * tileMapConfig.scale, config.prophet_start_y * tileMapConfig.scale, this.player);
     this.temple = new Temple(this, templeLocation.x, templeLocation.y, tileMapConfig.scale, this.player);
 
-
     this.player.create();
     this.prophet.create();
     this.temple.create();
+
+    // Setup enemy spawner
+    this.setupEnemySpawner();
 
     this.camera.startFollow(this.player.sprite);
     this.physics.world.setBounds(0, 0, mapWidth, mapHeight);
@@ -55,13 +59,33 @@ export default class AvenWood extends Scene {
     EventBus.emit('current-scene-ready', this);
   }
 
+  private setupEnemySpawner(): void {
+    const spawnerConfig: EnemySpawnerConfig = {
+      enemyClass: DaggerBandit,
+      maxEnemies: 3,
+      spawnInterval: 5000, // 5 seconds
+      spawnPoints: [
+        { x: 200, y: 500 },
+        { x: 1200, y: 500 },
+        { x: 2000, y: 500 }
+      ],
+      spawnRadius: 100,
+      autoStart: true,
+      respawnDelay: 3000
+    };
+
+    this.enemySpawner = new EnemySpawner(this, this.player, spawnerConfig);
+  }
+
   update(time: number, delta: number) {
     this.player.update(time, delta);
     this.prophet.update(time, delta);
     this.temple.update(time, delta);
+    this.enemySpawner.update(time, delta);
   }
 
   changeScene() {
+    this.enemySpawner.destroy();
     this.scene.restart();
   }
 }
