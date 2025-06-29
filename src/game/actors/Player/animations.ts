@@ -288,6 +288,8 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
   {
     key: 'bloodSwordsMan_player_fall',
     frames: [
+      { key: 'bloodSwordsmanAtlas', frame: 'jump to fall trans 0' },
+      { key: 'bloodSwordsmanAtlas', frame: 'jump to fall trans 1' },
       { key: 'bloodSwordsmanAtlas', frame: 'fall 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'fall 1' },
       { key: 'bloodSwordsmanAtlas', frame: 'fall 2' },
@@ -299,7 +301,9 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
   {
     key: 'bloodSwordsMan_player_land',
     frames: [
-      { key: 'bloodSwordsmanAtlas', frame: 'fall 3' }
+      { key: 'bloodSwordsmanAtlas', frame: 'land 0' },
+      { key: 'bloodSwordsmanAtlas', frame: 'land 1' },
+      { key: 'bloodSwordsmanAtlas', frame: 'land 2' }
     ],
     frameRate: 12,
     repeat: 0
