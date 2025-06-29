@@ -5,7 +5,7 @@ import { Player } from '../../actors/Player';
 import { DaggerBandit } from '../../actors/DaggerBandit';
 import { Prophet } from '../../actors/Prophet';
 import { Temple } from '../../props/Temple';
-import { TileMapComponent, TileMapConfig } from '../../components/TileMap';
+import { TileMapComponent } from '../../components/TileMap';
 import { EnemySpawner, EnemySpawnerConfig } from '../../components/EnemySpawner';
 
 export default class AvenWood extends Scene {
@@ -60,15 +60,12 @@ export default class AvenWood extends Scene {
   }
 
   private setupEnemySpawner(): void {
+    console.log(this.player.sprite.y);
     const spawnerConfig: EnemySpawnerConfig = {
       enemyClass: DaggerBandit,
       maxEnemies: 3,
-      spawnInterval: 5000, // 5 seconds
-      spawnPoints: [
-        { x: 200, y: 500 },
-        { x: 1200, y: 500 },
-        { x: 2000, y: 500 }
-      ],
+      spawnInterval: 5000,
+      spawnPoint: { x: 200, y: this.player.sprite.y },
       spawnRadius: 100,
       autoStart: true,
       respawnDelay: 3000

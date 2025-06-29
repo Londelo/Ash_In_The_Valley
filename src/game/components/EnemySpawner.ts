@@ -2,6 +2,8 @@ import { Scene } from 'phaser';
 import { EventBus } from '../EventBus';
 import type { Player } from '../actors/Player';
 import type { Actor } from './Actor';
+import AvenWood from '../scenes/avenwood';
+import GehennaDeep from '../scenes/gehennaDeep';
 
 export interface SpawnPoint {
   x: number;
@@ -12,22 +14,21 @@ export interface EnemySpawnerConfig {
   enemyClass: new (scene: Scene, x: number, y: number, player: Player) => Actor;
   maxEnemies: number;
   spawnInterval: number; // milliseconds
-  spawnPoints: SpawnPoint[];
+  spawnPoint: SpawnPoint;
   spawnRadius?: number; // random offset from spawn points
   autoStart?: boolean;
   respawnDelay?: number; // delay before respawning after enemy death
 }
 
 export class EnemySpawner {
-  private scene: Scene;
+  private scene: AvenWood | GehennaDeep;
   private player: Player;
   private config: EnemySpawnerConfig;
   private enemies: Actor[] = [];
   private spawnTimer: Phaser.Time.TimerEvent | null = null;
   private isActive: boolean = false;
-  private currentSpawnIndex: number = 0;
 
-  constructor(scene: Scene, player: Player, config: EnemySpawnerConfig) {
+  constructor(scene: AvenWood | GehennaDeep, player: Player, config: EnemySpawnerConfig) {
     this.scene = scene;
     this.player = player;
     this.config = {
@@ -44,7 +45,7 @@ export class EnemySpawner {
 
   public start(): void {
     if (this.isActive) return;
-    
+
     this.isActive = true;
     this.createSpawnTimer();
   }
@@ -90,19 +91,13 @@ export class EnemySpawner {
   }
 
   private getNextSpawnPoint(): SpawnPoint | null {
-    if (this.config.spawnPoints.length === 0) return null;
-
-    const basePoint = this.config.spawnPoints[this.currentSpawnIndex];
-    this.currentSpawnIndex = (this.currentSpawnIndex + 1) % this.config.spawnPoints.length;
-
-    // Add random offset if radius is specified
     const radius = this.config.spawnRadius || 0;
     const angle = Math.random() * Math.PI * 2;
     const distance = Math.random() * radius;
 
     return {
-      x: basePoint.x + Math.cos(angle) * distance,
-      y: basePoint.y + Math.sin(angle) * distance
+      x: this.config.spawnPoint.x + Math.cos(angle) * distance,
+      y: this.config.spawnPoint.y + Math.sin(angle) * distance
     };
   }
 
@@ -122,7 +117,7 @@ export class EnemySpawner {
 
   private setupEnemyCollisions(enemy: Actor): void {
     // Enemy collides with world
-    this.scene.physics.add.collider(enemy.sprite, this.scene.physics.world.staticBodies);
+    this.scene.physics.add.collider(enemy.sprite, this.scene.world);
 
     // Player attacks hit enemy
     this.scene.physics.add.overlap(
@@ -172,7 +167,7 @@ export class EnemySpawner {
     if (attackHitbox && enemy && attackHitbox.isActive) {
       enemy.takeDamage(attackHitbox.config.damage);
       attackHitbox.destroy();
-      
+
       // Emit damage event for specific enemy
       if ('uniqueId' in enemy) {
         EventBus.emit(`damage_${(enemy as any).uniqueId}`, attackHitbox.config.damage);
@@ -245,7 +240,7 @@ export class EnemySpawner {
       if (!enemy.isDead && 'attackHitboxManager' in enemy) {
         const enemyAttackManager = (enemy as any).attackHitboxManager;
         const enemyHitboxes = enemyAttackManager.getActiveHitboxes();
-        
+
         enemyHitboxes.forEach((hitbox: any) => {
           if (hitbox.isActive) {
             this.scene.physics.world.overlap(
@@ -277,7 +272,7 @@ export class EnemySpawner {
 
   public updateConfig(newConfig: Partial<EnemySpawnerConfig>): void {
     this.config = { ...this.config, ...newConfig };
-    
+
     // Restart timer if interval changed
     if (newConfig.spawnInterval && this.spawnTimer) {
       this.stop();

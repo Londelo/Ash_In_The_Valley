@@ -13,15 +13,17 @@ const swordMasterActorConfig: ActorConfig = {
   invulnerabilityDuration: 1000,
   bodyOffsetY: 0,
   knockbackForce: 200,
-  deathAnimationKey: 'player_death',
-  hitAnimationKey: 'player_hit'
+  deathAnimationKey: 'swordMaster_player_death',
+  hitAnimationKey: 'swordMaster_player_hit'
 };
 
 const bloodSwordsManActorConfig: ActorConfig = {
   ...swordMasterActorConfig,
   bodyWidth: 30,
   bodyHeight: 40,
-  bodyOffsetY: 40
+  bodyOffsetY: 40,
+  deathAnimationKey: 'bloodSwordsMan_player_death',
+  hitAnimationKey: 'bloodSwordsMan_player_hit'
 };
 
 const lordOfFlamesActorConfig: ActorConfig = {
@@ -30,7 +32,9 @@ const lordOfFlamesActorConfig: ActorConfig = {
   bodyHeight: 30,
   centerXLeft: 0.75,
   centerXRight: 0.25,
-  bodyOffsetY: 17
+  bodyOffsetY: 17,
+  deathAnimationKey: 'lordOfFlames_player_death',
+  hitAnimationKey: 'lordOfFlames_player_hit'
 };
 
 const holySamuraiActorConfig: ActorConfig = {
@@ -40,7 +44,9 @@ const holySamuraiActorConfig: ActorConfig = {
   centerXLeft: 0.65,
   centerXRight: 0.35,
   bodyOffsetY: 30,
-  attackPower: 35
+  attackPower: 35,
+  deathAnimationKey: 'holySamurai_player_death',
+  hitAnimationKey: 'holySamurai_player_hit'
 };
 
 const actorConfigs: { [K in PlayerSkins]: ActorConfig } = {
