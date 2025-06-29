@@ -122,22 +122,6 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'swordMaster_player_slash_heavy',
-    frames: [
-      { key: 'swordMasterAtlas', frame: 'Dash 1' },
-      { key: 'swordMasterAtlas', frame: 'Dash 2' },
-      { key: 'swordMasterAtlas', frame: 'Dash 3' },
-      { key: 'swordMasterAtlas', frame: 'Slash 2 1' },
-      { key: 'swordMasterAtlas', frame: 'Slash 2 2' },
-      { key: 'swordMasterAtlas', frame: 'Slash 2 3' },
-      { key: 'swordMasterAtlas', frame: 'Slash 2 4' }
-    ],
-    delay: 50,
-    showBeforeDelay: true,
-    frameRate: 15,
-    repeat: 0
-  },
-  {
     key: 'swordMaster_player_attack_3',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Block 0' },
@@ -166,38 +150,6 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     delay: 100,
     showBeforeDelay: true,
     frameRate: 12,
-    repeat: 0
-  },
-  {
-    key: 'swordMaster_player_roll_attack',
-    frames: [
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 0' },
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 1' },
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 2' },
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 3' },
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 4' },
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 5' },
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 6' },
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 7' },
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 8' },
-      { key: 'swordMasterAtlas', frame: 'Roll Attack 9' }
-    ],
-    frameRate: 7,
-    repeat: 0
-  },
-  {
-    key: 'swordMaster_player_block',
-    frames: [
-      { key: 'swordMasterAtlas', frame: 'Block 0' },
-      { key: 'swordMasterAtlas', frame: 'Block 1' },
-      { key: 'swordMasterAtlas', frame: 'Block 2' },
-      { key: 'swordMasterAtlas', frame: 'Block 3' },
-      { key: 'swordMasterAtlas', frame: 'Block 4' },
-      { key: 'swordMasterAtlas', frame: 'Block 5' }
-    ],
-    delay: 100,
-    showBeforeDelay: true,
-    frameRate: 20,
     repeat: 0
   },
   {
@@ -298,7 +250,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     frameRate: 8,
     repeat: -1
   },
-  {
+  {//TODO: handle landing
     key: 'bloodSwordsMan_player_land',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'land 0' },
@@ -311,12 +263,29 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
   {
     key: 'bloodSwordsMan_player_dash',
     frames: [
-      { key: 'bloodSwordsmanAtlas', frame: 'run 0' },
-      { key: 'bloodSwordsmanAtlas', frame: 'run 1' },
-      { key: 'bloodSwordsmanAtlas', frame: 'run 2' },
-      { key: 'bloodSwordsmanAtlas', frame: 'run 3' },
-      { key: 'bloodSwordsmanAtlas', frame: 'run 4' },
-      { key: 'bloodSwordsmanAtlas', frame: 'run 5' }
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 0' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 1' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 2' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 3' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 4' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 5' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 6' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 7' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 8' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 9' },
+      { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 10' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 0' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 1' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 2' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 3' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 4' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 5' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 6' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 7' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 8' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 9' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 10' },
+      { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 11' }
     ],
     frameRate: 20,
     repeat: 0
@@ -354,22 +323,6 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     delay: 0,
     showBeforeDelay: true,
     frameRate: 12,
-    repeat: 0
-  },
-  {
-    key: 'bloodSwordsMan_player_slash_heavy',
-    frames: [
-      { key: 'bloodSwordsmanAtlas', frame: 'heart slam 0' },
-      { key: 'bloodSwordsmanAtlas', frame: 'heart slam 1' },
-      { key: 'bloodSwordsmanAtlas', frame: 'heart slam 2' },
-      { key: 'bloodSwordsmanAtlas', frame: 'heart slam 3' },
-      { key: 'bloodSwordsmanAtlas', frame: 'heart slam 4' },
-      { key: 'bloodSwordsmanAtlas', frame: 'heart slam 5' },
-      { key: 'bloodSwordsmanAtlas', frame: 'heart slam 6' }
-    ],
-    delay: 50,
-    showBeforeDelay: true,
-    frameRate: 15,
     repeat: 0
   },
   {
@@ -414,38 +367,6 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     delay: 100,
     showBeforeDelay: true,
     frameRate: 12,
-    repeat: 0
-  },
-  {
-    key: 'bloodSwordsMan_player_roll_attack',
-    frames: [
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 0' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 1' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 2' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 3' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 4' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 5' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 6' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 7' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 8' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 9' }
-    ],
-    frameRate: 7,
-    repeat: 0
-  },
-  {
-    key: 'bloodSwordsMan_player_block',
-    frames: [
-      { key: 'bloodSwordsmanAtlas', frame: 'charge 0' },
-      { key: 'bloodSwordsmanAtlas', frame: 'charge 1' },
-      { key: 'bloodSwordsmanAtlas', frame: 'charge 2' },
-      { key: 'bloodSwordsmanAtlas', frame: 'charge 3' },
-      { key: 'bloodSwordsmanAtlas', frame: 'charge 4' },
-      { key: 'bloodSwordsmanAtlas', frame: 'charge 5' }
-    ],
-    delay: 100,
-    showBeforeDelay: true,
-    frameRate: 20,
     repeat: 0
   },
   {
@@ -598,22 +519,6 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'lordOfFlames_player_slash_heavy',
-    frames: [
-      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 0' },
-      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 1' },
-      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 2' },
-      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 3' },
-      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 4' },
-      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 5' },
-      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 6' }
-    ],
-    delay: 50,
-    showBeforeDelay: true,
-    frameRate: 15,
-    repeat: 0
-  },
-  {
     key: 'lordOfFlames_player_attack_3',
     frames: [
       { key: 'lordOfFlamesAtlas', frame: 'Spear 0' },
@@ -655,23 +560,6 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
     delay: 100,
     showBeforeDelay: true,
     frameRate: 12,
-    repeat: 0
-  },
-  {
-    key: 'lordOfFlames_player_roll_attack',
-    frames: [
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 0' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 1' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 2' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 3' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 4' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 5' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 6' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 7' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 8' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 9' }
-    ],
-    frameRate: 7,
     repeat: 0
   },
   {
@@ -847,20 +735,6 @@ export const holySamuraiAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'holySamurai_player_slash_heavy',
-    frames: [
-      { key: 'holySamuraiAtlas', frame: 'Glitch Out 0' },
-      { key: 'holySamuraiAtlas', frame: 'Glitch Out 1' },
-      { key: 'holySamuraiAtlas', frame: 'Glitch Out 2' },
-      { key: 'holySamuraiAtlas', frame: 'Glitch Out 3' },
-      { key: 'holySamuraiAtlas', frame: 'Glitch Out 4' }
-    ],
-    delay: 50,
-    showBeforeDelay: true,
-    frameRate: 15,
-    repeat: 0
-  },
-  {
     key: 'holySamurai_player_attack_3',
     frames: [
       { key: 'holySamuraiAtlas', frame: 'Gltich Attack 0' },
@@ -896,37 +770,6 @@ export const holySamuraiAnimationConfigs: Animation[] = [
     delay: 100,
     showBeforeDelay: true,
     frameRate: 12,
-    repeat: 0
-  },
-  {
-    key: 'holySamurai_player_roll_attack',
-    frames: [
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 0' },
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 1' },
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 2' },
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 3' },
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 4' },
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 5' },
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 6' },
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 7' },
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 8' },
-      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 9' }
-    ],
-    frameRate: 7,
-    repeat: 0
-  },
-  {
-    key: 'holySamurai_player_block',
-    frames: [
-      { key: 'holySamuraiAtlas', frame: 'Wall SIt' },
-      { key: 'holySamuraiAtlas', frame: 'Wall Slide 0' },
-      { key: 'holySamuraiAtlas', frame: 'Wall Slide 1' },
-      { key: 'holySamuraiAtlas', frame: 'Wall Slide 2' },
-      { key: 'holySamuraiAtlas', frame: 'Wall Slide 3' }
-    ],
-    delay: 100,
-    showBeforeDelay: true,
-    frameRate: 20,
     repeat: 0
   },
   {
