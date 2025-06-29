@@ -34,8 +34,8 @@ export class Player extends Actor {
   private isDashing: boolean = false;
   private comboState: number = 0;
   private comboTimer: number = 0;
-  private readonly COMBO_WINDOW_MAX = 600;
-  private readonly COMBO_WINDOW_MIN = 300;
+  private comboWindowMin: number = 0;
+  private comboWindowMax: number = 0;
   private state: State;
   public playerSkin: PlayerSkins;
   public attackHitboxManager: AttackHitboxManager;
@@ -88,6 +88,13 @@ export class Player extends Actor {
     return duration;
   }
 
+  private setComboWindow(animationKey: string) {
+    const duration = this.getAnimationDuration(animationKey);
+    this.comboWindowMin = duration - 100;
+    this.comboWindowMax = duration + 100;
+    console.log(`Combo window set: ${this.comboWindowMin}ms - ${this.comboWindowMax}ms (animation: ${duration}ms)`);
+  }
+
   private addPlayerAnimationListeners() {
     this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
       if (this.state.isActionAnimations(animation.key) && !animation.key.includes('_player_death')) {
@@ -136,17 +143,25 @@ export class Player extends Actor {
   public resetCombo() {
     this.comboState = 0;
     this.comboTimer = 0;
+    this.comboWindowMin = 0;
+    this.comboWindowMax = 0;
   }
 
-  private shouldResetCombo() {
-    if (this.comboTimer < this.COMBO_WINDOW_MIN || this.comboTimer > this.COMBO_WINDOW_MAX) {
-      this.resetCombo();
-    }
+  private isInComboWindow(): boolean {
+    if (this.comboState === 0) return true; // First attack always allowed
+    
+    return this.comboTimer >= this.comboWindowMin && this.comboTimer <= this.comboWindowMax;
   }
 
   private updateComboTimer(deltaTime: number) {
     if (this.comboState > 0) {
       this.comboTimer += deltaTime * 1000;
+      
+      // Reset combo if we exceed the max window
+      if (this.comboTimer > this.comboWindowMax) {
+        console.log(`Combo reset - exceeded window (${this.comboTimer}ms > ${this.comboWindowMax}ms)`);
+        this.resetCombo();
+      }
     }
   }
 
@@ -227,34 +242,38 @@ export class Player extends Actor {
 
   private handleSlash(state: PlayerState, deltaTime: number) {
     if (state.shouldAttack) {
-      this.shouldResetCombo();
+      // Check if we're in the combo window
+      if (!this.isInComboWindow()) {
+        console.log(`Attack blocked - outside combo window (${this.comboTimer}ms not in ${this.comboWindowMin}-${this.comboWindowMax}ms)`);
+        this.resetCombo();
+        return;
+      }
 
       if (this.comboState === 0) {
         const attackKey = `${this.playerSkin}_player_attack_1`;
-        const duration = this.getAnimationDuration(attackKey);
-        console.log(`Attack 1 animation duration: ${duration}ms`);
+        this.setComboWindow(attackKey);
         
         this.sprite.play(attackKey);
         this.createAttackHitbox(attackKey);
         this.comboState = 1;
         this.comboTimer = 0;
+        console.log('Started combo - Attack 1');
       } else if (this.comboState === 1) {
         const attackKey = `${this.playerSkin}_player_attack_2`;
-        const duration = this.getAnimationDuration(attackKey);
-        console.log(`Attack 2 animation duration: ${duration}ms`);
+        this.setComboWindow(attackKey);
         
         this.sprite.play(attackKey);
         this.createAttackHitbox(attackKey);
         this.comboState = 2;
         this.comboTimer = 0;
+        console.log('Combo continued - Attack 2');
       } else if (this.comboState === 2) {
         const attackKey = `${this.playerSkin}_player_attack_3`;
-        const duration = this.getAnimationDuration(attackKey);
-        console.log(`Attack 3 animation duration: ${duration}ms`);
         
         this.sprite.play(attackKey);
         this.createAttackHitbox(attackKey);
         this.resetCombo();
+        console.log('Combo finished - Attack 3');
       }
     }
   }
