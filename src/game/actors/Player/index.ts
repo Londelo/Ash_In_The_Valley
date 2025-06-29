@@ -3,7 +3,7 @@ import { State, PlayerState } from './state';
 import { setSpriteDirection } from '../../utils/spriteDirection';
 import { AttackHitboxManager } from '../../components/AttackHitbox';
 import { AnimationHelper } from '../../components/AnimationHelper';
-import { getAnimationConfig } from './animations';
+import { getAllAnimationConfigs } from './animations';
 import { Actor, ActorConfig } from '../../components/Actor';
 import { getAttackConfig } from './attackConfigs';
 import { getActorConfig } from './actorConfigs';
@@ -34,12 +34,12 @@ export class Player extends Actor {
   private readonly COMBO_WINDOW_MAX = 600;
   private readonly COMBO_WINDOW_MIN = 300;
   private state: State;
-  private playerSkin: PlayerSkins;
+  public playerSkin: PlayerSkins;
   public attackHitboxManager: AttackHitboxManager;
   public debugEnabled: boolean = false;
 
   constructor(scene: Scene, x: number, y: number) {
-    const playerSkin: PlayerSkins = 'swordMaster'; // or pass as parameter if needed
+    const playerSkin: PlayerSkins = 'swordMaster';
     const actorConfig: ActorConfig = getActorConfig(playerSkin);
     super(scene, x, y, skinAtlasMap[playerSkin], skinFrameMap[playerSkin], actorConfig);
     this.playerSkin = playerSkin;
@@ -47,23 +47,19 @@ export class Player extends Actor {
     this.attackHitboxManager = new AttackHitboxManager(scene);
   }
 
-  private createPlayerAnimations(scene: Scene) {
+  private createAllPlayerAnimations(scene: Scene) {
     const animationManager = new AnimationHelper(scene);
-    const animationConfigs = getAnimationConfig(this.playerSkin);
-    if (!animationConfigs) {
-      console.error('MISSING ANIMATION CONFIG')
-      return
-    };
-    animationManager.createAnimations(animationConfigs);
+    const allAnimationConfigs = getAllAnimationConfigs();
+    animationManager.createAnimations(allAnimationConfigs);
   }
 
   private createAttackHitbox(attackType: string) {
     const attackConfigFn = getAttackConfig(this.playerSkin);
-    const config = attackConfigFn ? attackConfigFn(this) [attackType] : undefined;
+    const config = attackConfigFn ? attackConfigFn(this)[attackType] : undefined;
     if (!config) {
-      console.error('MISSING ATTACK CONFIG')
-      return
-    };
+      console.error('MISSING ATTACK CONFIG for skin:', this.playerSkin, 'attack:', attackType);
+      return;
+    }
 
     const direction = this.sprite.flipX ? 'left' : 'right';
     this.attackHitboxManager.createAttackHitbox(
@@ -76,9 +72,9 @@ export class Player extends Actor {
 
   private addPlayerAnimationListeners() {
     this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
-      if (this.state.isActionAnimations(animation.key) && animation.key !== 'player_death') {
-        this.sprite.play('player_idle');
-      } else if (animation.key === 'player_death') {
+      if (this.state.isActionAnimations(animation.key) && !animation.key.includes('_player_death')) {
+        this.sprite.play(`${this.playerSkin}_player_idle`);
+      } else if (animation.key.includes('_player_death')) {
         this.sprite.anims.stop();
       }
     });
@@ -120,16 +116,31 @@ export class Player extends Actor {
   private changeSkin(newSkin: PlayerSkins) {
     if (this.playerSkin === newSkin) return;
 
+    console.log('Changing skin from', this.playerSkin, 'to', newSkin);
+    
+    // Stop current animation
+    this.sprite.anims.stop();
+    
+    // Update skin
     this.playerSkin = newSkin;
-
-    this.createPlayerAnimations(this.scene);
+    
+    // Update config
+    this.config = getActorConfig(newSkin);
+    
+    // Update sprite texture and body
     this.sprite.setTexture(skinAtlasMap[newSkin], skinFrameMap[newSkin]);
-    this.sprite.play('player_idle');
+    this.sprite.setBodySize(this.config.bodyWidth, this.config.bodyHeight, true);
+    this.adjustForCenterOffset(this.sprite.flipX ? 'left' : 'right');
+    
+    // Play idle animation with new skin prefix
+    this.sprite.play(`${this.playerSkin}_player_idle`);
+    
+    console.log('Skin changed successfully to', newSkin);
   }
 
   private handleSkinChange() {
     if (Phaser.Input.Keyboard.JustDown(this.inputKeys.C)) {
-      const newSkin = this.playerSkin === 'swordMaster' ? 'bloodSwordsMan' : 'swordMaster';
+      const newSkin: PlayerSkins = this.playerSkin === 'swordMaster' ? 'bloodSwordsMan' : 'swordMaster';
       this.changeSkin(newSkin);
     }
   }
@@ -157,11 +168,11 @@ export class Player extends Actor {
     }
 
     if (state.shouldPlayWalkAnimation) {
-      this.sprite.play('player_walk');
+      this.sprite.play(`${this.playerSkin}_player_walk`);
     } else if (state.shouldPlayRunAnimation) {
-      this.sprite.play('player_run');
+      this.sprite.play(`${this.playerSkin}_player_run`);
     } else if (state.shouldPlayIdleAnimation) {
-      this.sprite.play('player_idle');
+      this.sprite.play(`${this.playerSkin}_player_idle`);
     }
   }
 
@@ -170,13 +181,13 @@ export class Player extends Actor {
       this.shouldResetCombo();
 
       if (this.comboState === 0) {
-        this.sprite.play('player_attack_1');
-        this.createAttackHitbox('player_attack_1');
+        this.sprite.play(`${this.playerSkin}_player_attack_1`);
+        this.createAttackHitbox(`${this.playerSkin}_player_attack_1`);
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 1) {
-        this.sprite.play('player_attack_2');
-        this.createAttackHitbox('player_attack_2');
+        this.sprite.play(`${this.playerSkin}_player_attack_2`);
+        this.createAttackHitbox(`${this.playerSkin}_player_attack_2`);
 
         const dashDirection = this.sprite.flipX ? -1 : 1;
         const dashDistance = 1500 * dashDirection;
@@ -185,8 +196,8 @@ export class Player extends Actor {
         this.comboState = 2;
         this.comboTimer = 0;
       } else if (this.comboState === 2) {
-        this.sprite.play('player_attack_3');
-        this.createAttackHitbox('player_attack_3');
+        this.sprite.play(`${this.playerSkin}_player_attack_3`);
+        this.createAttackHitbox(`${this.playerSkin}_player_attack_3`);
         this.resetCombo();
       }
     }
@@ -195,8 +206,8 @@ export class Player extends Actor {
   private handleSlamAttack(state: PlayerState) {
     if (state.shouldSlamAttack) {
       if (state.isInAir) {
-        this.sprite.play('player_slam_attack');
-        this.createAttackHitbox('player_slam_attack');
+        this.sprite.play(`${this.playerSkin}_player_slam_attack`);
+        this.createAttackHitbox(`${this.playerSkin}_player_slam_attack`);
         this.sprite.setVelocityY(400);
       }
     }
@@ -205,7 +216,7 @@ export class Player extends Actor {
   private handleDash(state: PlayerState, deltaTime: number) {
     if (state.shouldDash) {
       this.performDash(deltaTime);
-      this.sprite.play('player_dash');
+      this.sprite.play(`${this.playerSkin}_player_dash`);
       this.comboState = 2;
       this.comboTimer = 0;
     }
@@ -213,7 +224,7 @@ export class Player extends Actor {
 
   private handleBlock(state: PlayerState) {
     if (state.shouldBlock) {
-      this.sprite.play('player_block');
+      this.sprite.play(`${this.playerSkin}_player_block`);
       this.comboState = 2;
       this.comboTimer = 0;
     }
@@ -222,13 +233,13 @@ export class Player extends Actor {
   private handleJump(state: PlayerState) {
     if (state.shouldJump) {
       this.sprite.setVelocityY(-400);
-      this.sprite.play('player_jump');
+      this.sprite.play(`${this.playerSkin}_player_jump`);
     }
   }
 
   private handleFall(state: PlayerState) {
     if (state.shouldFall) {
-      this.sprite.play('player_fall');
+      this.sprite.play(`${this.playerSkin}_player_fall`);
     }
   }
 
@@ -238,9 +249,9 @@ export class Player extends Actor {
     this.inputKeys = inputKeys;
 
     this.state = new State(this);
-    this.createPlayerAnimations(this.scene);
+    this.createAllPlayerAnimations(this.scene);
     this.addPlayerAnimationListeners();
-    this.sprite.play('player_idle');
+    this.sprite.play(`${this.playerSkin}_player_idle`);
   }
 
   update(time: number, delta: number) {

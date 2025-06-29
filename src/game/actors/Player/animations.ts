@@ -3,7 +3,7 @@ import { PlayerSkins } from '.';
 
 export const swordsMasterAnimationConfigs: Animation[] = [
   {
-    key: 'player_idle',
+    key: 'swordMaster_player_idle',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Idle 0' },
       { key: 'swordMasterAtlas', frame: 'Idle 1' },
@@ -19,7 +19,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: -1
   },
   {
-    key: 'player_walk',
+    key: 'swordMaster_player_walk',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Run 1' },
       { key: 'swordMasterAtlas', frame: 'Run 2' },
@@ -33,7 +33,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: -1
   },
   {
-    key: 'player_run',
+    key: 'swordMaster_player_run',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Run Fast 0' },
       { key: 'swordMasterAtlas', frame: 'Run Fast 1' },
@@ -48,7 +48,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: -1
   },
   {
-    key: 'player_jump',
+    key: 'swordMaster_player_jump',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Jump 0' },
       { key: 'swordMasterAtlas', frame: 'Jump 1' },
@@ -58,7 +58,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_fall',
+    key: 'swordMaster_player_fall',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Fall 0' },
       { key: 'swordMasterAtlas', frame: 'Fall 1' },
@@ -68,7 +68,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: -1
   },
   {
-    key: 'player_land',
+    key: 'swordMaster_player_land',
     frames: [
       { key: 'swordMasterAtlas', frame: 'crouch land 0' },
       { key: 'swordMasterAtlas', frame: 'crouch land 1' },
@@ -79,7 +79,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_dash',
+    key: 'swordMaster_player_dash',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Dash 0' },
       { key: 'swordMasterAtlas', frame: 'Dash 1' },
@@ -92,7 +92,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_attack_1',
+    key: 'swordMaster_player_attack_1',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slash 1 0' },
       { key: 'swordMasterAtlas', frame: 'Slash 1 1' },
@@ -108,7 +108,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_attack_2',
+    key: 'swordMaster_player_attack_2',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slash 2 0' },
       { key: 'swordMasterAtlas', frame: 'Slash 2 1' },
@@ -122,7 +122,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_slash_heavy',
+    key: 'swordMaster_player_slash_heavy',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Dash 1' },
       { key: 'swordMasterAtlas', frame: 'Dash 2' },
@@ -138,7 +138,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_attack_3',
+    key: 'swordMaster_player_attack_3',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Block 0' },
       { key: 'swordMasterAtlas', frame: 'Block 1' },
@@ -155,7 +155,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_slam_attack',
+    key: 'swordMaster_player_slam_attack',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slam 0' },
       { key: 'swordMasterAtlas', frame: 'Slam 1' },
@@ -169,7 +169,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_roll_attack',
+    key: 'swordMaster_player_roll_attack',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Roll Attack 0' },
       { key: 'swordMasterAtlas', frame: 'Roll Attack 1' },
@@ -186,7 +186,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_block',
+    key: 'swordMaster_player_block',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Block 0' },
       { key: 'swordMasterAtlas', frame: 'Block 1' },
@@ -201,7 +201,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_hit',
+    key: 'swordMaster_player_hit',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Hit 0' },
       { key: 'swordMasterAtlas', frame: 'Hit 1' }
@@ -210,7 +210,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_death',
+    key: 'swordMaster_player_death',
     frames: [
       { key: 'swordMasterAtlas', frame: 'death 0' },
       { key: 'swordMasterAtlas', frame: 'death 1' },
@@ -226,7 +226,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
 
 export const bloodSwordsmanAnimationConfigs: Animation[] = [
   {
-    key: 'player_idle',
+    key: 'bloodSwordsMan_player_idle',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'idle 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'idle 1' },
@@ -245,7 +245,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: -1
   },
   {
-    key: 'player_walk',
+    key: 'bloodSwordsMan_player_walk',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'run 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'run 1' },
@@ -260,7 +260,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: -1
   },
   {
-    key: 'player_run',
+    key: 'bloodSwordsMan_player_run',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'run 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'run 1' },
@@ -275,7 +275,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: -1
   },
   {
-    key: 'player_jump',
+    key: 'bloodSwordsMan_player_jump',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'jump 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'jump 1' },
@@ -286,7 +286,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_fall',
+    key: 'bloodSwordsMan_player_fall',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'fall 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'fall 1' },
@@ -297,7 +297,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: -1
   },
   {
-    key: 'player_land',
+    key: 'bloodSwordsMan_player_land',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'fall 3' }
     ],
@@ -305,7 +305,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_dash',
+    key: 'bloodSwordsMan_player_dash',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'run 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'run 1' },
@@ -318,7 +318,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_attack_1',
+    key: 'bloodSwordsMan_player_attack_1',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'double slash 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'double slash 1' },
@@ -335,7 +335,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_attack_2',
+    key: 'bloodSwordsMan_player_attack_2',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'double slash 6' },
       { key: 'bloodSwordsmanAtlas', frame: 'double slash 7' },
@@ -353,7 +353,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_slash_heavy',
+    key: 'bloodSwordsMan_player_slash_heavy',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'heart slam 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'heart slam 1' },
@@ -369,7 +369,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_attack_3',
+    key: 'bloodSwordsMan_player_attack_3',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'attack 3 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'attack 3 1' },
@@ -391,7 +391,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_slam_attack',
+    key: 'bloodSwordsMan_player_slam_attack',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'attack 3 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'attack 3 1' },
@@ -413,7 +413,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_roll_attack',
+    key: 'bloodSwordsMan_player_roll_attack',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'attack 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'attack 1' },
@@ -430,7 +430,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_block',
+    key: 'bloodSwordsMan_player_block',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'charge 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'charge 1' },
@@ -445,7 +445,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_hit',
+    key: 'bloodSwordsMan_player_hit',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'hit 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'hit 1' }
@@ -454,7 +454,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_death',
+    key: 'bloodSwordsMan_player_death',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'death/blood teleport 1' },
@@ -471,6 +471,13 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
 const animationConfigs: { [K in PlayerSkins]?: Animation[] } = {
   'swordMaster': swordsMasterAnimationConfigs,
   'bloodSwordsMan': bloodSwordsmanAnimationConfigs
+};
+
+export const getAllAnimationConfigs = (): Animation[] => {
+  return [
+    ...swordsMasterAnimationConfigs,
+    ...bloodSwordsmanAnimationConfigs
+  ];
 };
 
 export const getAnimationConfig = (playerSkin: PlayerSkins) => animationConfigs[playerSkin]

@@ -6,7 +6,7 @@ export type PlayerAttackConfigFn = (_this: Player) => { [key: string]: AttackHit
 
 const swordsMasterAttackConfigs: PlayerAttackConfigFn =
   (_this: Player) => ({
-    'player_attack_1': {
+    [`${_this.playerSkin}_player_attack_1`]: {
       width: 200,
       height: 40,
       offsetX_right: 65,
@@ -16,7 +16,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower,
       attackerId: 'player'
     },
-    'player_attack_2': {
+    [`${_this.playerSkin}_player_attack_2`]: {
       width: 200,
       height: 40,
       offsetX_right: 65,
@@ -26,7 +26,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower,
       attackerId: 'player'
     },
-    'player_attack_3': {
+    [`${_this.playerSkin}_player_attack_3`]: {
       width: 270,
       height: 70,
       offsetX_right: 45,
@@ -36,7 +36,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower * 1.5,
       attackerId: 'player'
     },
-    'player_slam_attack': {
+    [`${_this.playerSkin}_player_slam_attack`]: {
       width: 220,
       height: 100,
       offsetX_right: 80,
@@ -50,7 +50,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
 
 const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
   (_this: Player) => ({
-    'player_attack_1': {
+    [`${_this.playerSkin}_player_attack_1`]: {
       width: 250,
       height: 50,
       offsetX_right: 75,
@@ -60,7 +60,7 @@ const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower * 1.1,
       attackerId: 'player'
     },
-    'player_attack_2': {
+    [`${_this.playerSkin}_player_attack_2`]: {
       width: 280,
       height: 60,
       offsetX_right: 85,
@@ -70,7 +70,7 @@ const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower * 1.3,
       attackerId: 'player'
     },
-    'player_attack_3': {
+    [`${_this.playerSkin}_player_attack_3`]: {
       width: 220,
       height: 80,
       offsetX_right: 0,
@@ -80,7 +80,7 @@ const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower * 1.8,
       attackerId: 'player'
     },
-    'player_slam_attack': {
+    [`${_this.playerSkin}_player_slam_attack`]: {
       width: 300,
       height: 120,
       offsetX_right: 100,

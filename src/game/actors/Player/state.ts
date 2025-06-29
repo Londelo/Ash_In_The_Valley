@@ -35,31 +35,33 @@ export class State {
   }
 
   public isActionAnimations(animKey?: string): boolean {
-    return animKey === 'player_attack_1' ||
-      animKey === 'player_attack_2' ||
-      animKey === 'player_slam_attack' ||
-      animKey === 'player_dash' ||
-      animKey === 'player_attack_3' ||
-      animKey === 'player_roll_attack' ||
-      animKey === 'player_slash_heavy' ||
-      animKey === 'player_land' ||
-      animKey === 'player_block' ||
-      animKey === 'player_hit' ||
-      animKey === 'player_death'
+    if (!animKey) return false;
+    return animKey.includes('_player_attack_1') ||
+      animKey.includes('_player_attack_2') ||
+      animKey.includes('_player_slam_attack') ||
+      animKey.includes('_player_dash') ||
+      animKey.includes('_player_attack_3') ||
+      animKey.includes('_player_roll_attack') ||
+      animKey.includes('_player_slash_heavy') ||
+      animKey.includes('_player_land') ||
+      animKey.includes('_player_block') ||
+      animKey.includes('_player_hit') ||
+      animKey.includes('_player_death');
   }
 
   public isHighPriorityAnimation(animKey?: string): boolean {
-    return animKey === 'player_land' ||
-      animKey === 'player_attack_1' ||
-      animKey === 'player_attack_2' ||
-      animKey === 'player_slam_attack' ||
-      animKey === 'player_dash' ||
-      animKey === 'player_attack_3' ||
-      animKey === 'player_roll_attack' ||
-      animKey === 'player_slash_heavy' ||
-      animKey === 'player_block' ||
-      animKey === 'player_hit' ||
-      animKey === 'player_death'
+    if (!animKey) return false;
+    return animKey.includes('_player_land') ||
+      animKey.includes('_player_attack_1') ||
+      animKey.includes('_player_attack_2') ||
+      animKey.includes('_player_slam_attack') ||
+      animKey.includes('_player_dash') ||
+      animKey.includes('_player_attack_3') ||
+      animKey.includes('_player_roll_attack') ||
+      animKey.includes('_player_slash_heavy') ||
+      animKey.includes('_player_block') ||
+      animKey.includes('_player_hit') ||
+      animKey.includes('_player_death');
   }
 
   public getState(currentAnim: string | undefined): PlayerState {
@@ -67,11 +69,11 @@ export class State {
     const cursors = this.player.cursors;
     const isOnGround = this.player.sprite.body.onFloor();
 
-    const isSlashing = currentAnim === 'player_attack_1' || currentAnim === 'player_attack_2' || currentAnim === 'player_attack_3';;;
-    const isDashing = currentAnim === 'player_dash';
-    const isLanding = currentAnim === 'player_land';
-    const isSlamming = currentAnim === 'player_slam_attack'
-    const isBlocking = currentAnim === 'player_block'
+    const isSlashing = currentAnim?.includes('_player_attack_1') || currentAnim?.includes('_player_attack_2') || currentAnim?.includes('_player_attack_3');
+    const isDashing = currentAnim?.includes('_player_dash');
+    const isLanding = currentAnim?.includes('_player_land');
+    const isSlamming = currentAnim?.includes('_player_slam_attack');
+    const isBlocking = currentAnim?.includes('_player_block');
     const isInAir = !isOnGround;
 
     const isMovingLeft = cursors.left.isDown;
@@ -114,7 +116,7 @@ export class State {
                                    !isLanding &&
                                    !isInAir &&
                                    !isMoving &&
-                                   currentAnim !== 'player_idle';
+                                   !currentAnim?.includes('_player_idle');
 
     const shouldPlayMovementAnimation = isOnGround &&
                                        !isSlashing &&
@@ -125,11 +127,11 @@ export class State {
 
     const shouldPlayWalkAnimation = shouldPlayMovementAnimation &&
                                    !isRunning &&
-                                   currentAnim !== 'player_walk';
+                                   !currentAnim?.includes('_player_walk');
 
     const shouldPlayRunAnimation = shouldPlayMovementAnimation &&
                                   isRunning &&
-                                  currentAnim !== 'player_run';
+                                  !currentAnim?.includes('_player_run');
 
     return {
       shouldAttack,
