@@ -28,7 +28,10 @@ export class Player extends Actor {
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   playerSpeed: number = 200;
-  private readonly DASH_DISTANCE = 15000;
+  private readonly DASH_VELOCITY = 800;
+  private readonly DASH_DURATION = 300; // milliseconds
+  private dashTimer: number = 0;
+  private isDashing: boolean = false;
   private comboState: number = 0;
   private comboTimer: number = 0;
   private readonly COMBO_WINDOW_MAX = 600;
@@ -76,6 +79,10 @@ export class Player extends Actor {
         this.sprite.play(`${this.playerSkin}_player_idle`);
       } else if (animation.key.includes('_player_death')) {
         this.sprite.anims.stop();
+      } else if (animation.key.includes('_player_dash')) {
+        // Dash animation completed, stop dashing
+        this.isDashing = false;
+        this.dashTimer = 0;
       }
     });
   }
@@ -90,10 +97,24 @@ export class Player extends Actor {
     }
   }
 
-  private performDash(deltaTime: number) {
+  private performDash() {
     const dashDirection = this.sprite.flipX ? -1 : 1;
-    const dashDistance = this.DASH_DISTANCE * dashDirection;
-    this.sprite.x += dashDistance * deltaTime;
+    this.sprite.setVelocityX(this.DASH_VELOCITY * dashDirection);
+    this.isDashing = true;
+    this.dashTimer = 0;
+  }
+
+  private updateDash(delta: number) {
+    if (this.isDashing) {
+      this.dashTimer += delta;
+      
+      // Stop dash after duration
+      if (this.dashTimer >= this.DASH_DURATION) {
+        this.isDashing = false;
+        this.dashTimer = 0;
+        // Don't set velocity to 0 here, let normal movement handle it
+      }
+    }
   }
 
   public resetCombo() {
@@ -153,6 +174,11 @@ export class Player extends Actor {
   }
 
   private handleMovement(state: PlayerState) {
+    // Don't override dash velocity
+    if (this.isDashing) {
+      return;
+    }
+
     if (state.canMove && state.isMoving) {
       const moveSpeed = state.isRunning ? this.playerSpeed * 2 : this.playerSpeed;
 
@@ -163,7 +189,7 @@ export class Player extends Actor {
         this.sprite.setVelocityX(moveSpeed);
         setSpriteDirection(this.sprite, 'right', this.adjustForCenterOffset);
       }
-    } else if (state.justStoppedMoving) {
+    } else if (state.justStoppedMoving && !this.isDashing) {
       this.sprite.setVelocityX(0);
     }
   }
@@ -220,9 +246,9 @@ export class Player extends Actor {
     }
   }
 
-  private handleDash(state: PlayerState, deltaTime: number) {
+  private handleDash(state: PlayerState) {
     if (state.shouldDash) {
-      this.performDash(deltaTime);
+      this.performDash();
       this.sprite.play(`${this.playerSkin}_player_dash`);
       this.comboState = 2;
       this.comboTimer = 0;
@@ -276,11 +302,12 @@ export class Player extends Actor {
     this.handleSkinChange();
     this.updateComboTimer(deltaTime);
     this.updateInvulnerabilityTimer(delta);
+    this.updateDash(delta);
 
     const state = this.state.getState(currentAnim);
     this.handleSlash(state, deltaTime);
     this.handleSlamAttack(state);
-    this.handleDash(state, deltaTime);
+    this.handleDash(state);
     this.handleBlock(state);
     this.handleJump(state);
     this.handleFall(state);

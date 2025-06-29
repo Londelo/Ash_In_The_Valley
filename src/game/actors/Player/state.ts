@@ -72,7 +72,7 @@ export class State {
     const isOnGround = this.player.sprite.body.onFloor();
 
     const isSlashing = currentAnim?.includes('_player_attack_1') || currentAnim?.includes('_player_attack_2') || currentAnim?.includes('_player_attack_3');
-    const isDashing = currentAnim?.includes('_player_dash');
+    const isDashing = currentAnim?.includes('_player_dash') || (this.player as any).isDashing;
     const isLanding = currentAnim?.includes('_player_land');
     const isSlamming = currentAnim?.includes('_player_slam_attack');
     const isBlocking = currentAnim?.includes('_player_block');
