@@ -36,7 +36,7 @@ export class Player extends Actor {
   private state: State;
   public playerSkin: PlayerSkins;
   public attackHitboxManager: AttackHitboxManager;
-  public debugEnabled: boolean = false;
+  public debugEnabled: boolean = true;
 
   constructor(scene: Scene, x: number, y: number) {
     const playerSkin: PlayerSkins = 'swordMaster';
@@ -117,24 +117,24 @@ export class Player extends Actor {
     if (this.playerSkin === newSkin) return;
 
     console.log('Changing skin from', this.playerSkin, 'to', newSkin);
-    
+
     // Stop current animation
     this.sprite.anims.stop();
-    
+
     // Update skin
     this.playerSkin = newSkin;
-    
+
     // Update config
     this.config = getActorConfig(newSkin);
-    
+
     // Update sprite texture and body
     this.sprite.setTexture(skinAtlasMap[newSkin], skinFrameMap[newSkin]);
     this.sprite.setBodySize(this.config.bodyWidth, this.config.bodyHeight, true);
     this.adjustForCenterOffset(this.sprite.flipX ? 'left' : 'right');
-    
+
     // Play idle animation with new skin prefix
     this.sprite.play(`${this.playerSkin}_player_idle`);
-    
+
     console.log('Skin changed successfully to', newSkin);
   }
 

@@ -28,19 +28,18 @@ const lordOfFlamesActorConfig: ActorConfig = {
   ...swordMasterActorConfig,
   bodyWidth: 25,
   bodyHeight: 30,
-  centerXLeft: 0.65,
-  centerXRight: 0.35,
+  centerXLeft: 0.75,
+  centerXRight: 0.25,
   bodyOffsetY: 17
 };
 
 const holySamuraiActorConfig: ActorConfig = {
   ...swordMasterActorConfig,
-  scale: 1.5,
-  bodyWidth: 40,
-  bodyHeight: 60,
-  centerXLeft: 0.6,
-  centerXRight: 0.4,
-  bodyOffsetY: 132,
+  bodyWidth: 15,
+  bodyHeight: 34,
+  centerXLeft: 0.65,
+  centerXRight: 0.35,
+  bodyOffsetY: 30,
   attackPower: 35
 };
 
