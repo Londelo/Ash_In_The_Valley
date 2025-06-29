@@ -311,7 +311,7 @@ export class Player extends Actor {
 
   private handleJump(state: PlayerState) {
     if (state.shouldJump) {
-      this.sprite.setVelocityY(-400);
+      this.sprite.setVelocityY(-600);
       this.sprite.play(`${this.playerSkin}_player_jump`);
     }
   }

@@ -533,9 +533,7 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
       { key: 'lordOfFlamesAtlas', frame: 'Attack 13' },
       { key: 'lordOfFlamesAtlas', frame: 'Attack 14' },
       { key: 'lordOfFlamesAtlas', frame: 'Attack 15' },
-      { key: 'lordOfFlamesAtlas', frame: 'Attack 16' },
-      { key: 'lordOfFlamesAtlas', frame: 'Attack 17' },
-      { key: 'lordOfFlamesAtlas', frame: 'Attack 18' }
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 16' }
 
     ],
     delay: 0,
