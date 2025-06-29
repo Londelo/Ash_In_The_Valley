@@ -28,7 +28,7 @@ export abstract class Actor {
   protected config: ActorConfig;
   protected invulnerabilityTimer: number = 0;
   protected boundingBox: Phaser.GameObjects.Graphics;
-  protected debugEnabled: boolean = true;
+  protected debugEnabled: boolean = false;
 
   constructor(scene: Phaser.Scene, x: number, y: number, textureKey: string, frameKey: string, config: ActorConfig) {
     this.scene = scene;

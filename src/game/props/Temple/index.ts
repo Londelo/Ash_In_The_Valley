@@ -8,7 +8,7 @@ export class Temple extends Prop {
   private readonly INTERACTION_RANGE = 50;
   private isPlayerNear: boolean = false;
   private inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
-  public debugEnabled: boolean = true;
+  public debugEnabled: boolean = false;
 
   constructor(scene: Scene, x: number, y: number, mapScale: number, playerRef: Player) {
     const propConfig: PropConfig = {
