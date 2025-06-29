@@ -24,9 +24,13 @@ const bloodSwordsManActorConfig: ActorConfig = {
   bodyOffsetY: 40
 };
 
-const lordOfFamesActorConfig: ActorConfig = {
-  ...swordMasterActorConfig
-  // TODO: Override any properties specific to lordOfFames here
+const lordOfFlamesActorConfig: ActorConfig = {
+  ...swordMasterActorConfig,
+  bodyWidth: 25,
+  bodyHeight: 30,
+  centerXLeft: 0.65,
+  centerXRight: 0.35,
+  bodyOffsetY: 17
 };
 
 const holySamuraiActorConfig: ActorConfig = {
@@ -37,7 +41,7 @@ const holySamuraiActorConfig: ActorConfig = {
 const actorConfigs: { [K in PlayerSkins]: ActorConfig } = {
   swordMaster: swordMasterActorConfig,
   bloodSwordsMan: bloodSwordsManActorConfig,
-  lordOfFames: lordOfFamesActorConfig,
+  lordOfFlames: lordOfFlamesActorConfig,
   holySamurai: holySamuraiActorConfig
 };
 

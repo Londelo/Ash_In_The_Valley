@@ -8,19 +8,19 @@ import { Actor, ActorConfig } from '../../components/Actor';
 import { getAttackConfig } from './attackConfigs';
 import { getActorConfig } from './actorConfigs';
 
-export type PlayerSkins = 'swordMaster' | 'bloodSwordsMan' | 'lordOfFames' | 'holySamurai'
+export type PlayerSkins = 'swordMaster' | 'bloodSwordsMan' | 'lordOfFlames' | 'holySamurai'
 
 const skinAtlasMap: { [K in PlayerSkins]: string } = {
   'swordMaster': 'swordMasterAtlas',
   'bloodSwordsMan': 'bloodSwordsmanAtlas',
-  'lordOfFames': 'lordOfFamesAtlas',
+  'lordOfFlames': 'lordOfFlamesAtlas',
   'holySamurai': 'holySamuraiAtlas'
 };
 
 const skinFrameMap: { [K in PlayerSkins]: string } = {
   'swordMaster': 'Idle 0',
   'bloodSwordsMan': 'idle 0',
-  'lordOfFames': 'idle 0',
+  'lordOfFlames': 'Idle 0',
   'holySamurai': 'idle 0'
 };
 
@@ -138,10 +138,17 @@ export class Player extends Actor {
     console.log('Skin changed successfully to', newSkin);
   }
 
+  private getNextSkin(): PlayerSkins {
+    const skinOrder: PlayerSkins[] = ['swordMaster', 'bloodSwordsMan', 'lordOfFlames'];
+    const currentIndex = skinOrder.indexOf(this.playerSkin);
+    const nextIndex = (currentIndex + 1) % skinOrder.length;
+    return skinOrder[nextIndex];
+  }
+
   private handleSkinChange() {
     if (Phaser.Input.Keyboard.JustDown(this.inputKeys.C)) {
-      const newSkin: PlayerSkins = this.playerSkin === 'swordMaster' ? 'bloodSwordsMan' : 'swordMaster';
-      this.changeSkin(newSkin);
+      const nextSkin = this.getNextSkin();
+      this.changeSkin(nextSkin);
     }
   }
 

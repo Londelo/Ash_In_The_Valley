@@ -468,15 +468,258 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
   }
 ];
 
+export const lordOfFlamesAnimationConfigs: Animation[] = [
+  {
+    key: 'lordOfFlames_player_idle',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 7' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 11' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'lordOfFlames_player_walk',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Move 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 7' }
+    ],
+    frameRate: 12,
+    repeat: -1
+  },
+  {
+    key: 'lordOfFlames_player_run',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Move 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 12' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 13' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 14' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 15' }
+    ],
+    frameRate: 15,
+    repeat: -1
+  },
+  {
+    key: 'lordOfFlames_player_jump',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Move 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 2' }
+    ],
+    frameRate: 10,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_fall',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Move 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 5' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'lordOfFlames_player_land',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Move 6' }
+    ],
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_dash',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Move 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 12' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 13' }
+    ],
+    frameRate: 20,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_attack_1',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 7' }
+    ],
+    delay: 0,
+    showBeforeDelay: true,
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_attack_2',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 12' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 13' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 14' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 15' }
+    ],
+    delay: 0,
+    showBeforeDelay: true,
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_slash_heavy',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Range Fire Burst 6' }
+    ],
+    delay: 50,
+    showBeforeDelay: true,
+    frameRate: 15,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_attack_3',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 7' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 12' }
+    ],
+    delay: 50,
+    showBeforeDelay: true,
+    frameRate: 10,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_slam_attack',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 7' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 12' }
+    ],
+    delay: 100,
+    showBeforeDelay: true,
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_roll_attack',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 7' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 9' }
+    ],
+    frameRate: 7,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_block',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 12' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 13' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 14' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 15' }
+    ],
+    delay: 100,
+    showBeforeDelay: true,
+    frameRate: 20,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_hit',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Death 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 1' }
+    ],
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_death',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Death 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 5' }
+    ],
+    frameRate: 8,
+    repeat: 0
+  }
+];
+
 const animationConfigs: { [K in PlayerSkins]?: Animation[] } = {
   'swordMaster': swordsMasterAnimationConfigs,
-  'bloodSwordsMan': bloodSwordsmanAnimationConfigs
+  'bloodSwordsMan': bloodSwordsmanAnimationConfigs,
+  'lordOfFlames': lordOfFlamesAnimationConfigs
 };
 
 export const getAllAnimationConfigs = (): Animation[] => {
   return [
     ...swordsMasterAnimationConfigs,
-    ...bloodSwordsmanAnimationConfigs
+    ...bloodSwordsmanAnimationConfigs,
+    ...lordOfFlamesAnimationConfigs
   ];
 };
 
