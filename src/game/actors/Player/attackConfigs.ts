@@ -82,10 +82,10 @@ const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
       offsetX_right: 0,
       offsetX_left: -0,
       offsetY: -40,
-      duration: 450,
+      duration: 300,
       damage: _this.attackPower * 1.8,
       attackerId: 'player',
-      delay: 0
+      delay: 700
     },
     [`${_this.playerSkin}_player_slam_attack`]: {
       width: 220,
@@ -111,7 +111,7 @@ const lordOfFlamesAttackConfigs: PlayerAttackConfigFn =
       duration: 400,
       damage: _this.attackPower * 0.9,
       attackerId: 'player',
-      delay: 0
+      delay: 200
     },
     [`${_this.playerSkin}_player_attack_2`]: {
       width: 200,
@@ -122,7 +122,7 @@ const lordOfFlamesAttackConfigs: PlayerAttackConfigFn =
       duration: 400,
       damage: _this.attackPower * 1.1,
       attackerId: 'player',
-      delay: 0
+      delay: 200
     },
     [`${_this.playerSkin}_player_attack_3`]: {
       width: 400,
@@ -133,7 +133,7 @@ const lordOfFlamesAttackConfigs: PlayerAttackConfigFn =
       duration: 800,
       damage: _this.attackPower * 1.6,
       attackerId: 'player',
-      delay: 0
+      delay: 600
     },
     [`${_this.playerSkin}_player_slam_attack`]: {
       width: 250,
@@ -159,7 +159,7 @@ const holySamuraiAttackConfigs: PlayerAttackConfigFn =
       duration: 400,
       damage: _this.attackPower * 1.0,
       attackerId: 'player',
-      delay: 0
+      delay: 200
     },
     [`${_this.playerSkin}_player_attack_2`]: {
       width: 240,

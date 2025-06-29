@@ -26,7 +26,7 @@ export class AttackHitboxManager {
     direction: 'left' | 'right' = 'right'
   ): AttackHitbox | null {
     const delay = config.delay || 0;
-    
+
     if (delay > 0) {
       // Create pending hitbox that will spawn after delay
       const pendingHitbox = new PendingHitbox(this.scene, x, y, config, direction, delay);
@@ -82,7 +82,7 @@ export class AttackHitboxManager {
       if (!pendingHitbox.isActive) {
         return false;
       }
-      
+
       if (pendingHitbox.isReady()) {
         // Convert pending hitbox to active hitbox
         const activeHitbox = pendingHitbox.createActiveHitbox();
@@ -90,7 +90,7 @@ export class AttackHitboxManager {
         pendingHitbox.destroy();
         return false;
       }
-      
+
       return true;
     });
   }
@@ -172,7 +172,6 @@ export class AttackHitbox {
     this.sprite = scene.physics.add.sprite(x, y, '');
     this.sprite.setVisible(false);
     this.sprite.setBodySize(config.width, config.height);
-
     this.sprite.attackHitbox = this;
 
     this.timer = scene.time.delayedCall(config.duration, () => {
