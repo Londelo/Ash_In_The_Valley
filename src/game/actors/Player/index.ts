@@ -250,6 +250,12 @@ export class Player extends Actor {
     }
   }
 
+  private handleLanding(state: PlayerState) {
+    if (state.shouldLand) {
+      this.sprite.play(`${this.playerSkin}_player_land`);
+    }
+  }
+
   create() {
     const { cursors, inputKeys } = this.setupPlayerInput(this.scene);
     this.cursors = cursors;
@@ -278,6 +284,7 @@ export class Player extends Actor {
     this.handleBlock(state);
     this.handleJump(state);
     this.handleFall(state);
+    this.handleLanding(state);
     this.handleMovement(state);
     this.handleMovementAnimations(state);
 

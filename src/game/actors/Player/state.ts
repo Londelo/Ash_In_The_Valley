@@ -5,6 +5,7 @@ export interface PlayerState {
   shouldSlamAttack: boolean;
   shouldJump: boolean;
   shouldFall: boolean;
+  shouldLand: boolean;
   shouldDash: boolean;
   shouldBlock: boolean
   isMovingLeft: boolean;
@@ -29,6 +30,7 @@ export interface PlayerState {
 
 export class State {
   private player: Player;
+  private wasInAir: boolean = false;
 
   constructor(player: Player) {
     this.player = player;
@@ -76,6 +78,12 @@ export class State {
     const isBlocking = currentAnim?.includes('_player_block');
     const isInAir = !isOnGround;
 
+    // Track landing state
+    const shouldLand = this.wasInAir && isOnGround && !isSlashing && !isDashing && !isSlamming && !isBlocking;
+    
+    // Update air state tracking
+    this.wasInAir = isInAir;
+
     const isMovingLeft = cursors.left.isDown;
     const isMovingRight = cursors.right.isDown;
     const justStoppedMoving = Phaser.Input.Keyboard.JustUp(cursors.left) || Phaser.Input.Keyboard.JustUp(cursors.right)
@@ -88,25 +96,35 @@ export class State {
     const shouldDash = Phaser.Input.Keyboard.JustDown(inputKeys.Q) &&
                        !isSlamming &&
                        !isSlashing &&
-                       !isDashing
+                       !isDashing &&
+                       !isLanding
 
-    const shouldAttack = Phaser.Input.Keyboard.JustDown(inputKeys.R) && isOnGround
+    const shouldAttack = Phaser.Input.Keyboard.JustDown(inputKeys.R) && 
+                        isOnGround && 
+                        !isLanding
 
-    const shouldBlock = Phaser.Input.Keyboard.JustDown(inputKeys.W) && isOnGround && !isBlocking && !isDashing && !isInAir
+    const shouldBlock = Phaser.Input.Keyboard.JustDown(inputKeys.W) && 
+                       isOnGround && 
+                       !isBlocking && 
+                       !isDashing && 
+                       !isInAir && 
+                       !isLanding
 
-    const shouldSlamAttack = Phaser.Input.Keyboard.JustDown(inputKeys.E)
+    const shouldSlamAttack = Phaser.Input.Keyboard.JustDown(inputKeys.E) && !isLanding
 
     const shouldJump = Phaser.Input.Keyboard.JustDown(cursors.up) &&
                        isOnGround &&
                        !isSlamming &&
                        !isSlashing &&
-                       !isDashing
+                       !isDashing &&
+                       !isLanding
 
     const shouldFall = this.player.sprite.body.velocity.y > 0 &&
                        isInAir &&
                        !isSlamming &&
                        !isSlashing &&
-                       !isDashing
+                       !isDashing &&
+                       !isLanding
 
     const canMove = !isSlashing && !isDashing && !isLanding && !isSlamming
 
@@ -138,6 +156,7 @@ export class State {
       shouldSlamAttack,
       shouldJump,
       shouldFall,
+      shouldLand,
       shouldDash,
       shouldBlock,
       isMovingLeft,
