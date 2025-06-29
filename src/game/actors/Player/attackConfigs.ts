@@ -136,10 +136,55 @@ const lordOfFlamesAttackConfigs: PlayerAttackConfigFn =
     }
   });
 
+const holySamuraiAttackConfigs: PlayerAttackConfigFn =
+  (_this: Player) => ({
+    [`${_this.playerSkin}_player_attack_1`]: {
+      width: 220,
+      height: 50,
+      offsetX_right: 70,
+      offsetX_left: -70,
+      offsetY: -25,
+      duration: 200,
+      damage: _this.attackPower * 1.0,
+      attackerId: 'player'
+    },
+    [`${_this.playerSkin}_player_attack_2`]: {
+      width: 240,
+      height: 55,
+      offsetX_right: 75,
+      offsetX_left: -75,
+      offsetY: -28,
+      duration: 220,
+      damage: _this.attackPower * 1.2,
+      attackerId: 'player'
+    },
+    [`${_this.playerSkin}_player_attack_3`]: {
+      width: 350,
+      height: 80,
+      offsetX_right: 90,
+      offsetX_left: -90,
+      offsetY: -40,
+      duration: 500,
+      damage: _this.attackPower * 2.0,
+      attackerId: 'player'
+    },
+    [`${_this.playerSkin}_player_slam_attack`]: {
+      width: 280,
+      height: 110,
+      offsetX_right: 85,
+      offsetX_left: -85,
+      offsetY: -55,
+      duration: 380,
+      damage: _this.attackPower * 1.7,
+      attackerId: 'player'
+    }
+  });
+
 const attackConfigs: { [K in PlayerSkins]?: PlayerAttackConfigFn } = {
   'swordMaster': swordsMasterAttackConfigs,
   'bloodSwordsMan': bloodSwordsManAttackConfigs,
-  'lordOfFlames': lordOfFlamesAttackConfigs
+  'lordOfFlames': lordOfFlamesAttackConfigs,
+  'holySamurai': holySamuraiAttackConfigs
 }
 
 export const getAttackConfig = (playerSkin: PlayerSkins) => attackConfigs[playerSkin]

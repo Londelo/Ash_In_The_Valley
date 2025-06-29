@@ -709,17 +709,250 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
   }
 ];
 
+export const holySamuraiAnimationConfigs: Animation[] = [
+  {
+    key: 'holySamurai_player_idle',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Idle 0' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 1' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 2' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 3' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 4' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 5' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 6' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 7' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 8' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 9' },
+      { key: 'holySamuraiAtlas', frame: 'Idle 10' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'holySamurai_player_walk',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Run 0' },
+      { key: 'holySamuraiAtlas', frame: 'Run 1' },
+      { key: 'holySamuraiAtlas', frame: 'Run 2' },
+      { key: 'holySamuraiAtlas', frame: 'Run 3' },
+      { key: 'holySamuraiAtlas', frame: 'Run 4' },
+      { key: 'holySamuraiAtlas', frame: 'Run 5' },
+      { key: 'holySamuraiAtlas', frame: 'Run 6' },
+      { key: 'holySamuraiAtlas', frame: 'Run 7' }
+    ],
+    frameRate: 12,
+    repeat: -1
+  },
+  {
+    key: 'holySamurai_player_run',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Run 8' },
+      { key: 'holySamuraiAtlas', frame: 'Run 9' },
+      { key: 'holySamuraiAtlas', frame: 'Run 10' },
+      { key: 'holySamuraiAtlas', frame: 'Run 11' },
+      { key: 'holySamuraiAtlas', frame: 'Run 0' },
+      { key: 'holySamuraiAtlas', frame: 'Run 1' },
+      { key: 'holySamuraiAtlas', frame: 'Run 2' },
+      { key: 'holySamuraiAtlas', frame: 'Run 3' }
+    ],
+    frameRate: 15,
+    repeat: -1
+  },
+  {
+    key: 'holySamurai_player_jump',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Jump 0' },
+      { key: 'holySamuraiAtlas', frame: 'Jump 1' },
+      { key: 'holySamuraiAtlas', frame: 'Jump 2' },
+      { key: 'holySamuraiAtlas', frame: 'Jump 3' }
+    ],
+    frameRate: 10,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_fall',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Fall 0' },
+      { key: 'holySamuraiAtlas', frame: 'Fall 1' },
+      { key: 'holySamuraiAtlas', frame: 'Fall 2' },
+      { key: 'holySamuraiAtlas', frame: 'Fall 3' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'holySamurai_player_land',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Land 0' },
+      { key: 'holySamuraiAtlas', frame: 'Land 1' },
+      { key: 'holySamuraiAtlas', frame: 'Land 2' }
+    ],
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_dash',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Run 8' },
+      { key: 'holySamuraiAtlas', frame: 'Run 9' },
+      { key: 'holySamuraiAtlas', frame: 'Run 10' },
+      { key: 'holySamuraiAtlas', frame: 'Run 11' },
+      { key: 'holySamuraiAtlas', frame: 'Run 0' },
+      { key: 'holySamuraiAtlas', frame: 'Run 1' }
+    ],
+    frameRate: 20,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_attack_1',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Slash 1 0' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 1 1' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 1 2' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 1 3' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 1 4' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 1 5' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 1 6' }
+    ],
+    delay: 0,
+    showBeforeDelay: true,
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_attack_2',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Slash 2 0' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 2 1' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 2 2' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 2 3' },
+      { key: 'holySamuraiAtlas', frame: 'Slash 2 4' }
+    ],
+    delay: 0,
+    showBeforeDelay: true,
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_slash_heavy',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Glitch Out 0' },
+      { key: 'holySamuraiAtlas', frame: 'Glitch Out 1' },
+      { key: 'holySamuraiAtlas', frame: 'Glitch Out 2' },
+      { key: 'holySamuraiAtlas', frame: 'Glitch Out 3' },
+      { key: 'holySamuraiAtlas', frame: 'Glitch Out 4' }
+    ],
+    delay: 50,
+    showBeforeDelay: true,
+    frameRate: 15,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_attack_3',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 0' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 1' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 2' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 3' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 4' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 5' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 6' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 7' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 8' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 9' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 10' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 11' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 12' }
+    ],
+    delay: 50,
+    showBeforeDelay: true,
+    frameRate: 10,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_slam_attack',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 13' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 14' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 15' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 16' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 17' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 18' },
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 19' }
+    ],
+    delay: 100,
+    showBeforeDelay: true,
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_roll_attack',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 0' },
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 1' },
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 2' },
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 3' },
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 4' },
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 5' },
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 6' },
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 7' },
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 8' },
+      { key: 'holySamuraiAtlas', frame: 'Idle Gltich 9' }
+    ],
+    frameRate: 7,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_block',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Wall SIt' },
+      { key: 'holySamuraiAtlas', frame: 'Wall Slide 0' },
+      { key: 'holySamuraiAtlas', frame: 'Wall Slide 1' },
+      { key: 'holySamuraiAtlas', frame: 'Wall Slide 2' },
+      { key: 'holySamuraiAtlas', frame: 'Wall Slide 3' }
+    ],
+    delay: 100,
+    showBeforeDelay: true,
+    frameRate: 20,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_hit',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 0' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 1' }
+    ],
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_death',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 0' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 1' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 2' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 3' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 4' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 5' }
+    ],
+    frameRate: 8,
+    repeat: 0
+  }
+];
+
 const animationConfigs: { [K in PlayerSkins]?: Animation[] } = {
   'swordMaster': swordsMasterAnimationConfigs,
   'bloodSwordsMan': bloodSwordsmanAnimationConfigs,
-  'lordOfFlames': lordOfFlamesAnimationConfigs
+  'lordOfFlames': lordOfFlamesAnimationConfigs,
+  'holySamurai': holySamuraiAnimationConfigs
 };
 
 export const getAllAnimationConfigs = (): Animation[] => {
   return [
     ...swordsMasterAnimationConfigs,
     ...bloodSwordsmanAnimationConfigs,
-    ...lordOfFlamesAnimationConfigs
+    ...lordOfFlamesAnimationConfigs,
+    ...holySamuraiAnimationConfigs
   ];
 };
 

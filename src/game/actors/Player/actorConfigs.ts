@@ -34,8 +34,14 @@ const lordOfFlamesActorConfig: ActorConfig = {
 };
 
 const holySamuraiActorConfig: ActorConfig = {
-  ...swordMasterActorConfig
-  // TODO: Override any properties specific to holySamurai here
+  ...swordMasterActorConfig,
+  scale: 1.5,
+  bodyWidth: 40,
+  bodyHeight: 60,
+  centerXLeft: 0.6,
+  centerXRight: 0.4,
+  bodyOffsetY: 132,
+  attackPower: 35
 };
 
 const actorConfigs: { [K in PlayerSkins]: ActorConfig } = {

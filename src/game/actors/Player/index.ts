@@ -21,7 +21,7 @@ const skinFrameMap: { [K in PlayerSkins]: string } = {
   'swordMaster': 'Idle 0',
   'bloodSwordsMan': 'idle 0',
   'lordOfFlames': 'Idle 0',
-  'holySamurai': 'idle 0'
+  'holySamurai': 'Idle 0'
 };
 
 export class Player extends Actor {
@@ -139,7 +139,7 @@ export class Player extends Actor {
   }
 
   private getNextSkin(): PlayerSkins {
-    const skinOrder: PlayerSkins[] = ['swordMaster', 'bloodSwordsMan', 'lordOfFlames'];
+    const skinOrder: PlayerSkins[] = ['swordMaster', 'bloodSwordsMan', 'lordOfFlames', 'holySamurai'];
     const currentIndex = skinOrder.indexOf(this.playerSkin);
     const nextIndex = (currentIndex + 1) % skinOrder.length;
     return skinOrder[nextIndex];
