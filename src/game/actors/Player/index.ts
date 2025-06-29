@@ -80,9 +80,10 @@ export class Player extends Actor {
       } else if (animation.key.includes('_player_death')) {
         this.sprite.anims.stop();
       } else if (animation.key.includes('_player_dash')) {
-        // Dash animation completed, stop dashing
+        // Dash animation completed, stop dashing and reset velocity
         this.isDashing = false;
         this.dashTimer = 0;
+        this.sprite.setVelocityX(0);
       }
     });
   }
@@ -112,7 +113,7 @@ export class Player extends Actor {
       if (this.dashTimer >= this.DASH_DURATION) {
         this.isDashing = false;
         this.dashTimer = 0;
-        // Don't set velocity to 0 here, let normal movement handle it
+        this.sprite.setVelocityX(0);
       }
     }
   }
