@@ -6,7 +6,7 @@ export type PlayerAttackConfigFn = (_this: Player) => { [key: string]: AttackHit
 
 const swordsMasterAttackConfigs: PlayerAttackConfigFn =
   (_this: Player) => ({
-    'player_slash_1': {
+    'player_attack_1': {
       width: 200,
       height: 40,
       offsetX_right: 65,
@@ -16,7 +16,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower,
       attackerId: 'player'
     },
-    'player_slash_2': {
+    'player_attack_2': {
       width: 200,
       height: 40,
       offsetX_right: 65,
@@ -26,7 +26,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower,
       attackerId: 'player'
     },
-    'player_spin_attack': {
+    'player_attack_3': {
       width: 270,
       height: 70,
       offsetX_right: 45,
@@ -50,7 +50,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
 
 const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
   (_this: Player) => ({
-    'player_slash_1': {
+    'player_attack_1': {
       width: 250,
       height: 50,
       offsetX_right: 75,
@@ -60,7 +60,7 @@ const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower * 1.1,
       attackerId: 'player'
     },
-    'player_slash_2': {
+    'player_attack_2': {
       width: 280,
       height: 60,
       offsetX_right: 85,
@@ -70,11 +70,11 @@ const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
       damage: _this.attackPower * 1.3,
       attackerId: 'player'
     },
-    'player_spin_attack': {
-      width: 320,
+    'player_attack_3': {
+      width: 220,
       height: 80,
-      offsetX_right: 55,
-      offsetX_left: -55,
+      offsetX_right: 0,
+      offsetX_left: -0,
       offsetY: -40,
       duration: 450,
       damage: _this.attackPower * 1.8,

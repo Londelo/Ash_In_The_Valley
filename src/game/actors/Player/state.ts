@@ -35,11 +35,11 @@ export class State {
   }
 
   public isActionAnimations(animKey?: string): boolean {
-    return animKey === 'player_slash_1' ||
-      animKey === 'player_slash_2' ||
+    return animKey === 'player_attack_1' ||
+      animKey === 'player_attack_2' ||
       animKey === 'player_slam_attack' ||
       animKey === 'player_dash' ||
-      animKey === 'player_spin_attack' ||
+      animKey === 'player_attack_3' ||
       animKey === 'player_roll_attack' ||
       animKey === 'player_slash_heavy' ||
       animKey === 'player_land' ||
@@ -50,11 +50,11 @@ export class State {
 
   public isHighPriorityAnimation(animKey?: string): boolean {
     return animKey === 'player_land' ||
-      animKey === 'player_slash_1' ||
-      animKey === 'player_slash_2' ||
+      animKey === 'player_attack_1' ||
+      animKey === 'player_attack_2' ||
       animKey === 'player_slam_attack' ||
       animKey === 'player_dash' ||
-      animKey === 'player_spin_attack' ||
+      animKey === 'player_attack_3' ||
       animKey === 'player_roll_attack' ||
       animKey === 'player_slash_heavy' ||
       animKey === 'player_block' ||
@@ -67,7 +67,7 @@ export class State {
     const cursors = this.player.cursors;
     const isOnGround = this.player.sprite.body.onFloor();
 
-    const isSlashing = currentAnim === 'player_slash_1' || currentAnim === 'player_slash_2' || currentAnim === 'player_spin_attack';;;
+    const isSlashing = currentAnim === 'player_attack_1' || currentAnim === 'player_attack_2' || currentAnim === 'player_attack_3';;;
     const isDashing = currentAnim === 'player_dash';
     const isLanding = currentAnim === 'player_land';
     const isSlamming = currentAnim === 'player_slam_attack'

@@ -6,6 +6,7 @@ import { AnimationHelper } from '../../components/AnimationHelper';
 import { getAnimationConfig } from './animations';
 import { Actor, ActorConfig } from '../../components/Actor';
 import { getAttackConfig } from './attackConfigs';
+import { getActorConfig } from './actorConfigs';
 
 export type PlayerSkins = 'swordMaster' | 'bloodSwordsMan' | 'lordOfFames' | 'holySamurai'
 
@@ -33,27 +34,15 @@ export class Player extends Actor {
   private readonly COMBO_WINDOW_MAX = 600;
   private readonly COMBO_WINDOW_MIN = 300;
   private state: State;
-  private playerSkin: PlayerSkins = 'swordMaster'
+  private playerSkin: PlayerSkins;
   public attackHitboxManager: AttackHitboxManager;
+  public debugEnabled: boolean = false;
 
   constructor(scene: Scene, x: number, y: number) {
-    const actorConfig: ActorConfig = {
-      scale: 3,
-      bodyWidth: 15,
-      bodyHeight: 34,
-      centerXLeft: 0.7,
-      centerXRight: 0.305,
-      centerY: 1,
-      health: 100,
-      attackPower: 30,
-      invulnerabilityDuration: 1000,
-      bodyOffsetY: 0,
-      knockbackForce: 200,
-      deathAnimationKey: 'player_death',
-      hitAnimationKey: 'player_hit'
-    };
-
-    super(scene, x, y, skinAtlasMap[actorConfig.playerSkin || 'swordMaster'], skinFrameMap[actorConfig.playerSkin || 'swordMaster'], actorConfig);
+    const playerSkin: PlayerSkins = 'swordMaster'; // or pass as parameter if needed
+    const actorConfig: ActorConfig = getActorConfig(playerSkin);
+    super(scene, x, y, skinAtlasMap[playerSkin], skinFrameMap[playerSkin], actorConfig);
+    this.playerSkin = playerSkin;
     this.sprite.setDepth(1);
     this.attackHitboxManager = new AttackHitboxManager(scene);
   }
@@ -130,16 +119,11 @@ export class Player extends Actor {
 
   private changeSkin(newSkin: PlayerSkins) {
     if (this.playerSkin === newSkin) return;
-    
+
     this.playerSkin = newSkin;
-    
-    // Update sprite texture
-    this.sprite.setTexture(skinAtlasMap[newSkin], skinFrameMap[newSkin]);
-    
-    // Recreate animations for new skin
+
     this.createPlayerAnimations(this.scene);
-    
-    // Play idle animation
+    this.sprite.setTexture(skinAtlasMap[newSkin], skinFrameMap[newSkin]);
     this.sprite.play('player_idle');
   }
 
@@ -186,13 +170,13 @@ export class Player extends Actor {
       this.shouldResetCombo();
 
       if (this.comboState === 0) {
-        this.sprite.play('player_slash_1');
-        this.createAttackHitbox('player_slash_1');
+        this.sprite.play('player_attack_1');
+        this.createAttackHitbox('player_attack_1');
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 1) {
-        this.sprite.play('player_slash_2');
-        this.createAttackHitbox('player_slash_2');
+        this.sprite.play('player_attack_2');
+        this.createAttackHitbox('player_attack_2');
 
         const dashDirection = this.sprite.flipX ? -1 : 1;
         const dashDistance = 1500 * dashDirection;
@@ -201,8 +185,8 @@ export class Player extends Actor {
         this.comboState = 2;
         this.comboTimer = 0;
       } else if (this.comboState === 2) {
-        this.sprite.play('player_spin_attack');
-        this.createAttackHitbox('player_spin_attack');
+        this.sprite.play('player_attack_3');
+        this.createAttackHitbox('player_attack_3');
         this.resetCombo();
       }
     }
@@ -210,24 +194,10 @@ export class Player extends Actor {
 
   private handleSlamAttack(state: PlayerState) {
     if (state.shouldSlamAttack) {
-      this.shouldResetCombo();
-
-      if (state.isInAir && this.comboState === 0) {
+      if (state.isInAir) {
         this.sprite.play('player_slam_attack');
         this.createAttackHitbox('player_slam_attack');
         this.sprite.setVelocityY(400);
-        this.comboState = 1;
-        this.comboTimer = 0;
-      } else if (this.comboState === 0) {
-        this.sprite.play('player_slam_attack');
-        this.createAttackHitbox('player_slam_attack');
-        this.comboState = 1;
-        this.comboTimer = 0;
-      } else if (this.comboState === 1) {
-        setSpriteDirection(this.sprite, this.sprite.flipX ? 'right' : 'left', this.adjustForCenterOffset);
-        this.sprite.play('player_slam_attack');
-        this.createAttackHitbox('player_slam_attack');
-        this.resetCombo();
       }
     }
   }

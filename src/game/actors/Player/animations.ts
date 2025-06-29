@@ -92,7 +92,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_slash_1',
+    key: 'player_attack_1',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slash 1 0' },
       { key: 'swordMasterAtlas', frame: 'Slash 1 1' },
@@ -108,7 +108,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_slash_2',
+    key: 'player_attack_2',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slash 2 0' },
       { key: 'swordMasterAtlas', frame: 'Slash 2 1' },
@@ -138,7 +138,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_spin_attack',
+    key: 'player_attack_3',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Block 0' },
       { key: 'swordMasterAtlas', frame: 'Block 1' },
@@ -318,33 +318,38 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_slash_1',
-    frames: [
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 1 0' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 1 1' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 1 2' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 1 3' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 1 4' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 1 5' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 1 6' }
-    ],
-    delay: 50,
-    showBeforeDelay: true,
-    frameRate: 10,
-    repeat: 0
-  },
-  {
-    key: 'player_slash_2',
+    key: 'player_attack_1',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'double slash 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'double slash 1' },
       { key: 'bloodSwordsmanAtlas', frame: 'double slash 2' },
       { key: 'bloodSwordsmanAtlas', frame: 'double slash 3' },
-      { key: 'bloodSwordsmanAtlas', frame: 'double slash 4' }
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 4' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 5' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 6' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 7' }
     ],
-    delay: 50,
+    delay: 0,
     showBeforeDelay: true,
-    frameRate: 15,
+    frameRate: 12,
+    repeat: 0
+  },
+  {
+    key: 'player_attack_2',
+    frames: [
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 6' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 7' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 8' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 9' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 10' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 11' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 12' },
+      { key: 'bloodSwordsmanAtlas', frame: 'double slash 13' }
+
+    ],
+    delay: 0,
+    showBeforeDelay: true,
+    frameRate: 12,
     repeat: 0
   },
   {
@@ -364,7 +369,7 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'player_spin_attack',
+    key: 'player_attack_3',
     frames: [
       { key: 'bloodSwordsmanAtlas', frame: 'attack 3 0' },
       { key: 'bloodSwordsmanAtlas', frame: 'attack 3 1' },
@@ -373,7 +378,12 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
       { key: 'bloodSwordsmanAtlas', frame: 'attack 3 4' },
       { key: 'bloodSwordsmanAtlas', frame: 'attack 3 5' },
       { key: 'bloodSwordsmanAtlas', frame: 'attack 3 6' },
-      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 7' }
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 7' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 8' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 9' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 10' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 11' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 12' },
     ],
     delay: 50,
     showBeforeDelay: true,
@@ -383,11 +393,19 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
   {
     key: 'player_slam_attack',
     frames: [
-      { key: 'bloodSwordsmanAtlas', frame: 'jump slam 0' },
-      { key: 'bloodSwordsmanAtlas', frame: 'jump slam 1' },
-      { key: 'bloodSwordsmanAtlas', frame: 'jump slam 2' },
-      { key: 'bloodSwordsmanAtlas', frame: 'jump slam 3' },
-      { key: 'bloodSwordsmanAtlas', frame: 'jump slam 4' }
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 0' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 1' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 2' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 3' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 4' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 5' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 6' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 7' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 8' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 9' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 10' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 11' },
+      { key: 'bloodSwordsmanAtlas', frame: 'attack 3 12' },
     ],
     delay: 100,
     showBeforeDelay: true,

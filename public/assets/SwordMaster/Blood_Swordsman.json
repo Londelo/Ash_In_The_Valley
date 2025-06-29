@@ -783,14 +783,6 @@
     "sourceSize": { "w": 168, "h": 79 },
     "duration": 100
    },
-   "attack 12": {
-    "frame": { "x": 2016, "y": 869, "w": 168, "h": 79 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 168, "h": 79 },
-    "sourceSize": { "w": 168, "h": 79 },
-    "duration": 100
-   },
    "jump slam 0": {
     "frame": { "x": 0, "y": 948, "w": 168, "h": 79 },
     "rotated": false,
@@ -1259,20 +1251,20 @@
    { "name": "double slash", "from": 44, "to": 57, "direction": "forward", "color": "#000000ff" },
    { "name": "attack 3", "from": 58, "to": 70, "direction": "forward", "color": "#000000ff" },
    { "name": "attack 1", "from": 71, "to": 89, "direction": "forward", "color": "#000000ff" },
-   { "name": "attack", "from": 90, "to": 102, "direction": "forward", "color": "#000000ff" },
-   { "name": "jump slam", "from": 103, "to": 115, "direction": "forward", "color": "#000000ff" },
-   { "name": "hit", "from": 116, "to": 117, "direction": "forward", "color": "#000000ff" },
-   { "name": "blood gif", "from": 118, "to": 158, "direction": "forward", "color": "#000000ff" },
-   { "name": "death/blood teleport", "from": 118, "to": 128, "direction": "forward", "color": "#000000ff" },
-   { "name": "heart slam", "from": 129, "to": 146, "direction": "forward", "color": "#000000ff" },
-   { "name": "blood teleport 2", "from": 147, "to": 158, "direction": "forward", "color": "#000000ff" }
+   { "name": "attack", "from": 90, "to": 101, "direction": "forward", "color": "#000000ff" },
+   { "name": "jump slam", "from": 102, "to": 114, "direction": "forward", "color": "#000000ff" },
+   { "name": "hit", "from": 115, "to": 116, "direction": "forward", "color": "#000000ff" },
+   { "name": "blood gif", "from": 117, "to": 157, "direction": "forward", "color": "#000000ff" },
+   { "name": "death/blood teleport", "from": 117, "to": 127, "direction": "forward", "color": "#000000ff" },
+   { "name": "heart slam", "from": 128, "to": 145, "direction": "forward", "color": "#000000ff" },
+   { "name": "blood teleport 2", "from": 146, "to": 157, "direction": "forward", "color": "#000000ff" }
   ],
   "layers": [
-   { "name": "Sword Back", "opacity": 255, "blendMode": "normal" },
-   { "name": "Body", "opacity": 255, "blendMode": "normal" },
-   { "name": "sword Front", "opacity": 255, "blendMode": "normal" },
-   { "name": "vfx", "opacity": 255, "blendMode": "normal" },
-   { "name": "VFX 2", "opacity": 255, "blendMode": "normal" }
+   { "name": "Sword Back Copy", "opacity": 255, "blendMode": "normal" },
+   { "name": "Body Copy", "opacity": 255, "blendMode": "normal" },
+   { "name": "sword Front Copy", "opacity": 255, "blendMode": "normal" },
+   { "name": "vfx Copy", "opacity": 255, "blendMode": "normal" },
+   { "name": "VFX 2 Copy", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]
