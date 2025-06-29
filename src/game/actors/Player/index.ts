@@ -73,6 +73,21 @@ export class Player extends Actor {
     );
   }
 
+  private getAnimationDuration(animationKey: string): number {
+    const animation = this.scene.anims.get(animationKey);
+    if (!animation) {
+      console.warn(`Animation ${animationKey} not found`);
+      return 0;
+    }
+
+    // Calculate duration: (number of frames / frame rate) * 1000 to get milliseconds
+    const frameCount = animation.frames.length;
+    const frameRate = animation.frameRate;
+    const duration = (frameCount / frameRate) * 1000;
+    
+    return duration;
+  }
+
   private addPlayerAnimationListeners() {
     this.sprite.on('animationcomplete', (animation: Phaser.Animations.Animation) => {
       if (this.state.isActionAnimations(animation.key) && !animation.key.includes('_player_death')) {
@@ -215,18 +230,30 @@ export class Player extends Actor {
       this.shouldResetCombo();
 
       if (this.comboState === 0) {
-        this.sprite.play(`${this.playerSkin}_player_attack_1`);
-        this.createAttackHitbox(`${this.playerSkin}_player_attack_1`);
+        const attackKey = `${this.playerSkin}_player_attack_1`;
+        const duration = this.getAnimationDuration(attackKey);
+        console.log(`Attack 1 animation duration: ${duration}ms`);
+        
+        this.sprite.play(attackKey);
+        this.createAttackHitbox(attackKey);
         this.comboState = 1;
         this.comboTimer = 0;
       } else if (this.comboState === 1) {
-        this.sprite.play(`${this.playerSkin}_player_attack_2`);
-        this.createAttackHitbox(`${this.playerSkin}_player_attack_2`);
+        const attackKey = `${this.playerSkin}_player_attack_2`;
+        const duration = this.getAnimationDuration(attackKey);
+        console.log(`Attack 2 animation duration: ${duration}ms`);
+        
+        this.sprite.play(attackKey);
+        this.createAttackHitbox(attackKey);
         this.comboState = 2;
         this.comboTimer = 0;
       } else if (this.comboState === 2) {
-        this.sprite.play(`${this.playerSkin}_player_attack_3`);
-        this.createAttackHitbox(`${this.playerSkin}_player_attack_3`);
+        const attackKey = `${this.playerSkin}_player_attack_3`;
+        const duration = this.getAnimationDuration(attackKey);
+        console.log(`Attack 3 animation duration: ${duration}ms`);
+        
+        this.sprite.play(attackKey);
+        this.createAttackHitbox(attackKey);
         this.resetCombo();
       }
     }
@@ -235,8 +262,12 @@ export class Player extends Actor {
   private handleSlamAttack(state: PlayerState) {
     if (state.shouldSlamAttack) {
       if (state.isInAir) {
-        this.sprite.play(`${this.playerSkin}_player_slam_attack`);
-        this.createAttackHitbox(`${this.playerSkin}_player_slam_attack`);
+        const attackKey = `${this.playerSkin}_player_slam_attack`;
+        const duration = this.getAnimationDuration(attackKey);
+        console.log(`Slam attack animation duration: ${duration}ms`);
+        
+        this.sprite.play(attackKey);
+        this.createAttackHitbox(attackKey);
         this.sprite.setVelocityY(400);
       }
     }
