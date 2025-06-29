@@ -68,12 +68,14 @@ export class AttackHitbox {
   public sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   public config: AttackHitboxConfig;
   public isActive: boolean = true;
+  public hitEntities: Set<string> = new Set();
   private scene: Phaser.Scene;
   private timer: Phaser.Time.TimerEvent;
 
   constructor(scene: Phaser.Scene, x: number, y: number, config: AttackHitboxConfig) {
     this.scene = scene;
     this.config = config;
+    this.hitEntities = new Set<string>();
 
     this.sprite = scene.physics.add.sprite(x, y, '');
     this.sprite.setVisible(false);
@@ -84,6 +86,14 @@ export class AttackHitbox {
     this.timer = scene.time.delayedCall(config.duration, () => {
       this.destroy();
     });
+  }
+
+  public hasHitEntity(entityId: string): boolean {
+    return this.hitEntities.has(entityId);
+  }
+
+  public addHitEntity(entityId: string): void {
+    this.hitEntities.add(entityId);
   }
 
   public destroy() {

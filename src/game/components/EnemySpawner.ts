@@ -165,13 +165,27 @@ export class EnemySpawner {
     const enemy = this.enemies.find(e => e.sprite === enemySprite);
 
     if (attackHitbox && enemy && attackHitbox.isActive) {
+      // Get enemy's unique identifier
+      const enemyId = 'uniqueId' in enemy ? (enemy as any).uniqueId : enemy.sprite.name || 'unknown';
+      
+      // Check if this hitbox has already hit this enemy
+      if (attackHitbox.hasHitEntity(enemyId)) {
+        return; // Skip damage - this enemy was already hit by this hitbox
+      }
+
+      // Mark this enemy as hit by this hitbox
+      attackHitbox.addHitEntity(enemyId);
+
+      // Apply damage
       enemy.takeDamage(attackHitbox.config.damage);
-      attackHitbox.destroy();
 
       // Emit damage event for specific enemy
       if ('uniqueId' in enemy) {
         EventBus.emit(`damage_${(enemy as any).uniqueId}`, attackHitbox.config.damage);
       }
+
+      // NOTE: We do NOT destroy the hitbox here anymore!
+      // The hitbox will be destroyed by its own timer after the duration expires
     }
   };
 
@@ -179,8 +193,19 @@ export class EnemySpawner {
     const attackHitbox = enemyAttack.attackHitbox;
 
     if (attackHitbox && attackHitbox.isActive) {
+      // Check if this hitbox has already hit the player
+      if (attackHitbox.hasHitEntity('player')) {
+        return; // Skip damage - player was already hit by this hitbox
+      }
+
+      // Mark player as hit by this hitbox
+      attackHitbox.addHitEntity('player');
+
+      // Apply damage
       this.player.takeDamage(attackHitbox.config.damage);
-      attackHitbox.destroy();
+
+      // NOTE: We do NOT destroy the hitbox here anymore!
+      // The hitbox will be destroyed by its own timer after the duration expires
     }
   };
 
