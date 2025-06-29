@@ -98,9 +98,7 @@ export const swordsMasterAnimationConfigs: Animation[] = [
       { key: 'swordMasterAtlas', frame: 'Slash 1 1' },
       { key: 'swordMasterAtlas', frame: 'Slash 1 2' },
       { key: 'swordMasterAtlas', frame: 'Slash 1 3' },
-      { key: 'swordMasterAtlas', frame: 'Slash 1 4' },
-      { key: 'swordMasterAtlas', frame: 'Slash 1 5' },
-      { key: 'swordMasterAtlas', frame: 'Slash 1 6' }
+      { key: 'swordMasterAtlas', frame: 'Slash 1 4' }
     ],
     delay: 50,
     showBeforeDelay: true,

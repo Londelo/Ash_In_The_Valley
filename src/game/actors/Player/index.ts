@@ -84,14 +84,14 @@ export class Player extends Actor {
     const frameCount = animation.frames.length;
     const frameRate = animation.frameRate;
     const duration = (frameCount / frameRate) * 1000;
-    
+
     return duration;
   }
 
   private setComboWindow(animationKey: string) {
     const duration = this.getAnimationDuration(animationKey);
-    this.comboWindowMin = duration - 100;
-    this.comboWindowMax = duration + 100;
+    this.comboWindowMin = duration - 150;
+    this.comboWindowMax = duration + 150;
     console.log(`Combo window set: ${this.comboWindowMin}ms - ${this.comboWindowMax}ms (animation: ${duration}ms)`);
   }
 
@@ -149,14 +149,14 @@ export class Player extends Actor {
 
   private isInComboWindow(): boolean {
     if (this.comboState === 0) return true; // First attack always allowed
-    
+
     return this.comboTimer >= this.comboWindowMin && this.comboTimer <= this.comboWindowMax;
   }
 
   private updateComboTimer(deltaTime: number) {
     if (this.comboState > 0) {
       this.comboTimer += deltaTime * 1000;
-      
+
       // Reset combo if we exceed the max window
       if (this.comboTimer > this.comboWindowMax) {
         console.log(`Combo reset - exceeded window (${this.comboTimer}ms > ${this.comboWindowMax}ms)`);
@@ -252,7 +252,7 @@ export class Player extends Actor {
       if (this.comboState === 0) {
         const attackKey = `${this.playerSkin}_player_attack_1`;
         this.setComboWindow(attackKey);
-        
+
         this.sprite.play(attackKey);
         this.createAttackHitbox(attackKey);
         this.comboState = 1;
@@ -261,7 +261,7 @@ export class Player extends Actor {
       } else if (this.comboState === 1) {
         const attackKey = `${this.playerSkin}_player_attack_2`;
         this.setComboWindow(attackKey);
-        
+
         this.sprite.play(attackKey);
         this.createAttackHitbox(attackKey);
         this.comboState = 2;
@@ -269,7 +269,7 @@ export class Player extends Actor {
         console.log('Combo continued - Attack 2');
       } else if (this.comboState === 2) {
         const attackKey = `${this.playerSkin}_player_attack_3`;
-        
+
         this.sprite.play(attackKey);
         this.createAttackHitbox(attackKey);
         this.resetCombo();
@@ -284,7 +284,7 @@ export class Player extends Actor {
         const attackKey = `${this.playerSkin}_player_slam_attack`;
         const duration = this.getAnimationDuration(attackKey);
         console.log(`Slam attack animation duration: ${duration}ms`);
-        
+
         this.sprite.play(attackKey);
         this.createAttackHitbox(attackKey);
         this.sprite.setVelocityY(400);
