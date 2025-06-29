@@ -108,7 +108,7 @@ export class Player extends Actor {
   private updateDash(delta: number) {
     if (this.isDashing) {
       this.dashTimer += delta;
-      
+
       // Stop dash after duration
       if (this.dashTimer >= this.DASH_DURATION) {
         this.isDashing = false;
@@ -222,11 +222,6 @@ export class Player extends Actor {
       } else if (this.comboState === 1) {
         this.sprite.play(`${this.playerSkin}_player_attack_2`);
         this.createAttackHitbox(`${this.playerSkin}_player_attack_2`);
-
-        const dashDirection = this.sprite.flipX ? -1 : 1;
-        const dashDistance = 1500 * dashDirection;
-        this.sprite.x += dashDistance * deltaTime;
-
         this.comboState = 2;
         this.comboTimer = 0;
       } else if (this.comboState === 2) {
@@ -258,7 +253,7 @@ export class Player extends Actor {
 
   private handleBlock(state: PlayerState) {
     if (state.shouldBlock) {
-      this.sprite.play(`${this.playerSkin}_player_block`);
+      this.sprite.play(`${this.playerSkin}_player_heal`);
       this.comboState = 2;
       this.comboTimer = 0;
     }

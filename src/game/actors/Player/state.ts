@@ -46,7 +46,7 @@ export class State {
       animKey.includes('_player_roll_attack') ||
       animKey.includes('_player_slash_heavy') ||
       animKey.includes('_player_land') ||
-      animKey.includes('_player_block') ||
+      animKey.includes('_player_heal') ||
       animKey.includes('_player_hit') ||
       animKey.includes('_player_death');
   }
@@ -61,7 +61,7 @@ export class State {
       animKey.includes('_player_attack_3') ||
       animKey.includes('_player_roll_attack') ||
       animKey.includes('_player_slash_heavy') ||
-      animKey.includes('_player_block') ||
+      animKey.includes('_player_heal') ||
       animKey.includes('_player_hit') ||
       animKey.includes('_player_death');
   }
@@ -71,16 +71,16 @@ export class State {
     const cursors = this.player.cursors;
     const isOnGround = this.player.sprite.body.onFloor();
 
-    const isSlashing = currentAnim?.includes('_player_attack_1') || currentAnim?.includes('_player_attack_2') || currentAnim?.includes('_player_attack_3');
-    const isDashing = currentAnim?.includes('_player_dash') || (this.player as any).isDashing;
-    const isLanding = currentAnim?.includes('_player_land');
-    const isSlamming = currentAnim?.includes('_player_slam_attack');
-    const isBlocking = currentAnim?.includes('_player_block');
+    const isSlashing = !!(currentAnim?.includes('_player_attack_1') || currentAnim?.includes('_player_attack_2') || currentAnim?.includes('_player_attack_3'));
+    const isDashing = !!(currentAnim?.includes('_player_dash') || (this.player as any).isDashing);
+    const isLanding = !!currentAnim?.includes('_player_land');
+    const isSlamming = !!currentAnim?.includes('_player_slam_attack');
+    const isBlocking = !!currentAnim?.includes('_player_heal');
     const isInAir = !isOnGround;
 
     // Track landing state
     const shouldLand = this.wasInAir && isOnGround && !isSlashing && !isDashing && !isSlamming && !isBlocking;
-    
+
     // Update air state tracking
     this.wasInAir = isInAir;
 
@@ -97,17 +97,18 @@ export class State {
                        !isSlamming &&
                        !isSlashing &&
                        !isDashing &&
-                       !isLanding
+                       !isLanding &&
+                       this.player.playerSkin !== 'lordOfFlames'
 
-    const shouldAttack = Phaser.Input.Keyboard.JustDown(inputKeys.R) && 
-                        isOnGround && 
+    const shouldAttack = Phaser.Input.Keyboard.JustDown(inputKeys.R) &&
+                        isOnGround &&
                         !isLanding
 
-    const shouldBlock = Phaser.Input.Keyboard.JustDown(inputKeys.W) && 
-                       isOnGround && 
-                       !isBlocking && 
-                       !isDashing && 
-                       !isInAir && 
+    const shouldBlock = Phaser.Input.Keyboard.JustDown(inputKeys.W) &&
+                       isOnGround &&
+                       !isBlocking &&
+                       !isDashing &&
+                       !isInAir &&
                        !isLanding
 
     const shouldSlamAttack = Phaser.Input.Keyboard.JustDown(inputKeys.E) && !isLanding
@@ -117,7 +118,8 @@ export class State {
                        !isSlamming &&
                        !isSlashing &&
                        !isDashing &&
-                       !isLanding
+                       !isLanding &&
+                       this.player.playerSkin !== 'lordOfFlames'
 
     const shouldFall = this.player.sprite.body.velocity.y > 0 &&
                        isInAir &&

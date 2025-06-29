@@ -423,7 +423,15 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
       { key: 'lordOfFlamesAtlas', frame: 'Move 4' },
       { key: 'lordOfFlamesAtlas', frame: 'Move 5' },
       { key: 'lordOfFlamesAtlas', frame: 'Move 6' },
-      { key: 'lordOfFlamesAtlas', frame: 'Move 7' }
+      { key: 'lordOfFlamesAtlas', frame: 'Move 7' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 12' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 13' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 14' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 15' }
     ],
     frameRate: 12,
     repeat: -1
@@ -431,6 +439,14 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
   {
     key: 'lordOfFlames_player_run',
     frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Move 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 7' },
       { key: 'lordOfFlamesAtlas', frame: 'Move 8' },
       { key: 'lordOfFlamesAtlas', frame: 'Move 9' },
       { key: 'lordOfFlamesAtlas', frame: 'Move 10' },
@@ -474,12 +490,19 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
   {
     key: 'lordOfFlames_player_dash',
     frames: [
-      { key: 'lordOfFlamesAtlas', frame: 'Move 8' },
-      { key: 'lordOfFlamesAtlas', frame: 'Move 9' },
-      { key: 'lordOfFlamesAtlas', frame: 'Move 10' },
-      { key: 'lordOfFlamesAtlas', frame: 'Move 11' },
-      { key: 'lordOfFlamesAtlas', frame: 'Move 12' },
-      { key: 'lordOfFlamesAtlas', frame: 'Move 13' }
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 7' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 12' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 13' },
+      { key: 'lordOfFlamesAtlas', frame: 'Spear 14' }
     ],
     frameRate: 20,
     repeat: 0
@@ -511,7 +534,11 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
       { key: 'lordOfFlamesAtlas', frame: 'Attack 12' },
       { key: 'lordOfFlamesAtlas', frame: 'Attack 13' },
       { key: 'lordOfFlamesAtlas', frame: 'Attack 14' },
-      { key: 'lordOfFlamesAtlas', frame: 'Attack 15' }
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 15' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 16' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 17' },
+      { key: 'lordOfFlamesAtlas', frame: 'Attack 18' }
+
     ],
     delay: 0,
     showBeforeDelay: true,
@@ -521,19 +548,21 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
   {
     key: 'lordOfFlames_player_attack_3',
     frames: [
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 0' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 1' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 2' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 3' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 4' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 5' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 6' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 7' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 8' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 9' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 10' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 11' },
-      { key: 'lordOfFlamesAtlas', frame: 'Spear 12' }
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 2' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 3' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 4' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 7' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 12' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 13' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 14' }
     ],
     delay: 50,
     showBeforeDelay: true,
@@ -555,7 +584,9 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
       { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 9' },
       { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 10' },
       { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 11' },
-      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 12' }
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 12' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 13' },
+      { key: 'lordOfFlamesAtlas', frame: 'Chain Stab 14' }
     ],
     delay: 100,
     showBeforeDelay: true,
@@ -563,14 +594,21 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
-    key: 'lordOfFlames_player_block',
+    key: 'lordOfFlames_player_heal',
     frames: [
+
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 9' },
       { key: 'lordOfFlamesAtlas', frame: 'BUff 10' },
       { key: 'lordOfFlamesAtlas', frame: 'BUff 11' },
       { key: 'lordOfFlamesAtlas', frame: 'BUff 12' },
       { key: 'lordOfFlamesAtlas', frame: 'BUff 13' },
       { key: 'lordOfFlamesAtlas', frame: 'BUff 14' },
-      { key: 'lordOfFlamesAtlas', frame: 'BUff 15' }
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 15' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 16' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 17' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 18' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 19' },
+      { key: 'lordOfFlamesAtlas', frame: 'BUff 20' }
     ],
     delay: 100,
     showBeforeDelay: true,
@@ -581,7 +619,8 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
     key: 'lordOfFlames_player_hit',
     frames: [
       { key: 'lordOfFlamesAtlas', frame: 'Death 0' },
-      { key: 'lordOfFlamesAtlas', frame: 'Death 1' }
+      { key: 'lordOfFlamesAtlas', frame: 'Death 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 2' }
     ],
     frameRate: 12,
     repeat: 0
@@ -639,7 +678,11 @@ export const holySamuraiAnimationConfigs: Animation[] = [
       { key: 'holySamuraiAtlas', frame: 'Run 4' },
       { key: 'holySamuraiAtlas', frame: 'Run 5' },
       { key: 'holySamuraiAtlas', frame: 'Run 6' },
-      { key: 'holySamuraiAtlas', frame: 'Run 7' }
+      { key: 'holySamuraiAtlas', frame: 'Run 7' },
+      { key: 'holySamuraiAtlas', frame: 'Run 8' },
+      { key: 'holySamuraiAtlas', frame: 'Run 9' },
+      { key: 'holySamuraiAtlas', frame: 'Run 10' },
+      { key: 'holySamuraiAtlas', frame: 'Run 11' }
     ],
     frameRate: 12,
     repeat: -1
@@ -647,14 +690,18 @@ export const holySamuraiAnimationConfigs: Animation[] = [
   {
     key: 'holySamurai_player_run',
     frames: [
-      { key: 'holySamuraiAtlas', frame: 'Run 8' },
-      { key: 'holySamuraiAtlas', frame: 'Run 9' },
-      { key: 'holySamuraiAtlas', frame: 'Run 10' },
-      { key: 'holySamuraiAtlas', frame: 'Run 11' },
       { key: 'holySamuraiAtlas', frame: 'Run 0' },
       { key: 'holySamuraiAtlas', frame: 'Run 1' },
       { key: 'holySamuraiAtlas', frame: 'Run 2' },
-      { key: 'holySamuraiAtlas', frame: 'Run 3' }
+      { key: 'holySamuraiAtlas', frame: 'Run 3' },
+      { key: 'holySamuraiAtlas', frame: 'Run 4' },
+      { key: 'holySamuraiAtlas', frame: 'Run 5' },
+      { key: 'holySamuraiAtlas', frame: 'Run 6' },
+      { key: 'holySamuraiAtlas', frame: 'Run 7' },
+      { key: 'holySamuraiAtlas', frame: 'Run 8' },
+      { key: 'holySamuraiAtlas', frame: 'Run 9' },
+      { key: 'holySamuraiAtlas', frame: 'Run 10' },
+      { key: 'holySamuraiAtlas', frame: 'Run 11' }
     ],
     frameRate: 15,
     repeat: -1
@@ -662,10 +709,10 @@ export const holySamuraiAnimationConfigs: Animation[] = [
   {
     key: 'holySamurai_player_jump',
     frames: [
-      { key: 'holySamuraiAtlas', frame: 'Jump 0' },
-      { key: 'holySamuraiAtlas', frame: 'Jump 1' },
-      { key: 'holySamuraiAtlas', frame: 'Jump 2' },
-      { key: 'holySamuraiAtlas', frame: 'Jump 3' }
+      { key: 'holySamuraiAtlas', frame: 'Jump Glitch 0' },
+      { key: 'holySamuraiAtlas', frame: 'Jump Glitch 1' },
+      { key: 'holySamuraiAtlas', frame: 'Jump Glitch 2' },
+      { key: 'holySamuraiAtlas', frame: 'Jump Glitch 3' }
     ],
     frameRate: 10,
     repeat: 0
@@ -694,40 +741,40 @@ export const holySamuraiAnimationConfigs: Animation[] = [
   {
     key: 'holySamurai_player_dash',
     frames: [
-      { key: 'holySamuraiAtlas', frame: 'Run 8' },
-      { key: 'holySamuraiAtlas', frame: 'Run 9' },
-      { key: 'holySamuraiAtlas', frame: 'Run 10' },
-      { key: 'holySamuraiAtlas', frame: 'Run 11' },
-      { key: 'holySamuraiAtlas', frame: 'Run 0' },
-      { key: 'holySamuraiAtlas', frame: 'Run 1' }
+      { key: 'holySamuraiAtlas', frame: 'Jump Glitch 0' },
+      { key: 'holySamuraiAtlas', frame: 'Jump Glitch 1' },
+      { key: 'holySamuraiAtlas', frame: 'Jump Glitch 2' },
+      { key: 'holySamuraiAtlas', frame: 'Jump Glitch 3' }
     ],
-    frameRate: 20,
+    frameRate: 10,
     repeat: 0
   },
   {
     key: 'holySamurai_player_attack_1',
     frames: [
-      { key: 'holySamuraiAtlas', frame: 'Slash 1 0' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 1 1' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 1 2' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 1 3' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 1 4' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 1 5' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 1 6' }
+      { key: 'holySamuraiAtlas', frame: 'Slash_1 0' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_1 1' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_1 2' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_1 3' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_1 4' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_1 5' }
     ],
     delay: 0,
     showBeforeDelay: true,
-    frameRate: 12,
+    frameRate: 10,
     repeat: 0
   },
   {
     key: 'holySamurai_player_attack_2',
     frames: [
-      { key: 'holySamuraiAtlas', frame: 'Slash 2 0' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 2 1' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 2 2' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 2 3' },
-      { key: 'holySamuraiAtlas', frame: 'Slash 2 4' }
+      { key: 'holySamuraiAtlas', frame: 'Slash_2 0' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_2 1' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_2 2' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_2 3' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_2 4' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_2 5' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_2 6' },
+      { key: 'holySamuraiAtlas', frame: 'Slash_2 7' }
     ],
     delay: 0,
     showBeforeDelay: true,
@@ -737,21 +784,14 @@ export const holySamuraiAnimationConfigs: Animation[] = [
   {
     key: 'holySamurai_player_attack_3',
     frames: [
-      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 0' },
-      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 1' },
       { key: 'holySamuraiAtlas', frame: 'Gltich Attack 2' },
       { key: 'holySamuraiAtlas', frame: 'Gltich Attack 3' },
       { key: 'holySamuraiAtlas', frame: 'Gltich Attack 4' },
       { key: 'holySamuraiAtlas', frame: 'Gltich Attack 5' },
       { key: 'holySamuraiAtlas', frame: 'Gltich Attack 6' },
-      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 7' },
-      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 8' },
-      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 9' },
-      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 10' },
-      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 11' },
-      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 12' }
+      { key: 'holySamuraiAtlas', frame: 'Gltich Attack 7' }
     ],
-    delay: 50,
+    delay: 10,
     showBeforeDelay: true,
     frameRate: 10,
     repeat: 0
@@ -776,7 +816,8 @@ export const holySamuraiAnimationConfigs: Animation[] = [
     key: 'holySamurai_player_hit',
     frames: [
       { key: 'holySamuraiAtlas', frame: 'Death Frame 0' },
-      { key: 'holySamuraiAtlas', frame: 'Death Frame 1' }
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 1' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 2' }
     ],
     frameRate: 12,
     repeat: 0
