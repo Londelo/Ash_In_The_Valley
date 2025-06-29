@@ -702,7 +702,16 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
       { key: 'lordOfFlamesAtlas', frame: 'Death 2' },
       { key: 'lordOfFlamesAtlas', frame: 'Death 3' },
       { key: 'lordOfFlamesAtlas', frame: 'Death 4' },
-      { key: 'lordOfFlamesAtlas', frame: 'Death 5' }
+      { key: 'lordOfFlamesAtlas', frame: 'Death 5' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 7' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 8' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 9' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 10' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 11' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 12' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 13' },
+      { key: 'lordOfFlamesAtlas', frame: 'Death 14' }
     ],
     frameRate: 8,
     repeat: 0
@@ -933,7 +942,13 @@ export const holySamuraiAnimationConfigs: Animation[] = [
       { key: 'holySamuraiAtlas', frame: 'Death Frame 2' },
       { key: 'holySamuraiAtlas', frame: 'Death Frame 3' },
       { key: 'holySamuraiAtlas', frame: 'Death Frame 4' },
-      { key: 'holySamuraiAtlas', frame: 'Death Frame 5' }
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 5' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 6' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 7' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 8' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 9' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 10' },
+      { key: 'holySamuraiAtlas', frame: 'Death Frame 11' }
     ],
     frameRate: 8,
     repeat: 0
