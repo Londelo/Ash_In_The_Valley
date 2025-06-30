@@ -30,8 +30,10 @@ export class Player extends Actor {
   playerSpeed: number = 200;
   private readonly DASH_VELOCITY = 800;
   private readonly DASH_DURATION = 300; // milliseconds
+  private readonly WALL_SLIDE_VELOCITY = 50; // slow fall speed when wall sliding
   private dashTimer: number = 0;
   private isDashing: boolean = false;
+  private isWallSliding: boolean = false;
   private comboState: number = 0;
   private comboTimer: number = 0;
   private comboWindowMin: number = 0;
@@ -205,8 +207,8 @@ export class Player extends Actor {
   }
 
   private handleMovement(state: PlayerState) {
-    // Don't override dash velocity
-    if (this.isDashing) {
+    // Don't override dash velocity or wall slide
+    if (this.isDashing || state.isWallSliding) {
       return;
     }
 
@@ -220,7 +222,7 @@ export class Player extends Actor {
         this.sprite.setVelocityX(moveSpeed);
         setSpriteDirection(this.sprite, 'right', this.adjustForCenterOffset);
       }
-    } else if (state.justStoppedMoving && !this.isDashing) {
+    } else if (state.justStoppedMoving && !this.isDashing && !state.isWallSliding) {
       this.sprite.setVelocityX(0);
     }
   }
@@ -237,6 +239,40 @@ export class Player extends Actor {
       this.sprite.play(`${this.playerSkin}_player_run`);
     } else if (state.shouldPlayIdleAnimation) {
       this.sprite.play(`${this.playerSkin}_player_idle`);
+    }
+  }
+
+  private handleWallSlide(state: PlayerState) {
+    if (state.shouldWallSlide && !this.isWallSliding) {
+      this.isWallSliding = true;
+      this.sprite.setVelocityX(0);
+      this.sprite.setVelocityY(this.WALL_SLIDE_VELOCITY);
+      this.sprite.play(`${this.playerSkin}_player_wall_hold`);
+    } else if (!state.shouldWallSlide && this.isWallSliding) {
+      this.isWallSliding = false;
+      // Let gravity take over
+    }
+
+    // Maintain wall slide velocity
+    if (this.isWallSliding) {
+      this.sprite.setVelocityX(0);
+      this.sprite.setVelocityY(this.WALL_SLIDE_VELOCITY);
+    }
+  }
+
+  private handleWallJump(state: PlayerState) {
+    if (state.shouldWallJump) {
+      this.isWallSliding = false;
+      
+      // Jump away from wall
+      const jumpDirection = this.sprite.flipX ? 1 : -1;
+      this.sprite.setVelocityX(this.playerSpeed * jumpDirection);
+      this.sprite.setVelocityY(-600);
+      
+      // Face away from wall
+      setSpriteDirection(this.sprite, jumpDirection > 0 ? 'right' : 'left', this.adjustForCenterOffset);
+      
+      this.sprite.play(`${this.playerSkin}_player_jump`);
     }
   }
 
@@ -351,6 +387,8 @@ export class Player extends Actor {
     this.updateDash(delta);
 
     const state = this.state.getState(currentAnim);
+    this.handleWallSlide(state);
+    this.handleWallJump(state);
     this.handleSlash(state, deltaTime);
     this.handleSlamAttack(state);
     this.handleDash(state);

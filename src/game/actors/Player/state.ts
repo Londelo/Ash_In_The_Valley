@@ -26,6 +26,11 @@ export interface PlayerState {
   isLanding: boolean;
   isInAir: boolean;
   isOnGround: boolean;
+  
+  // Wall slide states
+  shouldWallSlide: boolean;
+  shouldWallJump: boolean;
+  isWallSliding: boolean;
 }
 
 export class State {
@@ -66,6 +71,28 @@ export class State {
       animKey.includes('_player_death');
   }
 
+  private canWallSlide(): boolean {
+    return this.player.playerSkin === 'swordMaster' || this.player.playerSkin === 'holySamurai';
+  }
+
+  private checkWallCollision(): 'left' | 'right' | null {
+    const sprite = this.player.sprite;
+    const worldBounds = this.player.scene.physics.world.bounds;
+    const tolerance = 10;
+
+    // Check left wall
+    if (sprite.x - sprite.displayWidth/2 <= worldBounds.x + tolerance) {
+      return 'left';
+    }
+    
+    // Check right wall  
+    if (sprite.x + sprite.displayWidth/2 >= worldBounds.width - tolerance) {
+      return 'right';
+    }
+
+    return null;
+  }
+
   public getState(currentAnim: string | undefined): PlayerState {
     const inputKeys = this.player.inputKeys;
     const cursors = this.player.cursors;
@@ -77,15 +104,32 @@ export class State {
     const isSlamming = !!currentAnim?.includes('_player_slam_attack');
     const isBlocking = !!currentAnim?.includes('_player_heal');
     const isInAir = !isOnGround;
+    const isWallSliding = !!currentAnim?.includes('_player_wall_hold');
+
+    // Wall slide logic
+    const wallCollision = this.checkWallCollision();
+    const isMovingLeft = cursors.left.isDown;
+    const isMovingRight = cursors.right.isDown;
+    
+    const shouldWallSlide = this.canWallSlide() && 
+                           isInAir && 
+                           !isSlashing && 
+                           !isDashing && 
+                           !isSlamming && 
+                           !isLanding &&
+                           wallCollision !== null &&
+                           ((wallCollision === 'left' && isMovingLeft) || 
+                            (wallCollision === 'right' && isMovingRight));
+
+    const shouldWallJump = isWallSliding && 
+                          Phaser.Input.Keyboard.JustDown(cursors.up);
 
     // Track landing state
-    const shouldLand = this.wasInAir && isOnGround && !isSlashing && !isDashing && !isSlamming && !isBlocking;
+    const shouldLand = this.wasInAir && isOnGround && !isSlashing && !isDashing && !isSlamming && !isBlocking && !isWallSliding;
 
     // Update air state tracking
     this.wasInAir = isInAir;
 
-    const isMovingLeft = cursors.left.isDown;
-    const isMovingRight = cursors.right.isDown;
     const justStoppedMoving = Phaser.Input.Keyboard.JustUp(cursors.left) || Phaser.Input.Keyboard.JustUp(cursors.right)
 
     const isMoving = isMovingLeft || isMovingRight;
@@ -98,20 +142,25 @@ export class State {
                        !isSlashing &&
                        !isDashing &&
                        !isLanding &&
+                       !isWallSliding &&
                        this.player.playerSkin !== 'lordOfFlames'
 
     const shouldAttack = Phaser.Input.Keyboard.JustDown(inputKeys.R) &&
                         isOnGround &&
-                        !isLanding
+                        !isLanding &&
+                        !isWallSliding
 
     const shouldBlock = Phaser.Input.Keyboard.JustDown(inputKeys.W) &&
                        isOnGround &&
                        !isBlocking &&
                        !isDashing &&
                        !isInAir &&
-                       !isLanding
+                       !isLanding &&
+                       !isWallSliding
 
-    const shouldSlamAttack = Phaser.Input.Keyboard.JustDown(inputKeys.E) && !isLanding
+    const shouldSlamAttack = Phaser.Input.Keyboard.JustDown(inputKeys.E) && 
+                            !isLanding && 
+                            !isWallSliding
 
     const shouldJump = Phaser.Input.Keyboard.JustDown(cursors.up) &&
                        isOnGround &&
@@ -119,6 +168,7 @@ export class State {
                        !isSlashing &&
                        !isDashing &&
                        !isLanding &&
+                       !isWallSliding &&
                        this.player.playerSkin !== 'lordOfFlames'
 
     const shouldFall = this.player.sprite.body.velocity.y > 0 &&
@@ -126,9 +176,11 @@ export class State {
                        !isSlamming &&
                        !isSlashing &&
                        !isDashing &&
-                       !isLanding
+                       !isLanding &&
+                       !shouldWallSlide &&
+                       !isWallSliding
 
-    const canMove = !isSlashing && !isDashing && !isLanding && !isSlamming
+    const canMove = !isSlashing && !isDashing && !isLanding && !isSlamming && !isWallSliding
 
     const shouldPlayIdleAnimation = isOnGround &&
                                    !isSlashing &&
@@ -136,6 +188,7 @@ export class State {
                                    !isLanding &&
                                    !isInAir &&
                                    !isMoving &&
+                                   !isWallSliding &&
                                    !currentAnim?.includes('_player_idle');
 
     const shouldPlayMovementAnimation = isOnGround &&
@@ -178,7 +231,11 @@ export class State {
       isDashing,
       isLanding,
       isInAir,
-      isOnGround
+      isOnGround,
+      
+      shouldWallSlide,
+      shouldWallJump,
+      isWallSliding
     };
   }
 }
