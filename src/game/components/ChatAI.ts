@@ -97,8 +97,21 @@ export class ChatAI {
     this.currentLocation = location;
 
     if (this.isConversationActive && location) {
-      this.startConversation({agent: {prompt: {prompt: ''}}})
-      this.sendContextualUpdate(`Player has entered location: ${location}`);
+      let userMessage = '';
+
+      if(location.includes('lvl_4')) {
+        userMessage = 'Im in Gehenna deep now at ' + location + '.'
+      }
+
+      if(location.includes('lvl_7')) {
+        userMessage = 'Im in Gehenna deep now at ' + location + '.'
+      }
+
+      if(location.includes('holy_place')) {
+        userMessage = 'Im in Gehenna deep now at ' + location + '.'
+      }
+
+      this.sendUserMessage(userMessage)
     }
   }
 
@@ -108,8 +121,12 @@ export class ChatAI {
     this.currentPlayerSkin = skin;
 
     if (this.isConversationActive) {
-      this.startConversation({agent: {prompt: {prompt: ''}}})
-      this.sendContextualUpdate(`Player has transformed into: ${skin}`);
+
+      if(skin === 'holySamurai') {
+        const userMessage = 'I just transformed into ' + skin + '.';
+        this.sendUserMessage(userMessage)
+      }
+
     }
   }
 
