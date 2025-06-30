@@ -37,7 +37,7 @@ export default class AvenWood extends Scene {
     const templeLocation = this.tileMapComponent.getObjectLayer('temple')?.objects[0] as any;
 
     // Determine player spawn position
-    let playerStartX = templeLocation.x * tileMapConfig.scale;
+    let playerStartX = config.player_start_x * tileMapConfig.scale;
     let playerStartY = config.player_start_y * tileMapConfig.scale;
 
     // Override with custom spawn if provided
@@ -54,9 +54,6 @@ export default class AvenWood extends Scene {
     this.prophet.create();
     this.temple.create();
 
-    // Setup enemy spawner
-    this.setupEnemySpawner();
-
     this.camera.startFollow(this.player.sprite);
     this.physics.world.setBounds(0, 0, mapWidth, mapHeight);
     this.camera.setBounds(0, 0, mapWidth, mapHeight);
@@ -67,20 +64,6 @@ export default class AvenWood extends Scene {
     this.physics.add.collider(this.temple.sprite, this.world);
 
     EventBus.emit('current-scene-ready', this);
-  }
-
-  private setupEnemySpawner(): void {
-    const spawnerConfig: EnemySpawnerConfig = {
-      enemyClass: DaggerBandit,
-      maxEnemies: 3,
-      spawnInterval: 5000,
-      spawnPoint: { x: 200, y: this.player.sprite.y },
-      spawnRadius: 100,
-      autoStart: true,
-      respawnDelay: 3000
-    };
-
-    this.enemySpawner = new EnemySpawner(this, this.player, spawnerConfig);
   }
 
   update(time: number, delta: number) {
