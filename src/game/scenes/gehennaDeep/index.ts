@@ -14,12 +14,15 @@ export default class GehennaDeep extends Scene {
   map: Phaser.Tilemaps.Tilemap;
   world: Phaser.Physics.Arcade.StaticGroup;
   exitZone: Phaser.Physics.Arcade.StaticGroup;
+  crossZone: Phaser.Physics.Arcade.StaticGroup;
 
   player: Player;
   tileMapComponent: TileMapComponent;
   locationManager: LocationManager;
   elkSpawner: EnemySpawner;
   deerSpawner: EnemySpawner;
+  inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
+  isPlayerInCrossZone: boolean = false;
 
   constructor() {
     super('GehennaDeep');
@@ -36,12 +39,18 @@ export default class GehennaDeep extends Scene {
 
     // Setup exit zone
     this.setupExitZone();
+    
+    // Setup cross zone
+    this.setupCrossZone();
 
     const { width: mapWidth, height: mapHeight } = this.tileMapComponent.getMapDimensions();
     const playerSpawn: any = this.tileMapComponent.getObjectLayer('spawn')?.objects[0];
 
     this.player = new Player(this, playerSpawn.x * tileMapConfig.scale, playerSpawn.y * tileMapConfig.scale);
     this.player.create();
+
+    // Setup input keys
+    this.inputKeys = this.setupInputKeys();
 
     // Setup Elk spawner
     this.setupElkSpawner();
@@ -74,7 +83,66 @@ export default class GehennaDeep extends Scene {
       this
     );
 
+    // Setup cross zone collision
+    this.physics.add.overlap(
+      this.player.sprite,
+      this.crossZone,
+      this.handleCrossZoneOverlap,
+      undefined,
+      this
+    );
+
     EventBus.emit('current-scene-ready', this);
+  }
+
+  private setupInputKeys() {
+    if (this.input && this.input.keyboard) {
+      const inputKeys = this.input.keyboard.addKeys('T') as { [key: string]: Phaser.Input.Keyboard.Key };
+      return inputKeys;
+    } else {
+      throw new Error('Keyboard input plugin is not available.');
+    }
+  }
+
+  private setupCrossZone(): void {
+    this.crossZone = this.physics.add.staticGroup();
+    const locationsLayer = this.tileMapComponent.getObjectLayer('locations');
+
+    if (locationsLayer && locationsLayer.objects) {
+      const crossObject = locationsLayer.objects.find((obj: any) => obj.name === 'cross');
+      
+      if (crossObject) {
+        const crossRect = this.add.rectangle(
+          crossObject.x * config.tileMapConfig.scale,
+          crossObject.y * config.tileMapConfig.scale,
+          crossObject.width * config.tileMapConfig.scale,
+          crossObject.height * config.tileMapConfig.scale,
+          0x0000ff,
+          0
+        );
+        crossRect.setOrigin(0, 0);
+        this.crossZone.add(crossRect);
+        console.log('Cross zone created at', crossObject.x, crossObject.y);
+      } else {
+        console.warn('No location object with name "cross" found');
+      }
+    }
+  }
+
+  private handleCrossZoneOverlap = () => {
+    this.isPlayerInCrossZone = true;
+  }
+
+  private handleCrossZoneTransformation() {
+    if (this.isPlayerInCrossZone && Phaser.Input.Keyboard.JustDown(this.inputKeys.T)) {
+      this.player.changeSkin('holySamurai');
+      console.log('Player transformed to Holy Samurai in cross zone');
+    }
+    
+    // Reset flag if player is not in the cross zone anymore
+    if (!this.physics.overlap(this.player.sprite, this.crossZone)) {
+      this.isPlayerInCrossZone = false;
+    }
   }
 
   private setupElkSpawner(): void {
@@ -180,5 +248,8 @@ export default class GehennaDeep extends Scene {
     if (this.deerSpawner) {
       this.deerSpawner.update(time, delta);
     }
+    
+    // Handle cross zone transformation
+    this.handleCrossZoneTransformation();
   }
 }
