@@ -80,7 +80,7 @@ const config = {
       autoStart: true
     },
     lvl_4: {
-      maxEnemies: 30,
+      maxEnemies: 15,
       spawnInterval: 500,
       spawnRadius: 0,
       respawnDelay: 0,

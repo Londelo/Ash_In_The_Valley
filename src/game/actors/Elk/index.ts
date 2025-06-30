@@ -62,8 +62,6 @@ export class Elk extends Actor {
 
       // Emit event for boss manager
       EventBus.emit('elk_death');
-
-      console.log('Elk death triggered player transformation to bloodSwordsman');
     }
   }
 

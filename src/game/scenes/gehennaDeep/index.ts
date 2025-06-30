@@ -134,7 +134,6 @@ export default class GehennaDeep extends Scene {
         );
         crossRect.setOrigin(0, 0);
         this.crossZone.add(crossRect);
-        console.log('Cross zone created at', crossObject.x, crossObject.y);
       } else {
         console.warn('No location object with name "cross" found');
       }
@@ -148,7 +147,6 @@ export default class GehennaDeep extends Scene {
   private handleCrossZoneTransformation() {
     if (this.isPlayerInCrossZone && Phaser.Input.Keyboard.JustDown(this.inputKeys.T)) {
       this.player.changeSkin('holySamurai');
-      console.log('Player transformed to Holy Samurai in cross zone');
     }
 
     // Reset flag if player is not in the cross zone anymore
@@ -177,7 +175,6 @@ export default class GehennaDeep extends Scene {
         };
 
         this.elkSpawner = new EnemySpawner(this, this.player, spawnerConfig);
-        console.log('Elk spawner created at blood powerSpawn location');
       } else {
         console.warn('No powerSpawn object with name "blood" found');
       }
@@ -206,7 +203,6 @@ export default class GehennaDeep extends Scene {
         };
 
         this.deerSpawner = new EnemySpawner(this, this.player, spawnerConfig);
-        console.log('Deer spawner created at deer powerSpawn location');
       } else {
         console.warn('No powerSpawn object with name "deer" found');
       }
@@ -257,7 +253,7 @@ export default class GehennaDeep extends Scene {
     this.player.update(time, delta);
     this.locationManager.update(time, delta);
     this.bossManager.update(time, delta);
-    
+
     if (this.elkSpawner) {
       this.elkSpawner.update(time, delta);
     }

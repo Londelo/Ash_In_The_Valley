@@ -83,7 +83,6 @@ export class LocationManager {
       });
     }
 
-    console.log(`Found ${this.spawnPoints.length} enemy spawn points`);
   }
 
   private getPlayerCurrentLocation(): string | null {
@@ -109,7 +108,6 @@ export class LocationManager {
     const config = this.locationConfigs[locationName];
 
     if (!config || spawnPoints.length === 0) {
-      console.log(`No config or spawn points found for location: ${locationName}`);
       return;
     }
 
@@ -129,7 +127,6 @@ export class LocationManager {
       }
     });
 
-    console.log(`Activated spawners for location: ${locationName} with ${spawnPoints.length} spawn points`);
   }
 
   private pauseLocationSpawners(locationName: string): void {
@@ -142,7 +139,6 @@ export class LocationManager {
       }
     });
 
-    console.log(`Paused spawners for location: ${locationName}`);
   }
 
   public update(time: number, delta: number): void {
@@ -160,7 +156,6 @@ export class LocationManager {
       }
 
       this.currentLocation = newLocation;
-      console.log(`Player entered location: ${newLocation || 'unknown'}`);
     }
 
     // Update all active spawners

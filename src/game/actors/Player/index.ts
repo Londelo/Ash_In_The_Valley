@@ -91,7 +91,6 @@ export class Player extends Actor {
     const duration = this.getAnimationDuration(animationKey);
     this.comboWindowMin = duration - 150;
     this.comboWindowMax = duration + 150;
-    console.log(`Combo window set: ${this.comboWindowMin}ms - ${this.comboWindowMax}ms (animation: ${duration}ms)`);
   }
 
   private addPlayerAnimationListeners() {
@@ -158,7 +157,6 @@ export class Player extends Actor {
 
       // Reset combo if we exceed the max window
       if (this.comboTimer > this.comboWindowMax) {
-        console.log(`Combo reset - exceeded window (${this.comboTimer}ms > ${this.comboWindowMax}ms)`);
         this.resetCombo();
       }
     }
@@ -184,7 +182,6 @@ export class Player extends Actor {
     // Play idle animation with new skin prefix
     this.sprite.play(`${this.playerSkin}_player_idle`);
 
-    console.log('Skin changed successfully to', newSkin);
   }
 
   private getNextSkin(): PlayerSkins {
@@ -240,7 +237,6 @@ export class Player extends Actor {
       this.sprite.setVelocityY(0);
       this.sprite.play(`${this.playerSkin}_player_wall_hold`);
     } else if (state.shouldStopWallSlide && state.isWallSliding) {
-      console.log('Stopping wall slide');
       this.sprite.play(`${this.playerSkin}_player_idle`);
       this.sprite.body.setGravityY(0); // Restore normal gravity
       this.sprite.setVelocityY(0);
@@ -280,7 +276,6 @@ export class Player extends Actor {
         this.createAttackHitbox(attackKey);
         this.comboState = 1;
         this.comboTimer = 0;
-        console.log('Started combo - Attack 1');
       } else if (this.comboState === 1) {
         const attackKey = `${this.playerSkin}_player_attack_2`;
         this.setComboWindow(attackKey);
@@ -289,14 +284,12 @@ export class Player extends Actor {
         this.createAttackHitbox(attackKey);
         this.comboState = 2;
         this.comboTimer = 0;
-        console.log('Combo continued - Attack 2');
       } else if (this.comboState === 2) {
         const attackKey = `${this.playerSkin}_player_attack_3`;
 
         this.sprite.play(attackKey);
         this.createAttackHitbox(attackKey);
         this.resetCombo();
-        console.log('Combo finished - Attack 3');
       }
     }
   }
@@ -306,7 +299,6 @@ export class Player extends Actor {
       if (state.isInAir) {
         const attackKey = `${this.playerSkin}_player_slam_attack`;
         const duration = this.getAnimationDuration(attackKey);
-        console.log(`Slam attack animation duration: ${duration}ms`);
 
         this.sprite.play(attackKey);
         this.createAttackHitbox(attackKey);

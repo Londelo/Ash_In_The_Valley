@@ -50,7 +50,6 @@ export class ChatAI {
     });
 
     this.isConversationActive = true;
-    console.log('Started conversation')
     this.onConversationStartedCallback?.();
   }
 
@@ -63,7 +62,6 @@ export class ChatAI {
       await this.conversation.endSession();
       this.isConversationActive = false;
       this.conversation = null;
-      console.log('Ended conversation')
       this.onConversationEndedCallback?.();
     } catch (error) {
       this.isConversationActive = false;

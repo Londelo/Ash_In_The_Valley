@@ -70,7 +70,6 @@ export default class AvenWood extends Scene {
   }
 
   private setupEnemySpawner(): void {
-    console.log(this.player.sprite.y);
     const spawnerConfig: EnemySpawnerConfig = {
       enemyClass: DaggerBandit,
       maxEnemies: 3,

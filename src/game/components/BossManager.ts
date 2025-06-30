@@ -58,7 +58,6 @@ export class BossManager {
       });
     }
 
-    console.log(`Found ${this.spawnPoints.length} boss spawn points`);
   }
 
   private setupEventListeners(): void {
@@ -72,7 +71,6 @@ export class BossManager {
   private handleElkDeath(): void {
     if (this.boss1Triggered) return;
 
-    console.log('Elk death detected, triggering boss_1 spawns');
     this.boss1Triggered = true;
     this.activateBossSpawners('boss_1');
   }
@@ -80,7 +78,6 @@ export class BossManager {
   private handleDeerDeath(): void {
     if (this.boss2Triggered) return;
 
-    console.log('Deer death detected, triggering boss_2 spawns');
     this.boss2Triggered = true;
     this.activateBossSpawners('boss_2');
   }
@@ -94,9 +91,7 @@ export class BossManager {
   private activateBossSpawners(bossName: string): void {
     const spawnPoints = this.getSpawnPointsForBoss(bossName);
     const config = this.locationConfigs[bossName];
-    console.log(spawnPoints, this.spawnPoints, config);
     if (!config || spawnPoints.length === 0) {
-      console.log(`No config or spawn points found for boss: ${bossName}`);
       return;
     }
 

@@ -79,7 +79,6 @@ export class EnemySpawner {
   }
 
   private trySpawnEnemy(): void {
-    console.log(`Trying to spawn enemy: ${this.spawnCount}/${this.config.maxEnemies}`);
     if (!this.isActive || this.config.respawnDelay === 0 && this.spawnCount >= this.config.maxEnemies) {
       return;
     }
@@ -112,7 +111,6 @@ export class EnemySpawner {
     this.setupEnemyCollisions(enemy);
     this.setupEnemyEventListeners(enemy);
 
-    console.log(`Spawned enemy at (${spawnPoint.x}, ${spawnPoint.y}), total: ${this.enemies.length}/${this.config.maxEnemies}`);
   }
 
   private setupEnemyCollisions(enemy: Actor): void {

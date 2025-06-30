@@ -53,7 +53,6 @@ export class State {
     if (playerIsDetected && !this.DETECTION_MADE && !this.isCharging) {
       this.isCharging = true;
       this.chargeStartTime = currentTime;
-      console.log('Bandit started charging at player!');
       return true;
     }
 
@@ -62,7 +61,6 @@ export class State {
       const chargeElapsed = currentTime - this.chargeStartTime;
       if (chargeElapsed >= this.CHARGE_DURATION) {
         this.isCharging = false;
-        console.log('Bandit finished charging');
         return false;
       }
       return true;
