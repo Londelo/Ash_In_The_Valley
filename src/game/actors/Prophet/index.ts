@@ -2,6 +2,7 @@ import { Scene } from 'phaser';
 import { createProphetAnimations, addProphetAnimationListeners } from './animations';
 import type { Player } from '../Player/index';
 import { ChatAI, ChatAIOptions } from '../../components/ChatAI';
+import { EventBus } from '../../EventBus';
 
 export class Prophet {
   scene: Scene;
@@ -29,6 +30,19 @@ export class Prophet {
       onConversationEnded: this.onConversationEnded.bind(this)
     };
     this.chatAI = new ChatAI(chatAIOptions);
+
+    // Listen for player skin changes
+    EventBus.on('player_skin_changed', this.handlePlayerSkinChange.bind(this));
+    // Listen for location changes
+    EventBus.on('location_changed', this.handleLocationChange.bind(this));
+  }
+
+  private handlePlayerSkinChange(skin: string): void {
+    this.chatAI.updatePlayerSkin(skin);
+  }
+
+  private handleLocationChange(location: string | null): void {
+    this.chatAI.updateLocation(location);
   }
 
   private setupInputKeys() {
@@ -39,7 +53,6 @@ export class Prophet {
       throw new Error('Keyboard input plugin is not available.');
     }
   }
-
 
   private getDistanceToPlayer(): number {
     const prophetX = this.sprite.x;
@@ -67,8 +80,8 @@ export class Prophet {
     }
     else if (!playerIsNear && this.isPlayerNear) {
       this.isPlayerNear = false;
-      this.sprite.play('prophet_look_down');
-      this.chatAI.endConversation()
+      // this.sprite.play('prophet_look_down');
+      // this.chatAI.endConversation()
     }
 
     this.isPlayerNear = playerIsNear;

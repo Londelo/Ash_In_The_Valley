@@ -14,21 +14,20 @@ export class ChatAI {
   private onMessageCallback?: (message: any) => void;
   private onConversationStartedCallback?: () => void;
   private onConversationEndedCallback?: () => void;
+  private currentLocation: string | null = null;
+  private currentPlayerSkin: string | null = null;
 
   constructor(options: ChatAIOptions) {
     this.agentId = options.agentId;
     this.onMessageCallback = options.onMessageReceived;
     this.onConversationStartedCallback = options.onConversationStarted;
     this.onConversationEndedCallback = options.onConversationEnded;
-
   }
 
   public async getMicPermissions(): Promise<void> {
-      try {
+    try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
-
     } catch (error) {
-
       if (error instanceof DOMException && error.name === 'NotAllowedError') {
       } else if (error instanceof DOMException && error.name === 'NotFoundError') {
       } else {
@@ -36,12 +35,13 @@ export class ChatAI {
     }
   }
 
-  public async startConversation(): Promise<void> {
+  public async startConversation(overrides?: any): Promise<void> {
     if (this.isConversationActive) {
       return;
     }
 
     this.conversation = await Conversation.startSession({
+      overrides: overrides || {},
       agentId: this.agentId,
       onMessage: this.onMessageReceived.bind(this),
       onError: this.onConversationError.bind(this),
@@ -88,6 +88,28 @@ export class ChatAI {
     try {
       this.conversation.sendContextualUpdate(update);
     } catch (error) {
+    }
+  }
+
+  public updateLocation(location: string | null): void {
+    if (location === this.currentLocation) return;
+
+    this.currentLocation = location;
+
+    if (this.isConversationActive && location) {
+      this.startConversation({agent: {prompt: {prompt: ''}}})
+      this.sendContextualUpdate(`Player has entered location: ${location}`);
+    }
+  }
+
+  public updatePlayerSkin(skin: string): void {
+    if (skin === this.currentPlayerSkin) return;
+
+    this.currentPlayerSkin = skin;
+
+    if (this.isConversationActive) {
+      this.startConversation({agent: {prompt: {prompt: ''}}})
+      this.sendContextualUpdate(`Player has transformed into: ${skin}`);
     }
   }
 

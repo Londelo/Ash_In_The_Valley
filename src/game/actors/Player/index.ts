@@ -7,6 +7,7 @@ import { getAllAnimationConfigs } from './animations';
 import { Actor, ActorConfig } from '../../components/Actor';
 import { getAttackConfig } from './attackConfigs';
 import { getActorConfig } from './actorConfigs';
+import { EventBus } from '../../EventBus';
 
 export type PlayerSkins = 'swordMaster' | 'bloodSwordsMan' | 'lordOfFlames' | 'holySamurai'
 
@@ -48,7 +49,6 @@ export class Player extends Actor {
     this.playerSkin = playerSkin;
     this.sprite.setDepth(1);
     this.attackHitboxManager = new AttackHitboxManager(scene);
-
   }
 
   private createAllPlayerAnimations(scene: Scene) {
@@ -182,7 +182,9 @@ export class Player extends Actor {
 
     // Play idle animation with new skin prefix
     this.sprite.play(`${this.playerSkin}_player_idle`);
-
+    
+    // Emit event for skin change
+    EventBus.emit('player_skin_changed', newSkin);
   }
 
   private getNextSkin(): PlayerSkins {
