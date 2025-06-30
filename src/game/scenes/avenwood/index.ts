@@ -21,6 +21,8 @@ export default class AvenWood extends Scene {
   tileMapComponent: TileMapComponent;
   enemySpawner: EnemySpawner
   boss: Boss | null = null;
+  prophetTriggerZone: Phaser.GameObjects.Zone;
+  bossSpawned: boolean = false;
 
   constructor() {
     super('AvenWood');
@@ -52,17 +54,12 @@ export default class AvenWood extends Scene {
     this.prophet = new Prophet(this, config.prophet_start_x * tileMapConfig.scale, config.prophet_start_y * tileMapConfig.scale, this.player);
     this.temple = new Temple(this, templeLocation.x, templeLocation.y, tileMapConfig.scale, this.player);
 
-    // Create a single boss instance at center of map
-    if (!this.boss) {
-      const bossSpawnX = mapWidth / 2;
-      const bossSpawnY = mapHeight / 2;
-      this.boss = new Boss(this, bossSpawnX, bossSpawnY, this.player);
-    }
+    // Create trigger zone around prophet
+    this.createProphetTriggerZone();
 
     this.player.create();
     this.prophet.create();
     this.temple.create();
-    if (this.boss) this.boss.create();
 
     this.camera.startFollow(this.player.sprite);
     this.physics.world.setBounds(0, 0, mapWidth, mapHeight);
@@ -72,29 +69,78 @@ export default class AvenWood extends Scene {
     this.physics.add.collider(this.player.sprite, this.world);
     this.physics.add.collider(this.prophet.sprite, this.world);
     this.physics.add.collider(this.temple.sprite, this.world);
-    if (this.boss) this.physics.add.collider(this.boss.sprite, this.world);
 
-    // Setup player attack hitboxes to damage boss
-    if (this.boss) {
-      this.physics.add.overlap(
-        this.player.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
-        this.boss.sprite,
-        this.handlePlayerAttackHitBoss,
-        undefined,
-        this
-      );
-
-      // Setup boss attack hitboxes to damage player
-      this.physics.add.overlap(
-        this.boss.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
-        this.player.sprite,
-        this.handleBossAttackHitPlayer,
-        undefined,
-        this
-      );
-    }
+    // Setup overlap for prophet trigger zone
+    this.physics.add.overlap(
+      this.player.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
+      this.prophetTriggerZone,
+      this.handleProphetAttacked,
+      undefined,
+      this
+    );
 
     EventBus.emit('current-scene-ready', this);
+  }
+
+  private createProphetTriggerZone(): void {
+    // Create a zone around the prophet
+    const prophetX = this.prophet.sprite.x;
+    const prophetY = this.prophet.sprite.y;
+    const zoneWidth = 100;
+    const zoneHeight = 100;
+
+    this.prophetTriggerZone = this.add.zone(prophetX, prophetY, zoneWidth, zoneHeight);
+    this.physics.world.enable(this.prophetTriggerZone);
+    (this.prophetTriggerZone.body as Phaser.Physics.Arcade.Body).setAllowGravity(false);
+    (this.prophetTriggerZone.body as Phaser.Physics.Arcade.Body).moves = false;
+  }
+
+  private handleProphetAttacked = (playerAttack: any): void => {
+    if (this.bossSpawned) return;
+    
+    const attackHitbox = playerAttack.attackHitbox;
+    
+    if (attackHitbox && attackHitbox.isActive) {
+      this.spawnBoss();
+      this.bossSpawned = true;
+      
+      // Make prophet disappear
+      this.prophet.sprite.setVisible(false);
+      this.prophet.sprite.body.enable = false;
+      
+      // Disable the trigger zone
+      this.prophetTriggerZone.destroy();
+    }
+  };
+
+  private spawnBoss(): void {
+    // Create boss at prophet's position
+    const bossX = this.prophet.sprite.x;
+    const bossY = this.prophet.sprite.y;
+    
+    this.boss = new Boss(this, bossX, bossY, this.player);
+    this.boss.create();
+    
+    // Add collisions for boss
+    this.physics.add.collider(this.boss.sprite, this.world);
+    
+    // Setup player attack hitboxes to damage boss
+    this.physics.add.overlap(
+      this.player.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
+      this.boss.sprite,
+      this.handlePlayerAttackHitBoss,
+      undefined,
+      this
+    );
+
+    // Setup boss attack hitboxes to damage player
+    this.physics.add.overlap(
+      this.boss.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
+      this.player.sprite,
+      this.handleBossAttackHitPlayer,
+      undefined,
+      this
+    );
   }
 
   private handlePlayerAttackHitBoss = (playerAttack: any, bossSprite: any): void => {
