@@ -1,5 +1,17 @@
 import { TileMapConfig } from '../../components/TileMap';
 
+export interface LocationSpawnConfig {
+  maxEnemies: number;
+  spawnInterval: number;
+  spawnRadius: number;
+  respawnDelay: number;
+  autoStart: boolean;
+}
+
+export interface LocationConfigs {
+  [locationName: string]: LocationSpawnConfig;
+}
+
 const config = {
   backgroundColor: 0x87CEEB,
 
@@ -42,7 +54,68 @@ const config = {
     ],
     scale: 3,
     collisionLayers: ['floor']
-  } as TileMapConfig
+  } as TileMapConfig,
+
+  // Location-based spawn configurations - no respawning
+  locationConfigs: {
+    lvl_1: {
+      maxEnemies: 5,
+      spawnInterval: 1000,
+      spawnRadius: 0,
+      respawnDelay: 0,
+      autoStart: true
+    },
+    lvl_2: {
+      maxEnemies: 10,
+      spawnInterval: 1000,
+      spawnRadius: 0,
+      respawnDelay: 0,
+      autoStart: true
+    },
+    lvl_3: {
+      maxEnemies: 5,
+      spawnInterval: 1000,
+      spawnRadius: 0,
+      respawnDelay: 0,
+      autoStart: true
+    },
+    lvl_4: {
+      maxEnemies: 15,
+      spawnInterval: 500,
+      spawnRadius: 0,
+      respawnDelay: 0,
+      autoStart: true
+    },
+    lvl_5: {
+      maxEnemies: 3,
+      spawnInterval: 1000,
+      spawnRadius: 0,
+      respawnDelay: 0,
+      autoStart: true
+    },
+    lvl_6: {
+      maxEnemies: 3,
+      spawnInterval: 1000,
+      spawnRadius: 0,
+      respawnDelay: 0,
+      autoStart: true
+    },
+    boss_1: {
+      maxEnemies: 10,
+      spawnInterval: 1000,
+      spawnRadius: 0,
+      respawnDelay: 0,
+      autoStart: true
+    },
+    boss_2: {
+      maxEnemies: 20,
+      spawnInterval: 1000,
+      spawnRadius: 0,
+      respawnDelay: 2000,
+      autoStart: true
+    }
+
+  } as LocationConfigs
 }
 
 export default config;

@@ -23,8 +23,13 @@ export class Preloader extends Scene {
     this.load.setPath( 'assets' );
 
     this.load.atlas( 'swordMasterAtlas', 'SwordMaster/swordmaster.png', 'SwordMaster/swordmaster.json' );
+    this.load.atlas( 'bloodSwordsmanAtlas', 'SwordMaster/Blood_Swordsman.png', 'SwordMaster/Blood_Swordsman.json' );
+    this.load.atlas( 'lordOfFlamesAtlas', 'SwordMaster/Lord_Flames.png', 'SwordMaster/Lord_Flames.json' );
+    this.load.atlas( 'holySamuraiAtlas', 'SwordMaster/Glitch_Samurai.png', 'SwordMaster/Glitch_Samurai.json' );
     this.load.atlas( 'daggerBanditAtlas', 'DaggerBandit/Dagger_Bandit.png', 'DaggerBandit/Dagger_Bandit.json' );
     this.load.atlas( 'prophetAtlas', 'Prophet/prophet.png', 'Prophet/prophet.json' );
+    this.load.atlas( 'elkAtlas', 'ElkAndDeer/Elk.png', 'ElkAndDeer/Elk.json' );
+    this.load.atlas( 'deerAtlas', 'ElkAndDeer/Deer.png', 'ElkAndDeer/Deer.json' );
 
     this.load.atlas( 'templeAtlas', 'Temple/temple.png', 'Temple/temple.json' );
 
@@ -51,6 +56,6 @@ export class Preloader extends Scene {
   }
 
   create() {
-    this.scene.start( 'AvenWood' );
+    this.scene.start( 'GehennaDeep' );
   }
 }

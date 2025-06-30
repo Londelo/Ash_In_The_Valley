@@ -8,17 +8,23 @@ export type AI_State = {
     shouldMove: boolean;
     isOnGround: boolean
     playerDirection: "left" | "right";
+    isCharging: boolean;
 }
 export class State {
   private bandit: DaggerBandit;
   private player: Player;
 
   private DETECTION_MADE = false;
-  private readonly DETECTION_RANGE = 300;
-  private readonly ATTACK_RANGE = 150;
+  private readonly DETECTION_RANGE = 700;
+  private readonly ATTACK_RANGE = 120;
 
   private lastAttackTime: number = 0;
   private readonly ATTACK_COOLDOWN = 1500;
+
+  // Charge behavior properties
+  private chargeStartTime: number = 0;
+  private readonly CHARGE_DURATION = 2000; // 2 seconds
+  private isCharging: boolean = false;
 
   constructor(bandit: DaggerBandit, player: Player) {
     this.bandit = bandit;
@@ -40,6 +46,27 @@ export class State {
 
   private checkAttackCooldown(currentTime: number): boolean {
     return currentTime - this.lastAttackTime > this.ATTACK_COOLDOWN;
+  }
+
+  private handleChargeLogic(currentTime: number, playerIsDetected: boolean): boolean {
+    // Start charging when first detecting player
+    if (playerIsDetected && !this.DETECTION_MADE && !this.isCharging) {
+      this.isCharging = true;
+      this.chargeStartTime = currentTime;
+      return true;
+    }
+
+    // Continue charging for the duration
+    if (this.isCharging) {
+      const chargeElapsed = currentTime - this.chargeStartTime;
+      if (chargeElapsed >= this.CHARGE_DURATION) {
+        this.isCharging = false;
+        return false;
+      }
+      return true;
+    }
+
+    return false;
   }
 
   public isActionAnimations(animKey?: string, uniqueId?: string): boolean {
@@ -75,13 +102,22 @@ export class State {
     const playerIsInAttackRange = distance <= this.ATTACK_RANGE
     const canAttack = this.checkAttackCooldown(time)
 
-    const shouldAttack = canAttack && playerIsInAttackRange && !isAttacking && !isBigAttacking
-    const shouldMove = distance > this.ATTACK_RANGE && playerIsDetected
-    const shouldPlayMoveAnim = shouldMove && !isMoving && !playerIsInAttackRange
-    const shouldPlayIdleAnim = (playerIsInAttackRange || !playerIsDetected) && !isIdle
+    // Handle charge behavior
+    const isCharging = this.handleChargeLogic(time, playerIsDetected);
 
+    // Attack when: detected, in range, can attack, not already attacking, not charging
+    const shouldAttack = playerIsDetected && playerIsInAttackRange && canAttack && !isAttacking && !isBigAttacking && !isCharging
+
+    // Move when: detected, NOT in attack range, not attacking, OR when charging
+    const shouldMove = (playerIsDetected && !playerIsInAttackRange && !isAttacking && !isBigAttacking) || isCharging
+
+    // Animation logic
+    const shouldPlayMoveAnim = shouldMove && !isMoving
+    const shouldPlayIdleAnim = !shouldMove && !isAttacking && !isBigAttacking && !isIdle
+
+    // Update state tracking
     this.lastAttackTime = shouldAttack ? time : this.lastAttackTime
-    this.DETECTION_MADE = !this.DETECTION_MADE && playerIsDetected ? true : this.DETECTION_MADE
+    this.DETECTION_MADE = playerIsDetected ? true : this.DETECTION_MADE
 
     return {
       shouldAttack,
@@ -89,7 +125,8 @@ export class State {
       shouldPlayIdleAnim,
       shouldMove,
       playerDirection,
-      isOnGround
+      isOnGround,
+      isCharging
     }
   }
 }

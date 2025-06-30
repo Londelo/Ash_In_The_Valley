@@ -50,7 +50,6 @@ export class ChatAI {
     });
 
     this.isConversationActive = true;
-
     this.onConversationStartedCallback?.();
   }
 
