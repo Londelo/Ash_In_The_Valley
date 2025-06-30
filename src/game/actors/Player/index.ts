@@ -41,7 +41,7 @@ export class Player extends Actor {
   private state: State;
   public playerSkin: PlayerSkins;
   public attackHitboxManager: AttackHitboxManager;
-  public debugEnabled: boolean = false;
+  public debugEnabled: boolean = true;
 
   constructor(scene: Scene, x: number, y: number) {
     const playerSkin: PlayerSkins = 'swordMaster';
@@ -263,15 +263,15 @@ export class Player extends Actor {
   private handleWallJump(state: PlayerState) {
     if (state.shouldWallJump) {
       this.isWallSliding = false;
-      
+
       // Jump away from wall
       const jumpDirection = this.sprite.flipX ? 1 : -1;
       this.sprite.setVelocityX(this.playerSpeed * jumpDirection);
       this.sprite.setVelocityY(-600);
-      
+
       // Face away from wall
       setSpriteDirection(this.sprite, jumpDirection > 0 ? 'right' : 'left', this.adjustForCenterOffset);
-      
+
       this.sprite.play(`${this.playerSkin}_player_jump`);
     }
   }
