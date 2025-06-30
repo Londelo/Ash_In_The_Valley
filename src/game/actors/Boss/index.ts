@@ -59,7 +59,7 @@ export class Boss extends Actor {
       centerXLeft: 0.6,
       centerXRight: 0.4,
       centerY: 1,
-      health: 800, // Much more health for a proper boss fight
+      health: 1600,
       attackPower: 20,
       bodyOffsetY: 30,
       knockbackForce: 50,
