@@ -155,7 +155,6 @@ export class State {
                        this.player.playerSkin !== 'lordOfFlames'
 
     const shouldAttack = Phaser.Input.Keyboard.JustDown(inputKeys.R) &&
-                        isOnGround &&
                         !isLanding &&
                         !isWallSliding
 

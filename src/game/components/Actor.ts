@@ -1,4 +1,5 @@
 import { debugGraphics } from '../utils/debugGraphics';
+import { HealthBar, HealthBarConfig } from './HealthBar';
 
 export interface ActorConfig {
   scale: number;
@@ -14,6 +15,7 @@ export interface ActorConfig {
   knockbackForce?: number;
   deathAnimationKey?: string;
   hitAnimationKey?: string;
+  healthBar?: HealthBarConfig;
 }
 
 export abstract class Actor {
@@ -24,6 +26,7 @@ export abstract class Actor {
   public attackPower: number;
   public isDead: boolean = false;
   public isInvulnerable: boolean = false;
+  public healthBar?: HealthBar;
 
   protected config: ActorConfig;
   protected invulnerabilityTimer: number = 0;
@@ -41,11 +44,14 @@ export abstract class Actor {
     this.setActorScale(config.scale);
     this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.sprite.setCollideWorldBounds(true);
-    this.sprite.setGravityY(300);
+    this.sprite.setGravityY(600);
     this.sprite.setBodySize(config.bodyWidth, config.bodyHeight, true);
     this.adjustForCenterOffset('right');
 
     this.boundingBox = scene.add.graphics();
+
+    // Create health bar
+    this.healthBar = this.config.healthBar ? new HealthBar(scene, this.sprite, this.config.healthBar) : undefined;
   }
 
   public setActorScale(scale: number): void {
@@ -69,6 +75,11 @@ export abstract class Actor {
     if (this.isInvulnerable || this.isDead) return;
 
     this.health = Math.max(0, this.health - amount);
+
+    // Update health bar
+    if (this.healthBar) {
+      this.healthBar.update(this.health, this.maxHealth);
+    }
 
     if (this.health <= 0) {
       this.onDeath();

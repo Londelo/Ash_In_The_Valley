@@ -48,6 +48,7 @@ export class Player extends Actor {
     this.playerSkin = playerSkin;
     this.sprite.setDepth(1);
     this.attackHitboxManager = new AttackHitboxManager(scene);
+
   }
 
   private createAllPlayerAnimations(scene: Scene) {
@@ -381,6 +382,9 @@ export class Player extends Actor {
     const direction = this.sprite.flipX ? 'left' : 'right';
     this.attackHitboxManager.updateHitboxes(this.sprite.x, this.sprite.y, direction);
     this.attackHitboxManager.cleanupInactiveHitboxes();
+
+    // Update health bar position
+    this.healthBar?.update(this.health, this.maxHealth);
 
     this.renderDebugGraphics(this.attackHitboxManager.getActiveHitboxes());
   }

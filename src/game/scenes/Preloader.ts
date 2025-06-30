@@ -30,6 +30,7 @@ export class Preloader extends Scene {
     this.load.atlas( 'prophetAtlas', 'Prophet/prophet.png', 'Prophet/prophet.json' );
     this.load.atlas( 'elkAtlas', 'ElkAndDeer/Elk.png', 'ElkAndDeer/Elk.json' );
     this.load.atlas( 'deerAtlas', 'ElkAndDeer/Deer.png', 'ElkAndDeer/Deer.json' );
+    this.load.atlas( 'bossAtlas', 'Boss/boss.png', 'Boss/boss.json' );
 
     this.load.atlas( 'templeAtlas', 'Temple/temple.png', 'Temple/temple.json' );
 

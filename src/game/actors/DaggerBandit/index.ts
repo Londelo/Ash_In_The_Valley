@@ -125,7 +125,7 @@ export class DaggerBandit extends Actor {
       const moveSpeed = isCharging ? this.chargeSpeed : this.banditSpeed;
       const dashDirection = this.sprite.flipX ? -1 : 1;
       const dashDistance = moveSpeed * dashDirection;
-      
+
       if (playerDirection === 'left') {
         this.sprite.x += dashDistance * this.deltaTime;
         setSpriteDirection(this.sprite, 'left', this.adjustForCenterOffset);
