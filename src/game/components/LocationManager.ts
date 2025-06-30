@@ -113,13 +113,8 @@ export class LocationManager {
       return;
     }
 
-    // Calculate how many enemies per spawn point
-    const enemiesPerSpawn = Math.max(1, Math.ceil(config.maxEnemies / spawnPoints.length));
-
     // Create spawners for each spawn point in this location
     spawnPoints.forEach((spawnPoint, index) => {
-      // If this is the last spawn point, assign any remaining enemies
-      const isLastSpawnPoint = index === spawnPoints.length - 1;
 
       const spawnerConfig: EnemySpawnerConfig = {
         enemyClass: DaggerBandit,
