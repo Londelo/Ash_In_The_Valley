@@ -41,7 +41,7 @@ export abstract class Actor {
     this.setActorScale(config.scale);
     this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.sprite.setCollideWorldBounds(true);
-    this.sprite.setGravityY(300);
+    this.sprite.setGravityY(600);
     this.sprite.setBodySize(config.bodyWidth, config.bodyHeight, true);
     this.adjustForCenterOffset('right');
 

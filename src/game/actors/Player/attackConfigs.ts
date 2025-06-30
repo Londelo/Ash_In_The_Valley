@@ -24,7 +24,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -65,
       offsetY: -18,
       duration: 200,
-      damage: _this.attackPower,
+      damage: _this.attackPower * 1.5,
       attackerId: 'player',
       delay: 0
     },
@@ -35,7 +35,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -45,
       offsetY: -35,
       duration: 400,
-      damage: _this.attackPower * 1.5,
+      damage: _this.attackPower * 2,
       attackerId: 'player',
       delay: 0
     },
@@ -46,7 +46,7 @@ const swordsMasterAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -80,
       offsetY: -55,
       duration: 300,
-      damage: _this.attackPower * 1.2,
+      damage: _this.attackPower * 2,
       attackerId: 'player',
       delay: 0
     }
@@ -72,7 +72,7 @@ const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -85,
       offsetY: -30,
       duration: 300,
-      damage: _this.attackPower * 1.3,
+      damage: _this.attackPower * 1.6,
       attackerId: 'player',
       delay: 0
     },
@@ -83,7 +83,7 @@ const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -0,
       offsetY: -40,
       duration: 300,
-      damage: _this.attackPower * 1.8,
+      damage: _this.attackPower * 2,
       attackerId: 'player',
       delay: 700
     },
@@ -94,7 +94,7 @@ const bloodSwordsManAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -0,
       offsetY: -40,
       duration: 450,
-      damage: _this.attackPower * 1.8,
+      damage: _this.attackPower * 2,
       attackerId: 'player',
       delay: 0
     }
@@ -109,7 +109,7 @@ const lordOfFlamesAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -55,
       offsetY: -30,
       duration: 400,
-      damage: _this.attackPower * 0.9,
+      damage: _this.attackPower * 2,
       attackerId: 'player',
       delay: 200
     },
@@ -120,7 +120,7 @@ const lordOfFlamesAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -65,
       offsetY: -20,
       duration: 400,
-      damage: _this.attackPower * 1.1,
+      damage: _this.attackPower * 2,
       attackerId: 'player',
       delay: 200
     },
@@ -131,7 +131,7 @@ const lordOfFlamesAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -150,
       offsetY: -40,
       duration: 800,
-      damage: _this.attackPower * 1.6,
+      damage: _this.attackPower * 3,
       attackerId: 'player',
       delay: 600
     },
@@ -142,7 +142,7 @@ const lordOfFlamesAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -70,
       offsetY: -45,
       duration: 320,
-      damage: _this.attackPower * 1.4,
+      damage: _this.attackPower * 3,
       attackerId: 'player',
       delay: 0
     }
@@ -168,7 +168,7 @@ const holySamuraiAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -75,
       offsetY: -28,
       duration: 400,
-      damage: _this.attackPower * 1.2,
+      damage: _this.attackPower * 1.5,
       attackerId: 'player',
       delay: 0
     },
@@ -190,7 +190,7 @@ const holySamuraiAttackConfigs: PlayerAttackConfigFn =
       offsetX_left: -85,
       offsetY: -55,
       duration: 380,
-      damage: _this.attackPower * 1.7,
+      damage: _this.attackPower * 2,
       attackerId: 'player',
       delay: 0
     }

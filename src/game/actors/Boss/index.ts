@@ -20,17 +20,18 @@ export class Boss extends Actor {
   private readonly DETECTION_RANGE = 600;
   private attackTimer: number = 0;
   private readonly ATTACK_INTERVAL = 3000; // Attack every 3 seconds
+  public debugEnabled: boolean = true;
 
   public attackHitboxManager: AttackHitboxManager;
 
   private attackConfigs: { [key: string]: AttackHitboxConfig } = {
     'boss_attack_2': {
-      width: 250,
+      width: 200,
       height: 50,
       offsetX_right: 80,
       offsetX_left: -80,
-      offsetY: -25,
-      duration: 250,
+      offsetY: -65,
+      duration: 800,
       damage: 15,
       attackerId: 'boss'
     }
@@ -41,13 +42,13 @@ export class Boss extends Actor {
       scale: 4,
       bodyWidth: 60,
       bodyHeight: 80,
-      centerXLeft: 0.6,
-      centerXRight: 0.4,
+      centerXLeft: 0.5,
+      centerXRight: 0.5,
       centerY: 1,
-      health: 1600,
+      health: 300,
       attackPower: 20,
       bodyOffsetY: 30,
-      knockbackForce: 50,
+      knockbackForce: 200,
       deathAnimationKey: 'boss_death',
       hitAnimationKey: 'boss_hit'
     };
@@ -166,7 +167,7 @@ export class Boss extends Actor {
         currentAnim === 'boss_attack_2_prep' ||
         currentAnim === 'boss_attack_2' ||
         currentAnim === 'boss_attack_2_end')) {
-      
+
       // If we're in the main attack animation, keep charging toward player
       if (currentAnim === 'boss_attack_2' && this.isCharging) {
         const direction = this.getDirectionToPlayer();
@@ -174,13 +175,13 @@ export class Boss extends Actor {
         this.sprite.setVelocityX(chargeDirection * this.chargeSpeed);
         setSpriteDirection(this.sprite, direction, this.adjustForCenterOffset);
       }
-      
+
       return;
     }
 
     // Start attack sequence
     this.sprite.play('boss_attack_2_prep');
-    
+
     // Set initial direction toward player for the charge
     const direction = this.getDirectionToPlayer();
     setSpriteDirection(this.sprite, direction, this.adjustForCenterOffset);
@@ -190,11 +191,11 @@ export class Boss extends Actor {
     this.state = new State(this, this.playerRef);
     this.createBossAnimations(this.scene);
     this.addBossAnimationListeners();
-    
+
     EventBus.on('damage_boss', (damage: number) => {
       this.takeDamage(damage);
     });
-    
+
     this.sprite.play('boss_idle');
   }
 
