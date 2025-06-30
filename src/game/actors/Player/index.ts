@@ -202,6 +202,8 @@ export class Player extends Actor {
   }
 
   private handleMovement(state: PlayerState) {
+    if (this.isDashing) return
+
     if (state.canMove && state.isMoving) {
       const moveSpeed = state.isRunning ? this.playerSpeed * 2 : this.playerSpeed;
 
@@ -233,11 +235,11 @@ export class Player extends Actor {
   }
 
   private handleWallSlide(state: PlayerState) {
-    if (state.shouldWallSlide) {
+    if (state.shouldWallSlide && !state.isWallSliding) {
       this.sprite.body.setGravityY(-1);
       this.sprite.setVelocityY(0);
       this.sprite.play(`${this.playerSkin}_player_wall_hold`);
-    } else if (state.shouldStopWallSlide) {
+    } else if (state.shouldStopWallSlide && state.isWallSliding) {
       console.log('Stopping wall slide');
       this.sprite.play(`${this.playerSkin}_player_idle`);
       this.sprite.body.setGravityY(0); // Restore normal gravity

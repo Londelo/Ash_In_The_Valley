@@ -1464,7 +1464,7 @@
   <object id="126" x="82" y="209.5" width="62" height="128.5"/>
  </objectgroup>
  <objectgroup id="42" name="spawn">
-  <object id="37" name="player_spawn" x="775.667" y="1075.67">
+  <object id="37" name="player_spawn" x="990.167" y="1680.67">
    <point/>
   </object>
   <object id="85" name="enemy_lvl_1" x="770.5" y="329">
@@ -1514,7 +1514,7 @@
   <object id="127" name="blood" x="875.636" y="1077.45">
    <point/>
   </object>
-  <object id="128" name="flames" x="856.182" y="1744">
+  <object id="128" name="flames" x="859.182" y="1724.5">
    <point/>
   </object>
   <object id="130" name="holy" x="1692" y="1486">

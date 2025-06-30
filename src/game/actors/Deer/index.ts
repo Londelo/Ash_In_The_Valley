@@ -5,6 +5,7 @@ import { AnimationHelper } from '../../components/AnimationHelper';
 import { getAllDeerAnimationConfigs } from './animations';
 import { Actor, ActorConfig } from '../../components/Actor';
 import { getDeerActorConfig } from './actorConfigs';
+import { Player } from '../Player';
 
 export type DeerSkins = 'deer';
 
@@ -22,13 +23,16 @@ export class Deer extends Actor {
   private deltaTime: number = 0;
   public deerSkin: DeerSkins;
   public debugEnabled: boolean = false;
+  private hasTriggeredPlayerTransform: boolean = false;
+  private playerRef: Player;
 
-  constructor(scene: Scene, x: number, y: number) {
+  constructor(scene: Scene, x: number, y: number, playerRef: Player) {
     const deerSkin: DeerSkins = 'deer';
     const actorConfig: ActorConfig = getDeerActorConfig(deerSkin);
     super(scene, x, y, skinAtlasMap[deerSkin], skinFrameMap[deerSkin], actorConfig);
     this.deerSkin = deerSkin;
     this.sprite.setDepth(0);
+    this.playerRef = playerRef;
   }
 
   private createAllDeerAnimations(scene: Scene) {
@@ -47,7 +51,12 @@ export class Deer extends Actor {
   }
 
   private onDeathComplete(): void {
-    // Custom logic for deer death (if needed)
+    if (!this.hasTriggeredPlayerTransform) {
+      this.hasTriggeredPlayerTransform = true;
+
+      // Change player to bloodSwordsman
+      (this.playerRef as any).changeSkin('lordOfFlames');
+    }
   }
 
   protected onDeath(): void {
