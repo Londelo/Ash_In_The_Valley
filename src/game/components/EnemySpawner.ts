@@ -27,6 +27,7 @@ export class EnemySpawner {
   private enemies: Actor[] = [];
   private spawnTimer: Phaser.Time.TimerEvent | null = null;
   private isActive: boolean = false;
+  private hasSpawnedOnce: boolean = false;
 
   constructor(scene: AvenWood | GehennaDeep, player: Player, config: EnemySpawnerConfig) {
     this.scene = scene;
@@ -80,6 +81,11 @@ export class EnemySpawner {
   }
 
   private trySpawnEnemy(): void {
+    // If we've already spawned once and respawnDelay is 0, don't spawn again
+    if (this.config.respawnDelay === 0 && this.hasSpawnedOnce) {
+      return;
+    }
+
     if (!this.isActive || this.enemies.length >= this.config.maxEnemies) {
       return;
     }
@@ -87,6 +93,7 @@ export class EnemySpawner {
     const spawnPoint = this.getSpawnPoint();
     if (spawnPoint) {
       this.spawnEnemy(spawnPoint);
+      this.hasSpawnedOnce = true;
     }
   }
 
@@ -218,9 +225,8 @@ export class EnemySpawner {
       this.enemies.splice(index, 1);
     }
 
-    // Schedule respawn if spawner is still active
-    if (this.isActive && this.config.respawnDelay) {
-      console.log("hit")
+    // Schedule respawn if spawner is still active and respawnDelay is not 0
+    if (this.isActive && this.config.respawnDelay && this.config.respawnDelay > 0) {
       this.scene.time.delayedCall(this.config.respawnDelay, () => {
         if (this.isActive && this.enemies.length < this.config.maxEnemies) {
           this.trySpawnEnemy();

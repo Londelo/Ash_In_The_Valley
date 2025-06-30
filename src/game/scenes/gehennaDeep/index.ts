@@ -141,6 +141,8 @@ export default class GehennaDeep extends Scene {
   update(time: number, delta: number) {
     this.player.update(time, delta);
     this.locationManager.update(time, delta);
-    this.elkSpawner.update(time, delta);
+    if (this.elkSpawner) {
+      this.elkSpawner.update(time, delta);
+    }
   }
 }
