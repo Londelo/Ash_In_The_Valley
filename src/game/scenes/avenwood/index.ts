@@ -21,9 +21,9 @@ export default class AvenWood extends Scene {
   tileMapComponent: TileMapComponent;
   enemySpawner: EnemySpawner
   boss: Boss | null = null;
-  prophetTriggerZone: Phaser.GameObjects.Zone;
-  prophetTriggerSprite: Phaser.GameObjects.Rectangle;
+  prophetTriggerZone: Phaser.GameObjects.Rectangle;
   bossSpawned: boolean = false;
+  attackCheckTimer: Phaser.Time.TimerEvent;
 
   constructor() {
     super('AvenWood');
@@ -71,33 +71,26 @@ export default class AvenWood extends Scene {
     this.physics.add.collider(this.prophet.sprite, this.world);
     this.physics.add.collider(this.temple.sprite, this.world);
 
-    // Setup overlap for prophet trigger zone
-    this.physics.add.overlap(
-      this.player.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
-      this.prophetTriggerZone,
-      this.handleProphetAttacked,
-      undefined,
-      this
-    );
+    // Create a timer to check for attack overlaps
+    this.attackCheckTimer = this.time.addEvent({
+      delay: 100,
+      callback: this.checkAttackOverlaps,
+      callbackScope: this,
+      loop: true
+    });
 
     EventBus.emit('current-scene-ready', this);
   }
 
   private createProphetTriggerZone(): void {
-    // Create a zone around the prophet
+    // Create a visible rectangle around the prophet
     const prophetX = this.prophet.sprite.x;
     const prophetY = this.prophet.sprite.y;
     const zoneWidth = 150;
     const zoneHeight = 150;
-
-    // Create the invisible physics zone
-    this.prophetTriggerZone = this.add.zone(prophetX, prophetY, zoneWidth, zoneHeight);
-    this.physics.world.enable(this.prophetTriggerZone);
-    (this.prophetTriggerZone.body as Phaser.Physics.Arcade.Body).setAllowGravity(false);
-    (this.prophetTriggerZone.body as Phaser.Physics.Arcade.Body).moves = false;
     
-    // Create a visible rectangle to represent the zone
-    this.prophetTriggerSprite = this.add.rectangle(
+    // Create a visible rectangle with physics body
+    this.prophetTriggerZone = this.add.rectangle(
       prophetX, 
       prophetY, 
       zoneWidth, 
@@ -105,29 +98,37 @@ export default class AvenWood extends Scene {
       0xff0000, 
       0.3
     );
-    this.prophetTriggerSprite.setDepth(10);
+    this.prophetTriggerZone.setDepth(10);
+    
+    // Enable physics on the rectangle
+    this.physics.add.existing(this.prophetTriggerZone, true);
   }
 
-  private handleProphetAttacked = (playerAttack: any): void => {
+  private checkAttackOverlaps = (): void => {
     if (this.bossSpawned) return;
     
-    const attackHitbox = playerAttack.attackHitbox;
+    // Get all active player attack hitboxes
+    const playerHitboxes = this.player.attackHitboxManager.getActiveHitboxes();
     
-    if (attackHitbox && attackHitbox.isActive) {
-      this.spawnBoss();
-      this.bossSpawned = true;
-      
-      // Make prophet disappear
-      this.prophet.sprite.setVisible(false);
-      this.prophet.sprite.body.enable = false;
-      
-      // Disable the trigger zone and make the visual indicator disappear
-      this.prophetTriggerZone.destroy();
-      this.prophetTriggerSprite.destroy();
+    // Check each hitbox for overlap with the prophet trigger zone
+    for (const hitbox of playerHitboxes) {
+      if (hitbox.isActive) {
+        const hitboxBounds = hitbox.sprite.getBounds();
+        const zoneBounds = this.prophetTriggerZone.getBounds();
+        
+        if (Phaser.Geom.Rectangle.Overlaps(hitboxBounds, zoneBounds)) {
+          this.spawnBoss();
+          break;
+        }
+      }
     }
   };
 
   private spawnBoss(): void {
+    if (this.bossSpawned) return;
+    
+    this.bossSpawned = true;
+    
     // Create boss at prophet's position
     const bossX = this.prophet.sprite.x;
     const bossY = this.prophet.sprite.y;
@@ -155,6 +156,16 @@ export default class AvenWood extends Scene {
       undefined,
       this
     );
+    
+    // Make prophet disappear
+    this.prophet.sprite.setVisible(false);
+    this.prophet.sprite.body.enable = false;
+    
+    // Disable the trigger zone
+    this.prophetTriggerZone.destroy();
+    
+    // Stop the attack check timer
+    this.attackCheckTimer.destroy();
   }
 
   private handlePlayerAttackHitBoss = (playerAttack: any, bossSprite: any): void => {
