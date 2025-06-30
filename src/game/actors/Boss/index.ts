@@ -12,15 +12,15 @@ export class Boss extends Actor {
   private state: State;
   private playerRef: Player;
   private deltaTime: number = 0;
-  private bossSpeed: number = 120;
-  private chargeSpeed: number = 350; // Faster speed for attack_2
+  private bossSpeed: number = 80;
+  private chargeSpeed: number = 200; // Faster speed for attack_2
   private _moveDirection: number; // -1 for left, 1 for right
   private isCharging: boolean = false;
 
   private readonly DETECTION_RANGE = 600;
   private attackTimer: number = 0;
   private readonly ATTACK_INTERVAL = 3000; // Attack every 3 seconds
-  public debugEnabled: boolean = true;
+  public debugEnabled: boolean = false;
 
   public attackHitboxManager: AttackHitboxManager;
 
@@ -32,7 +32,7 @@ export class Boss extends Actor {
       offsetX_left: -80,
       offsetY: -65,
       duration: 800,
-      damage: 15,
+      damage: 50,
       attackerId: 'boss'
     }
   };
@@ -45,12 +45,23 @@ export class Boss extends Actor {
       centerXLeft: 0.5,
       centerXRight: 0.5,
       centerY: 1,
-      health: 300,
+      health: 800,
       attackPower: 20,
       bodyOffsetY: 30,
       knockbackForce: 200,
       deathAnimationKey: 'boss_death',
-      hitAnimationKey: 'boss_hit'
+      hitAnimationKey: 'boss_hit',
+      healthBar:{
+        width: 50,
+        height: 6,
+        borderWidth: 1,
+        borderColor: 0x000000,
+        backgroundColor: 0x000000,
+        fillColor: 0x00ff00,
+        offsetY: 260,
+        showBorder: true,
+        showBackground: true
+      }
     };
 
     super(scene, x, y, 'bossAtlas', 'Idle 0', actorConfig);
@@ -58,9 +69,9 @@ export class Boss extends Actor {
     this.playerRef = playerRef;
     this.sprite.setDepth(0);
     this.attackHitboxManager = new AttackHitboxManager(scene);
-    
+
     // Customize boss health bar
-    this.healthBar.update(this.health, this.maxHealth);
+    this.healthBar?.update(this.health, this.maxHealth);
   }
 
   private createBossAnimations(scene: Scene) {
@@ -96,6 +107,9 @@ export class Boss extends Actor {
         this.isCharging = false;
       } else if (animation.key === 'boss_death') {
         this.sprite.anims.stop();
+      } else {
+        this.sprite.play('boss_idle');
+        this.isCharging = false;
       }
     });
   }
@@ -224,9 +238,9 @@ export class Boss extends Actor {
     const spriteDirection = this.sprite.flipX ? 'left' : 'right';
     this.attackHitboxManager.updateHitboxes(this.sprite.x, this.sprite.y, spriteDirection);
     this.attackHitboxManager.cleanupInactiveHitboxes();
-    
+
     // Update health bar position
-    this.healthBar.update(this.health, this.maxHealth);
+    this.healthBar?.update(this.health, this.maxHealth);
 
     this.renderDebugGraphics(this.attackHitboxManager.getActiveHitboxes());
   }

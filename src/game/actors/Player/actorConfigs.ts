@@ -14,7 +14,18 @@ const swordMasterActorConfig: ActorConfig = {
   bodyOffsetY: 15,
   knockbackForce: 200,
   deathAnimationKey: 'swordMaster_player_death',
-  hitAnimationKey: 'swordMaster_player_hit'
+  hitAnimationKey: 'swordMaster_player_hit',
+  healthBar:{
+    width: 50,
+    height: 6,
+    borderWidth: 1,
+    borderColor: 0x000000,
+    backgroundColor: 0x000000,
+    fillColor: 0x00ff00,
+    offsetY: 100,
+    showBorder: true,
+    showBackground: true
+  }
 };
 
 const bloodSwordsManActorConfig: ActorConfig = {
