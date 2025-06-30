@@ -20,7 +20,7 @@ export default class AvenWood extends Scene {
   temple: Temple;
   tileMapComponent: TileMapComponent;
   enemySpawner: EnemySpawner
-  boss: Boss
+  boss: Boss | null = null;
 
   constructor() {
     super('AvenWood');
@@ -52,15 +52,17 @@ export default class AvenWood extends Scene {
     this.prophet = new Prophet(this, config.prophet_start_x * tileMapConfig.scale, config.prophet_start_y * tileMapConfig.scale, this.player);
     this.temple = new Temple(this, templeLocation.x, templeLocation.y, tileMapConfig.scale, this.player);
 
-    // Example: spawn boss at center of map
-    const bossSpawnX = mapWidth / 2;
-    const bossSpawnY = mapHeight / 2;
-    this.boss = new Boss(this, bossSpawnX, bossSpawnY, this.player);
+    // Create a single boss instance at center of map
+    if (!this.boss) {
+      const bossSpawnX = mapWidth / 2;
+      const bossSpawnY = mapHeight / 2;
+      this.boss = new Boss(this, bossSpawnX, bossSpawnY, this.player);
+    }
 
     this.player.create();
     this.prophet.create();
     this.temple.create();
-    this.boss.create();
+    if (this.boss) this.boss.create();
 
     this.camera.startFollow(this.player.sprite);
     this.physics.world.setBounds(0, 0, mapWidth, mapHeight);
@@ -70,7 +72,7 @@ export default class AvenWood extends Scene {
     this.physics.add.collider(this.player.sprite, this.world);
     this.physics.add.collider(this.prophet.sprite, this.world);
     this.physics.add.collider(this.temple.sprite, this.world);
-    this.physics.add.collider(this.boss.sprite, this.world);
+    if (this.boss) this.physics.add.collider(this.boss.sprite, this.world);
 
     EventBus.emit('current-scene-ready', this);
   }

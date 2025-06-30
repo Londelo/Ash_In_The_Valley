@@ -13,6 +13,7 @@ export class Boss extends Actor {
   private playerRef: Player;
   private deltaTime: number = 0;
   private bossSpeed: number = 120;
+  private chargeSpeed: number = 350; // Faster speed for attack_2
 
   private readonly DETECTION_RANGE = 600;
   private readonly ARENA_CENTER_X = 600;
@@ -28,6 +29,7 @@ export class Boss extends Actor {
   private readonly VANISH_INTERVAL = 8000; // Try to vanish every 8 seconds
   private attackTimer: number = 0;
   private readonly ATTACK_INTERVAL = 4000; // Attack every 4 seconds
+  private isCharging: boolean = false;
 
   public attackHitboxManager: AttackHitboxManager;
 
@@ -103,8 +105,12 @@ export class Boss extends Actor {
       } else if (animation.key === 'boss_attack_2_prep') {
         this.sprite.play('boss_attack_2');
         this.createAttackHitbox('boss_attack_2');
+        this.isCharging = true;
       } else if (animation.key === 'boss_attack_2') {
         this.sprite.play('boss_attack_2_end');
+        this.isCharging = false;
+      } else if (animation.key === 'boss_attack_2_end') {
+        this.isCharging = false;
       } else if (animation.key === 'boss_vanish') {
         this.onVanishComplete();
       } else if (animation.key === 'boss_appear') {
@@ -112,6 +118,7 @@ export class Boss extends Actor {
       } else if (this.state.isActionAnimations(animation.key) && animation.key !== 'boss_death') {
         this.state.onAttackComplete();
         this.sprite.play('boss_idle');
+        this.isCharging = false;
       } else if (animation.key === 'boss_death') {
         this.sprite.anims.stop();
       }
@@ -197,8 +204,8 @@ export class Boss extends Actor {
     return this.playerRef.sprite.x < this.sprite.x ? 'left' : 'right';
   }
 
-  private shouldChangeDirection(time: number): boolean {
-    this.directionChangeTimer += time;
+  private shouldChangeDirection(delta: number): boolean {
+    this.directionChangeTimer += delta;
     if (this.directionChangeTimer >= this.DIRECTION_CHANGE_INTERVAL) {
       this.directionChangeTimer = 0;
       return Math.random() < 0.7; // 70% chance to change direction
@@ -206,10 +213,10 @@ export class Boss extends Actor {
     return false;
   }
 
-  private shouldVanish(time: number): boolean {
+  private shouldVanish(delta: number): boolean {
     if (this.isVanished) return false;
     
-    this.vanishTimer += time;
+    this.vanishTimer += delta;
     if (this.vanishTimer >= this.VANISH_INTERVAL) {
       this.vanishTimer = 0;
       return Math.random() < 0.3; // 30% chance to vanish
@@ -217,10 +224,10 @@ export class Boss extends Actor {
     return false;
   }
 
-  private shouldAttack(time: number): boolean {
+  private shouldAttack(delta: number): boolean {
     if (this.isVanished) return false;
     
-    this.attackTimer += time;
+    this.attackTimer += delta;
     if (this.attackTimer >= this.ATTACK_INTERVAL) {
       this.attackTimer = 0;
       return Math.random() < 0.6; // 60% chance to attack
@@ -233,12 +240,23 @@ export class Boss extends Actor {
   }
 
   public handleMovement(currentState: BossState) {
-    if (currentState.shouldMove && !this.isVanished) {
-      const direction = currentState.playerDirection === 'left' ? -1 : 1;
+    if (this.isVanished || this.telegraphSprite) {
+      this.sprite.setVelocityX(0);
+      return;
+    }
 
-      this.sprite.setVelocityX(direction * this.bossSpeed);
+    if (currentState.shouldMove) {
+      let speed = this.bossSpeed;
+      
+      // Use faster speed when charging with attack_2
+      if (this.isCharging) {
+        speed = this.chargeSpeed;
+      }
+      
+      const direction = currentState.playerDirection === 'left' ? -1 : 1;
+      this.sprite.setVelocityX(direction * speed);
       setSpriteDirection(this.sprite, direction > 0 ? 'right' : 'left', this.adjustForCenterOffset);
-    } else if (!currentState.shouldMove) {
+    } else {
       this.sprite.setVelocityX(0);
     }
   }
@@ -319,9 +337,7 @@ export class Boss extends Actor {
         currentState.shouldMove = false;
       } else {
         currentState.shouldAttack2 = true;
-        if (distance > 200) {
-          currentState.shouldMove = true;
-        }
+        currentState.shouldMove = true; // Move toward player during attack_2
       }
     }
     
