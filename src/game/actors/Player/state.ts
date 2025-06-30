@@ -31,6 +31,7 @@ export interface PlayerState {
   shouldWallSlide: boolean;
   shouldWallJump: boolean;
   isWallSliding: boolean;
+  shouldStopWallSlide: boolean;
 }
 
 export class State {
@@ -120,6 +121,12 @@ export class State {
                            wallCollision !== null &&
                            ((wallCollision === 'left' && isMovingLeft) || 
                             (wallCollision === 'right' && isMovingRight));
+
+    // NEW: Check if we should stop wall sliding (no longer touching wall or not pressing toward wall)
+    const shouldStopWallSlide = isWallSliding && 
+                               (wallCollision === null || 
+                                (wallCollision === 'left' && !isMovingLeft) ||
+                                (wallCollision === 'right' && !isMovingRight));
 
     const shouldWallJump = isWallSliding && 
                           Phaser.Input.Keyboard.JustDown(cursors.up);
@@ -235,7 +242,8 @@ export class State {
       
       shouldWallSlide,
       shouldWallJump,
-      isWallSliding
+      isWallSliding,
+      shouldStopWallSlide
     };
   }
 }

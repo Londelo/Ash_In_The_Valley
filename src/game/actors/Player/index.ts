@@ -247,12 +247,14 @@ export class Player extends Actor {
       this.sprite.body.setGravityY(-1);
       this.sprite.setVelocityY(0);
       this.sprite.play(`${this.playerSkin}_player_wall_hold`);
-    } else if (!state.shouldWallSlide && this.isWallSliding) {
+    } else if (state.shouldStopWallSlide && this.isWallSliding) {
+      // Player is no longer wall sliding - restore gravity and let them fall
       this.isWallSliding = false;
-      this.sprite.body.setGravityY(0);
+      this.sprite.body.setGravityY(0); // Restore normal gravity
     }
 
-    if(this.isWallSliding) {
+    // Maintain wall slide state while actively wall sliding
+    if (this.isWallSliding && !state.shouldStopWallSlide) {
       this.sprite.body.setGravityY(-1);
       this.sprite.setVelocityY(0);
     }
