@@ -4,6 +4,7 @@ import { EnemySpawner, EnemySpawnerConfig } from './EnemySpawner';
 import { DaggerBandit } from '../actors/DaggerBandit';
 import type { Player } from '../actors/Player';
 import type { LocationConfigs } from '../scenes/gehennaDeep/config';
+import { EventBus } from '../EventBus';
 
 export interface LocationZone {
   name: string;
@@ -82,7 +83,6 @@ export class LocationManager {
         }
       });
     }
-
   }
 
   private getPlayerCurrentLocation(): string | null {
@@ -113,7 +113,6 @@ export class LocationManager {
 
     // Create spawners for each spawn point in this location
     spawnPoints.forEach((spawnPoint, index) => {
-
       const spawnerConfig: EnemySpawnerConfig = {
         enemyClass: DaggerBandit,
         spawnPoint: { x: spawnPoint.x, y: spawnPoint.y },
@@ -126,7 +125,6 @@ export class LocationManager {
         this.activeSpawners.set(spawnPoint.name, spawner);
       }
     });
-
   }
 
   private pauseLocationSpawners(locationName: string): void {
@@ -138,7 +136,6 @@ export class LocationManager {
         spawner.stop(); // Stop spawning but keep existing enemies
       }
     });
-
   }
 
   public update(time: number, delta: number): void {
@@ -155,6 +152,9 @@ export class LocationManager {
         this.activateLocationSpawners(newLocation);
       }
 
+      // Emit location change event
+      EventBus.emit('location_changed', newLocation);
+      
       this.currentLocation = newLocation;
     }
 
