@@ -14,7 +14,7 @@ export class State {
   private player: Player;
 
   private DETECTION_MADE = false;
-  private readonly DETECTION_RANGE = 300;
+  private readonly DETECTION_RANGE = 400;
   private readonly ATTACK_RANGE = 150;
 
   private lastAttackTime: number = 0;
@@ -71,17 +71,24 @@ export class State {
     const isOnGround = this.bandit.sprite.body.onFloor();
 
     const playerDirection = direction
+    // Once detected, always follow (remove distance check for following)
     const playerIsDetected = distance < this.DETECTION_RANGE || this.DETECTION_MADE
     const playerIsInAttackRange = distance <= this.ATTACK_RANGE
     const canAttack = this.checkAttackCooldown(time)
 
-    const shouldAttack = canAttack && playerIsInAttackRange && !isAttacking && !isBigAttacking
-    const shouldMove = distance > this.ATTACK_RANGE && playerIsDetected
-    const shouldPlayMoveAnim = shouldMove && !isMoving && !playerIsInAttackRange
-    const shouldPlayIdleAnim = (playerIsInAttackRange || !playerIsDetected) && !isIdle
+    // Attack when: detected, in range, can attack, not already attacking
+    const shouldAttack = playerIsDetected && playerIsInAttackRange && canAttack && !isAttacking && !isBigAttacking
+    
+    // Move when: detected, NOT in attack range, not attacking
+    const shouldMove = playerIsDetected && !playerIsInAttackRange && !isAttacking && !isBigAttacking
+    
+    // Animation logic
+    const shouldPlayMoveAnim = shouldMove && !isMoving
+    const shouldPlayIdleAnim = !shouldMove && !isAttacking && !isBigAttacking && !isIdle
 
+    // Update state tracking
     this.lastAttackTime = shouldAttack ? time : this.lastAttackTime
-    this.DETECTION_MADE = !this.DETECTION_MADE && playerIsDetected ? true : this.DETECTION_MADE
+    this.DETECTION_MADE = playerIsDetected ? true : this.DETECTION_MADE
 
     return {
       shouldAttack,

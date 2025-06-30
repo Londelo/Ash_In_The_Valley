@@ -56,55 +56,55 @@ const config = {
     collisionLayers: ['floor']
   } as TileMapConfig,
 
-  // Location-based spawn configurations
+  // Location-based spawn configurations - no respawning
   locationConfigs: {
     lvl_1: {
       maxEnemies: 2,
       spawnInterval: 1000,
       spawnRadius: 0,
-      respawnDelay: 4000,
+      respawnDelay: 0, // No respawning
       autoStart: true
     },
     lvl_2: {
       maxEnemies: 3,
       spawnInterval: 1000,
       spawnRadius: 0,
-      respawnDelay: 3000,
+      respawnDelay: 0, // No respawning
       autoStart: true
     },
     lvl_3: {
       maxEnemies: 4,
       spawnInterval: 1000,
       spawnRadius: 0,
-      respawnDelay: 2000,
+      respawnDelay: 0, // No respawning
       autoStart: true
     },
     lvl_4: {
       maxEnemies: 5,
       spawnInterval: 1000,
       spawnRadius: 0,
-      respawnDelay: 1500,
+      respawnDelay: 0, // No respawning
       autoStart: true
     },
     lvl_5: {
       maxEnemies: 6,
       spawnInterval: 1000,
       spawnRadius: 0,
-      respawnDelay: 1000,
+      respawnDelay: 0, // No respawning
       autoStart: true
     },
     lvl_6: {
       maxEnemies: 7,
       spawnInterval: 1000,
       spawnRadius: 0,
-      respawnDelay: 800,
+      respawnDelay: 0, // No respawning
       autoStart: true
     },
     lvl_7: {
       maxEnemies: 2,
       spawnInterval: 1000,
       spawnRadius: 0,
-      respawnDelay: 4000,
+      respawnDelay: 0, // No respawning
       autoStart: true
     }
 

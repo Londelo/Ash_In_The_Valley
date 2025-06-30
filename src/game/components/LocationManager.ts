@@ -112,11 +112,11 @@ export class LocationManager {
     spawnPoints.forEach(spawnPoint => {
       const spawnerConfig: EnemySpawnerConfig = {
         enemyClass: DaggerBandit,
-        maxEnemies: Math.ceil(config.maxEnemies / spawnPoints.length), // Distribute enemies across spawn points
+        maxEnemies: Math.ceil(config.maxEnemies / spawnPoints.length),
         spawnInterval: config.spawnInterval,
-        spawnPoint: { x: spawnPoint.x, y: spawnPoint.y }, // Exact spawn point coordinates
+        spawnPoint: { x: spawnPoint.x, y: spawnPoint.y },
         autoStart: config.autoStart,
-        respawnDelay: config.respawnDelay
+        respawnDelay: 0 // Disable respawning - enemies don't come back once killed
       };
 
       const spawner = new EnemySpawner(this.scene as any, this.player, spawnerConfig);
@@ -144,9 +144,10 @@ export class LocationManager {
     const newLocation = this.getPlayerCurrentLocation();
 
     if (newLocation !== this.currentLocation) {
-      // Player changed location
+      // Player changed location - but don't destroy existing enemies
       if (this.currentLocation) {
-        this.deactivateLocationSpawners(this.currentLocation);
+        // Stop spawning new enemies in old location but keep existing ones alive
+        this.pauseLocationSpawners(this.currentLocation);
       }
 
       if (newLocation) {
@@ -159,8 +160,21 @@ export class LocationManager {
 
     // Update all active spawners
     this.activeSpawners.forEach(spawner => {
-      spawner.update(0, 16); // Using fixed delta for simplicity
+      spawner.update(0, 16);
     });
+  }
+
+  private pauseLocationSpawners(locationName: string): void {
+    const spawnPoints = this.getSpawnPointsForLocation(locationName);
+    
+    spawnPoints.forEach(spawnPoint => {
+      const spawner = this.activeSpawners.get(spawnPoint.name);
+      if (spawner) {
+        spawner.stop(); // Stop spawning but keep existing enemies
+      }
+    });
+
+    console.log(`Paused spawners for location: ${locationName}`);
   }
 
   public getCurrentLocation(): string | null {
