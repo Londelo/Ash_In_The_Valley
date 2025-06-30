@@ -86,8 +86,10 @@ export class State {
     const shouldPlayMoveAnim = shouldMove && !isMoving
     const shouldPlayIdleAnim = !shouldMove && !isAttacking && !isBigAttacking && !isIdle
 
-    // Update state tracking
-    this.lastAttackTime = shouldAttack ? time : this.lastAttackTime
+    // Update state tracking - ALWAYS update lastAttackTime when shouldAttack is true
+    if (shouldAttack) {
+      this.lastAttackTime = time;
+    }
     this.DETECTION_MADE = playerIsDetected ? true : this.DETECTION_MADE
 
     return {
