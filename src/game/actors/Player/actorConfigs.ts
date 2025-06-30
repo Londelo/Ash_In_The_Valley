@@ -44,6 +44,7 @@ const lordOfFlamesActorConfig: ActorConfig = {
   centerXLeft: 0.75,
   centerXRight: 0.25,
   bodyOffsetY: 27,
+  attackPower: 20,
   deathAnimationKey: 'lordOfFlames_player_death',
   hitAnimationKey: 'lordOfFlames_player_hit'
 };
@@ -55,7 +56,7 @@ const holySamuraiActorConfig: ActorConfig = {
   centerXLeft: 0.65,
   centerXRight: 0.35,
   bodyOffsetY: 45,
-  attackPower: 35,
+  attackPower: 15,
   deathAnimationKey: 'holySamurai_player_death',
   hitAnimationKey: 'holySamurai_player_hit'
 };

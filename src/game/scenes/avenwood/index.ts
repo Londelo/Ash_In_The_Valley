@@ -88,34 +88,34 @@ export default class AvenWood extends Scene {
     const prophetY = this.prophet.sprite.y;
     const zoneWidth = 150;
     const zoneHeight = 150;
-    
+
     // Create a visible rectangle with physics body
     this.prophetTriggerZone = this.add.rectangle(
-      prophetX, 
-      prophetY, 
-      zoneWidth, 
-      zoneHeight, 
-      0xff0000, 
-      0.3
+      prophetX,
+      prophetY,
+      zoneWidth,
+      zoneHeight,
+      0xff0000,
+      0
     );
     this.prophetTriggerZone.setDepth(10);
-    
+
     // Enable physics on the rectangle
     this.physics.add.existing(this.prophetTriggerZone, true);
   }
 
   private checkAttackOverlaps = (): void => {
     if (this.bossSpawned) return;
-    
+
     // Get all active player attack hitboxes
     const playerHitboxes = this.player.attackHitboxManager.getActiveHitboxes();
-    
+
     // Check each hitbox for overlap with the prophet trigger zone
     for (const hitbox of playerHitboxes) {
       if (hitbox.isActive) {
         const hitboxBounds = hitbox.sprite.getBounds();
         const zoneBounds = this.prophetTriggerZone.getBounds();
-        
+
         if (Phaser.Geom.Rectangle.Overlaps(hitboxBounds, zoneBounds)) {
           this.spawnBoss();
           break;
@@ -126,19 +126,19 @@ export default class AvenWood extends Scene {
 
   private spawnBoss(): void {
     if (this.bossSpawned) return;
-    
+
     this.bossSpawned = true;
-    
+
     // Create boss at prophet's position
     const bossX = this.prophet.sprite.x;
     const bossY = this.prophet.sprite.y;
-    
+
     this.boss = new Boss(this, bossX, bossY, this.player);
     this.boss.create();
-    
+
     // Add collisions for boss
     this.physics.add.collider(this.boss.sprite, this.world);
-    
+
     // Setup player attack hitboxes to damage boss
     this.physics.add.overlap(
       this.player.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
@@ -156,21 +156,21 @@ export default class AvenWood extends Scene {
       undefined,
       this
     );
-    
+
     // Make prophet disappear
     this.prophet.sprite.setVisible(false);
     this.prophet.sprite.body.enable = false;
-    
+
     // Disable the trigger zone
     this.prophetTriggerZone.destroy();
-    
+
     // Stop the attack check timer
     this.attackCheckTimer.destroy();
   }
 
   private handlePlayerAttackHitBoss = (playerAttack: any, bossSprite: any): void => {
     const attackHitbox = playerAttack.attackHitbox;
-    
+
     if (attackHitbox && attackHitbox.isActive && this.boss) {
       // Check if this hitbox has already hit the boss
       if (attackHitbox.hasHitEntity('boss')) {

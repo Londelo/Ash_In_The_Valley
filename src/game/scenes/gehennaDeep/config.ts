@@ -109,9 +109,9 @@ const config = {
     },
     boss_2: {
       maxEnemies: 20,
-      spawnInterval: 1000,
+      spawnInterval: 1500,
       spawnRadius: 0,
-      respawnDelay: 2000,
+      respawnDelay: 0,
       autoStart: true
     }
 
