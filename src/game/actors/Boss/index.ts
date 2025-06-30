@@ -7,6 +7,7 @@ import { AttackHitboxManager, AttackHitboxConfig } from '../../components/Attack
 import { AnimationHelper } from '../../components/AnimationHelper';
 import { getBossAnimationConfigs } from './animations';
 import { Actor, ActorConfig } from '../../components/Actor';
+import { ChatAI, ChatAIOptions } from '../../components/ChatAI';
 
 export class Boss extends Actor {
   private state: State;
@@ -23,6 +24,10 @@ export class Boss extends Actor {
   private missileSprites: Phaser.GameObjects.Sprite[] = [];
 
   public attackHitboxManager: AttackHitboxManager;
+  private chatAI: ChatAI;
+  private inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
+  private lastTauntTime: number = 0;
+  private readonly TAUNT_COOLDOWN = 8000;
 
   private attackConfigs: { [key: string]: AttackHitboxConfig } = {
     'boss_attack_1': {
@@ -68,6 +73,23 @@ export class Boss extends Actor {
     this.playerRef = playerRef;
     this.sprite.setDepth(1);
     this.attackHitboxManager = new AttackHitboxManager(scene);
+
+    const chatAIOptions: ChatAIOptions = {
+      agentId: 'agent_01jy5e6qfyear8247z07scjnrj',
+      onMessageReceived: this.onAIMessageReceived.bind(this),
+      onConversationStarted: this.onConversationStarted.bind(this),
+      onConversationEnded: this.onConversationEnded.bind(this)
+    };
+    this.chatAI = new ChatAI(chatAIOptions);
+  }
+
+  private setupInputKeys() {
+    if (this.scene.input && this.scene.input.keyboard) {
+      const inputKeys = this.scene.input.keyboard.addKeys('Y,U,I,O') as { [key: string]: Phaser.Input.Keyboard.Key };
+      return { inputKeys };
+    } else {
+      throw new Error('Keyboard input plugin is not available.');
+    }
   }
 
   private createBossAnimations(scene: Scene) {
@@ -107,6 +129,7 @@ export class Boss extends Actor {
         this.sprite.play('boss_idle');
       } else if (animation.key === 'boss_death') {
         this.sprite.anims.stop();
+        this.sendBossDeathTaunt();
       }
     });
   }
@@ -162,6 +185,8 @@ export class Boss extends Actor {
     this.isVanished = true;
     this.sprite.setVisible(false);
     
+    this.sendBossTaunt('vanish');
+    
     this.scene.time.delayedCall(2000, () => {
       const playerX = this.playerRef.sprite.x;
       const side = Math.random() < 0.5 ? 'left' : 'right';
@@ -213,11 +238,93 @@ export class Boss extends Actor {
       const playerX = this.playerRef.sprite.x;
       const playerY = this.playerRef.sprite.y;
       this.createTelegraph(playerX, playerY);
+      this.sendBossTaunt('special_attack');
     } else if (currentState.shouldAttack2) {
       this.sprite.play('boss_attack_2_prep');
+      this.sendBossTaunt('basic_attack');
     } else if (currentState.shouldVanish) {
       this.sprite.play('boss_vanish');
       this.state.onVanishUsed();
+    }
+  }
+
+  private sendBossTaunt(attackType: string) {
+    const currentTime = Date.now();
+    if (currentTime - this.lastTauntTime < this.TAUNT_COOLDOWN) return;
+
+    this.lastTauntTime = currentTime;
+
+    const healthPercent = (this.health / this.maxHealth) * 100;
+    let contextMessage = '';
+
+    switch (attackType) {
+      case 'basic_attack':
+        contextMessage = `The transformed prophet boss is performing a basic ground attack. Boss health: ${healthPercent.toFixed(0)}%. Use evil, menacing voice to taunt the player about their futile resistance.`;
+        break;
+      case 'special_attack':
+        contextMessage = `The transformed prophet boss is launching a devastating special attack from above. Boss health: ${healthPercent.toFixed(0)}%. Use evil, menacing voice to mock the player's inability to escape divine wrath.`;
+        break;
+      case 'vanish':
+        contextMessage = `The transformed prophet boss is vanishing and will reappear next to the player. Boss health: ${healthPercent.toFixed(0)}%. Use evil, menacing voice to taunt about being everywhere and nowhere.`;
+        break;
+      case 'phase2':
+        contextMessage = `The transformed prophet boss has entered phase 2 (below 50% health). Use evil, menacing voice to express growing desperation and fury.`;
+        break;
+      case 'death':
+        contextMessage = `The transformed prophet boss has been defeated. Use a final evil, menacing voice to curse the player or make ominous threats about what's to come.`;
+        break;
+    }
+
+    if (!this.chatAI.getIsConversationActive()) {
+      this.chatAI.startConversation().then(() => {
+        this.chatAI.sendUserMessage(contextMessage);
+      });
+    } else {
+      this.chatAI.sendUserMessage(contextMessage);
+    }
+  }
+
+  private sendBossDeathTaunt() {
+    this.sendBossTaunt('death');
+  }
+
+  private handlePlayerResponses() {
+    const responses = [
+      "You're nothing but a corrupted shadow of what you once were!",
+      "Your transformation won't save you from justice!",
+      "I've faced worse demons than you!",
+      "Your evil ends here, false prophet!"
+    ];
+
+    if (Phaser.Input.Keyboard.JustDown(this.inputKeys.Y)) {
+      this.chatAI.sendUserMessage(`Player responds defiantly: "${responses[0]}"`);
+    } else if (Phaser.Input.Keyboard.JustDown(this.inputKeys.U)) {
+      this.chatAI.sendUserMessage(`Player responds with determination: "${responses[1]}"`);
+    } else if (Phaser.Input.Keyboard.JustDown(this.inputKeys.I)) {
+      this.chatAI.sendUserMessage(`Player responds confidently: "${responses[2]}"`);
+    } else if (Phaser.Input.Keyboard.JustDown(this.inputKeys.O)) {
+      this.chatAI.sendUserMessage(`Player responds righteously: "${responses[3]}"`);
+    }
+  }
+
+  private onAIMessageReceived(message: any): void {
+    // AI message received - boss is speaking
+  }
+
+  private onConversationStarted(): void {
+    this.sendBossTaunt('phase2');
+  }
+
+  private onConversationEnded(): void {
+    // Conversation ended
+  }
+
+  protected onHit(damage: number): void {
+    super.onHit(damage);
+    
+    const healthPercent = (this.health / this.maxHealth) * 100;
+    if (healthPercent <= 50 && healthPercent > 45) {
+      this.sendBossTaunt('phase2');
     }
   }
 
@@ -225,6 +332,11 @@ export class Boss extends Actor {
     this.state = new State(this, this.playerRef);
     this.createBossAnimations(this.scene);
     this.addBossAnimationListeners();
+
+    const { inputKeys } = this.setupInputKeys();
+    this.inputKeys = inputKeys;
+
+    this.chatAI.getMicPermissions();
 
     EventBus.on('damage_boss', (damage: number) => {
       this.takeDamage(damage);
@@ -237,6 +349,8 @@ export class Boss extends Actor {
     this.deltaTime = delta / 1000;
 
     if (this.isDead) return;
+
+    this.handlePlayerResponses();
 
     const currentState = this.state.getState(time, delta);
     this.handleAttacks(currentState);

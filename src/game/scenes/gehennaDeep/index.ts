@@ -13,6 +13,7 @@ export default class GehennaDeep extends Scene {
   player: Player;
   boss: Boss;
   tileMapComponent: TileMapComponent;
+  uiText: Phaser.GameObjects.Text;
 
   constructor() {
     super('GehennaDeep');
@@ -37,6 +38,8 @@ export default class GehennaDeep extends Scene {
     this.player.create();
     this.boss.create();
 
+    this.createUI();
+
     this.camera.startFollow(this.player.sprite);
     this.camera.setFollowOffset(0, 200);
     this.physics.world.setBounds(0, 0, mapWidth, mapHeight);
@@ -48,6 +51,35 @@ export default class GehennaDeep extends Scene {
     this.setupCombat();
 
     EventBus.emit('current-scene-ready', this);
+  }
+
+  private createUI() {
+    this.uiText = this.add.text(20, 20, '', {
+      fontSize: '16px',
+      color: '#ffffff',
+      backgroundColor: '#000000',
+      padding: { x: 10, y: 5 }
+    });
+    this.uiText.setScrollFactor(0);
+    this.uiText.setDepth(1000);
+    
+    this.updateUI();
+  }
+
+  private updateUI() {
+    const bossHealthPercent = Math.max(0, (this.boss.health / this.boss.maxHealth) * 100);
+    const playerHealthPercent = Math.max(0, (this.player.health / this.player.maxHealth) * 100);
+    
+    this.uiText.setText([
+      `Boss Health: ${bossHealthPercent.toFixed(0)}%`,
+      `Player Health: ${playerHealthPercent.toFixed(0)}%`,
+      '',
+      'Combat Responses:',
+      'Y - "You\'re nothing but a corrupted shadow!"',
+      'U - "Your transformation won\'t save you!"',
+      'I - "I\'ve faced worse demons than you!"',
+      'O - "Your evil ends here, false prophet!"'
+    ]);
   }
 
   private setupCombat() {
@@ -80,6 +112,7 @@ export default class GehennaDeep extends Scene {
     this.player.update(time, delta);
     this.boss.update(time, delta);
     
+    this.updateUI();
     this.setupCombat();
   }
 }
