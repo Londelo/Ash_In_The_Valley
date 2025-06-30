@@ -20,7 +20,7 @@ export class Boss extends Actor {
   private readonly DETECTION_RANGE = 600;
   private attackTimer: number = 0;
   private readonly ATTACK_INTERVAL = 3000; // Attack every 3 seconds
-  public debugEnabled: boolean = false;
+  public debugEnabled: boolean = true;
 
   public attackHitboxManager: AttackHitboxManager;
 

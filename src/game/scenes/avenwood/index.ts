@@ -74,14 +74,102 @@ export default class AvenWood extends Scene {
     this.physics.add.collider(this.temple.sprite, this.world);
     if (this.boss) this.physics.add.collider(this.boss.sprite, this.world);
 
+    // Setup player attack hitboxes to damage boss
+    if (this.boss) {
+      this.physics.add.overlap(
+        this.player.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
+        this.boss.sprite,
+        this.handlePlayerAttackHitBoss,
+        undefined,
+        this
+      );
+
+      // Setup boss attack hitboxes to damage player
+      this.physics.add.overlap(
+        this.boss.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
+        this.player.sprite,
+        this.handleBossAttackHitPlayer,
+        undefined,
+        this
+      );
+    }
+
     EventBus.emit('current-scene-ready', this);
   }
+
+  private handlePlayerAttackHitBoss = (playerAttack: any, bossSprite: any): void => {
+    const attackHitbox = playerAttack.attackHitbox;
+    
+    if (attackHitbox && attackHitbox.isActive && this.boss) {
+      // Check if this hitbox has already hit the boss
+      if (attackHitbox.hasHitEntity('boss')) {
+        return; // Skip damage - boss was already hit by this hitbox
+      }
+
+      // Mark boss as hit by this hitbox
+      attackHitbox.addHitEntity('boss');
+
+      // Apply damage
+      this.boss.takeDamage(attackHitbox.config.damage);
+
+      // Emit damage event for boss
+      EventBus.emit('damage_boss', attackHitbox.config.damage);
+    }
+  };
+
+  private handleBossAttackHitPlayer = (bossAttack: any, playerSprite: any): void => {
+    const attackHitbox = bossAttack.attackHitbox;
+
+    if (attackHitbox && attackHitbox.isActive) {
+      // Check if this hitbox has already hit the player
+      if (attackHitbox.hasHitEntity('player')) {
+        return; // Skip damage - player was already hit by this hitbox
+      }
+
+      // Mark player as hit by this hitbox
+      attackHitbox.addHitEntity('player');
+
+      // Apply damage
+      this.player.takeDamage(attackHitbox.config.damage);
+    }
+  };
 
   update(time: number, delta: number) {
     this.player.update(time, delta);
     this.prophet.update(time, delta);
     this.temple.update(time, delta);
     if (this.boss) this.boss.update(time, delta);
+
+    // Update dynamic collision detection for player and boss attacks
+    this.updateDynamicCollisions();
+  }
+
+  private updateDynamicCollisions(): void {
+    if (!this.boss) return;
+
+    // Update player attack collisions with boss
+    const playerHitboxes = this.player.attackHitboxManager.getActiveHitboxes();
+    playerHitboxes.forEach(hitbox => {
+      if (hitbox.isActive) {
+        this.physics.world.overlap(
+          hitbox.sprite,
+          this.boss?.sprite,
+          () => this.handlePlayerAttackHitBoss(hitbox.sprite, this.boss?.sprite)
+        );
+      }
+    });
+
+    // Update boss attack collisions with player
+    const bossHitboxes = this.boss.attackHitboxManager.getActiveHitboxes();
+    bossHitboxes.forEach(hitbox => {
+      if (hitbox.isActive) {
+        this.physics.world.overlap(
+          hitbox.sprite,
+          this.player.sprite,
+          () => this.handleBossAttackHitPlayer(hitbox.sprite, this.player.sprite)
+        );
+      }
+    });
   }
 
   changeScene() {
