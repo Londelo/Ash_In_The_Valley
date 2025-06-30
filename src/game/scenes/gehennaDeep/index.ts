@@ -78,7 +78,7 @@ export default class GehennaDeep extends Scene {
           obj.width * config.tileMapConfig.scale,
           obj.height * config.tileMapConfig.scale,
           0x00ff00,
-          0.3
+          0
         );
         exitRect.setOrigin(0, 0);
         this.exitZone.add(exitRect);
@@ -89,15 +89,15 @@ export default class GehennaDeep extends Scene {
   private handleExitOverlap = (playerSprite: any, exitObject: any): void => {
     // Clean up current scene
     this.enemySpawner?.destroy();
-    
+
     // Calculate spawn position near temple in AvenWood
     const spawnX = (config.temple_x + 50) * 2; // Using AvenWood's scale of 2
-    const spawnY = 500; // Safe Y position
-    
+    const spawnY = 800; // Safe Y position
+
     // Transition to AvenWood with custom spawn position
-    this.scene.start('AvenWood', { 
-      playerX: spawnX, 
-      playerY: spawnY 
+    this.scene.start('AvenWood', {
+      playerX: spawnX,
+      playerY: spawnY
     });
   };
 
