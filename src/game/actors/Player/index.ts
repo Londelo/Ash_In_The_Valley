@@ -30,7 +30,6 @@ export class Player extends Actor {
   playerSpeed: number = 200;
   private readonly DASH_VELOCITY = 800;
   private readonly DASH_DURATION = 300; // milliseconds
-  private readonly WALL_SLIDE_VELOCITY = 50; // slow fall speed when wall sliding
   private dashTimer: number = 0;
   private isDashing: boolean = false;
   private isWallSliding: boolean = false;
@@ -246,17 +245,17 @@ export class Player extends Actor {
     if (state.shouldWallSlide && !this.isWallSliding) {
       this.isWallSliding = true;
       this.sprite.setVelocityX(0);
-      this.sprite.setVelocityY(this.WALL_SLIDE_VELOCITY);
+      this.sprite.setVelocityY(0); // Stop all vertical movement - no sliding down
       this.sprite.play(`${this.playerSkin}_player_wall_hold`);
     } else if (!state.shouldWallSlide && this.isWallSliding) {
       this.isWallSliding = false;
       // Let gravity take over
     }
 
-    // Maintain wall slide velocity
+    // Maintain wall hold position - completely stop movement
     if (this.isWallSliding) {
       this.sprite.setVelocityX(0);
-      this.sprite.setVelocityY(this.WALL_SLIDE_VELOCITY);
+      this.sprite.setVelocityY(0); // Hold position - no sliding down
     }
   }
 
