@@ -2,7 +2,6 @@ import config from './config';
 import { EventBus } from '../../EventBus';
 import { Scene } from 'phaser';
 import { Player } from '../../actors/Player';
-import { Boss } from '../../actors/Boss';
 import { TileMapComponent } from '../../components/TileMap';
 
 export default class GehennaDeep extends Scene {
@@ -11,9 +10,9 @@ export default class GehennaDeep extends Scene {
   world: Phaser.Physics.Arcade.StaticGroup;
 
   player: Player;
-  boss: Boss;
   tileMapComponent: TileMapComponent;
   uiText: Phaser.GameObjects.Text;
+  inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
 
   constructor() {
     super('GehennaDeep');
@@ -30,15 +29,13 @@ export default class GehennaDeep extends Scene {
 
     const { width: mapWidth, height: mapHeight } = this.tileMapComponent.getMapDimensions();
     const playerSpawn: any = this.tileMapComponent.getObjectLayer('spawn')?.objects[0];
-    const bossSpawn: any = this.tileMapComponent.getObjectLayer('boss_spawn')?.objects[0];
 
     this.player = new Player(this, playerSpawn.x * tileMapConfig.scale, playerSpawn.y * tileMapConfig.scale);
-    this.boss = new Boss(this, bossSpawn?.x * tileMapConfig.scale || 750, bossSpawn?.y * tileMapConfig.scale || 400, this.player);
 
     this.player.create();
-    this.boss.create();
 
     this.createUI();
+    this.setupInputKeys();
 
     this.camera.startFollow(this.player.sprite);
     this.camera.setFollowOffset(0, 200);
@@ -46,11 +43,14 @@ export default class GehennaDeep extends Scene {
     this.camera.setBounds(0, 0, mapWidth, mapHeight);
 
     this.physics.add.collider(this.player.sprite, this.world);
-    this.physics.add.collider(this.boss.sprite, this.world);
-
-    this.setupCombat();
 
     EventBus.emit('current-scene-ready', this);
+  }
+
+  private setupInputKeys() {
+    if (this.input && this.input.keyboard) {
+      this.inputKeys = this.input.keyboard.addKeys('B') as { [key: string]: Phaser.Input.Keyboard.Key };
+    }
   }
 
   private createUI() {
@@ -67,52 +67,35 @@ export default class GehennaDeep extends Scene {
   }
 
   private updateUI() {
-    const bossHealthPercent = Math.max(0, (this.boss.health / this.boss.maxHealth) * 100);
     const playerHealthPercent = Math.max(0, (this.player.health / this.player.maxHealth) * 100);
     
     this.uiText.setText([
-      `Boss Health: ${bossHealthPercent.toFixed(0)}%`,
+      `Gehenna Deep - Cave Exploration`,
       `Player Health: ${playerHealthPercent.toFixed(0)}%`,
       '',
-      'Combat Responses:',
-      'Y - "You\'re nothing but a corrupted shadow!"',
-      'U - "Your transformation won\'t save you!"',
-      'I - "I\'ve faced worse demons than you!"',
-      'O - "Your evil ends here, false prophet!"'
+      'Controls:',
+      'Arrow Keys - Move',
+      'Space + Move - Run',
+      'Up Arrow - Jump',
+      'R - Attack',
+      'E - Slam Attack',
+      'Q - Dash',
+      'W - Block',
+      '',
+      'B - Start Boss Fight (when ready)'
     ]);
   }
 
-  private setupCombat() {
-    this.physics.add.overlap(
-      this.player.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
-      this.boss.sprite,
-      (_playerHitbox: any, _bossSprite: any) => {
-        const hitbox = _playerHitbox.attackHitbox;
-        if (hitbox && hitbox.isActive) {
-          EventBus.emit('damage_boss', hitbox.config.damage);
-          hitbox.destroy();
-        }
-      }
-    );
-
-    this.physics.add.overlap(
-      this.boss.attackHitboxManager.getActiveHitboxes().map(h => h.sprite),
-      this.player.sprite,
-      (_bossHitbox: any, _playerSprite: any) => {
-        const hitbox = _bossHitbox.attackHitbox;
-        if (hitbox && hitbox.isActive) {
-          EventBus.emit('damage_player', hitbox.config.damage);
-          hitbox.destroy();
-        }
-      }
-    );
+  private handleBossFightTrigger() {
+    if (Phaser.Input.Keyboard.JustDown(this.inputKeys.B)) {
+      // Transition to boss fight scene
+      this.scene.start('BossFight');
+    }
   }
 
   update(time: number, delta: number) {
     this.player.update(time, delta);
-    this.boss.update(time, delta);
-    
     this.updateUI();
-    this.setupCombat();
+    this.handleBossFightTrigger();
   }
 }

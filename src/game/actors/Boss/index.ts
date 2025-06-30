@@ -15,7 +15,7 @@ export class Boss extends Actor {
   private deltaTime: number = 0;
   private bossSpeed: number = 80;
   
-  private readonly ARENA_CENTER_X = 750;
+  private readonly ARENA_CENTER_X = 600;
   private readonly WANDER_RANGE = 200;
   
   private isVanished: boolean = false;
@@ -24,7 +24,7 @@ export class Boss extends Actor {
   private missileSprites: Phaser.GameObjects.Sprite[] = [];
 
   public attackHitboxManager: AttackHitboxManager;
-  private chatAI: ChatAI;
+  public chatAI: ChatAI;
   private inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   private lastTauntTime: number = 0;
   private readonly TAUNT_COOLDOWN = 8000;
@@ -37,7 +37,7 @@ export class Boss extends Actor {
       offsetX_left: -100,
       offsetY: -30,
       duration: 300,
-      damage: this.attackPower * 2,
+      damage: 25,
       attackerId: 'boss'
     },
     'boss_attack_2': {
@@ -47,7 +47,7 @@ export class Boss extends Actor {
       offsetX_left: -80,
       offsetY: -25,
       duration: 250,
-      damage: this.attackPower,
+      damage: 15,
       attackerId: 'boss'
     }
   };
@@ -60,8 +60,8 @@ export class Boss extends Actor {
       centerXLeft: 0.6,
       centerXRight: 0.4,
       centerY: 1,
-      health: 500,
-      attackPower: 40,
+      health: 300,
+      attackPower: 20,
       bodyOffsetY: 30,
       knockbackForce: 50,
       deathAnimationKey: 'boss_death',
@@ -161,7 +161,7 @@ export class Boss extends Actor {
       offsetX_left: 0,
       offsetY: 0,
       duration: 500,
-      damage: this.attackPower * 1.5,
+      damage: 30,
       attackerId: 'boss'
     };
 
@@ -340,6 +340,10 @@ export class Boss extends Actor {
 
     EventBus.on('damage_boss', (damage: number) => {
       this.takeDamage(damage);
+    });
+
+    EventBus.on('damage_player', (damage: number) => {
+      this.playerRef.takeDamage(damage);
     });
 
     this.sprite.play('boss_idle');

@@ -17,7 +17,7 @@ export class State {
   private boss: Boss;
   private player: Player;
 
-  private readonly ARENA_CENTER_X = 750;
+  private readonly ARENA_CENTER_X = 600;
   private readonly WANDER_RANGE = 200;
   private readonly ATTACK_2_COOLDOWN = 4000;
   private readonly SPECIAL_ATTACK_INTERVAL = 5;
