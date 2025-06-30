@@ -58,6 +58,9 @@ export class Boss extends Actor {
     this.playerRef = playerRef;
     this.sprite.setDepth(0);
     this.attackHitboxManager = new AttackHitboxManager(scene);
+    
+    // Customize boss health bar
+    this.healthBar.update(this.health, this.maxHealth);
   }
 
   private createBossAnimations(scene: Scene) {
@@ -221,6 +224,9 @@ export class Boss extends Actor {
     const spriteDirection = this.sprite.flipX ? 'left' : 'right';
     this.attackHitboxManager.updateHitboxes(this.sprite.x, this.sprite.y, spriteDirection);
     this.attackHitboxManager.cleanupInactiveHitboxes();
+    
+    // Update health bar position
+    this.healthBar.update(this.health, this.maxHealth);
 
     this.renderDebugGraphics(this.attackHitboxManager.getActiveHitboxes());
   }

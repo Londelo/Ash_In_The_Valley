@@ -1,4 +1,5 @@
 import { debugGraphics } from '../utils/debugGraphics';
+import { HealthBar } from './HealthBar';
 
 export interface ActorConfig {
   scale: number;
@@ -24,6 +25,7 @@ export abstract class Actor {
   public attackPower: number;
   public isDead: boolean = false;
   public isInvulnerable: boolean = false;
+  public healthBar: HealthBar;
 
   protected config: ActorConfig;
   protected invulnerabilityTimer: number = 0;
@@ -46,6 +48,19 @@ export abstract class Actor {
     this.adjustForCenterOffset('right');
 
     this.boundingBox = scene.add.graphics();
+    
+    // Create health bar
+    this.healthBar = new HealthBar(scene, this.sprite, {
+      width: 50,
+      height: 6,
+      borderWidth: 1,
+      borderColor: 0x000000,
+      backgroundColor: 0x000000,
+      fillColor: 0x00ff00,
+      offsetY: 50,
+      showBorder: true,
+      showBackground: true
+    });
   }
 
   public setActorScale(scale: number): void {
@@ -69,6 +84,9 @@ export abstract class Actor {
     if (this.isInvulnerable || this.isDead) return;
 
     this.health = Math.max(0, this.health - amount);
+    
+    // Update health bar
+    this.healthBar.update(this.health, this.maxHealth);
 
     if (this.health <= 0) {
       this.onDeath();
