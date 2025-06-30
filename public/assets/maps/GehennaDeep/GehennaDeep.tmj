@@ -1045,6 +1045,7 @@
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  "height":120,
                  "id":44,
+                 "locked":true,
                  "name":"BG_design",
                  "opacity":1,
                  "type":"tilelayer",
@@ -1053,6 +1054,7 @@
                  "x":0,
                  "y":0
                 }],
+         "locked":true,
          "name":"background",
          "opacity":1,
          "type":"group",
@@ -1473,7 +1475,7 @@
                 {
                  "height":141.5,
                  "id":11,
-                 "name":"wall",
+                 "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -1499,8 +1501,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":639.386818181818,
-                 "x":160.47,
+                 "width":719.386818181818,
+                 "x":80.47,
                  "y":336.803
                 }, 
                 {
@@ -1550,7 +1552,7 @@
                 {
                  "height":113.333,
                  "id":18,
-                 "name":"all",
+                 "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2085,16 +2087,51 @@
                  "width":63,
                  "x":800.75,
                  "y":497
+                }, 
+                {
+                 "height":197,
+                 "id":123,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":47,
+                 "x":33,
+                 "y":193.5
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":52,
+         "locked":true,
+         "name":"exit",
+         "objects":[
+                {
+                 "height":128.5,
+                 "id":126,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":62,
+                 "x":82,
+                 "y":209.5
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
          "x":0,
          "y":0
         }, 
         {
          "draworder":"topdown",
          "id":42,
+         "locked":true,
          "name":"spawn",
          "objects":[
                 {
@@ -2279,7 +2316,66 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":53,
+         "name":"powerSpawn",
+         "objects":[
+                {
+                 "height":0,
+                 "id":127,
+                 "name":"blood",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":875.636363636364,
+                 "y":1077.45454545455
+                }, 
+                {
+                 "height":0,
+                 "id":128,
+                 "name":"flames",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":856.181818181818,
+                 "y":1744
+                }, 
+                {
+                 "height":0,
+                 "id":130,
+                 "name":"holy",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1692,
+                 "y":1486
+                }, 
+                {
+                 "height":0,
+                 "id":131,
+                 "name":"holy",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":230,
+                 "y":1749
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2401,12 +2497,12 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
- "nextlayerid":52,
- "nextobjectid":123,
+ "nextlayerid":54,
+ "nextobjectid":132,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

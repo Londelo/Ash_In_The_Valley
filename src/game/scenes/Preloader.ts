@@ -54,6 +54,6 @@ export class Preloader extends Scene {
   }
 
   create() {
-    this.scene.start( 'AvenWood' );
+    this.scene.start( 'GehennaDeep' );
   }
 }

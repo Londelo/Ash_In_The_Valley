@@ -110,16 +110,6 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: -1
   },
   {
-    key: 'swordMaster_player_wall_slide_stop',
-    frames: [
-      { key: 'swordMasterAtlas', frame: 'Wall slide Stop 0' },
-      { key: 'swordMasterAtlas', frame: 'Wall slide Stop 1' },
-      { key: 'swordMasterAtlas', frame: 'Wall slide Stop 2' }
-    ],
-    frameRate: 8,
-    repeat: 0
-  },
-  {
     key: 'swordMaster_player_attack_1',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slash 1 0' },
@@ -333,16 +323,6 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
     ],
     frameRate: 8,
     repeat: -1
-  },
-  {
-    key: 'bloodSwordsMan_player_wall_slide_stop',
-    frames: [
-      { key: 'bloodSwordsmanAtlas', frame: 'land 0' },
-      { key: 'bloodSwordsmanAtlas', frame: 'land 1' },
-      { key: 'bloodSwordsmanAtlas', frame: 'land 2' }
-    ],
-    frameRate: 8,
-    repeat: 0
   },
   {
     key: 'bloodSwordsMan_player_attack_1',
@@ -578,16 +558,6 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
     ],
     frameRate: 8,
     repeat: -1
-  },
-  {
-    key: 'lordOfFlames_player_wall_slide_stop',
-    frames: [
-      { key: 'lordOfFlamesAtlas', frame: 'Move 6' },
-      { key: 'lordOfFlamesAtlas', frame: 'Move 7' },
-      { key: 'lordOfFlamesAtlas', frame: 'Move 8' }
-    ],
-    frameRate: 8,
-    repeat: 0
   },
   {
     key: 'lordOfFlames_player_attack_1',
@@ -847,16 +817,6 @@ export const holySamuraiAnimationConfigs: Animation[] = [
     ],
     frameRate: 8,
     repeat: -1
-  },
-  {
-    key: 'holySamurai_player_wall_slide_stop',
-    frames: [
-      { key: 'holySamuraiAtlas', frame: 'Land 0' },
-      { key: 'holySamuraiAtlas', frame: 'Land 1' },
-      { key: 'holySamuraiAtlas', frame: 'Land 2' }
-    ],
-    frameRate: 8,
-    repeat: 0
   },
   {
     key: 'holySamurai_player_attack_1',
