@@ -246,7 +246,7 @@ export class Player extends Actor {
       this.isWallSliding = true;
       this.sprite.body.setGravityY(-1);
       this.sprite.setVelocityY(0);
-      this.sprite.play(`${this.playerSkin}_player_wall_slide`);
+      this.sprite.play(`${this.playerSkin}_player_wall_hold`);
     } else if (!state.shouldWallSlide && this.isWallSliding) {
       this.isWallSliding = false;
       this.sprite.body.setGravityY(0);
