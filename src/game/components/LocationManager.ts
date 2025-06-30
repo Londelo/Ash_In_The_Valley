@@ -23,16 +23,16 @@ export class LocationManager {
   private tileMapComponent: TileMapComponent;
   private locationConfigs: LocationConfigs;
   private mapScale: number;
-  
+
   private locationZones: LocationZone[] = [];
   private spawnPoints: SpawnPoint[] = [];
   private currentLocation: string | null = null;
   private activeSpawners: Map<string, EnemySpawner> = new Map();
 
   constructor(
-    scene: Scene, 
-    player: Player, 
-    tileMapComponent: TileMapComponent, 
+    scene: Scene,
+    player: Player,
+    tileMapComponent: TileMapComponent,
     locationConfigs: LocationConfigs,
     mapScale: number
   ) {
@@ -50,7 +50,7 @@ export class LocationManager {
 
   private setupLocationZones(): void {
     const locationsLayer = this.tileMapComponent.getObjectLayer('locations');
-    
+
     if (locationsLayer && locationsLayer.objects) {
       locationsLayer.objects.forEach((obj: any) => {
         const zone: LocationZone = {
@@ -69,7 +69,7 @@ export class LocationManager {
 
   private setupSpawnPoints(): void {
     const spawnLayer = this.tileMapComponent.getObjectLayer('spawn');
-    
+
     if (spawnLayer && spawnLayer.objects) {
       spawnLayer.objects.forEach((obj: any) => {
         const spawnPoint: SpawnPoint = {
@@ -95,7 +95,7 @@ export class LocationManager {
   }
 
   private getSpawnPointsForLocation(locationName: string): SpawnPoint[] {
-    return this.spawnPoints.filter(spawn => 
+    return this.spawnPoints.filter(spawn =>
       spawn.name.includes(locationName)
     );
   }
@@ -128,7 +128,7 @@ export class LocationManager {
 
   private deactivateLocationSpawners(locationName: string): void {
     const spawnPoints = this.getSpawnPointsForLocation(locationName);
-    
+
     spawnPoints.forEach(spawnPoint => {
       const spawner = this.activeSpawners.get(spawnPoint.name);
       if (spawner) {
@@ -140,7 +140,7 @@ export class LocationManager {
     console.log(`Deactivated spawners for location: ${locationName}`);
   }
 
-  public update(): void {
+  public update(time: number, delta: number): void {
     const newLocation = this.getPlayerCurrentLocation();
 
     if (newLocation !== this.currentLocation) {
@@ -160,13 +160,13 @@ export class LocationManager {
 
     // Update all active spawners
     this.activeSpawners.forEach(spawner => {
-      spawner.update(0, 16);
+      spawner.update(time, delta);
     });
   }
 
   private pauseLocationSpawners(locationName: string): void {
     const spawnPoints = this.getSpawnPointsForLocation(locationName);
-    
+
     spawnPoints.forEach(spawnPoint => {
       const spawner = this.activeSpawners.get(spawnPoint.name);
       if (spawner) {

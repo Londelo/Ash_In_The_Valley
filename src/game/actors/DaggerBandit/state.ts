@@ -75,13 +75,13 @@ export class State {
     const playerIsDetected = distance < this.DETECTION_RANGE || this.DETECTION_MADE
     const playerIsInAttackRange = distance <= this.ATTACK_RANGE
     const canAttack = this.checkAttackCooldown(time)
-
+    console.log(canAttack, time, this.lastAttackTime, this.ATTACK_COOLDOWN)
     // Attack when: detected, in range, can attack, not already attacking
     const shouldAttack = playerIsDetected && playerIsInAttackRange && canAttack && !isAttacking && !isBigAttacking
-    
+
     // Move when: detected, NOT in attack range, not attacking
     const shouldMove = playerIsDetected && !playerIsInAttackRange && !isAttacking && !isBigAttacking
-    
+
     // Animation logic
     const shouldPlayMoveAnim = shouldMove && !isMoving
     const shouldPlayIdleAnim = !shouldMove && !isAttacking && !isBigAttacking && !isIdle

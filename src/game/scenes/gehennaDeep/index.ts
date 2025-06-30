@@ -40,9 +40,9 @@ export default class GehennaDeep extends Scene {
 
     // Setup location-based enemy spawning
     this.locationManager = new LocationManager(
-      this, 
-      this.player, 
-      this.tileMapComponent, 
+      this,
+      this.player,
+      this.tileMapComponent,
       config.locationConfigs,
       tileMapConfig.scale
     );
@@ -104,6 +104,6 @@ export default class GehennaDeep extends Scene {
 
   update(time: number, delta: number) {
     this.player.update(time, delta);
-    this.locationManager.update();
+    this.locationManager.update(time, delta);
   }
 }
