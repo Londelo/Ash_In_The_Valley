@@ -14,10 +14,10 @@ export class Boss extends Actor {
   private playerRef: Player;
   private deltaTime: number = 0;
   private bossSpeed: number = 120;
-  
+
   private readonly ARENA_CENTER_X = 600;
   private readonly WANDER_RANGE = 300;
-  
+
   private isVanished: boolean = false;
   private vanishTargetX: number = 0;
   private telegraphSprite: Phaser.GameObjects.Sprite | null = null;
@@ -53,7 +53,7 @@ export class Boss extends Actor {
 
   constructor(scene: Scene, x: number, y: number, playerRef: Player) {
     const actorConfig: ActorConfig = {
-      scale: 2,
+      scale: 4,
       bodyWidth: 60,
       bodyHeight: 80,
       centerXLeft: 0.6,
@@ -70,7 +70,7 @@ export class Boss extends Actor {
     super(scene, x, y, 'bossAtlas', 'Idle 0', actorConfig);
 
     this.playerRef = playerRef;
-    this.sprite.setDepth(1);
+    this.sprite.setDepth(0);
     this.attackHitboxManager = new AttackHitboxManager(scene);
 
     const chatAIOptions: ChatAIOptions = {
@@ -136,7 +136,7 @@ export class Boss extends Actor {
     if (this.telegraphSprite) {
       const targetX = this.telegraphSprite.x;
       const targetY = this.telegraphSprite.y + 100;
-      
+
       this.createMissileHitbox(targetX, targetY);
       this.telegraphSprite.destroy();
       this.telegraphSprite = null;
@@ -156,7 +156,7 @@ export class Boss extends Actor {
     };
 
     this.attackHitboxManager.createAttackHitbox(x, y, missileConfig, 'right');
-    
+
     const missileSprite = this.scene.add.sprite(x, y, 'bossAtlas', 'attack_1 0');
     missileSprite.setScale(1.2);
     missileSprite.play('boss_attack_1');
@@ -174,14 +174,14 @@ export class Boss extends Actor {
   public onVanishComplete() {
     this.isVanished = true;
     this.sprite.setVisible(false);
-    
+
     this.sendBossTaunt('vanish');
-    
+
     this.scene.time.delayedCall(2000, () => {
       const playerX = this.playerRef.sprite.x;
       const side = Math.random() < 0.5 ? 'left' : 'right';
       this.vanishTargetX = side === 'left' ? playerX - 150 : playerX + 150;
-      
+
       this.sprite.x = this.vanishTargetX;
       this.sprite.setVisible(true);
       this.sprite.play('boss_appear');
@@ -190,7 +190,7 @@ export class Boss extends Actor {
 
   public onAppearComplete() {
     this.isVanished = false;
-    
+
     this.scene.time.delayedCall(500, () => {
       this.sprite.play('boss_attack_2_prep');
     });
@@ -199,7 +199,7 @@ export class Boss extends Actor {
   public handleMovement(currentState: BossState) {
     if (currentState.shouldMove && !this.isVanished) {
       const direction = currentState.playerDirection === 'left' ? -1 : 1;
-      
+
       this.sprite.setVelocityX(direction * this.bossSpeed);
       setSpriteDirection(this.sprite, direction > 0 ? 'right' : 'left', this.adjustForCenterOffset);
     } else if (!currentState.shouldMove) {
@@ -290,7 +290,7 @@ export class Boss extends Actor {
 
   protected onHit(damage: number): void {
     super.onHit(damage);
-    
+
     const healthPercent = (this.health / this.maxHealth) * 100;
     if (healthPercent <= 50 && healthPercent > 45) {
       this.sendBossTaunt('phase2');
