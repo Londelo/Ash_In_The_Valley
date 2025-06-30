@@ -24,7 +24,7 @@ export default class AvenWood extends Scene {
     super('AvenWood');
   }
 
-  create() {
+  create(data?: { playerX?: number, playerY?: number }) {
     this.camera = this.cameras.main;
     const { tileMapConfig } = config
 
@@ -36,7 +36,17 @@ export default class AvenWood extends Scene {
     const { width: mapWidth, height: mapHeight } = this.tileMapComponent.getMapDimensions();
     const templeLocation = this.tileMapComponent.getObjectLayer('temple')?.objects[0] as any;
 
-    this.player = new Player(this, templeLocation.x * tileMapConfig.scale, config.player_start_y * tileMapConfig.scale);
+    // Determine player spawn position
+    let playerStartX = templeLocation.x * tileMapConfig.scale;
+    let playerStartY = config.player_start_y * tileMapConfig.scale;
+
+    // Override with custom spawn if provided
+    if (data && data.playerX !== undefined && data.playerY !== undefined) {
+      playerStartX = data.playerX;
+      playerStartY = data.playerY;
+    }
+
+    this.player = new Player(this, playerStartX, playerStartY);
     this.prophet = new Prophet(this, config.prophet_start_x * tileMapConfig.scale, config.prophet_start_y * tileMapConfig.scale, this.player);
     this.temple = new Temple(this, templeLocation.x, templeLocation.y, tileMapConfig.scale, this.player);
 

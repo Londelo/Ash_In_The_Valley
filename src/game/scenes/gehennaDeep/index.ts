@@ -12,6 +12,7 @@ export default class GehennaDeep extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
   map: Phaser.Tilemaps.Tilemap;
   world: Phaser.Physics.Arcade.StaticGroup;
+  exitZone: Phaser.Physics.Arcade.StaticGroup;
 
   player: Player;
   bandits: DaggerBandit[] = [];
@@ -33,6 +34,9 @@ export default class GehennaDeep extends Scene {
     this.map = map;
     this.world = world;
 
+    // Setup exit zone
+    this.setupExitZone();
+
     const { width: mapWidth, height: mapHeight } = this.tileMapComponent.getMapDimensions();
     const playerSpawn: any = this.tileMapComponent.getObjectLayer('spawn')?.objects[0];
 
@@ -50,8 +54,52 @@ export default class GehennaDeep extends Scene {
 
     this.physics.add.collider(this.player.sprite, this.world);
 
+    // Setup exit collision
+    this.physics.add.overlap(
+      this.player.sprite,
+      this.exitZone,
+      this.handleExitOverlap,
+      undefined,
+      this
+    );
+
     EventBus.emit('current-scene-ready', this);
   }
+
+  private setupExitZone(): void {
+    this.exitZone = this.physics.add.staticGroup();
+    const exitLayer = this.tileMapComponent.getObjectLayer('exit');
+
+    if (exitLayer && exitLayer.objects) {
+      exitLayer.objects.forEach((obj: any) => {
+        const exitRect = this.add.rectangle(
+          obj.x * config.tileMapConfig.scale,
+          obj.y * config.tileMapConfig.scale,
+          obj.width * config.tileMapConfig.scale,
+          obj.height * config.tileMapConfig.scale,
+          0x00ff00,
+          0.3
+        );
+        exitRect.setOrigin(0, 0);
+        this.exitZone.add(exitRect);
+      });
+    }
+  }
+
+  private handleExitOverlap = (playerSprite: any, exitObject: any): void => {
+    // Clean up current scene
+    this.enemySpawner?.destroy();
+    
+    // Calculate spawn position near temple in AvenWood
+    const spawnX = (config.temple_x + 50) * 2; // Using AvenWood's scale of 2
+    const spawnY = 500; // Safe Y position
+    
+    // Transition to AvenWood with custom spawn position
+    this.scene.start('AvenWood', { 
+      playerX: spawnX, 
+      playerY: spawnY 
+    });
+  };
 
   private setupEnemySpawner(): void {
     const spawnerConfig: EnemySpawnerConfig = {
