@@ -28,8 +28,12 @@ export class Preloader extends Scene {
     this.load.atlas( 'holySamuraiAtlas', 'SwordMaster/Glitch_Samurai.png', 'SwordMaster/Glitch_Samurai.json' );
     this.load.atlas( 'daggerBanditAtlas', 'DaggerBandit/Dagger_Bandit.png', 'DaggerBandit/Dagger_Bandit.json' );
     this.load.atlas( 'prophetAtlas', 'Prophet/prophet.png', 'Prophet/prophet.json' );
+<<<<<<< HEAD
     this.load.atlas( 'elkAtlas', 'ElkAndDeer/Elk.png', 'ElkAndDeer/Elk.json' );
     this.load.atlas( 'deerAtlas', 'ElkAndDeer/Deer.png', 'ElkAndDeer/Deer.json' );
+=======
+    this.load.atlas( 'bossAtlas', 'Boss/boss.png', 'Boss/boss.json' );
+>>>>>>> 5a03fed (ASH-9: added boss assets)
 
     this.load.atlas( 'templeAtlas', 'Temple/temple.png', 'Temple/temple.json' );
 

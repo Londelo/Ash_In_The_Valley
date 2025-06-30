@@ -2,8 +2,11 @@ import config from './config';
 import { EventBus } from '../../EventBus';
 import { Scene } from 'phaser';
 import { Player } from '../../actors/Player';
+<<<<<<< HEAD
 import { Elk } from '../../actors/Elk';
 import { Deer } from '../../actors/Deer';
+=======
+>>>>>>> 5a03fed (ASH-9: added boss assets)
 import { TileMapComponent } from '../../components/TileMap';
 import { LocationManager } from '../../components/LocationManager';
 import { BossManager } from '../../components/BossManager';
@@ -19,12 +22,16 @@ export default class GehennaDeep extends Scene {
 
   player: Player;
   tileMapComponent: TileMapComponent;
+<<<<<<< HEAD
   locationManager: LocationManager;
   bossManager: BossManager;
   elkSpawner: EnemySpawner;
   deerSpawner: EnemySpawner;
   inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   isPlayerInCrossZone: boolean = false;
+=======
+  uiText: Phaser.GameObjects.Text;
+>>>>>>> 5a03fed (ASH-9: added boss assets)
 
   constructor() {
     super('GehennaDeep');
@@ -51,6 +58,7 @@ export default class GehennaDeep extends Scene {
     this.player = new Player(this, playerSpawn.x * tileMapConfig.scale, playerSpawn.y * tileMapConfig.scale);
     this.player.create();
 
+<<<<<<< HEAD
     // Setup input keys
     this.inputKeys = this.setupInputKeys();
 
@@ -78,6 +86,9 @@ export default class GehennaDeep extends Scene {
       tileMapConfig.scale
     );
     this.bossManager.initialize();
+=======
+    this.createUI();
+>>>>>>> 5a03fed (ASH-9: added boss assets)
 
     this.camera.startFollow(this.player.sprite);
     this.camera.setFollowOffset(0, 200);
@@ -107,6 +118,7 @@ export default class GehennaDeep extends Scene {
     EventBus.emit('current-scene-ready', this);
   }
 
+<<<<<<< HEAD
   private setupInputKeys() {
     if (this.input && this.input.keyboard) {
       const inputKeys = this.input.keyboard.addKeys('T') as { [key: string]: Phaser.Input.Keyboard.Key };
@@ -263,5 +275,44 @@ export default class GehennaDeep extends Scene {
 
     // Handle cross zone transformation
     this.handleCrossZoneTransformation();
+=======
+  private createUI() {
+    this.uiText = this.add.text(20, 20, '', {
+      fontSize: '16px',
+      color: '#ffffff',
+      backgroundColor: '#000000',
+      padding: { x: 10, y: 5 }
+    });
+    this.uiText.setScrollFactor(0);
+    this.uiText.setDepth(1000);
+    
+    this.updateUI();
+  }
+
+  private updateUI() {
+    const playerHealthPercent = Math.max(0, (this.player.health / this.player.maxHealth) * 100);
+    
+    this.uiText.setText([
+      `Gehenna Deep - The Ancient Caverns`,
+      `Player Health: ${playerHealthPercent.toFixed(0)}%`,
+      '',
+      'Controls:',
+      'Arrow Keys - Move',
+      'Space + Move - Run',
+      'Up Arrow - Jump',
+      'R - Attack',
+      'E - Slam Attack',
+      'Q - Dash',
+      'W - Block',
+      '',
+      'Explore the mysterious depths...',
+      'Return to Aven Wood to face the Prophet!'
+    ]);
+  }
+
+  update(time: number, delta: number) {
+    this.player.update(time, delta);
+    this.updateUI();
+>>>>>>> 5a03fed (ASH-9: added boss assets)
   }
 }
