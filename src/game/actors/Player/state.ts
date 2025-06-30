@@ -77,36 +77,29 @@ export class State {
 
   private checkWallCollision(): 'left' | 'right' | null {
     const sprite = this.player.sprite;
-    const scene = this.player.scene as any; // Cast to access scene properties
+    const scene = this.player.scene as any;
     
     if (!scene.world) return null;
 
-    const playerBounds = sprite.getBounds();
-    const checkDistance = 15; // How far to check for walls
-    
-    // Check for collision objects to the left and right
-    const leftCheckX = playerBounds.x - checkDistance;
-    const rightCheckX = playerBounds.right + checkDistance;
-    const centerY = playerBounds.centerY;
-    
-    // Get all collision objects from the world group
+    // Check if player's body is touching any collision objects
+    const playerBody = sprite.body;
     const collisionObjects = scene.world.children.entries;
     
     for (const obj of collisionObjects) {
-      const objBounds = obj.getBounds();
+      const objBody = obj.body;
+      if (!objBody) continue;
       
-      // Check if object is at player's vertical level
-      if (centerY >= objBounds.y && centerY <= objBounds.bottom) {
-        // Check left wall collision
-        if (leftCheckX >= objBounds.x && leftCheckX <= objBounds.right &&
-            playerBounds.right > objBounds.x && playerBounds.x < objBounds.right) {
-          return 'left';
-        }
+      // Check if bodies are overlapping
+      if (Phaser.Geom.Rectangle.Overlaps(playerBody, objBody)) {
+        // Determine which side the collision is on
+        const playerCenterX = playerBody.center.x;
+        const objCenterX = objBody.center.x;
         
-        // Check right wall collision  
-        if (rightCheckX >= objBounds.x && rightCheckX <= objBounds.right &&
-            playerBounds.x < objBounds.right && playerBounds.right > objBounds.x) {
+        // If player is to the left of the object, it's a right wall
+        if (playerCenterX < objCenterX) {
           return 'right';
+        } else {
+          return 'left';
         }
       }
     }
