@@ -164,7 +164,7 @@ export class Player extends Actor {
     }
   }
 
-  private changeSkin(newSkin: PlayerSkins) {
+  public changeSkin(newSkin: PlayerSkins) {
     if (this.playerSkin === newSkin) return;
 
     // Stop current animation
