@@ -25,7 +25,6 @@ export class Boss extends Actor {
 
   public attackHitboxManager: AttackHitboxManager;
   public chatAI: ChatAI;
-  private inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
   private lastTauntTime: number = 0;
   private readonly TAUNT_COOLDOWN = 8000;
 
@@ -81,15 +80,6 @@ export class Boss extends Actor {
       onConversationEnded: this.onConversationEnded.bind(this)
     };
     this.chatAI = new ChatAI(chatAIOptions);
-  }
-
-  private setupInputKeys() {
-    if (this.scene.input && this.scene.input.keyboard) {
-      const inputKeys = this.scene.input.keyboard.addKeys('Y,U,I,O') as { [key: string]: Phaser.Input.Keyboard.Key };
-      return { inputKeys };
-    } else {
-      throw new Error('Keyboard input plugin is not available.');
-    }
   }
 
   private createBossAnimations(scene: Scene) {
@@ -288,27 +278,8 @@ export class Boss extends Actor {
     this.sendBossTaunt('death');
   }
 
-  private handlePlayerResponses() {
-    const responses = [
-      "You're nothing but a corrupted shadow of what you once were!",
-      "Your transformation won't save you from justice!",
-      "I've faced worse demons than you!",
-      "Your evil ends here, false prophet!"
-    ];
-
-    if (Phaser.Input.Keyboard.JustDown(this.inputKeys.Y)) {
-      this.chatAI.sendUserMessage(`Player responds defiantly: "${responses[0]}"`);
-    } else if (Phaser.Input.Keyboard.JustDown(this.inputKeys.U)) {
-      this.chatAI.sendUserMessage(`Player responds with determination: "${responses[1]}"`);
-    } else if (Phaser.Input.Keyboard.JustDown(this.inputKeys.I)) {
-      this.chatAI.sendUserMessage(`Player responds confidently: "${responses[2]}"`);
-    } else if (Phaser.Input.Keyboard.JustDown(this.inputKeys.O)) {
-      this.chatAI.sendUserMessage(`Player responds righteously: "${responses[3]}"`);
-    }
-  }
-
   private onAIMessageReceived(message: any): void {
-    // AI message received - boss is speaking
+    // AI message received - boss is speaking with evil voice
   }
 
   private onConversationStarted(): void {
@@ -333,9 +304,6 @@ export class Boss extends Actor {
     this.createBossAnimations(this.scene);
     this.addBossAnimationListeners();
 
-    const { inputKeys } = this.setupInputKeys();
-    this.inputKeys = inputKeys;
-
     this.chatAI.getMicPermissions();
 
     EventBus.on('damage_boss', (damage: number) => {
@@ -353,8 +321,6 @@ export class Boss extends Actor {
     this.deltaTime = delta / 1000;
 
     if (this.isDead) return;
-
-    this.handlePlayerResponses();
 
     const currentState = this.state.getState(time, delta);
     this.handleAttacks(currentState);

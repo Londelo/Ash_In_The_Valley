@@ -124,11 +124,12 @@ export default class BossFight extends Scene {
       `Boss Health: ${bossHealthPercent.toFixed(0)}%`,
       `Player Health: ${playerHealthPercent.toFixed(0)}%`,
       '',
-      'Combat Responses:',
-      'Y - "You\'re nothing but a corrupted shadow!"',
-      'U - "Your transformation won\'t save you!"',
-      'I - "I\'ve faced worse demons than you!"',
-      'O - "Your evil ends here, false prophet!"'
+      'The corrupted Prophet speaks with an evil voice...',
+      'Respond naturally through your microphone!',
+      '',
+      'Combat Controls:',
+      'Arrow Keys - Move | Space + Move - Run',
+      'R - Attack | E - Slam | Q - Dash | W - Block'
     ]);
   }
 
@@ -190,7 +191,7 @@ export default class BossFight extends Scene {
       onComplete: () => startText.destroy()
     });
 
-    // Start boss AI conversation
+    // Start boss AI conversation with evil voice
     this.time.delayedCall(1000, () => {
       if (this.boss.chatAI && !this.boss.chatAI.getIsConversationActive()) {
         this.boss.chatAI.startConversation();
@@ -200,6 +201,11 @@ export default class BossFight extends Scene {
 
   private onBossDefeated() {
     this.fightStarted = false;
+    
+    // End conversation
+    if (this.boss.chatAI && this.boss.chatAI.getIsConversationActive()) {
+      this.boss.chatAI.endConversation();
+    }
     
     // Show victory message
     const victoryText = this.add.text(this.ARENA_CENTER_X, this.ARENA_CENTER_Y - 100, 'VICTORY!', {
@@ -216,6 +222,11 @@ export default class BossFight extends Scene {
 
   private onPlayerDefeated() {
     this.fightStarted = false;
+    
+    // End conversation
+    if (this.boss.chatAI && this.boss.chatAI.getIsConversationActive()) {
+      this.boss.chatAI.endConversation();
+    }
     
     // Show defeat message
     const defeatText = this.add.text(this.ARENA_CENTER_X, this.ARENA_CENTER_Y - 100, 'DEFEAT...', {
