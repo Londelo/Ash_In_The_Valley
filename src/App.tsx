@@ -6,22 +6,6 @@ function App() {
 
   //  References to the PhaserGame component (game and scene are exposed)
   const phaserRef = useRef<IRefPhaserGame | null>( null );
-
-  const changeScene = () => {
-
-    if( phaserRef.current ) {
-      const scene = phaserRef.current.scene;
-
-      if ( scene ) {
-        if ( scene.scene.key === 'AvenWood' ) {
-          ( scene as AvenWood ).changeScene();
-        } else if ( 'changeScene' in scene ) {
-          ( scene as any ).changeScene();
-        }
-      }
-    }
-  };
-
   // Event emitted from the PhaserGame component, can do things based on the current active scene
   const currentScene = ( scene: Phaser.Scene ) => {};
 
@@ -30,7 +14,12 @@ function App() {
       <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
       <div>
         <div>
-          <button className="button" onClick={changeScene}>Change Scene</button>
+          Controls:
+          <li>Arrow Keys to move</li>
+          <li>R to Attack</li>
+          <li>E to Heavy Air Attack</li>
+          <li>Q to Dash</li>
+          <li>T to Interact</li>
         </div>
       </div>
     </div>

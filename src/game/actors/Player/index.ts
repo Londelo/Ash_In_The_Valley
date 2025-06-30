@@ -182,7 +182,7 @@ export class Player extends Actor {
 
     // Play idle animation with new skin prefix
     this.sprite.play(`${this.playerSkin}_player_idle`);
-    
+
     // Emit event for skin change
     EventBus.emit('player_skin_changed', newSkin);
   }
@@ -195,10 +195,10 @@ export class Player extends Actor {
   }
 
   private handleSkinChange() {
-    if (Phaser.Input.Keyboard.JustDown(this.inputKeys.C)) {
-      const nextSkin = this.getNextSkin();
-      this.changeSkin(nextSkin);
-    }
+    // if (Phaser.Input.Keyboard.JustDown(this.inputKeys.C)) {
+    //   const nextSkin = this.getNextSkin();
+    //   this.changeSkin(nextSkin);
+    // }
   }
 
   private handleMovement(state: PlayerState) {
