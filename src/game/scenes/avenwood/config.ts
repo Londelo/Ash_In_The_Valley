@@ -24,7 +24,7 @@ const config = {
   player_start_y: 560,
 
   prophet_start_x: 800,
-  prophet_start_y: 678,
+  prophet_start_y: 528,
 
   temple_x: 2629,
   temple_y: 655,
