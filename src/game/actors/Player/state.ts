@@ -77,17 +77,38 @@ export class State {
 
   private checkWallCollision(): 'left' | 'right' | null {
     const sprite = this.player.sprite;
-    const worldBounds = this.player.scene.physics.world.bounds;
-    const tolerance = 10;
-
-    // Check left wall
-    if (sprite.x - sprite.displayWidth/2 <= worldBounds.x + tolerance) {
-      return 'left';
-    }
+    const scene = this.player.scene as any; // Cast to access scene properties
     
-    // Check right wall  
-    if (sprite.x + sprite.displayWidth/2 >= worldBounds.width - tolerance) {
-      return 'right';
+    if (!scene.world) return null;
+
+    const playerBounds = sprite.getBounds();
+    const checkDistance = 15; // How far to check for walls
+    
+    // Check for collision objects to the left and right
+    const leftCheckX = playerBounds.x - checkDistance;
+    const rightCheckX = playerBounds.right + checkDistance;
+    const centerY = playerBounds.centerY;
+    
+    // Get all collision objects from the world group
+    const collisionObjects = scene.world.children.entries;
+    
+    for (const obj of collisionObjects) {
+      const objBounds = obj.getBounds();
+      
+      // Check if object is at player's vertical level
+      if (centerY >= objBounds.y && centerY <= objBounds.bottom) {
+        // Check left wall collision
+        if (leftCheckX >= objBounds.x && leftCheckX <= objBounds.right &&
+            playerBounds.right > objBounds.x && playerBounds.x < objBounds.right) {
+          return 'left';
+        }
+        
+        // Check right wall collision  
+        if (rightCheckX >= objBounds.x && rightCheckX <= objBounds.right &&
+            playerBounds.x < objBounds.right && playerBounds.right > objBounds.x) {
+          return 'right';
+        }
+      }
     }
 
     return null;
