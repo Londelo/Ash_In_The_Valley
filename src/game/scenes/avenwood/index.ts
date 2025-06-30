@@ -88,8 +88,7 @@ export default class AvenWood extends Scene {
       'P - Talk to Prophet',
       'T - Enter Temple (near door)',
       '',
-      'Approach the Prophet to speak...',
-      'Or attack him to reveal his true nature!'
+      'Approach the Prophet to speak...'
     ]);
   }
 
