@@ -15,8 +15,8 @@ export class State {
   private player: Player;
 
   private DETECTION_MADE = false;
-  private readonly DETECTION_RANGE = 400;
-  private readonly ATTACK_RANGE = 150;
+  private readonly DETECTION_RANGE = 700;
+  private readonly ATTACK_RANGE = 120;
 
   private lastAttackTime: number = 0;
   private readonly ATTACK_COOLDOWN = 1500;

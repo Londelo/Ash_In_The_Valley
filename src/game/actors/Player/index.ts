@@ -40,7 +40,7 @@ export class Player extends Actor {
   private state: State;
   public playerSkin: PlayerSkins;
   public attackHitboxManager: AttackHitboxManager;
-  public debugEnabled: boolean = true;
+  public debugEnabled: boolean = false;
 
   constructor(scene: Scene, x: number, y: number) {
     const playerSkin: PlayerSkins = 'swordMaster';
