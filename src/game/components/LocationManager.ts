@@ -126,20 +126,6 @@ export class LocationManager {
     console.log(`Activated spawners for location: ${locationName} with ${spawnPoints.length} spawn points`);
   }
 
-  private deactivateLocationSpawners(locationName: string): void {
-    const spawnPoints = this.getSpawnPointsForLocation(locationName);
-
-    spawnPoints.forEach(spawnPoint => {
-      const spawner = this.activeSpawners.get(spawnPoint.name);
-      if (spawner) {
-        spawner.destroy();
-        this.activeSpawners.delete(spawnPoint.name);
-      }
-    });
-
-    console.log(`Deactivated spawners for location: ${locationName}`);
-  }
-
   public update(time: number, delta: number): void {
     const newLocation = this.getPlayerCurrentLocation();
 
