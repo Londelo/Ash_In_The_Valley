@@ -1390,7 +1390,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="32" name="floor" visible="0">
+ <objectgroup id="32" name="floor">
   <object id="9" x="480.5" y="386" width="319.273" height="59"/>
   <object id="11" x="432.5" y="417.5" width="47.5" height="141.5"/>
   <object id="8" x="968" y="194" width="53.3333" height="143"/>
@@ -1507,10 +1507,10 @@
   <object id="120" name="enemy_lvl_6_1" x="1291.33" y="1496.33">
    <point/>
   </object>
-  <object id="121" name="enemy_boss_1" x="502.667" y="1754.33">
+  <object id="121" name="enemy_boss_2" x="502.667" y="1754.33">
    <point/>
   </object>
-  <object id="122" name="enemy_boss_1" x="1160" y="1752">
+  <object id="122" name="enemy_boss_2" x="1160" y="1752">
    <point/>
   </object>
  </objectgroup>

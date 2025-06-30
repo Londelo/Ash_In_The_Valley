@@ -2101,7 +2101,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -2435,7 +2435,7 @@
                 {
                  "height":0,
                  "id":121,
-                 "name":"enemy_boss_1",
+                 "name":"enemy_boss_2",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2447,7 +2447,7 @@
                 {
                  "height":0,
                  "id":122,
-                 "name":"enemy_boss_1",
+                 "name":"enemy_boss_2",
                  "point":true,
                  "rotation":0,
                  "type":"",
