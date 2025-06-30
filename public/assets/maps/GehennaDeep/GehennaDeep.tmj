@@ -2101,7 +2101,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -2244,7 +2244,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -2303,7 +2303,7 @@
                 {
                  "height":0,
                  "id":86,
-                 "name":"enemy_lvl_2",
+                 "name":"enemy_lvl_2.1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2315,7 +2315,7 @@
                 {
                  "height":0,
                  "id":87,
-                 "name":"enemy_lvl_2",
+                 "name":"enemy_lvl_2.2",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2339,7 +2339,7 @@
                 {
                  "height":0,
                  "id":112,
-                 "name":"enemy_lvl_4",
+                 "name":"enemy_lvl_4.2",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2351,7 +2351,7 @@
                 {
                  "height":0,
                  "id":113,
-                 "name":"enemy_lvl_4",
+                 "name":"enemy_lvl_4.1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2363,7 +2363,7 @@
                 {
                  "height":0,
                  "id":114,
-                 "name":"enemy_lvl_4",
+                 "name":"enemy_lvl_4.3",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2375,7 +2375,7 @@
                 {
                  "height":0,
                  "id":115,
-                 "name":"enemy_boss_1",
+                 "name":"enemy_boss_1.2",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2387,7 +2387,7 @@
                 {
                  "height":0,
                  "id":116,
-                 "name":"enemy_boss_1",
+                 "name":"enemy_boss_1.1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2423,7 +2423,7 @@
                 {
                  "height":0,
                  "id":120,
-                 "name":"enemy_lvl_6_1",
+                 "name":"enemy_lvl_6.1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2435,7 +2435,7 @@
                 {
                  "height":0,
                  "id":121,
-                 "name":"enemy_boss_2",
+                 "name":"enemy_boss_2.2",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2447,7 +2447,7 @@
                 {
                  "height":0,
                  "id":122,
-                 "name":"enemy_boss_2",
+                 "name":"enemy_boss_2.1",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -2493,7 +2493,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],

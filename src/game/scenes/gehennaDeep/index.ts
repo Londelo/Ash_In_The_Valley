@@ -39,7 +39,7 @@ export default class GehennaDeep extends Scene {
 
     // Setup exit zone
     this.setupExitZone();
-    
+
     // Setup cross zone
     this.setupCrossZone();
 
@@ -109,8 +109,8 @@ export default class GehennaDeep extends Scene {
     const locationsLayer = this.tileMapComponent.getObjectLayer('locations');
 
     if (locationsLayer && locationsLayer.objects) {
-      const crossObject = locationsLayer.objects.find((obj: any) => obj.name === 'cross');
-      
+      const crossObject: any = locationsLayer.objects.find((obj: any) => obj.name === 'cross');
+
       if (crossObject) {
         const crossRect = this.add.rectangle(
           crossObject.x * config.tileMapConfig.scale,
@@ -138,7 +138,7 @@ export default class GehennaDeep extends Scene {
       this.player.changeSkin('holySamurai');
       console.log('Player transformed to Holy Samurai in cross zone');
     }
-    
+
     // Reset flag if player is not in the cross zone anymore
     if (!this.physics.overlap(this.player.sprite, this.crossZone)) {
       this.isPlayerInCrossZone = false;
@@ -248,7 +248,7 @@ export default class GehennaDeep extends Scene {
     if (this.deerSpawner) {
       this.deerSpawner.update(time, delta);
     }
-    
+
     // Handle cross zone transformation
     this.handleCrossZoneTransformation();
   }

@@ -82,7 +82,7 @@ export class LocationManager {
         }
       });
     }
-    
+
     console.log(`Found ${this.spawnPoints.length} enemy spawn points`);
   }
 
@@ -115,29 +115,22 @@ export class LocationManager {
 
     // Calculate how many enemies per spawn point
     const enemiesPerSpawn = Math.max(1, Math.ceil(config.maxEnemies / spawnPoints.length));
-    
+
     // Create spawners for each spawn point in this location
     spawnPoints.forEach((spawnPoint, index) => {
       // If this is the last spawn point, assign any remaining enemies
       const isLastSpawnPoint = index === spawnPoints.length - 1;
-      const maxEnemiesForThisSpawn = isLastSpawnPoint 
-        ? Math.max(1, config.maxEnemies - (index * enemiesPerSpawn))
-        : enemiesPerSpawn;
 
       const spawnerConfig: EnemySpawnerConfig = {
         enemyClass: DaggerBandit,
-        maxEnemies: maxEnemiesForThisSpawn,
-        spawnInterval: config.spawnInterval,
         spawnPoint: { x: spawnPoint.x, y: spawnPoint.y },
-        autoStart: config.autoStart,
-        respawnDelay: config.respawnDelay
+        ...config
       };
 
       // Only create a spawner if one doesn't already exist for this spawn point
       if (!this.activeSpawners.has(spawnPoint.name)) {
         const spawner = new EnemySpawner(this.scene as any, this.player, spawnerConfig);
         this.activeSpawners.set(spawnPoint.name, spawner);
-        console.log(`Created spawner at ${spawnPoint.name} (${spawnPoint.x}, ${spawnPoint.y}) with max ${maxEnemiesForThisSpawn} enemies`);
       }
     });
 

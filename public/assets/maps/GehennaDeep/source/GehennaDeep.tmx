@@ -1390,7 +1390,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="32" name="floor">
+ <objectgroup id="32" name="floor" visible="0">
   <object id="9" x="480.5" y="386" width="319.273" height="59"/>
   <object id="11" x="432.5" y="417.5" width="47.5" height="141.5"/>
   <object id="8" x="968" y="194" width="53.3333" height="143"/>
@@ -1450,7 +1450,7 @@
   <object id="110" x="800.75" y="497" width="63" height="63"/>
   <object id="123" x="33" y="193.5" width="47" height="197"/>
  </objectgroup>
- <objectgroup id="51" name="locations">
+ <objectgroup id="51" name="locations" visible="0">
   <object id="68" name="lvl_1" x="177" y="224" width="792" height="117"/>
   <object id="69" name="lvl_2" x="476" y="440" width="813" height="128"/>
   <object id="70" name="lvl_3" x="1089" y="641" width="519" height="112"/>
@@ -1474,28 +1474,28 @@
   <object id="85" name="enemy_lvl_1" x="770.5" y="329">
    <point/>
   </object>
-  <object id="86" name="enemy_lvl_2" x="1133" y="549.5">
+  <object id="86" name="enemy_lvl_2.1" x="1133" y="549.5">
    <point/>
   </object>
-  <object id="87" name="enemy_lvl_2" x="552" y="549.5">
+  <object id="87" name="enemy_lvl_2.2" x="552" y="549.5">
    <point/>
   </object>
   <object id="88" name="enemy_lvl_3" x="1452" y="741.5">
    <point/>
   </object>
-  <object id="112" name="enemy_lvl_4" x="1655.42" y="947.25">
+  <object id="112" name="enemy_lvl_4.2" x="1655.42" y="947.25">
    <point/>
   </object>
-  <object id="113" name="enemy_lvl_4" x="1473" y="1072.67">
+  <object id="113" name="enemy_lvl_4.1" x="1473" y="1072.67">
    <point/>
   </object>
-  <object id="114" name="enemy_lvl_4" x="1145.66" y="933.334">
+  <object id="114" name="enemy_lvl_4.3" x="1145.66" y="933.334">
    <point/>
   </object>
-  <object id="115" name="enemy_boss_1" x="713" y="1024">
+  <object id="115" name="enemy_boss_1.2" x="713" y="1024">
    <point/>
   </object>
-  <object id="116" name="enemy_boss_1" x="969.333" y="1071.66">
+  <object id="116" name="enemy_boss_1.1" x="969.333" y="1071.66">
    <point/>
   </object>
   <object id="118" name="enemy_lvl_5" x="629.667" y="1285.67">
@@ -1504,17 +1504,17 @@
   <object id="119" name="enemy_lvl_6" x="888.333" y="1494.67">
    <point/>
   </object>
-  <object id="120" name="enemy_lvl_6_1" x="1291.33" y="1496.33">
+  <object id="120" name="enemy_lvl_6.1" x="1291.33" y="1496.33">
    <point/>
   </object>
-  <object id="121" name="enemy_boss_2" x="502.667" y="1754.33">
+  <object id="121" name="enemy_boss_2.2" x="502.667" y="1754.33">
    <point/>
   </object>
-  <object id="122" name="enemy_boss_2" x="1160" y="1752">
+  <object id="122" name="enemy_boss_2.1" x="1160" y="1752">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="53" name="powerSpawn">
+ <objectgroup id="53" name="powerSpawn" visible="0">
   <object id="127" name="blood" x="875.636" y="1077.45">
    <point/>
   </object>
