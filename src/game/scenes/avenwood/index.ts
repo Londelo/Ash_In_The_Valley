@@ -100,7 +100,6 @@ export default class AvenWood extends Scene {
     );
     this.prophetTriggerZone.setDepth(10);
 
-    // Enable physics on the rectangle
     this.physics.add.existing(this.prophetTriggerZone, true);
   }
 
