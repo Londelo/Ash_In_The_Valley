@@ -77,31 +77,17 @@ export class State {
 
   private checkWallCollision(): 'left' | 'right' | null {
     const sprite = this.player.sprite;
-    const scene = this.player.scene as any;
+    const body = sprite.body;
     
-    if (!scene.world) return null;
+    if (!body) return null;
 
-    // Check if player's body is touching any collision objects
-    const playerBody = sprite.body;
-    const collisionObjects = scene.world.children.entries;
+    // Use Phaser's built-in blocked properties to detect wall collision
+    if (body.blocked.left) {
+      return 'left';
+    }
     
-    for (const obj of collisionObjects) {
-      const objBody = obj.body;
-      if (!objBody) continue;
-      
-      // Check if bodies are overlapping
-      if (Phaser.Geom.Rectangle.Overlaps(playerBody, objBody)) {
-        // Determine which side the collision is on
-        const playerCenterX = playerBody.center.x;
-        const objCenterX = objBody.center.x;
-        
-        // If player is to the left of the object, it's a right wall
-        if (playerCenterX < objCenterX) {
-          return 'right';
-        } else {
-          return 'left';
-        }
-      }
+    if (body.blocked.right) {
+      return 'right';
     }
 
     return null;
