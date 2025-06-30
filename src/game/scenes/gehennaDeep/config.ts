@@ -1,5 +1,17 @@
 import { TileMapConfig } from '../../components/TileMap';
 
+export interface LocationSpawnConfig {
+  maxEnemies: number;
+  spawnInterval: number;
+  spawnRadius: number;
+  respawnDelay: number;
+  autoStart: boolean;
+}
+
+export interface LocationConfigs {
+  [locationName: string]: LocationSpawnConfig;
+}
+
 const config = {
   backgroundColor: 0x87CEEB,
 
@@ -42,7 +54,39 @@ const config = {
     ],
     scale: 3,
     collisionLayers: ['floor']
-  } as TileMapConfig
+  } as TileMapConfig,
+
+  // Location-based spawn configurations
+  locationConfigs: {
+    entrance: {
+      maxEnemies: 2,
+      spawnInterval: 6000,
+      spawnRadius: 80,
+      respawnDelay: 4000,
+      autoStart: true
+    },
+    cavern: {
+      maxEnemies: 4,
+      spawnInterval: 4000,
+      spawnRadius: 100,
+      respawnDelay: 3000,
+      autoStart: true
+    },
+    depths: {
+      maxEnemies: 6,
+      spawnInterval: 3000,
+      spawnRadius: 120,
+      respawnDelay: 2000,
+      autoStart: true
+    },
+    chamber: {
+      maxEnemies: 3,
+      spawnInterval: 5000,
+      spawnRadius: 90,
+      respawnDelay: 3500,
+      autoStart: true
+    }
+  } as LocationConfigs
 }
 
 export default config;

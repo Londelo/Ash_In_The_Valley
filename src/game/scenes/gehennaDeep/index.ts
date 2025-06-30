@@ -2,11 +2,8 @@ import config from './config';
 import { EventBus } from '../../EventBus';
 import { Scene } from 'phaser';
 import { Player } from '../../actors/Player';
-import { DaggerBandit } from '../../actors/DaggerBandit';
-import { Prophet } from '../../actors/Prophet';
-import { Temple } from '../../props/Temple';
 import { TileMapComponent } from '../../components/TileMap';
-import { EnemySpawner, EnemySpawnerConfig } from '../../components/EnemySpawner';
+import { LocationManager } from '../../components/LocationManager';
 import avenWoodConfig from '../avenwood/config'
 
 export default class GehennaDeep extends Scene {
@@ -16,11 +13,8 @@ export default class GehennaDeep extends Scene {
   exitZone: Phaser.Physics.Arcade.StaticGroup;
 
   player: Player;
-  bandits: DaggerBandit[] = [];
-  prophet: Prophet;
-  temple: Temple;
   tileMapComponent: TileMapComponent;
-  enemySpawner: EnemySpawner;
+  locationManager: LocationManager;
 
   constructor() {
     super('GehennaDeep');
@@ -42,11 +36,17 @@ export default class GehennaDeep extends Scene {
     const playerSpawn: any = this.tileMapComponent.getObjectLayer('spawn')?.objects[0];
 
     this.player = new Player(this, playerSpawn.x * tileMapConfig.scale, playerSpawn.y * tileMapConfig.scale);
-
     this.player.create();
 
-    // Setup enemy spawner for cave environment
-    this.setupEnemySpawner();
+    // Setup location-based enemy spawning
+    this.locationManager = new LocationManager(
+      this, 
+      this.player, 
+      this.tileMapComponent, 
+      config.locationConfigs,
+      tileMapConfig.scale
+    );
+    this.locationManager.initialize();
 
     this.camera.startFollow(this.player.sprite);
     this.camera.setFollowOffset(0, 200);
@@ -89,11 +89,11 @@ export default class GehennaDeep extends Scene {
 
   private handleExitOverlap = (_playerSprite: any, _exitObject: any) => {
     // Clean up current scene
-    this.enemySpawner?.destroy();
+    this.locationManager?.destroy();
 
     // Calculate spawn position near temple in AvenWood
-    const spawnX = (config.temple_x) * avenWoodConfig.tileMapConfig.scale; // Using AvenWood's scale of 2
-    const spawnY = (config.temple_y - 100) * avenWoodConfig.tileMapConfig.scale; // Safe Y position
+    const spawnX = (config.temple_x) * avenWoodConfig.tileMapConfig.scale;
+    const spawnY = (config.temple_y - 100) * avenWoodConfig.tileMapConfig.scale;
 
     // Transition to AvenWood with custom spawn position
     this.scene.start('AvenWood', {
@@ -102,22 +102,8 @@ export default class GehennaDeep extends Scene {
     });
   };
 
-  private setupEnemySpawner(): void {
-    const spawnerConfig: EnemySpawnerConfig = {
-      enemyClass: DaggerBandit,
-      maxEnemies: 5,
-      spawnInterval: 4000, // 4 seconds - more intense in cave
-      spawnPoint: { x: 800, y: 400 },
-      spawnRadius: 80,
-      autoStart: true,
-      respawnDelay: 2500
-    };
-
-    this.enemySpawner = new EnemySpawner(this, this.player, spawnerConfig);
-  }
-
   update(time: number, delta: number) {
     this.player.update(time, delta);
-    this.enemySpawner.update(time, delta);
+    this.locationManager.update();
   }
 }
