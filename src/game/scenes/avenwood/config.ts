@@ -21,10 +21,10 @@ const config = {
   right_wall_color: 0x654321,
 
   player_start_x: 400,
-  player_start_y: 560,
+  player_start_y: 100,
 
   prophet_start_x: 800,
-  prophet_start_y: 678,
+  prophet_start_y: 528,
 
   temple_x: 2629,
   temple_y: 655,

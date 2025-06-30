@@ -27,7 +27,8 @@ export class DaggerBandit extends Actor {
       offsetY: -18,
       duration: 200,
       damage: this.attackPower,
-      attackerId: this.uniqueId
+      attackerId: this.uniqueId,
+      delay: 0
     },
     [`${this.uniqueId}_dagger_bandit_bat_fang_attack`]: {
       width: 50,
@@ -37,7 +38,8 @@ export class DaggerBandit extends Actor {
       offsetY: -15,
       duration: 500,
       damage: this.attackPower * 2.5,
-      attackerId: this.uniqueId
+      attackerId: this.uniqueId,
+      delay: 0
     }
   };
 

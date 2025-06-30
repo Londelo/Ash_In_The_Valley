@@ -28,7 +28,7 @@ export abstract class Actor {
   protected config: ActorConfig;
   protected invulnerabilityTimer: number = 0;
   protected boundingBox: Phaser.GameObjects.Graphics;
-  protected debugEnabled: boolean = true;
+  protected debugEnabled: boolean = false;
 
   constructor(scene: Phaser.Scene, x: number, y: number, textureKey: string, frameKey: string, config: ActorConfig) {
     this.scene = scene;
@@ -42,7 +42,7 @@ export abstract class Actor {
     this.sprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.sprite.setCollideWorldBounds(true);
     this.sprite.setGravityY(300);
-    this.sprite.setBodySize(config.bodyWidth, config.bodyHeight, false);
+    this.sprite.setBodySize(config.bodyWidth, config.bodyHeight, true);
     this.adjustForCenterOffset('right');
 
     this.boundingBox = scene.add.graphics();
@@ -61,12 +61,8 @@ export abstract class Actor {
     }
 
     const offsetX = this.sprite.displayOriginX - this.config.bodyWidth / 2;
-    const offsetY = this.getBodyOffsetY();
+    const offsetY = this.config.bodyOffsetY ?? 0;
     this.sprite.body.setOffset(offsetX, offsetY);
-  }
-
-  protected getBodyOffsetY(): number {
-    return this.config.bodyOffsetY ?? 0;
   }
 
   public takeDamage(amount: number): void {

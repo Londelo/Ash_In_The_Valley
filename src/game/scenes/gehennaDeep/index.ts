@@ -2,21 +2,19 @@ import config from './config';
 import { EventBus } from '../../EventBus';
 import { Scene } from 'phaser';
 import { Player } from '../../actors/Player';
-import { DaggerBandit } from '../../actors/DaggerBandit';
-import { Prophet } from '../../actors/Prophet';
-import { Temple } from '../../props/Temple';
 import { TileMapComponent } from '../../components/TileMap';
+import { LocationManager } from '../../components/LocationManager';
+import avenWoodConfig from '../avenwood/config'
 
 export default class GehennaDeep extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
   map: Phaser.Tilemaps.Tilemap;
   world: Phaser.Physics.Arcade.StaticGroup;
+  exitZone: Phaser.Physics.Arcade.StaticGroup;
 
   player: Player;
-  bandits: DaggerBandit[] = [];
-  prophet: Prophet;
-  temple: Temple;
   tileMapComponent: TileMapComponent;
+  locationManager: LocationManager;
 
   constructor() {
     super('GehennaDeep');
@@ -31,12 +29,24 @@ export default class GehennaDeep extends Scene {
     this.map = map;
     this.world = world;
 
+    // Setup exit zone
+    this.setupExitZone();
+
     const { width: mapWidth, height: mapHeight } = this.tileMapComponent.getMapDimensions();
     const playerSpawn: any = this.tileMapComponent.getObjectLayer('spawn')?.objects[0];
 
     this.player = new Player(this, playerSpawn.x * tileMapConfig.scale, playerSpawn.y * tileMapConfig.scale);
-
     this.player.create();
+
+    // Setup location-based enemy spawning
+    this.locationManager = new LocationManager(
+      this, 
+      this.player, 
+      this.tileMapComponent, 
+      config.locationConfigs,
+      tileMapConfig.scale
+    );
+    this.locationManager.initialize();
 
     this.camera.startFollow(this.player.sprite);
     this.camera.setFollowOffset(0, 200);
@@ -45,10 +55,55 @@ export default class GehennaDeep extends Scene {
 
     this.physics.add.collider(this.player.sprite, this.world);
 
+    // Setup exit collision
+    this.physics.add.overlap(
+      this.player.sprite,
+      this.exitZone,
+      this.handleExitOverlap,
+      undefined,
+      this
+    );
+
     EventBus.emit('current-scene-ready', this);
   }
 
+  private setupExitZone(): void {
+    this.exitZone = this.physics.add.staticGroup();
+    const exitLayer = this.tileMapComponent.getObjectLayer('exit');
+
+    if (exitLayer && exitLayer.objects) {
+      exitLayer.objects.forEach((obj: any) => {
+        const exitRect = this.add.rectangle(
+          obj.x * config.tileMapConfig.scale,
+          obj.y * config.tileMapConfig.scale,
+          obj.width * config.tileMapConfig.scale,
+          obj.height * config.tileMapConfig.scale,
+          0x00ff00,
+          0
+        );
+        exitRect.setOrigin(0, 0);
+        this.exitZone.add(exitRect);
+      });
+    }
+  }
+
+  private handleExitOverlap = (_playerSprite: any, _exitObject: any) => {
+    // Clean up current scene
+    this.locationManager?.destroy();
+
+    // Calculate spawn position near temple in AvenWood
+    const spawnX = (config.temple_x) * avenWoodConfig.tileMapConfig.scale;
+    const spawnY = (config.temple_y - 100) * avenWoodConfig.tileMapConfig.scale;
+
+    // Transition to AvenWood with custom spawn position
+    this.scene.start('AvenWood', {
+      playerX: spawnX,
+      playerY: spawnY
+    });
+  };
+
   update(time: number, delta: number) {
     this.player.update(time, delta);
+    this.locationManager.update();
   }
 }

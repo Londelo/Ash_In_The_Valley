@@ -8,7 +8,7 @@ export class Temple extends Prop {
   private readonly INTERACTION_RANGE = 50;
   private isPlayerNear: boolean = false;
   private inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
-  public debugEnabled: boolean = true;
+  public debugEnabled: boolean = false;
 
   constructor(scene: Scene, x: number, y: number, mapScale: number, playerRef: Player) {
     const propConfig: PropConfig = {
@@ -47,7 +47,7 @@ export class Temple extends Prop {
     const distance = this.getDistanceToPlayer();
     this.isPlayerNear = distance <= this.INTERACTION_RANGE;
     if (this.isPlayerNear && Phaser.Input.Keyboard.JustDown(this.inputKeys.T)) {
-      this.scene.scene.start('GehennaDeep');
+      (this.scene as any).changeScene();
     }
   }
 
