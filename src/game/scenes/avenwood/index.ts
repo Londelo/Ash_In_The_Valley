@@ -85,7 +85,7 @@ export default class AvenWood extends Scene {
       'E - Slam Attack',
       'Q - Dash',
       'W - Block',
-      'P - Talk to Prophet',
+      'P - [DEBUG] Talk to Evil Prophet',
       'T - Enter Temple (near door)',
       '',
       'Approach the Prophet to speak...'
