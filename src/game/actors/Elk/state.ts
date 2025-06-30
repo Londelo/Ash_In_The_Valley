@@ -33,7 +33,7 @@ export class State {
 
     // If moving, choose random direction
     if (this.currentBehavior === 'moving') {
-      this.moveDirection = Math.random() > 0.5 ? 'left' : 'right';
+      this.moveDirection = this.moveDirection === 'left' ? 'right' : 'left';
     }
   }
 

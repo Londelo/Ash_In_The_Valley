@@ -26,7 +26,7 @@ export class Elk extends Actor {
   public elkSkin: ElkSkins;
   private playerRef: Player;
   private hasTriggeredPlayerTransform: boolean = false;
-  public debugEnabled: boolean = true;
+  public debugEnabled: boolean = false;
   public uniqueId: string = `elk_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
   constructor(scene: Scene, x: number, y: number, playerRef: Player) {
@@ -78,10 +78,10 @@ export class Elk extends Actor {
 
       // Change elk to red skin
       this.changeSkin('redElk');
-      
+
       // Change player to bloodSwordsman
       (this.playerRef as any).changeSkin('bloodSwordsMan');
-      
+
       console.log('Elk death triggered player transformation to bloodSwordsman');
     }
   }
@@ -89,9 +89,6 @@ export class Elk extends Actor {
   protected onDeath(): void {
     this.isDead = true;
     this.sprite.setVelocityX(0);
-
-    // Change to red skin before playing death animation
-    this.changeSkin('redElk');
     this.sprite.play(`${this.elkSkin}_death`);
   }
 
