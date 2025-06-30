@@ -114,8 +114,7 @@ export class LocationManager {
         enemyClass: DaggerBandit,
         maxEnemies: Math.ceil(config.maxEnemies / spawnPoints.length), // Distribute enemies across spawn points
         spawnInterval: config.spawnInterval,
-        spawnPoint: { x: spawnPoint.x, y: spawnPoint.y },
-        spawnRadius: config.spawnRadius,
+        spawnPoint: { x: spawnPoint.x, y: spawnPoint.y }, // Exact spawn point coordinates
         autoStart: config.autoStart,
         respawnDelay: config.respawnDelay
       };

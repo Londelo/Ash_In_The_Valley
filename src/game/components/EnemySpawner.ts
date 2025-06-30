@@ -15,7 +15,7 @@ export interface EnemySpawnerConfig {
   maxEnemies: number;
   spawnInterval: number; // milliseconds
   spawnPoint: SpawnPoint;
-  spawnRadius?: number; // random offset from spawn points
+  spawnRadius?: number; // random offset from spawn points - DEPRECATED
   autoStart?: boolean;
   respawnDelay?: number; // delay before respawning after enemy death
 }
@@ -32,7 +32,7 @@ export class EnemySpawner {
     this.scene = scene;
     this.player = player;
     this.config = {
-      spawnRadius: 50,
+      spawnRadius: 0, // Default to exact spawn point
       autoStart: true,
       respawnDelay: 2000,
       ...config
@@ -84,19 +84,17 @@ export class EnemySpawner {
       return;
     }
 
-    const spawnPoint = this.getNextSpawnPoint();
+    const spawnPoint = this.getSpawnPoint();
     if (spawnPoint) {
       this.spawnEnemy(spawnPoint);
     }
   }
 
-  private getNextSpawnPoint(): SpawnPoint | null {
-    const radius = this.config.spawnRadius || 0;
-    const angle = Math.random() * Math.PI * 2;
-    const distance = Math.random() * radius;
+  private getSpawnPoint(): SpawnPoint {
+    // Always return the exact spawn point coordinates
     return {
-      x: this.config.spawnPoint.x + Math.cos(angle) * distance,
-      y: this.config.spawnPoint.y + Math.sin(angle) * distance
+      x: this.config.spawnPoint.x,
+      y: this.config.spawnPoint.y
     };
   }
 
