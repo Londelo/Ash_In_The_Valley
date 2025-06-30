@@ -7,7 +7,6 @@ import { AttackHitboxManager, AttackHitboxConfig } from '../../components/Attack
 import { AnimationHelper } from '../../components/AnimationHelper';
 import { getBossAnimationConfigs } from './animations';
 import { Actor, ActorConfig } from '../../components/Actor';
-import { ChatAI, ChatAIOptions } from '../../components/ChatAI';
 
 export class Boss extends Actor {
   private state: State;
@@ -15,6 +14,7 @@ export class Boss extends Actor {
   private deltaTime: number = 0;
   private bossSpeed: number = 120;
 
+  private readonly DETECTION_RANGE = 600;
   private readonly ARENA_CENTER_X = 600;
   private readonly WANDER_RANGE = 300;
 
@@ -22,11 +22,14 @@ export class Boss extends Actor {
   private vanishTargetX: number = 0;
   private telegraphSprite: Phaser.GameObjects.Sprite | null = null;
   private missileSprites: Phaser.GameObjects.Sprite[] = [];
+  private directionChangeTimer: number = 0;
+  private readonly DIRECTION_CHANGE_INTERVAL = 3000; // Change direction every 3 seconds
+  private vanishTimer: number = 0;
+  private readonly VANISH_INTERVAL = 8000; // Try to vanish every 8 seconds
+  private attackTimer: number = 0;
+  private readonly ATTACK_INTERVAL = 4000; // Attack every 4 seconds
 
   public attackHitboxManager: AttackHitboxManager;
-  public chatAI: ChatAI;
-  private lastTauntTime: number = 0;
-  private readonly TAUNT_COOLDOWN = 8000;
 
   private attackConfigs: { [key: string]: AttackHitboxConfig } = {
     'boss_attack_1': {
@@ -72,14 +75,6 @@ export class Boss extends Actor {
     this.playerRef = playerRef;
     this.sprite.setDepth(0);
     this.attackHitboxManager = new AttackHitboxManager(scene);
-
-    const chatAIOptions: ChatAIOptions = {
-      agentId: 'agent_01jy5e6qfyear8247z07scjnrj',
-      onMessageReceived: this.onAIMessageReceived.bind(this),
-      onConversationStarted: this.onConversationStarted.bind(this),
-      onConversationEnded: this.onConversationEnded.bind(this)
-    };
-    this.chatAI = new ChatAI(chatAIOptions);
   }
 
   private createBossAnimations(scene: Scene) {
@@ -119,7 +114,6 @@ export class Boss extends Actor {
         this.sprite.play('boss_idle');
       } else if (animation.key === 'boss_death') {
         this.sprite.anims.stop();
-        this.sendBossDeathTaunt();
       }
     });
   }
@@ -175,8 +169,6 @@ export class Boss extends Actor {
     this.isVanished = true;
     this.sprite.setVisible(false);
 
-    this.sendBossTaunt('vanish');
-
     this.scene.time.delayedCall(2000, () => {
       const playerX = this.playerRef.sprite.x;
       const side = Math.random() < 0.5 ? 'left' : 'right';
@@ -194,6 +186,49 @@ export class Boss extends Actor {
     this.scene.time.delayedCall(500, () => {
       this.sprite.play('boss_attack_2_prep');
     });
+  }
+
+  private getDistanceToPlayer(): number {
+    return Math.abs(this.playerRef.sprite.x - this.sprite.x);
+  }
+
+  private getDirectionToPlayer(): 'left' | 'right' {
+    return this.playerRef.sprite.x < this.sprite.x ? 'left' : 'right';
+  }
+
+  private shouldChangeDirection(time: number): boolean {
+    this.directionChangeTimer += time;
+    if (this.directionChangeTimer >= this.DIRECTION_CHANGE_INTERVAL) {
+      this.directionChangeTimer = 0;
+      return Math.random() < 0.7; // 70% chance to change direction
+    }
+    return false;
+  }
+
+  private shouldVanish(time: number): boolean {
+    if (this.isVanished) return false;
+    
+    this.vanishTimer += time;
+    if (this.vanishTimer >= this.VANISH_INTERVAL) {
+      this.vanishTimer = 0;
+      return Math.random() < 0.3; // 30% chance to vanish
+    }
+    return false;
+  }
+
+  private shouldAttack(time: number): boolean {
+    if (this.isVanished) return false;
+    
+    this.attackTimer += time;
+    if (this.attackTimer >= this.ATTACK_INTERVAL) {
+      this.attackTimer = 0;
+      return Math.random() < 0.6; // 60% chance to attack
+    }
+    return false;
+  }
+
+  private chooseRandomAttack(): 'attack_1' | 'attack_2' {
+    return Math.random() < 0.5 ? 'attack_1' : 'attack_2';
   }
 
   public handleMovement(currentState: BossState) {
@@ -225,75 +260,12 @@ export class Boss extends Actor {
       const playerX = this.playerRef.sprite.x;
       const playerY = this.playerRef.sprite.y;
       this.createTelegraph(playerX, playerY);
-      this.sendBossTaunt('special_attack');
     } else if (currentState.shouldAttack2) {
       this.sprite.play('boss_attack_2_prep');
       this.createAttackHitbox('boss_attack_2');
-      this.sendBossTaunt('basic_attack');
     } else if (currentState.shouldVanish) {
       this.sprite.play('boss_vanish');
       this.state.onVanishUsed();
-    }
-  }
-
-  private sendBossTaunt(attackType: string) {
-    const currentTime = Date.now();
-    if (currentTime - this.lastTauntTime < this.TAUNT_COOLDOWN) return;
-
-    this.lastTauntTime = currentTime;
-
-    const healthPercent = (this.health / this.maxHealth) * 100;
-    let contextMessage = '';
-
-    switch (attackType) {
-      case 'basic_attack':
-        contextMessage = `The transformed prophet boss is performing a basic ground attack. Boss health: ${healthPercent.toFixed(0)}%. Use evil, menacing voice to taunt the player about their futile resistance.`;
-        break;
-      case 'special_attack':
-        contextMessage = `The transformed prophet boss is launching a devastating special attack from above. Boss health: ${healthPercent.toFixed(0)}%. Use evil, menacing voice to mock the player's inability to escape divine wrath.`;
-        break;
-      case 'vanish':
-        contextMessage = `The transformed prophet boss is vanishing and will reappear next to the player. Boss health: ${healthPercent.toFixed(0)}%. Use evil, menacing voice to taunt about being everywhere and nowhere.`;
-        break;
-      case 'phase2':
-        contextMessage = `The transformed prophet boss has entered phase 2 (below 50% health). Use evil, menacing voice to express growing desperation and fury.`;
-        break;
-      case 'death':
-        contextMessage = `The transformed prophet boss has been defeated. Use a final evil, menacing voice to curse the player or make ominous threats about what's to come.`;
-        break;
-    }
-
-    if (!this.chatAI.getIsConversationActive()) {
-      this.chatAI.startConversation().then(() => {
-        this.chatAI.sendUserMessage(contextMessage);
-      });
-    } else {
-      this.chatAI.sendUserMessage(contextMessage);
-    }
-  }
-
-  private sendBossDeathTaunt() {
-    this.sendBossTaunt('death');
-  }
-
-  private onAIMessageReceived(message: any): void {
-    // AI message received - boss is speaking with evil voice
-  }
-
-  private onConversationStarted(): void {
-    this.sendBossTaunt('phase2');
-  }
-
-  private onConversationEnded(): void {
-    // Conversation ended
-  }
-
-  protected onHit(damage: number): void {
-    super.onHit(damage);
-
-    const healthPercent = (this.health / this.maxHealth) * 100;
-    if (healthPercent <= 50 && healthPercent > 45) {
-      this.sendBossTaunt('phase2');
     }
   }
 
@@ -301,8 +273,6 @@ export class Boss extends Actor {
     this.state = new State(this, this.playerRef);
     this.createBossAnimations(this.scene);
     this.addBossAnimationListeners();
-
-    this.chatAI.getMicPermissions();
 
     EventBus.on('damage_boss', (damage: number) => {
       this.takeDamage(damage);
@@ -320,13 +290,52 @@ export class Boss extends Actor {
 
     if (this.isDead) return;
 
+    // Update state based on new behavior logic
+    const distance = this.getDistanceToPlayer();
+    const direction = this.getDirectionToPlayer();
+    const shouldChangeDirection = this.shouldChangeDirection(delta);
+    const shouldVanish = this.shouldVanish(delta);
+    const shouldAttack = this.shouldAttack(delta);
+    const attackType = this.chooseRandomAttack();
+    
+    // Override state with our new random behaviors
     const currentState = this.state.getState(time, delta);
+    
+    // Apply random direction changes
+    if (shouldChangeDirection) {
+      currentState.playerDirection = currentState.playerDirection === 'left' ? 'right' : 'left';
+    }
+    
+    // Apply vanish behavior
+    if (shouldVanish) {
+      currentState.shouldVanish = true;
+    }
+    
+    // Apply attack behavior
+    if (shouldAttack) {
+      if (attackType === 'attack_1') {
+        currentState.shouldAttack1 = true;
+        currentState.shouldMove = false;
+      } else {
+        currentState.shouldAttack2 = true;
+        if (distance > 200) {
+          currentState.shouldMove = true;
+        }
+      }
+    }
+    
+    // Keep boss within detection range of player
+    if (distance > this.DETECTION_RANGE) {
+      currentState.shouldMove = true;
+      currentState.playerDirection = direction;
+    }
+
     this.handleAttacks(currentState);
     this.handleMovement(currentState);
     this.handleMovementAnimations(currentState);
 
-    const direction = this.sprite.flipX ? 'left' : 'right';
-    this.attackHitboxManager.updateHitboxes(this.sprite.x, this.sprite.y, direction);
+    const spriteDirection = this.sprite.flipX ? 'left' : 'right';
+    this.attackHitboxManager.updateHitboxes(this.sprite.x, this.sprite.y, spriteDirection);
     this.attackHitboxManager.cleanupInactiveHitboxes();
 
     this.renderDebugGraphics(this.attackHitboxManager.getActiveHitboxes());

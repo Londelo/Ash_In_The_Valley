@@ -17,11 +17,9 @@ export class State {
   private boss: Boss;
   private player: Player;
 
-  private readonly ARENA_CENTER_X = 600;
-  private readonly DETECTION_RANGE = 400;
+  private readonly DETECTION_RANGE = 600;
   private readonly ATTACK_RANGE = 200;
-  private readonly ATTACK_COOLDOWN = 2000; // Reduced cooldown for more action
-  private readonly SPECIAL_ATTACK_INTERVAL = 3; // Every 3rd attack
+  private readonly ATTACK_COOLDOWN = 2000;
 
   private lastAttackTime: number = 0;
   private attackCount: number = 0;
@@ -47,25 +45,8 @@ export class State {
     return this.player.sprite.x < this.boss.sprite.x ? 'left' : 'right';
   }
 
-  private shouldUseSpecialAttack(): boolean {
-    return this.attackCount > 0 && this.attackCount % this.SPECIAL_ATTACK_INTERVAL === 0;
-  }
-
-  private shouldUseVanishAttack(): boolean {
-    const currentPhase = this.boss.health <= this.boss.maxHealth / 2 ? 'phase2' : 'phase1';
-    return currentPhase === 'phase2' && !this.hasUsedVanishAttack && Math.random() < 0.3;
-  }
-
   private checkAttackCooldown(currentTime: number): boolean {
     return currentTime - this.lastAttackTime > this.ATTACK_COOLDOWN;
-  }
-
-  private shouldMoveTowardsPlayer(currentTime: number): boolean {
-    const distance = this.getDistanceToPlayer();
-    const timeSinceLastMove = currentTime - this.lastMoveTime;
-    
-    // Move if player is too far or if we haven't moved in a while
-    return distance > this.ATTACK_RANGE || timeSinceLastMove > this.MOVE_DURATION;
   }
 
   public isActionAnimations(animKey?: string): boolean {
@@ -120,23 +101,16 @@ export class State {
 
     const canAttack = this.checkAttackCooldown(time);
     const playerInRange = distance <= this.ATTACK_RANGE;
-    const shouldUseSpecial = this.shouldUseSpecialAttack();
-    const shouldUseVanish = this.shouldUseVanishAttack();
 
-    // Attack logic - boss should be aggressive
-    const shouldAttack1 = canAttack && playerInRange && shouldUseSpecial && !isAttacking;
-    const shouldAttack2 = canAttack && playerInRange && !shouldUseSpecial && !shouldUseVanish && !isAttacking;
-    const shouldVanish = shouldUseVanish && !isAttacking;
-
-    // Movement logic - boss should actively pursue player
-    const shouldMove = this.shouldMoveTowardsPlayer(time) && !isAttacking && !playerInRange;
+    // Default state values - these can be overridden by the Boss class
+    const shouldAttack1 = false;
+    const shouldAttack2 = false;
+    const shouldVanish = false;
+    const shouldMove = false;
+    
+    // Animation logic
     const shouldPlayMoveAnim = shouldMove && !isMoving;
     const shouldPlayIdleAnim = !shouldMove && !isAttacking && !isIdle;
-
-    // Update move timer when starting to move
-    if (shouldMove && !isMoving) {
-      this.lastMoveTime = time;
-    }
 
     return {
       shouldAttack1,
