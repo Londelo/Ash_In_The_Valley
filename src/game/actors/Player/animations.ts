@@ -92,6 +92,34 @@ export const swordsMasterAnimationConfigs: Animation[] = [
     repeat: 0
   },
   {
+    key: 'swordMaster_player_wall_hold',
+    frames: [
+      { key: 'swordMasterAtlas', frame: 'Wall hold' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'swordMaster_player_wall_slide',
+    frames: [
+      { key: 'swordMasterAtlas', frame: 'Wall Slide 0' },
+      { key: 'swordMasterAtlas', frame: 'Wall Slide 1' },
+      { key: 'swordMasterAtlas', frame: 'Wall Slide 2' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'swordMaster_player_wall_slide_stop',
+    frames: [
+      { key: 'swordMasterAtlas', frame: 'Wall slide Stop 0' },
+      { key: 'swordMasterAtlas', frame: 'Wall slide Stop 1' },
+      { key: 'swordMasterAtlas', frame: 'Wall slide Stop 2' }
+    ],
+    frameRate: 8,
+    repeat: 0
+  },
+  {
     key: 'swordMaster_player_attack_1',
     frames: [
       { key: 'swordMasterAtlas', frame: 'Slash 1 0' },
@@ -286,6 +314,34 @@ export const bloodSwordsmanAnimationConfigs: Animation[] = [
       { key: 'bloodSwordsmanAtlas', frame: 'blood teleport 2 11' }
     ],
     frameRate: 20,
+    repeat: 0
+  },
+  {
+    key: 'bloodSwordsMan_player_wall_hold',
+    frames: [
+      { key: 'bloodSwordsmanAtlas', frame: 'idle 0' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'bloodSwordsMan_player_wall_slide',
+    frames: [
+      { key: 'bloodSwordsmanAtlas', frame: 'run 0' },
+      { key: 'bloodSwordsmanAtlas', frame: 'run 1' },
+      { key: 'bloodSwordsmanAtlas', frame: 'run 2' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'bloodSwordsMan_player_wall_slide_stop',
+    frames: [
+      { key: 'bloodSwordsmanAtlas', frame: 'land 0' },
+      { key: 'bloodSwordsmanAtlas', frame: 'land 1' },
+      { key: 'bloodSwordsmanAtlas', frame: 'land 2' }
+    ],
+    frameRate: 8,
     repeat: 0
   },
   {
@@ -503,6 +559,34 @@ export const lordOfFlamesAnimationConfigs: Animation[] = [
       { key: 'lordOfFlamesAtlas', frame: 'Spear 14' }
     ],
     frameRate: 20,
+    repeat: 0
+  },
+  {
+    key: 'lordOfFlames_player_wall_hold',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Idle 0' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'lordOfFlames_player_wall_slide',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Move 0' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 1' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 2' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'lordOfFlames_player_wall_slide_stop',
+    frames: [
+      { key: 'lordOfFlamesAtlas', frame: 'Move 6' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 7' },
+      { key: 'lordOfFlamesAtlas', frame: 'Move 8' }
+    ],
+    frameRate: 8,
     repeat: 0
   },
   {
@@ -743,6 +827,35 @@ export const holySamuraiAnimationConfigs: Animation[] = [
       { key: 'holySamuraiAtlas', frame: 'Jump Glitch 3' }
     ],
     frameRate: 10,
+    repeat: 0
+  },
+  {
+    key: 'holySamurai_player_wall_hold',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Wall SIt' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'holySamurai_player_wall_slide',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Wall Slide 0' },
+      { key: 'holySamuraiAtlas', frame: 'Wall Slide 1' },
+      { key: 'holySamuraiAtlas', frame: 'Wall Slide 2' },
+      { key: 'holySamuraiAtlas', frame: 'Wall Slide 3' }
+    ],
+    frameRate: 8,
+    repeat: -1
+  },
+  {
+    key: 'holySamurai_player_wall_slide_stop',
+    frames: [
+      { key: 'holySamuraiAtlas', frame: 'Land 0' },
+      { key: 'holySamuraiAtlas', frame: 'Land 1' },
+      { key: 'holySamuraiAtlas', frame: 'Land 2' }
+    ],
+    frameRate: 8,
     repeat: 0
   },
   {
