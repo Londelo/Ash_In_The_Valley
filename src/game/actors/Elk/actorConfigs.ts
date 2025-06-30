@@ -1,7 +1,8 @@
 import { ActorConfig } from '../../components/Actor';
-import { ElkSkins } from '.';
 
-const blueElkActorConfig: ActorConfig = {
+export type ElkSkins = 'elk';
+
+const elkActorConfig: ActorConfig = {
   scale: 4,
   bodyWidth: 25,
   bodyHeight: 15,
@@ -13,19 +14,12 @@ const blueElkActorConfig: ActorConfig = {
   invulnerabilityDuration: 500,
   bodyOffsetY: 20,
   knockbackForce: 100,
-  deathAnimationKey: 'blueElk_death',
-  hitAnimationKey: 'blueElk_death'
-};
-
-const redElkActorConfig: ActorConfig = {
-  ...blueElkActorConfig,
-  deathAnimationKey: 'redElk_death',
-  hitAnimationKey: 'redElk_death'
+  deathAnimationKey: 'elk_death',
+  hitAnimationKey: 'elk_death'
 };
 
 const actorConfigs: { [K in ElkSkins]: ActorConfig } = {
-  blueElk: blueElkActorConfig,
-  redElk: redElkActorConfig
+  elk: elkActorConfig
 };
 
-export const getElkActorConfig = (elkSkin: ElkSkins): ActorConfig => actorConfigs[elkSkin] || blueElkActorConfig;
+export const getElkActorConfig = (elkSkin: ElkSkins): ActorConfig => actorConfigs[elkSkin] || elkActorConfig;

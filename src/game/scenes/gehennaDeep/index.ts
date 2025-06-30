@@ -3,6 +3,7 @@ import { EventBus } from '../../EventBus';
 import { Scene } from 'phaser';
 import { Player } from '../../actors/Player';
 import { Elk } from '../../actors/Elk';
+import { Deer } from '../../actors/Deer';
 import { TileMapComponent } from '../../components/TileMap';
 import { LocationManager } from '../../components/LocationManager';
 import { EnemySpawner, EnemySpawnerConfig } from '../../components/EnemySpawner';
@@ -18,6 +19,7 @@ export default class GehennaDeep extends Scene {
   tileMapComponent: TileMapComponent;
   locationManager: LocationManager;
   elkSpawner: EnemySpawner;
+  deerSpawner: EnemySpawner;
 
   constructor() {
     super('GehennaDeep');
@@ -43,6 +45,8 @@ export default class GehennaDeep extends Scene {
 
     // Setup Elk spawner
     this.setupElkSpawner();
+
+    this.setupDeerSpawner();
 
     // Setup location-based enemy spawning
     this.locationManager = new LocationManager(
@@ -102,6 +106,35 @@ export default class GehennaDeep extends Scene {
     }
   }
 
+  private setupDeerSpawner(): void {
+    const powerSpawnLayer = this.tileMapComponent.getObjectLayer('powerSpawn');
+
+    if (powerSpawnLayer && powerSpawnLayer.objects) {
+      const deerSpawn: any = powerSpawnLayer.objects.find((obj: any) => obj.name === 'flames');
+
+      if (deerSpawn) {
+        const spawnerConfig: EnemySpawnerConfig = {
+          enemyClass: Deer,
+          maxEnemies: 1,
+          spawnInterval: 100,
+          spawnPoint: {
+            x: deerSpawn.x * config.tileMapConfig.scale,
+            y: deerSpawn.y * config.tileMapConfig.scale
+          },
+          autoStart: true,
+          respawnDelay: 0 // Don't respawn deer
+        };
+
+        this.deerSpawner = new EnemySpawner(this, this.player, spawnerConfig);
+        console.log('Deer spawner created at deer powerSpawn location');
+      } else {
+        console.warn('No powerSpawn object with name "deer" found');
+      }
+    } else {
+      console.warn('No powerSpawn layer found in tilemap');
+    }
+  }
+
   private setupExitZone(): void {
     this.exitZone = this.physics.add.staticGroup();
     const exitLayer = this.tileMapComponent.getObjectLayer('exit');
@@ -143,6 +176,9 @@ export default class GehennaDeep extends Scene {
     this.locationManager.update(time, delta);
     if (this.elkSpawner) {
       this.elkSpawner.update(time, delta);
+    }
+    if (this.deerSpawner) {
+      this.deerSpawner.update(time, delta);
     }
   }
 }
