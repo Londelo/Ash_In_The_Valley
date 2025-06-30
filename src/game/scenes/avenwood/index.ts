@@ -18,7 +18,7 @@ export default class AvenWood extends Scene {
   prophet: Prophet;
   temple: Temple;
   tileMapComponent: TileMapComponent;
-  enemySpawner: EnemySpawner;
+  enemySpawner: EnemySpawner
 
   constructor() {
     super('AvenWood');
@@ -36,7 +36,7 @@ export default class AvenWood extends Scene {
     const { width: mapWidth, height: mapHeight } = this.tileMapComponent.getMapDimensions();
     const templeLocation = this.tileMapComponent.getObjectLayer('temple')?.objects[0] as any;
 
-    this.player = new Player(this, config.player_start_x * tileMapConfig.scale, config.player_start_y * tileMapConfig.scale);
+    this.player = new Player(this, templeLocation.x * tileMapConfig.scale, config.player_start_y * tileMapConfig.scale);
     this.prophet = new Prophet(this, config.prophet_start_x * tileMapConfig.scale, config.prophet_start_y * tileMapConfig.scale, this.player);
     this.temple = new Temple(this, templeLocation.x, templeLocation.y, tileMapConfig.scale, this.player);
 
@@ -82,7 +82,8 @@ export default class AvenWood extends Scene {
   }
 
   changeScene() {
-    this.enemySpawner.destroy();
-    this.scene.restart();
+    this.enemySpawner?.destroy();
+    this.scene.start('GehennaDeep');
+
   }
 }

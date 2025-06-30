@@ -39,7 +39,7 @@ export class Player extends Actor {
   private state: State;
   public playerSkin: PlayerSkins;
   public attackHitboxManager: AttackHitboxManager;
-  public debugEnabled: boolean = false;
+  public debugEnabled: boolean = true;
 
   constructor(scene: Scene, x: number, y: number) {
     const playerSkin: PlayerSkins = 'swordMaster';
@@ -311,7 +311,7 @@ export class Player extends Actor {
 
   private handleJump(state: PlayerState) {
     if (state.shouldJump) {
-      this.sprite.setVelocityY(-600);
+      this.sprite.setVelocityY(-700);
       this.sprite.play(`${this.playerSkin}_player_jump`);
     }
   }

@@ -94,7 +94,6 @@ export class EnemySpawner {
     const radius = this.config.spawnRadius || 0;
     const angle = Math.random() * Math.PI * 2;
     const distance = Math.random() * radius;
-
     return {
       x: this.config.spawnPoint.x + Math.cos(angle) * distance,
       y: this.config.spawnPoint.y + Math.sin(angle) * distance
@@ -167,7 +166,7 @@ export class EnemySpawner {
     if (attackHitbox && enemy && attackHitbox.isActive) {
       // Get enemy's unique identifier
       const enemyId = 'uniqueId' in enemy ? (enemy as any).uniqueId : enemy.sprite.name || 'unknown';
-      
+
       // Check if this hitbox has already hit this enemy
       if (attackHitbox.hasHitEntity(enemyId)) {
         return; // Skip damage - this enemy was already hit by this hitbox

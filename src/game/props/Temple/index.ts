@@ -47,7 +47,7 @@ export class Temple extends Prop {
     const distance = this.getDistanceToPlayer();
     this.isPlayerNear = distance <= this.INTERACTION_RANGE;
     if (this.isPlayerNear && Phaser.Input.Keyboard.JustDown(this.inputKeys.T)) {
-      this.scene.scene.start('GehennaDeep');
+      (this.scene as any).changeScene();
     }
   }
 

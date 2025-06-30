@@ -58,13 +58,7 @@ export default class GehennaDeep extends Scene {
       enemyClass: DaggerBandit,
       maxEnemies: 5,
       spawnInterval: 4000, // 4 seconds - more intense in cave
-      spawnPoints: [
-        { x: 300, y: 400 },
-        { x: 800, y: 400 },
-        { x: 1300, y: 400 },
-        { x: 1800, y: 400 },
-        { x: 2300, y: 400 }
-      ],
+      spawnPoint: { x: 800, y: 400 },
       spawnRadius: 80,
       autoStart: true,
       respawnDelay: 2500
