@@ -5,6 +5,7 @@ import { Player } from '../../actors/Player';
 import { Elk } from '../../actors/Elk';
 import { TileMapComponent } from '../../components/TileMap';
 import { LocationManager } from '../../components/LocationManager';
+import { EnemySpawner, EnemySpawnerConfig } from '../../components/EnemySpawner';
 import avenWoodConfig from '../avenwood/config'
 
 export default class GehennaDeep extends Scene {
@@ -14,9 +15,9 @@ export default class GehennaDeep extends Scene {
   exitZone: Phaser.Physics.Arcade.StaticGroup;
 
   player: Player;
-  elk: Elk;
   tileMapComponent: TileMapComponent;
   locationManager: LocationManager;
+  elkSpawner: EnemySpawner;
 
   constructor() {
     super('GehennaDeep');
@@ -40,8 +41,8 @@ export default class GehennaDeep extends Scene {
     this.player = new Player(this, playerSpawn.x * tileMapConfig.scale, playerSpawn.y * tileMapConfig.scale);
     this.player.create();
 
-    // Setup Elk from powerSpawn layer with name 'blood'
-    this.setupElk();
+    // Setup Elk spawner
+    this.setupElkSpawner();
 
     // Setup location-based enemy spawning
     this.locationManager = new LocationManager(
@@ -59,9 +60,6 @@ export default class GehennaDeep extends Scene {
     this.camera.setBounds(0, 0, mapWidth, mapHeight);
 
     this.physics.add.collider(this.player.sprite, this.world);
-    if (this.elk) {
-      this.physics.add.collider(this.elk.sprite, this.world);
-    }
 
     // Setup exit collision
     this.physics.add.overlap(
@@ -75,25 +73,27 @@ export default class GehennaDeep extends Scene {
     EventBus.emit('current-scene-ready', this);
   }
 
-  private setupElk(): void {
+  private setupElkSpawner(): void {
     const powerSpawnLayer = this.tileMapComponent.getObjectLayer('powerSpawn');
     
     if (powerSpawnLayer && powerSpawnLayer.objects) {
       const bloodSpawn = powerSpawnLayer.objects.find((obj: any) => obj.name === 'blood');
       
       if (bloodSpawn) {
-        this.elk = new Elk(
-          this,
-          bloodSpawn.x * config.tileMapConfig.scale,
-          bloodSpawn.y * config.tileMapConfig.scale,
-          this.player
-        );
-        this.elk.create();
-        
-        // Setup player attacks hitting elk
-        this.setupElkCollisions();
-        
-        console.log('Elk spawned at blood powerSpawn location');
+        const spawnerConfig: EnemySpawnerConfig = {
+          enemyClass: Elk,
+          maxEnemies: 1,
+          spawnInterval: 1000,
+          spawnPoint: { 
+            x: bloodSpawn.x * config.tileMapConfig.scale, 
+            y: bloodSpawn.y * config.tileMapConfig.scale 
+          },
+          autoStart: true,
+          respawnDelay: 0 // Don't respawn elk
+        };
+
+        this.elkSpawner = new EnemySpawner(this, this.player, spawnerConfig);
+        console.log('Elk spawner created at blood powerSpawn location');
       } else {
         console.warn('No powerSpawn object with name "blood" found');
       }
@@ -101,47 +101,6 @@ export default class GehennaDeep extends Scene {
       console.warn('No powerSpawn layer found in tilemap');
     }
   }
-
-  private setupElkCollisions(): void {
-    if (!this.elk) return;
-
-    // Player attacks hit elk
-    const checkPlayerAttackHit = () => {
-      const playerHitboxes = this.player.attackHitboxManager.getActiveHitboxes();
-      
-      playerHitboxes.forEach(hitbox => {
-        if (hitbox.isActive) {
-          this.physics.world.overlap(
-            hitbox.sprite,
-            this.elk.sprite,
-            () => this.handlePlayerAttackElk(hitbox.sprite, this.elk.sprite)
-          );
-        }
-      });
-    };
-
-    // Check collisions every frame
-    this.physics.world.on('worldstep', checkPlayerAttackHit);
-  }
-
-  private handlePlayerAttackElk = (playerAttack: any, elkSprite: any): void => {
-    const attackHitbox = playerAttack.attackHitbox;
-
-    if (attackHitbox && this.elk && attackHitbox.isActive) {
-      // Check if this hitbox has already hit the elk
-      if (attackHitbox.hasHitEntity('elk')) {
-        return;
-      }
-
-      // Mark elk as hit by this hitbox
-      attackHitbox.addHitEntity('elk');
-
-      // Apply damage
-      this.elk.takeDamage(attackHitbox.config.damage);
-      
-      console.log('Player hit elk for', attackHitbox.config.damage, 'damage');
-    }
-  };
 
   private setupExitZone(): void {
     this.exitZone = this.physics.add.staticGroup();
@@ -166,6 +125,7 @@ export default class GehennaDeep extends Scene {
   private handleExitOverlap = (_playerSprite: any, _exitObject: any) => {
     // Clean up current scene
     this.locationManager?.destroy();
+    this.elkSpawner?.destroy();
 
     // Calculate spawn position near temple in AvenWood
     const spawnX = (config.temple_x) * avenWoodConfig.tileMapConfig.scale;
@@ -180,9 +140,7 @@ export default class GehennaDeep extends Scene {
 
   update(time: number, delta: number) {
     this.player.update(time, delta);
-    if (this.elk) {
-      this.elk.update(time, delta);
-    }
     this.locationManager.update(time, delta);
+    this.elkSpawner.update(time, delta);
   }
 }
