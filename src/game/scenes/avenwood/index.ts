@@ -22,6 +22,7 @@ export default class AvenWood extends Scene {
   enemySpawner: EnemySpawner
   boss: Boss | null = null;
   prophetTriggerZone: Phaser.GameObjects.Zone;
+  prophetTriggerSprite: Phaser.GameObjects.Rectangle;
   bossSpawned: boolean = false;
 
   constructor() {
@@ -86,13 +87,25 @@ export default class AvenWood extends Scene {
     // Create a zone around the prophet
     const prophetX = this.prophet.sprite.x;
     const prophetY = this.prophet.sprite.y;
-    const zoneWidth = 100;
-    const zoneHeight = 100;
+    const zoneWidth = 150;
+    const zoneHeight = 150;
 
+    // Create the invisible physics zone
     this.prophetTriggerZone = this.add.zone(prophetX, prophetY, zoneWidth, zoneHeight);
     this.physics.world.enable(this.prophetTriggerZone);
     (this.prophetTriggerZone.body as Phaser.Physics.Arcade.Body).setAllowGravity(false);
     (this.prophetTriggerZone.body as Phaser.Physics.Arcade.Body).moves = false;
+    
+    // Create a visible rectangle to represent the zone
+    this.prophetTriggerSprite = this.add.rectangle(
+      prophetX, 
+      prophetY, 
+      zoneWidth, 
+      zoneHeight, 
+      0xff0000, 
+      0.3
+    );
+    this.prophetTriggerSprite.setDepth(10);
   }
 
   private handleProphetAttacked = (playerAttack: any): void => {
@@ -108,8 +121,9 @@ export default class AvenWood extends Scene {
       this.prophet.sprite.setVisible(false);
       this.prophet.sprite.body.enable = false;
       
-      // Disable the trigger zone
+      // Disable the trigger zone and make the visual indicator disappear
       this.prophetTriggerZone.destroy();
+      this.prophetTriggerSprite.destroy();
     }
   };
 
