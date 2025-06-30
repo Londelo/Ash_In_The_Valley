@@ -30,7 +30,7 @@ export class Prophet {
       onConversationEnded: this.onConversationEnded.bind(this)
     };
     this.chatAI = new ChatAI(chatAIOptions);
-    
+
     // Listen for player skin changes
     EventBus.on('player_skin_changed', this.handlePlayerSkinChange.bind(this));
     // Listen for location changes
@@ -40,7 +40,7 @@ export class Prophet {
   private handlePlayerSkinChange(skin: string): void {
     this.chatAI.updatePlayerSkin(skin);
   }
-  
+
   private handleLocationChange(location: string | null): void {
     this.chatAI.updateLocation(location);
   }
@@ -80,8 +80,8 @@ export class Prophet {
     }
     else if (!playerIsNear && this.isPlayerNear) {
       this.isPlayerNear = false;
-      this.sprite.play('prophet_look_down');
-      this.chatAI.endConversation()
+      // this.sprite.play('prophet_look_down');
+      // this.chatAI.endConversation()
     }
 
     this.isPlayerNear = playerIsNear;
