@@ -220,6 +220,7 @@ export class EnemySpawner {
 
     // Schedule respawn if spawner is still active
     if (this.isActive && this.config.respawnDelay) {
+      console.log("hit")
       this.scene.time.delayedCall(this.config.respawnDelay, () => {
         if (this.isActive && this.enemies.length < this.config.maxEnemies) {
           this.trySpawnEnemy();

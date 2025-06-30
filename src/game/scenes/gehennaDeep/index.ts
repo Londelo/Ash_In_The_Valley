@@ -75,18 +75,18 @@ export default class GehennaDeep extends Scene {
 
   private setupElkSpawner(): void {
     const powerSpawnLayer = this.tileMapComponent.getObjectLayer('powerSpawn');
-    
+
     if (powerSpawnLayer && powerSpawnLayer.objects) {
-      const bloodSpawn = powerSpawnLayer.objects.find((obj: any) => obj.name === 'blood');
-      
+      const bloodSpawn:any = powerSpawnLayer.objects.find((obj: any) => obj.name === 'blood');
+
       if (bloodSpawn) {
         const spawnerConfig: EnemySpawnerConfig = {
           enemyClass: Elk,
           maxEnemies: 1,
-          spawnInterval: 1000,
-          spawnPoint: { 
-            x: bloodSpawn.x * config.tileMapConfig.scale, 
-            y: bloodSpawn.y * config.tileMapConfig.scale 
+          spawnInterval: 100,
+          spawnPoint: {
+            x: bloodSpawn.x * config.tileMapConfig.scale,
+            y: bloodSpawn.y * config.tileMapConfig.scale
           },
           autoStart: true,
           respawnDelay: 0 // Don't respawn elk

@@ -8,7 +8,7 @@ const blueElkActorConfig: ActorConfig = {
   centerXLeft: 0.7,
   centerXRight: 0.3,
   centerY: 1,
-  health: 50,
+  health: 10,
   attackPower: 0,
   invulnerabilityDuration: 500,
   bodyOffsetY: 20,

@@ -26,7 +26,7 @@ export class State {
     // Randomly choose between moving and eating
     const behaviors = ['moving', 'eating', 'looking'] as const;
     this.currentBehavior = behaviors[Math.floor(Math.random() * behaviors.length)];
-    
+
     // Set random duration (1-2 seconds)
     this.behaviorDuration = 1000 + Math.random() * 1000;
     this.behaviorTimer = 0;
@@ -35,8 +35,6 @@ export class State {
     if (this.currentBehavior === 'moving') {
       this.moveDirection = Math.random() > 0.5 ? 'left' : 'right';
     }
-
-    console.log(`Elk starting ${this.currentBehavior} for ${this.behaviorDuration}ms`);
   }
 
   public getState(time: number, delta: number): ElkState {

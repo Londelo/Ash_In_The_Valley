@@ -26,12 +26,13 @@ export class Elk extends Actor {
   public elkSkin: ElkSkins;
   private playerRef: Player;
   private hasTriggeredPlayerTransform: boolean = false;
+  public debugEnabled: boolean = true;
 
   constructor(scene: Scene, x: number, y: number, playerRef: Player) {
     const elkSkin: ElkSkins = 'blueElk';
     const actorConfig: ActorConfig = getElkActorConfig(elkSkin);
     super(scene, x, y, skinAtlasMap[elkSkin], skinFrameMap[elkSkin], actorConfig);
-    
+
     this.elkSkin = elkSkin;
     this.playerRef = playerRef;
     this.sprite.setDepth(0);
@@ -73,13 +74,13 @@ export class Elk extends Actor {
   private onDeathComplete(): void {
     if (!this.hasTriggeredPlayerTransform) {
       this.hasTriggeredPlayerTransform = true;
-      
+
       // Change elk to red skin
       this.changeSkin('redElk');
-      
+
       // Change player to bloodSwordsman
       (this.playerRef as any).changeSkin('bloodSwordsMan');
-      
+
       console.log('Elk death triggered player transformation to bloodSwordsman');
     }
   }
@@ -87,7 +88,7 @@ export class Elk extends Actor {
   protected onDeath(): void {
     this.isDead = true;
     this.sprite.setVelocityX(0);
-    
+
     // Change to red skin before playing death animation
     this.changeSkin('redElk');
     this.sprite.play(`${this.elkSkin}_death`);
@@ -96,7 +97,7 @@ export class Elk extends Actor {
   public handleMovement(currentState: ElkState) {
     if (currentState.shouldMove) {
       const moveSpeed = this.elkSpeed;
-      
+
       if (currentState.moveDirection === 'left') {
         this.sprite.setVelocityX(-moveSpeed);
         setSpriteDirection(this.sprite, 'left', this.adjustForCenterOffset);
