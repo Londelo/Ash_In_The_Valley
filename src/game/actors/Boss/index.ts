@@ -16,34 +16,12 @@ export class Boss extends Actor {
   private chargeSpeed: number = 350; // Faster speed for attack_2
 
   private readonly DETECTION_RANGE = 600;
-  private readonly ARENA_CENTER_X = 600;
-  private readonly WANDER_RANGE = 300;
-
-  private isVanished: boolean = false;
-  private vanishTargetX: number = 0;
-  private telegraphSprite: Phaser.GameObjects.Sprite | null = null;
-  private missileSprites: Phaser.GameObjects.Sprite[] = [];
-  private directionChangeTimer: number = 0;
-  private readonly DIRECTION_CHANGE_INTERVAL = 3000; // Change direction every 3 seconds
-  private vanishTimer: number = 0;
-  private readonly VANISH_INTERVAL = 8000; // Try to vanish every 8 seconds
   private attackTimer: number = 0;
-  private readonly ATTACK_INTERVAL = 4000; // Attack every 4 seconds
-  private isCharging: boolean = false;
+  private readonly ATTACK_INTERVAL = 3000; // Attack every 3 seconds
 
   public attackHitboxManager: AttackHitboxManager;
 
   private attackConfigs: { [key: string]: AttackHitboxConfig } = {
-    'boss_attack_1': {
-      width: 300,
-      height: 60,
-      offsetX_right: 100,
-      offsetX_left: -100,
-      offsetY: -30,
-      duration: 300,
-      damage: 25,
-      attackerId: 'boss'
-    },
     'boss_attack_2': {
       width: 250,
       height: 50,
@@ -103,56 +81,14 @@ export class Boss extends Actor {
       if (animation.key === 'boss_attack_2_prep') {
         this.sprite.play('boss_attack_2');
         this.createAttackHitbox('boss_attack_2');
-        this.isCharging = true;
       } else if (animation.key === 'boss_attack_2') {
         this.sprite.play('boss_attack_2_end');
-        this.isCharging = false;
       } else if (animation.key === 'boss_attack_2_end') {
-        this.isCharging = false;
-      } else if (animation.key === 'boss_vanish') {
-        this.onVanishComplete();
-      } else if (animation.key === 'boss_appear') {
-        this.onAppearComplete();
-      } else if (this.state.isActionAnimations(animation.key) && animation.key !== 'boss_death') {
-        this.state.onAttackComplete();
         this.sprite.play('boss_idle');
-        this.isCharging = false;
       } else if (animation.key === 'boss_death') {
         this.sprite.anims.stop();
       }
     });
-  }
-
-  private createTelegraph(x: number, y: number) {
-    this.telegraphSprite = this.scene.add.sprite(x, y - 100, 'bossAtlas', 'prep_attack_1 0');
-    this.telegraphSprite.setScale(1.5);
-    this.telegraphSprite.setAlpha(0.7);
-    this.telegraphSprite.setTint(0xff0000);
-    this.telegraphSprite.play('boss_prep_attack_1');
-  }
-
-  public onVanishComplete() {
-    this.isVanished = true;
-    this.sprite.setVisible(false);
-
-    this.scene.time.delayedCall(2000, () => {
-      const playerX = this.playerRef.sprite.x;
-      const side = Math.random() < 0.5 ? 'left' : 'right';
-      this.vanishTargetX = side === 'left' ? playerX - 150 : playerX + 150;
-
-      this.sprite.x = this.vanishTargetX;
-      this.sprite.setVisible(true);
-      this.sprite.play('boss_appear');
-    });
-  }
-
-  public onAppearComplete() {
-    this.isVanished = false;
-
-    // After appearing, always perform attack_1
-    const playerX = this.playerRef.sprite.x;
-    const playerY = this.playerRef.sprite.y;
-    this.createTelegraph(playerX, playerY);
   }
 
   private getDistanceToPlayer(): number {
@@ -163,88 +99,67 @@ export class Boss extends Actor {
     return this.playerRef.sprite.x < this.sprite.x ? 'left' : 'right';
   }
 
-  private shouldChangeDirection(delta: number): boolean {
-    this.directionChangeTimer += delta;
-    if (this.directionChangeTimer >= this.DIRECTION_CHANGE_INTERVAL) {
-      this.directionChangeTimer = 0;
-      return Math.random() < 0.7; // 70% chance to change direction
-    }
-    return false;
-  }
-
-  private shouldVanish(delta: number): boolean {
-    if (this.isVanished) return false;
-
-    this.vanishTimer += delta;
-    if (this.vanishTimer >= this.VANISH_INTERVAL) {
-      this.vanishTimer = 0;
-      return Math.random() < 0.3; // 30% chance to vanish
-    }
-    return false;
-  }
-
   private shouldAttack(delta: number): boolean {
-    if (this.isVanished) return false;
-
     this.attackTimer += delta;
     if (this.attackTimer >= this.ATTACK_INTERVAL) {
       this.attackTimer = 0;
-      return Math.random() < 0.6; // 60% chance to attack
+      return Math.random() < 0.5; // 50% chance to attack
     }
     return false;
   }
 
-  private chooseRandomAttack(): 'attack_1' | 'attack_2' {
-    return Math.random() < 0.5 ? 'attack_1' : 'attack_2';
-  }
-
-  public handleMovement(currentState: BossState) {
-    if (this.isVanished || this.telegraphSprite) {
-      this.sprite.setVelocityX(0);
-      return;
-    }
-
-    if (currentState.shouldMove) {
-      let speed = this.bossSpeed;
-
-      // Use faster speed when charging with attack_2
-      if (this.isCharging) {
-        speed = this.chargeSpeed;
+  public handleMovement() {
+    const distance = this.getDistanceToPlayer();
+    const direction = this.getDirectionToPlayer();
+    
+    // If too far from player, move toward player
+    if (distance > this.DETECTION_RANGE) {
+      const moveDirection = direction === 'left' ? -1 : 1;
+      this.sprite.setVelocityX(moveDirection * this.bossSpeed);
+      setSpriteDirection(this.sprite, direction, this.adjustForCenterOffset);
+      this.sprite.play('boss_move', true);
+    } 
+    // If in range, randomly move around
+    else {
+      const randomMove = Math.random();
+      
+      if (randomMove < 0.3) {
+        // Move left
+        this.sprite.setVelocityX(-this.bossSpeed);
+        setSpriteDirection(this.sprite, 'left', this.adjustForCenterOffset);
+        this.sprite.play('boss_move', true);
+      } else if (randomMove < 0.6) {
+        // Move right
+        this.sprite.setVelocityX(this.bossSpeed);
+        setSpriteDirection(this.sprite, 'right', this.adjustForCenterOffset);
+        this.sprite.play('boss_move', true);
+      } else {
+        // Stay idle
+        this.sprite.setVelocityX(0);
+        this.sprite.play('boss_idle', true);
       }
-
-      const direction = currentState.playerDirection === 'left' ? -1 : 1;
-      this.sprite.setVelocityX(direction * speed);
-      setSpriteDirection(this.sprite, direction > 0 ? 'right' : 'left', this.adjustForCenterOffset);
-    } else {
-      this.sprite.setVelocityX(0);
     }
   }
 
-  public handleMovementAnimations(currentState: BossState) {
+  public handleAttack() {
     const currentAnim = this.sprite.anims.currentAnim?.key;
-    if (this.state.isHighPriorityAnimation(currentAnim)) {
+    
+    // Don't start new attack if already in attack animation
+    if (currentAnim && (
+        currentAnim === 'boss_attack_2_prep' || 
+        currentAnim === 'boss_attack_2' || 
+        currentAnim === 'boss_attack_2_end')) {
       return;
     }
-
-    if (currentState.shouldPlayMoveAnim) {
-      this.sprite.play('boss_move');
-    } else if (currentState.shouldPlayIdleAnim) {
-      this.sprite.play('boss_idle');
-    }
-  }
-
-  public handleAttacks(currentState: BossState) {
-    if (currentState.shouldAttack1) {
-      const playerX = this.playerRef.sprite.x;
-      const playerY = this.playerRef.sprite.y;
-      this.createTelegraph(playerX, playerY);
-    } else if (currentState.shouldAttack2) {
-      this.sprite.play('boss_attack_2_prep');
-      this.createAttackHitbox('boss_attack_2');
-    } else if (currentState.shouldVanish) {
-      this.sprite.play('boss_vanish');
-      this.state.onVanishUsed();
-    }
+    
+    // Start attack sequence
+    this.sprite.play('boss_attack_2_prep');
+    
+    // Charge toward player during attack
+    const direction = this.getDirectionToPlayer();
+    const chargeDirection = direction === 'left' ? -1 : 1;
+    this.sprite.setVelocityX(chargeDirection * this.chargeSpeed);
+    setSpriteDirection(this.sprite, direction, this.adjustForCenterOffset);
   }
 
   create() {
@@ -268,47 +183,13 @@ export class Boss extends Actor {
 
     if (this.isDead) return;
 
-    // Update state based on new behavior logic
-    const distance = this.getDistanceToPlayer();
-    const direction = this.getDirectionToPlayer();
-    const shouldChangeDirection = this.shouldChangeDirection(delta);
-    const shouldVanish = this.shouldVanish(delta);
-    const shouldAttack = this.shouldAttack(delta);
-    const attackType = this.chooseRandomAttack();
-
-    // Override state with our new random behaviors
-    const currentState = this.state.getState(time, delta);
-
-    // Apply random direction changes
-    if (shouldChangeDirection) {
-      currentState.playerDirection = currentState.playerDirection === 'left' ? 'right' : 'left';
+    // Check if we should attack
+    if (this.shouldAttack(delta)) {
+      this.handleAttack();
+    } else {
+      // Otherwise just move around
+      this.handleMovement();
     }
-
-    // Apply vanish behavior
-    if (shouldVanish) {
-      currentState.shouldVanish = true;
-    }
-
-    // Apply attack behavior
-    if (shouldAttack) {
-      if (attackType === 'attack_1') {
-        currentState.shouldAttack1 = true;
-        currentState.shouldMove = false;
-      } else {
-        currentState.shouldAttack2 = true;
-        currentState.shouldMove = true; // Move toward player during attack_2
-      }
-    }
-
-    // Keep boss within detection range of player
-    if (distance > this.DETECTION_RANGE) {
-      currentState.shouldMove = true;
-      currentState.playerDirection = direction;
-    }
-
-    this.handleAttacks(currentState);
-    this.handleMovement(currentState);
-    this.handleMovementAnimations(currentState);
 
     const spriteDirection = this.sprite.flipX ? 'left' : 'right';
     this.attackHitboxManager.updateHitboxes(this.sprite.x, this.sprite.y, spriteDirection);
