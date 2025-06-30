@@ -10,6 +10,7 @@ import { Actor, ActorConfig } from '../../components/Actor';
 
 export class DaggerBandit extends Actor {
   banditSpeed: number = 50;
+  chargeSpeed: number = 150; // Faster speed during charge
   private state: State;
   private playerRef: Player;
   private isVanished: boolean = false;
@@ -117,12 +118,14 @@ export class DaggerBandit extends Actor {
   }
 
   public handleMovement(currentState: AI_State) {
-    const { shouldMove, playerDirection } = currentState;
+    const { shouldMove, playerDirection, isCharging } = currentState;
 
     if (shouldMove) {
-      const baseSpeed = this.banditSpeed;
+      // Use faster speed when charging
+      const moveSpeed = isCharging ? this.chargeSpeed : this.banditSpeed;
       const dashDirection = this.sprite.flipX ? -1 : 1;
-      const dashDistance = baseSpeed * dashDirection;
+      const dashDistance = moveSpeed * dashDirection;
+      
       if (playerDirection === 'left') {
         this.sprite.x += dashDistance * this.deltaTime;
         setSpriteDirection(this.sprite, 'left', this.adjustForCenterOffset);
