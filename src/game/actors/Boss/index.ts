@@ -13,10 +13,10 @@ export class Boss extends Actor {
   private state: State;
   private playerRef: Player;
   private deltaTime: number = 0;
-  private bossSpeed: number = 80;
+  private bossSpeed: number = 120;
   
   private readonly ARENA_CENTER_X = 600;
-  private readonly WANDER_RANGE = 200;
+  private readonly WANDER_RANGE = 300;
   
   private isVanished: boolean = false;
   private vanishTargetX: number = 0;
@@ -59,7 +59,7 @@ export class Boss extends Actor {
       centerXLeft: 0.6,
       centerXRight: 0.4,
       centerY: 1,
-      health: 300,
+      health: 800, // Much more health for a proper boss fight
       attackPower: 20,
       bodyOffsetY: 30,
       knockbackForce: 50,
@@ -198,15 +198,12 @@ export class Boss extends Actor {
 
   public handleMovement(currentState: BossState) {
     if (currentState.shouldMove && !this.isVanished) {
-      const targetX = this.ARENA_CENTER_X + (Math.random() - 0.5) * this.WANDER_RANGE * 2;
-      const direction = targetX > this.sprite.x ? 1 : -1;
+      const direction = currentState.playerDirection === 'left' ? -1 : 1;
       
       this.sprite.setVelocityX(direction * this.bossSpeed);
       setSpriteDirection(this.sprite, direction > 0 ? 'right' : 'left', this.adjustForCenterOffset);
-      
-      this.scene.time.delayedCall(1000, () => {
-        this.sprite.setVelocityX(0);
-      });
+    } else if (!currentState.shouldMove) {
+      this.sprite.setVelocityX(0);
     }
   }
 
@@ -231,6 +228,7 @@ export class Boss extends Actor {
       this.sendBossTaunt('special_attack');
     } else if (currentState.shouldAttack2) {
       this.sprite.play('boss_attack_2_prep');
+      this.createAttackHitbox('boss_attack_2');
       this.sendBossTaunt('basic_attack');
     } else if (currentState.shouldVanish) {
       this.sprite.play('boss_vanish');
