@@ -58,34 +58,56 @@ const config = {
 
   // Location-based spawn configurations
   locationConfigs: {
-    entrance: {
+    lvl_1: {
       maxEnemies: 2,
       spawnInterval: 6000,
       spawnRadius: 80,
       respawnDelay: 4000,
       autoStart: true
     },
-    cavern: {
-      maxEnemies: 4,
-      spawnInterval: 4000,
+    lvl_2: {
+      maxEnemies: 3,
+      spawnInterval: 5000,
       spawnRadius: 100,
       respawnDelay: 3000,
       autoStart: true
     },
-    depths: {
-      maxEnemies: 6,
-      spawnInterval: 3000,
+    lvl_3: {
+      maxEnemies: 4,
+      spawnInterval: 4000,
       spawnRadius: 120,
       respawnDelay: 2000,
       autoStart: true
     },
-    chamber: {
-      maxEnemies: 3,
-      spawnInterval: 5000,
-      spawnRadius: 90,
-      respawnDelay: 3500,
+    lvl_4: {
+      maxEnemies: 5,
+      spawnInterval: 3500,
+      spawnRadius: 140,
+      respawnDelay: 1500,
+      autoStart: true
+    },
+    lvl_5: {
+      maxEnemies: 6,
+      spawnInterval: 3000,
+      spawnRadius: 160,
+      respawnDelay: 1000,
+      autoStart: true
+    },
+    lvl_6: {
+      maxEnemies: 7,
+      spawnInterval: 2500,
+      spawnRadius: 180,
+      respawnDelay: 800,
+      autoStart: true
+    },
+    lvl_7: {
+      maxEnemies: 2,
+      spawnInterval: 6000,
+      spawnRadius: 80,
+      respawnDelay: 4000,
       autoStart: true
     }
+
   } as LocationConfigs
 }
 
