@@ -183,9 +183,10 @@ export class Boss extends Actor {
   public onAppearComplete() {
     this.isVanished = false;
 
-    this.scene.time.delayedCall(500, () => {
-      this.sprite.play('boss_attack_2_prep');
-    });
+    // After appearing, always perform attack_1
+    const playerX = this.playerRef.sprite.x;
+    const playerY = this.playerRef.sprite.y;
+    this.createTelegraph(playerX, playerY);
   }
 
   private getDistanceToPlayer(): number {
