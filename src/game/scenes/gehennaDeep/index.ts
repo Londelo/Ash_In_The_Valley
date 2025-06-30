@@ -6,8 +6,9 @@ import { Elk } from '../../actors/Elk';
 import { Deer } from '../../actors/Deer';
 import { TileMapComponent } from '../../components/TileMap';
 import { LocationManager } from '../../components/LocationManager';
+import { BossManager } from '../../components/BossManager';
 import { EnemySpawner, EnemySpawnerConfig } from '../../components/EnemySpawner';
-import avenWoodConfig from '../avenwood/config'
+import avenWoodConfig from '../avenwood/config';
 
 export default class GehennaDeep extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
@@ -19,6 +20,7 @@ export default class GehennaDeep extends Scene {
   player: Player;
   tileMapComponent: TileMapComponent;
   locationManager: LocationManager;
+  bossManager: BossManager;
   elkSpawner: EnemySpawner;
   deerSpawner: EnemySpawner;
   inputKeys: { [key: string]: Phaser.Input.Keyboard.Key };
@@ -30,7 +32,7 @@ export default class GehennaDeep extends Scene {
 
   create() {
     this.camera = this.cameras.main;
-    const { tileMapConfig } = config
+    const { tileMapConfig } = config;
 
     this.tileMapComponent = new TileMapComponent(this, config.tileMapConfig);
     const { map, world } = this.tileMapComponent.create();
@@ -55,6 +57,7 @@ export default class GehennaDeep extends Scene {
     // Setup Elk spawner
     this.setupElkSpawner();
 
+    // Setup Deer spawner
     this.setupDeerSpawner();
 
     // Setup location-based enemy spawning
@@ -66,6 +69,15 @@ export default class GehennaDeep extends Scene {
       tileMapConfig.scale
     );
     this.locationManager.initialize();
+
+    // Setup boss manager
+    this.bossManager = new BossManager(
+      this,
+      this.player,
+      config.locationConfigs,
+      tileMapConfig.scale
+    );
+    this.bossManager.initialize();
 
     this.camera.startFollow(this.player.sprite);
     this.camera.setFollowOffset(0, 200);
@@ -226,7 +238,9 @@ export default class GehennaDeep extends Scene {
   private handleExitOverlap = (_playerSprite: any, _exitObject: any) => {
     // Clean up current scene
     this.locationManager?.destroy();
+    this.bossManager?.destroy();
     this.elkSpawner?.destroy();
+    this.deerSpawner?.destroy();
 
     // Calculate spawn position near temple in AvenWood
     const spawnX = (config.temple_x) * avenWoodConfig.tileMapConfig.scale;
@@ -242,6 +256,8 @@ export default class GehennaDeep extends Scene {
   update(time: number, delta: number) {
     this.player.update(time, delta);
     this.locationManager.update(time, delta);
+    this.bossManager.update(time, delta);
+    
     if (this.elkSpawner) {
       this.elkSpawner.update(time, delta);
     }

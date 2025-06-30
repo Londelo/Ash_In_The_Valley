@@ -6,6 +6,7 @@ import { getAllElkAnimationConfigs } from './animations';
 import { Actor, ActorConfig } from '../../components/Actor';
 import { getElkActorConfig } from './actorConfigs';
 import type { Player } from '../Player/index';
+import { EventBus } from '../../EventBus';
 
 export type ElkSkins = 'elk';
 
@@ -58,6 +59,9 @@ export class Elk extends Actor {
 
       // Change player to bloodSwordsman
       (this.playerRef as any).changeSkin('bloodSwordsMan');
+
+      // Emit event for boss manager
+      EventBus.emit('elk_death');
 
       console.log('Elk death triggered player transformation to bloodSwordsman');
     }

@@ -6,6 +6,7 @@ import { getAllDeerAnimationConfigs } from './animations';
 import { Actor, ActorConfig } from '../../components/Actor';
 import { getDeerActorConfig } from './actorConfigs';
 import { Player } from '../Player';
+import { EventBus } from '../../EventBus';
 
 export type DeerSkins = 'deer';
 
@@ -25,6 +26,7 @@ export class Deer extends Actor {
   public debugEnabled: boolean = false;
   private hasTriggeredPlayerTransform: boolean = false;
   private playerRef: Player;
+  public uniqueId: string = `deer_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
   constructor(scene: Scene, x: number, y: number, playerRef: Player) {
     const deerSkin: DeerSkins = 'deer';
@@ -54,8 +56,11 @@ export class Deer extends Actor {
     if (!this.hasTriggeredPlayerTransform) {
       this.hasTriggeredPlayerTransform = true;
 
-      // Change player to bloodSwordsman
+      // Change player to lordOfFlames
       (this.playerRef as any).changeSkin('lordOfFlames');
+      
+      // Emit event for boss manager
+      EventBus.emit('deer_death');
     }
   }
 
