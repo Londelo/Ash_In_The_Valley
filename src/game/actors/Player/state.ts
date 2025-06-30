@@ -26,7 +26,7 @@ export interface PlayerState {
   isLanding: boolean;
   isInAir: boolean;
   isOnGround: boolean;
-  
+
   // Wall slide states
   shouldWallSlide: boolean;
   shouldWallJump: boolean;
@@ -69,6 +69,8 @@ export class State {
       animKey.includes('_player_slash_heavy') ||
       animKey.includes('_player_heal') ||
       animKey.includes('_player_hit') ||
+      animKey.includes('_player_wall_slide') ||
+      animKey.includes('_player_wall_hold') ||
       animKey.includes('_player_death');
   }
 
@@ -79,14 +81,14 @@ export class State {
   private checkWallCollision(): 'left' | 'right' | null {
     const sprite = this.player.sprite;
     const body = sprite.body;
-    
+
     if (!body) return null;
 
     // Use Phaser's built-in blocked properties to detect wall collision
     if (body.blocked.left) {
       return 'left';
     }
-    
+
     if (body.blocked.right) {
       return 'right';
     }
@@ -109,26 +111,26 @@ export class State {
 
     // Wall slide logic
     const wallCollision = this.checkWallCollision();
+
     const isMovingLeft = cursors.left.isDown;
     const isMovingRight = cursors.right.isDown;
-    
-    const shouldWallSlide = this.canWallSlide() && 
-                           isInAir && 
-                           !isSlashing && 
-                           !isDashing && 
-                           !isSlamming && 
+    const isJumping = cursors.up.isDown;
+
+
+    const shouldWallSlide = this.canWallSlide() &&
+                           isInAir &&
+                           !isSlashing &&
+                           !isDashing &&
+                           !isSlamming &&
                            !isLanding &&
-                           wallCollision !== null &&
-                           ((wallCollision === 'left' && isMovingLeft) || 
+                          !isJumping &&
+                           ((wallCollision === 'left' && isMovingLeft) ||
                             (wallCollision === 'right' && isMovingRight));
 
     // NEW: Check if we should stop wall sliding (no longer touching wall or not pressing toward wall)
-    const shouldStopWallSlide = isWallSliding && 
-                               (wallCollision === null || 
-                                (wallCollision === 'left' && !isMovingLeft) ||
-                                (wallCollision === 'right' && !isMovingRight));
+    const shouldStopWallSlide = isWallSliding && wallCollision === null && !isMovingLeft && !isMovingRight;
 
-    const shouldWallJump = isWallSliding && 
+    const shouldWallJump = isWallSliding &&
                           Phaser.Input.Keyboard.JustDown(cursors.up);
 
     // Track landing state
@@ -165,8 +167,8 @@ export class State {
                        !isLanding &&
                        !isWallSliding
 
-    const shouldSlamAttack = Phaser.Input.Keyboard.JustDown(inputKeys.E) && 
-                            !isLanding && 
+    const shouldSlamAttack = Phaser.Input.Keyboard.JustDown(inputKeys.E) &&
+                            !isLanding &&
                             !isWallSliding
 
     const shouldJump = Phaser.Input.Keyboard.JustDown(cursors.up) &&
@@ -239,7 +241,7 @@ export class State {
       isLanding,
       isInAir,
       isOnGround,
-      
+
       shouldWallSlide,
       shouldWallJump,
       isWallSliding,

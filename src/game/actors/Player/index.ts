@@ -32,7 +32,6 @@ export class Player extends Actor {
   private readonly DASH_DURATION = 300; // milliseconds
   private dashTimer: number = 0;
   private isDashing: boolean = false;
-  private isWallSliding: boolean = false;
   private comboState: number = 0;
   private comboTimer: number = 0;
   private comboWindowMin: number = 0;
@@ -81,7 +80,6 @@ export class Player extends Actor {
       return 0;
     }
 
-    // Calculate duration: (number of frames / frame rate) * 1000 to get milliseconds
     const frameCount = animation.frames.length;
     const frameRate = animation.frameRate;
     const duration = (frameCount / frameRate) * 1000;
@@ -169,8 +167,6 @@ export class Player extends Actor {
   private changeSkin(newSkin: PlayerSkins) {
     if (this.playerSkin === newSkin) return;
 
-    console.log('Changing skin from', this.playerSkin, 'to', newSkin);
-
     // Stop current animation
     this.sprite.anims.stop();
 
@@ -206,11 +202,6 @@ export class Player extends Actor {
   }
 
   private handleMovement(state: PlayerState) {
-    // Don't override dash velocity or wall slide
-    if (this.isDashing || state.isWallSliding) {
-      return;
-    }
-
     if (state.canMove && state.isMoving) {
       const moveSpeed = state.isRunning ? this.playerSpeed * 2 : this.playerSpeed;
 
@@ -242,27 +233,20 @@ export class Player extends Actor {
   }
 
   private handleWallSlide(state: PlayerState) {
-    if (state.shouldWallSlide && !this.isWallSliding) {
-      this.isWallSliding = true;
+    if (state.shouldWallSlide) {
       this.sprite.body.setGravityY(-1);
       this.sprite.setVelocityY(0);
       this.sprite.play(`${this.playerSkin}_player_wall_hold`);
-    } else if (state.shouldStopWallSlide && this.isWallSliding) {
-      // Player is no longer wall sliding - restore gravity and let them fall
-      this.isWallSliding = false;
+    } else if (state.shouldStopWallSlide) {
+      console.log('Stopping wall slide');
+      this.sprite.play(`${this.playerSkin}_player_idle`);
       this.sprite.body.setGravityY(0); // Restore normal gravity
-    }
-
-    // Maintain wall slide state while actively wall sliding
-    if (this.isWallSliding && !state.shouldStopWallSlide) {
-      this.sprite.body.setGravityY(-1);
       this.sprite.setVelocityY(0);
     }
   }
 
   private handleWallJump(state: PlayerState) {
     if (state.shouldWallJump) {
-      this.isWallSliding = false;
       // Re-enable gravity for wall jump
       this.sprite.body.setGravityY(0);
 
@@ -282,7 +266,6 @@ export class Player extends Actor {
     if (state.shouldAttack) {
       // Check if we're in the combo window
       if (!this.isInComboWindow()) {
-        console.log(`Attack blocked - outside combo window (${this.comboTimer}ms not in ${this.comboWindowMin}-${this.comboWindowMax}ms)`);
         this.resetCombo();
         return;
       }

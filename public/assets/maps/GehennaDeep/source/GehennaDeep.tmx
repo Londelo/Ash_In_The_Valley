@@ -1454,7 +1454,7 @@
   <object id="126" x="82" y="209.5" width="62" height="128.5"/>
  </objectgroup>
  <objectgroup id="42" name="spawn">
-  <object id="37" name="player_spawn" x="179.667" y="323.667">
+  <object id="37" name="player_spawn" x="932.667" y="324.667">
    <point/>
   </object>
   <object id="85" name="enemy_lvl_1" x="770.5" y="329">
