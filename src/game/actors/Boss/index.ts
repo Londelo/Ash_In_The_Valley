@@ -15,10 +15,11 @@ export class Boss extends Actor {
   private bossSpeed: number = 120;
   private chargeSpeed: number = 350; // Faster speed for attack_2
   private _moveDirection: number; // -1 for left, 1 for right
+  private isCharging: boolean = false;
 
   private readonly DETECTION_RANGE = 600;
   private attackTimer: number = 0;
-  private readonly ATTACK_INTERVAL = 1000; // Attack every 3 seconds
+  private readonly ATTACK_INTERVAL = 3000; // Attack every 3 seconds
 
   public attackHitboxManager: AttackHitboxManager;
 
@@ -82,10 +83,13 @@ export class Boss extends Actor {
       if (animation.key === 'boss_attack_2_prep') {
         this.sprite.play('boss_attack_2');
         this.createAttackHitbox('boss_attack_2');
+        this.isCharging = true;
       } else if (animation.key === 'boss_attack_2') {
         this.sprite.play('boss_attack_2_end');
+        this.isCharging = false;
       } else if (animation.key === 'boss_attack_2_end') {
         this.sprite.play('boss_idle');
+        this.isCharging = false;
       } else if (animation.key === 'boss_death') {
         this.sprite.anims.stop();
       }
@@ -102,7 +106,6 @@ export class Boss extends Actor {
 
   private shouldAttack(delta: number): boolean {
     this.attackTimer += delta;
-    console.log(this.attackTimer, this.ATTACK_INTERVAL);
     if (this.attackTimer >= this.ATTACK_INTERVAL) {
       this.attackTimer = 0;
       return Math.random() < 0.5; // 50% chance to attack
@@ -111,6 +114,15 @@ export class Boss extends Actor {
   }
 
   public handleMovement() {
+    // Don't handle normal movement during attack animations
+    const currentAnim = this.sprite.anims.currentAnim?.key;
+    if (currentAnim && (
+        currentAnim === 'boss_attack_2_prep' ||
+        currentAnim === 'boss_attack_2' ||
+        currentAnim === 'boss_attack_2_end')) {
+      return;
+    }
+
     const directionToPlayer = this.getDirectionToPlayer();
     const bossX = this.sprite.x;
     const playerX = this.playerRef.sprite.x;
@@ -128,7 +140,7 @@ export class Boss extends Actor {
     } else if (bossX > rangeMax) {
       this._moveDirection = -1;
     } else {
-      // Occasionally (10% chance per update) change direction randomly
+      // Occasionally (0.5% chance per update) change direction randomly
       if (Math.random() < 0.005) {
         this._moveDirection *= -1;
       }
@@ -154,16 +166,23 @@ export class Boss extends Actor {
         currentAnim === 'boss_attack_2_prep' ||
         currentAnim === 'boss_attack_2' ||
         currentAnim === 'boss_attack_2_end')) {
+      
+      // If we're in the main attack animation, keep charging toward player
+      if (currentAnim === 'boss_attack_2' && this.isCharging) {
+        const direction = this.getDirectionToPlayer();
+        const chargeDirection = direction === 'left' ? -1 : 1;
+        this.sprite.setVelocityX(chargeDirection * this.chargeSpeed);
+        setSpriteDirection(this.sprite, direction, this.adjustForCenterOffset);
+      }
+      
       return;
     }
 
     // Start attack sequence
     this.sprite.play('boss_attack_2_prep');
-
-    // Charge toward player during attack
+    
+    // Set initial direction toward player for the charge
     const direction = this.getDirectionToPlayer();
-    const chargeDirection = direction === 'left' ? -1 : 1;
-    this.sprite.setVelocityX(chargeDirection * this.chargeSpeed);
     setSpriteDirection(this.sprite, direction, this.adjustForCenterOffset);
   }
 
@@ -171,6 +190,11 @@ export class Boss extends Actor {
     this.state = new State(this, this.playerRef);
     this.createBossAnimations(this.scene);
     this.addBossAnimationListeners();
+    
+    EventBus.on('damage_boss', (damage: number) => {
+      this.takeDamage(damage);
+    });
+    
     this.sprite.play('boss_idle');
   }
 
@@ -182,9 +206,15 @@ export class Boss extends Actor {
     // Check if we should attack
     if (this.shouldAttack(delta)) {
       this.handleAttack();
-    } else {
-      // Otherwise just move around
+    } else if (!this.isCharging) {
+      // Otherwise just move around if not charging
       this.handleMovement();
+    } else {
+      // If charging, continue the charge behavior
+      const direction = this.getDirectionToPlayer();
+      const chargeDirection = direction === 'left' ? -1 : 1;
+      this.sprite.setVelocityX(chargeDirection * this.chargeSpeed);
+      setSpriteDirection(this.sprite, direction, this.adjustForCenterOffset);
     }
 
     const spriteDirection = this.sprite.flipX ? 'left' : 'right';
