@@ -1,6 +1,7 @@
 import { Boot } from './scenes/Boot';
 import AvenWood from './scenes/avenwood';
 import GehennaDeep from './scenes/gehennaDeep';
+import BossFight from './scenes/BossFight';
 import { AUTO, Game } from 'phaser';
 import { Preloader } from './scenes/Preloader';
 
@@ -28,7 +29,8 @@ const config: Phaser.Types.Core.GameConfig = {
     Boot,
     Preloader,
     AvenWood,
-    GehennaDeep
+    GehennaDeep,
+    BossFight
   ]
 };
 
