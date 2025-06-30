@@ -85,7 +85,7 @@ export class TileMapComponent {
             obj.width * this.config.scale,
             obj.height * this.config.scale,
             0x000000,
-            0.8
+            0
           );
           collisionRect.setOrigin(0, 0);
           this.world.add(collisionRect);

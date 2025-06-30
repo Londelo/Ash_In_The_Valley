@@ -1468,7 +1468,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":319.272727272727,
+                 "width":319.273,
                  "x":480.5,
                  "y":386
                 }, 
@@ -1501,7 +1501,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":719.386818181818,
+                 "width":719.387,
                  "x":80.47,
                  "y":336.803
                 }, 
@@ -1512,8 +1512,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":111.378454545455,
-                 "x":864.621545454546,
+                 "width":111.378,
+                 "x":864.622,
                  "y":337
                 }, 
                 {
@@ -1545,8 +1545,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":431.121545454545,
-                 "x":864.212454545455,
+                 "width":431.122,
+                 "x":864.212,
                  "y":386
                 }, 
                 {
@@ -1887,7 +1887,7 @@
                  "type":"",
                  "visible":true,
                  "width":96.875,
-                 "x":1166.625,
+                 "x":1166.63,
                  "y":1632.75
                 }, 
                 {
@@ -1899,7 +1899,7 @@
                  "visible":true,
                  "width":52.375,
                  "x":1313,
-                 "y":1585.125
+                 "y":1585.13
                 }, 
                 {
                  "height":16.125,
@@ -1909,8 +1909,8 @@
                  "type":"",
                  "visible":true,
                  "width":80.375,
-                 "x":1232.875,
-                 "y":1584.625
+                 "x":1232.88,
+                 "y":1584.63
                 }, 
                 {
                  "height":17.5,
@@ -1921,7 +1921,7 @@
                  "visible":true,
                  "width":16.25,
                  "x":1216.75,
-                 "y":1567.375
+                 "y":1567.38
                 }, 
                 {
                  "height":22.25,
@@ -1932,7 +1932,7 @@
                  "visible":true,
                  "width":17.25,
                  "x":1166.25,
-                 "y":1584.625
+                 "y":1584.63
                 }, 
                 {
                  "height":18.875,
@@ -1942,8 +1942,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1183.875,
-                 "y":1600.125
+                 "x":1183.88,
+                 "y":1600.13
                 }, 
                 {
                  "height":18.75,
@@ -1953,8 +1953,8 @@
                  "type":"",
                  "visible":true,
                  "width":15.875,
-                 "x":1199.875,
-                 "y":1615.875
+                 "x":1199.88,
+                 "y":1615.88
                 }, 
                 {
                  "height":65,
@@ -2101,7 +2101,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -2124,14 +2124,13 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
         {
          "draworder":"topdown",
          "id":42,
-         "locked":true,
          "name":"spawn",
          "objects":[
                 {
@@ -2143,8 +2142,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":233,
-                 "y":328
+                 "x":179.666666666667,
+                 "y":323.666666666667
                 }, 
                 {
                  "height":0,
@@ -2216,7 +2215,7 @@
                  "visible":true,
                  "width":0,
                  "x":1471,
-                 "y":1083.66666666667
+                 "y":1083.67
                 }, 
                 {
                  "height":0,
@@ -2227,8 +2226,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1146.33333333333,
-                 "y":938.666666666667
+                 "x":1146.33,
+                 "y":938.667
                 }, 
                 {
                  "height":0,
@@ -2239,8 +2238,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":712.333333333333,
-                 "y":1029.33333333333
+                 "x":712.333,
+                 "y":1029.33
                 }, 
                 {
                  "height":0,
@@ -2252,7 +2251,7 @@
                  "visible":true,
                  "width":0,
                  "x":969,
-                 "y":1075.33333333333
+                 "y":1075.33
                 }, 
                 {
                  "height":0,
@@ -2263,8 +2262,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":629.666666666667,
-                 "y":1285.66666666667
+                 "x":629.667,
+                 "y":1285.67
                 }, 
                 {
                  "height":0,
@@ -2275,20 +2274,20 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":888.333333333333,
-                 "y":1494.66666666667
+                 "x":888.333,
+                 "y":1494.67
                 }, 
                 {
                  "height":0,
                  "id":120,
-                 "name":"enemy_lvl_6",
+                 "name":"enemy_lvl_6_1",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1291.33333333333,
-                 "y":1496.33333333333
+                 "x":1291.33,
+                 "y":1496.33
                 }, 
                 {
                  "height":0,
@@ -2299,8 +2298,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":502.666666666667,
-                 "y":1754.33333333333
+                 "x":502.667,
+                 "y":1754.33
                 }, 
                 {
                  "height":0,
@@ -2334,8 +2333,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":875.636363636364,
-                 "y":1077.45454545455
+                 "x":875.636,
+                 "y":1077.45
                 }, 
                 {
                  "height":0,
@@ -2346,7 +2345,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":856.181818181818,
+                 "x":856.182,
                  "y":1744
                 }, 
                 {
@@ -2375,20 +2374,19 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
         {
          "draworder":"topdown",
          "id":51,
-         "locked":true,
          "name":"locations",
          "objects":[
                 {
                  "height":117,
                  "id":68,
-                 "name":"level_1",
+                 "name":"lvl_1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2399,7 +2397,7 @@
                 {
                  "height":128,
                  "id":69,
-                 "name":"level_2",
+                 "name":"lvl_2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2410,7 +2408,7 @@
                 {
                  "height":112,
                  "id":70,
-                 "name":"leve_3",
+                 "name":"lvl_3",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2421,7 +2419,7 @@
                 {
                  "height":199,
                  "id":71,
-                 "name":"level_4",
+                 "name":"lvl_4",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2432,7 +2430,7 @@
                 {
                  "height":214,
                  "id":73,
-                 "name":"level_7",
+                 "name":"lvl_7",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2441,53 +2439,31 @@
                  "y":1552
                 }, 
                 {
-                 "height":130,
-                 "id":76,
-                 "name":"level_7_1",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":290,
-                 "x":1032,
-                 "y":1642
-                }, 
-                {
-                 "height":126,
-                 "id":77,
-                 "name":"level_7_2",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":337,
-                 "x":141,
-                 "y":1650
-                }, 
-                {
                  "height":145.455,
                  "id":78,
-                 "name":"level_5",
+                 "name":"lvl_5",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":703.03,
-                 "x":130.303,
+                 "width":482.03,
+                 "x":351.303,
                  "y":1181.82
                 }, 
                 {
                  "height":118.182,
                  "id":79,
-                 "name":"level_6",
+                 "name":"lvl_6",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":875.758,
-                 "x":151.515,
+                 "width":467.758,
+                 "x":559.515,
                  "y":1403.03
                 }, 
                 {
                  "height":127.273,
                  "id":82,
-                 "name":"level_6_1",
+                 "name":"lvl_6_1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -2502,7 +2478,7 @@
          "y":0
         }],
  "nextlayerid":54,
- "nextobjectid":132,
+ "nextobjectid":133,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.11.2",

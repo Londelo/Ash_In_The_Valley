@@ -7,6 +7,7 @@ import { Prophet } from '../../actors/Prophet';
 import { Temple } from '../../props/Temple';
 import { TileMapComponent } from '../../components/TileMap';
 import { EnemySpawner, EnemySpawnerConfig } from '../../components/EnemySpawner';
+import avenWoodConfig from '../avenwood/config'
 
 export default class GehennaDeep extends Scene {
   camera: Phaser.Cameras.Scene2D.Camera;
@@ -86,13 +87,13 @@ export default class GehennaDeep extends Scene {
     }
   }
 
-  private handleExitOverlap = (playerSprite: any, exitObject: any): void => {
+  private handleExitOverlap = (_playerSprite: any, _exitObject: any) => {
     // Clean up current scene
     this.enemySpawner?.destroy();
 
     // Calculate spawn position near temple in AvenWood
-    const spawnX = (config.temple_x + 50) * 2; // Using AvenWood's scale of 2
-    const spawnY = 800; // Safe Y position
+    const spawnX = (config.temple_x) * avenWoodConfig.tileMapConfig.scale; // Using AvenWood's scale of 2
+    const spawnY = (config.temple_y - 100) * avenWoodConfig.tileMapConfig.scale; // Safe Y position
 
     // Transition to AvenWood with custom spawn position
     this.scene.start('AvenWood', {
