@@ -14,10 +14,11 @@ export class Boss extends Actor {
   private deltaTime: number = 0;
   private bossSpeed: number = 120;
   private chargeSpeed: number = 350; // Faster speed for attack_2
+  private _moveDirection: number; // -1 for left, 1 for right
 
   private readonly DETECTION_RANGE = 600;
   private attackTimer: number = 0;
-  private readonly ATTACK_INTERVAL = 3000; // Attack every 3 seconds
+  private readonly ATTACK_INTERVAL = 1000; // Attack every 3 seconds
 
   public attackHitboxManager: AttackHitboxManager;
 
@@ -101,6 +102,7 @@ export class Boss extends Actor {
 
   private shouldAttack(delta: number): boolean {
     this.attackTimer += delta;
+    console.log(this.attackTimer, this.ATTACK_INTERVAL);
     if (this.attackTimer >= this.ATTACK_INTERVAL) {
       this.attackTimer = 0;
       return Math.random() < 0.5; // 50% chance to attack
@@ -109,52 +111,55 @@ export class Boss extends Actor {
   }
 
   public handleMovement() {
-    const distance = this.getDistanceToPlayer();
-    const direction = this.getDirectionToPlayer();
-    
-    // If too far from player, move toward player
-    if (distance > this.DETECTION_RANGE) {
-      const moveDirection = direction === 'left' ? -1 : 1;
-      this.sprite.setVelocityX(moveDirection * this.bossSpeed);
-      setSpriteDirection(this.sprite, direction, this.adjustForCenterOffset);
-      this.sprite.play('boss_move', true);
-    } 
-    // If in range, randomly move around
-    else {
-      const randomMove = Math.random();
-      
-      if (randomMove < 0.3) {
-        // Move left
-        this.sprite.setVelocityX(-this.bossSpeed);
-        setSpriteDirection(this.sprite, 'left', this.adjustForCenterOffset);
-        this.sprite.play('boss_move', true);
-      } else if (randomMove < 0.6) {
-        // Move right
-        this.sprite.setVelocityX(this.bossSpeed);
-        setSpriteDirection(this.sprite, 'right', this.adjustForCenterOffset);
-        this.sprite.play('boss_move', true);
-      } else {
-        // Stay idle
-        this.sprite.setVelocityX(0);
-        this.sprite.play('boss_idle', true);
+    const directionToPlayer = this.getDirectionToPlayer();
+    const bossX = this.sprite.x;
+    const playerX = this.playerRef.sprite.x;
+    const rangeMin = playerX - this.DETECTION_RANGE;
+    const rangeMax = playerX + this.DETECTION_RANGE;
+
+    // Track current direction (left/right) for boss
+    if (this._moveDirection === undefined) {
+      this._moveDirection = directionToPlayer === 'left' ? -1 : 1;
+    }
+
+    // If boss is outside the allowed range, force move toward player
+    if (bossX < rangeMin) {
+      this._moveDirection = 1;
+    } else if (bossX > rangeMax) {
+      this._moveDirection = -1;
+    } else {
+      // Occasionally (10% chance per update) change direction randomly
+      if (Math.random() < 0.005) {
+        this._moveDirection *= -1;
       }
+    }
+
+    // Move boss in current direction, but stay within range
+    if ((this._moveDirection === -1 && bossX > rangeMin) || (this._moveDirection === 1 && bossX < rangeMax)) {
+      this.sprite.setVelocityX(this._moveDirection * this.bossSpeed);
+      setSpriteDirection(this.sprite, this._moveDirection === -1 ? 'left' : 'right', this.adjustForCenterOffset);
+      this.sprite.play('boss_move', true);
+    } else {
+      // Stay idle if can't move further in that direction
+      this.sprite.setVelocityX(0);
+      this.sprite.play('boss_idle', true);
     }
   }
 
   public handleAttack() {
     const currentAnim = this.sprite.anims.currentAnim?.key;
-    
+
     // Don't start new attack if already in attack animation
     if (currentAnim && (
-        currentAnim === 'boss_attack_2_prep' || 
-        currentAnim === 'boss_attack_2' || 
+        currentAnim === 'boss_attack_2_prep' ||
+        currentAnim === 'boss_attack_2' ||
         currentAnim === 'boss_attack_2_end')) {
       return;
     }
-    
+
     // Start attack sequence
     this.sprite.play('boss_attack_2_prep');
-    
+
     // Charge toward player during attack
     const direction = this.getDirectionToPlayer();
     const chargeDirection = direction === 'left' ? -1 : 1;
@@ -166,19 +171,10 @@ export class Boss extends Actor {
     this.state = new State(this, this.playerRef);
     this.createBossAnimations(this.scene);
     this.addBossAnimationListeners();
-
-    EventBus.on('damage_boss', (damage: number) => {
-      this.takeDamage(damage);
-    });
-
-    EventBus.on('damage_player', (damage: number) => {
-      this.playerRef.takeDamage(damage);
-    });
-
     this.sprite.play('boss_idle');
   }
 
-  update(time: number, delta: number) {
+  update(_time: number, delta: number) {
     this.deltaTime = delta / 1000;
 
     if (this.isDead) return;
