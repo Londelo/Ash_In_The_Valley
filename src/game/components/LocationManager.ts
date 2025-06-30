@@ -72,14 +72,18 @@ export class LocationManager {
 
     if (spawnLayer && spawnLayer.objects) {
       spawnLayer.objects.forEach((obj: any) => {
-        const spawnPoint: SpawnPoint = {
-          name: obj.name,
-          x: obj.x * this.mapScale,
-          y: obj.y * this.mapScale
-        };
-        this.spawnPoints.push(spawnPoint);
+        if (obj.name && obj.name.startsWith('enemy_')) {
+          const spawnPoint: SpawnPoint = {
+            name: obj.name,
+            x: obj.x * this.mapScale,
+            y: obj.y * this.mapScale
+          };
+          this.spawnPoints.push(spawnPoint);
+        }
       });
     }
+    
+    console.log(`Found ${this.spawnPoints.length} enemy spawn points`);
   }
 
   private getPlayerCurrentLocation(): string | null {
@@ -105,25 +109,52 @@ export class LocationManager {
     const config = this.locationConfigs[locationName];
 
     if (!config || spawnPoints.length === 0) {
+      console.log(`No config or spawn points found for location: ${locationName}`);
       return;
     }
 
+    // Calculate how many enemies per spawn point
+    const enemiesPerSpawn = Math.max(1, Math.ceil(config.maxEnemies / spawnPoints.length));
+    
     // Create spawners for each spawn point in this location
-    spawnPoints.forEach(spawnPoint => {
+    spawnPoints.forEach((spawnPoint, index) => {
+      // If this is the last spawn point, assign any remaining enemies
+      const isLastSpawnPoint = index === spawnPoints.length - 1;
+      const maxEnemiesForThisSpawn = isLastSpawnPoint 
+        ? Math.max(1, config.maxEnemies - (index * enemiesPerSpawn))
+        : enemiesPerSpawn;
+
       const spawnerConfig: EnemySpawnerConfig = {
         enemyClass: DaggerBandit,
-        maxEnemies: Math.ceil(config.maxEnemies / spawnPoints.length),
+        maxEnemies: maxEnemiesForThisSpawn,
         spawnInterval: config.spawnInterval,
         spawnPoint: { x: spawnPoint.x, y: spawnPoint.y },
         autoStart: config.autoStart,
-        respawnDelay: 0 // Disable respawning - enemies don't come back once killed
+        respawnDelay: config.respawnDelay
       };
 
-      const spawner = new EnemySpawner(this.scene as any, this.player, spawnerConfig);
-      this.activeSpawners.set(spawnPoint.name, spawner);
+      // Only create a spawner if one doesn't already exist for this spawn point
+      if (!this.activeSpawners.has(spawnPoint.name)) {
+        const spawner = new EnemySpawner(this.scene as any, this.player, spawnerConfig);
+        this.activeSpawners.set(spawnPoint.name, spawner);
+        console.log(`Created spawner at ${spawnPoint.name} (${spawnPoint.x}, ${spawnPoint.y}) with max ${maxEnemiesForThisSpawn} enemies`);
+      }
     });
 
     console.log(`Activated spawners for location: ${locationName} with ${spawnPoints.length} spawn points`);
+  }
+
+  private pauseLocationSpawners(locationName: string): void {
+    const spawnPoints = this.getSpawnPointsForLocation(locationName);
+
+    spawnPoints.forEach(spawnPoint => {
+      const spawner = this.activeSpawners.get(spawnPoint.name);
+      if (spawner) {
+        spawner.stop(); // Stop spawning but keep existing enemies
+      }
+    });
+
+    console.log(`Paused spawners for location: ${locationName}`);
   }
 
   public update(time: number, delta: number): void {
@@ -148,19 +179,6 @@ export class LocationManager {
     this.activeSpawners.forEach(spawner => {
       spawner.update(time, delta);
     });
-  }
-
-  private pauseLocationSpawners(locationName: string): void {
-    const spawnPoints = this.getSpawnPointsForLocation(locationName);
-
-    spawnPoints.forEach(spawnPoint => {
-      const spawner = this.activeSpawners.get(spawnPoint.name);
-      if (spawner) {
-        spawner.stop(); // Stop spawning but keep existing enemies
-      }
-    });
-
-    console.log(`Paused spawners for location: ${locationName}`);
   }
 
   public getCurrentLocation(): string | null {

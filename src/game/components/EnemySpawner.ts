@@ -28,6 +28,7 @@ export class EnemySpawner {
   private spawnTimer: Phaser.Time.TimerEvent | null = null;
   private isActive: boolean = false;
   private hasSpawnedOnce: boolean = false;
+  private spawnCount: number = 0;
 
   constructor(scene: AvenWood | GehennaDeep, player: Player, config: EnemySpawnerConfig) {
     this.scene = scene;
@@ -49,6 +50,9 @@ export class EnemySpawner {
 
     this.isActive = true;
     this.createSpawnTimer();
+    
+    // Immediately try to spawn at least one enemy
+    this.trySpawnEnemy();
   }
 
   public stop(): void {
@@ -82,7 +86,7 @@ export class EnemySpawner {
 
   private trySpawnEnemy(): void {
     // If we've already spawned once and respawnDelay is 0, don't spawn again
-    if (this.config.respawnDelay === 0 && this.hasSpawnedOnce) {
+    if (this.config.respawnDelay === 0 && this.hasSpawnedOnce && this.spawnCount >= this.config.maxEnemies) {
       return;
     }
 
@@ -93,7 +97,12 @@ export class EnemySpawner {
     const spawnPoint = this.getSpawnPoint();
     if (spawnPoint) {
       this.spawnEnemy(spawnPoint);
-      this.hasSpawnedOnce = true;
+      this.spawnCount++;
+      
+      // If we've reached max enemies and respawnDelay is 0, mark as having spawned once
+      if (this.spawnCount >= this.config.maxEnemies && this.config.respawnDelay === 0) {
+        this.hasSpawnedOnce = true;
+      }
     }
   }
 
@@ -117,6 +126,8 @@ export class EnemySpawner {
     this.enemies.push(enemy);
     this.setupEnemyCollisions(enemy);
     this.setupEnemyEventListeners(enemy);
+    
+    console.log(`Spawned enemy at (${spawnPoint.x}, ${spawnPoint.y}), total: ${this.enemies.length}/${this.config.maxEnemies}`);
   }
 
   private setupEnemyCollisions(enemy: Actor): void {
@@ -225,7 +236,7 @@ export class EnemySpawner {
       this.enemies.splice(index, 1);
     }
 
-    // Schedule respawn if spawner is still active and respawnDelay is not 0
+    // Schedule respawn if spawner is still active
     if (this.isActive && this.config.respawnDelay && this.config.respawnDelay > 0) {
       this.scene.time.delayedCall(this.config.respawnDelay, () => {
         if (this.isActive && this.enemies.length < this.config.maxEnemies) {
@@ -314,6 +325,9 @@ export class EnemySpawner {
     this.enemies.forEach(enemy => {
       if ((enemy as any).deathCheckTimer) {
         (enemy as any).deathCheckTimer.destroy();
+      }
+      if (enemy.sprite && !enemy.sprite.destroyed) {
+        enemy.sprite.destroy();
       }
     });
     this.enemies = [];
