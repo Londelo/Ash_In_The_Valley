@@ -244,21 +244,9 @@ export class Player extends Actor {
   private handleWallSlide(state: PlayerState) {
     if (state.shouldWallSlide && !this.isWallSliding) {
       this.isWallSliding = true;
-      this.sprite.setVelocityX(0);
-      this.sprite.setVelocityY(0);
-      // Disable gravity to prevent sliding down
-      this.sprite.body.setGravityY(-800); // Cancel out world gravity
-      this.sprite.play(`${this.playerSkin}_player_wall_hold`);
+      this.sprite.play(`${this.playerSkin}_player_wall_slide`);
     } else if (!state.shouldWallSlide && this.isWallSliding) {
       this.isWallSliding = false;
-      // Re-enable gravity
-      this.sprite.body.setGravityY(0); // Reset to use world gravity
-    }
-
-    // Maintain wall hold position - completely stop movement
-    if (this.isWallSliding) {
-      this.sprite.setVelocityX(0);
-      this.sprite.setVelocityY(0);
     }
   }
 
